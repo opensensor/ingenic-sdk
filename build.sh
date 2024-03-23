@@ -1,8 +1,9 @@
 #!/bin/bash
 
-TOOLCHAIN_DIR=/opt/toolchains/thingino/mipsel-thingino-linux-musl_sdk-buildroot
+TOOLCHAIN_DIR=${HOME}/output/toolchain_xburst1_musl_gcc13/per-package/toolchain/host
 CROSS_COMPILE=mipsel-linux-
-KERNEL_DIR=${HOME}/output/wyze_c2_t20x_jxf23/build/linux-custom
+#KERNEL_DIR=${HOME}/output/cinnado_d1_t31l_sc2336_pru/build/linux-custom
+KERNEL_DIR=${HOME}/ingenic-t31-zrt-kernel-4.4.94-matteius
 
 case "$1" in
 	clean)

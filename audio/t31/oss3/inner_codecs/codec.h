@@ -4,36 +4,18 @@
  * Copyright (c) Ingenic Semiconductor Co., Ltd.
  */
 
-#ifndef __T10_CODEC_H__
-#define __T10_CODEC_H__
+#ifndef __TX_CODEC_H__
+#define __TX_CODEC_H__
 
 #include <linux/gpio.h>
-#include <mach/jzsnd.h>
+//#include <mach/jzsnd.h>
 #include <linux/bitops.h>
+#include <codec-common.h>
 
 #define BASE_ADDR_CODEC			0x10021000
 
 #define TS_CODEC_CGR_00			0x00
 #define TS_CODEC_CACR_02		0x08
-#if (!defined(CONFIG_SOC_T31) && !defined(CONFIG_SOC_C100))
-#define TS_CODEC_CMCR_03		0x0c
-#define TS_CODEC_CDCR1_04		0x10
-#define TS_CODEC_CDCR2_05		0x14
-#define TS_CODEC_CADR_07		0x1c
-#define TS_CODEC_CGAINR_0a		0x28
-#define TS_CODEC_CDPR_0e		0x38
-#define TS_CODEC_CDDPR2_0f		0x3c
-#define TS_CODEC_CDDPR1_10		0x40
-#define TS_CODEC_CDDPR0_11		0x44
-#define TS_CODEC_CAACR_21		0x84
-#define TS_CODEC_CMICCR_22		0x88
-#define TS_CODEC_CACR2_23		0x8c
-#define TS_CODEC_CAMPCR_24		0x90
-#define TS_CODEC_CAR_25			0x94
-#define TS_CODEC_CHR_26			0x98
-#define TS_CODEC_CHCR_27		0x9c
-#define TS_CODEC_CCR_28			0xa0
-#else
 #define TS_CODEC_CACR2_03       0x0c
 #define TS_CODEC_CDCR1_04       0x10
 #define TS_CODEC_CDCR2_05       0x14
@@ -48,7 +30,6 @@
 #define TS_CODEC_CANACR_26      0x98
 #define TS_CODEC_CANACR2_27     0x9c
 #define TS_CODEC_CHR_28         0xA0
-#endif
 #define TS_CODEC_CMR_40			0x100
 #define TS_CODEC_CTR_41			0x104
 #define TS_CODEC_CAGCCR_42		0x108
@@ -83,25 +64,14 @@
 #define SAMPLE_RATE_48K		0x1
 #define SAMPLE_RATE_96K		0x0
 
-struct codec_operation {
+struct codec_device {
 	struct resource *res;
 	void __iomem *iomem;
 	struct device *dev;
-	char name[16];
+	struct codec_attributes *attr;
+	struct audio_data_type record_type;
+	struct audio_data_type playback_type;
+	struct codec_spk_gpio spk_en;
 	void *priv;
 };
-
-static inline unsigned int codec_reg_read(struct codec_operation * ope, int offset)
-{
-	return readl(ope->iomem + offset);
-}
-
-static inline void codec_reg_write(struct codec_operation * ope, int offset, int data)
-{
-	writel(data, ope->iomem + offset);
-}
-
-int jz_codec_init(void);
-void jz_codec_exit(void);
-
 #endif /*end __T10_CODEC_H__*/

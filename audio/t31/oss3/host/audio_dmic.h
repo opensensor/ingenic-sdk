@@ -1,23 +1,97 @@
-#ifndef DMIC_HAL_H
-#define DMIC_HAL_H
+#ifndef AUDIO_DMIC_H
+#define AUDIO_DMIC_H
 
-#include "mic.h"
+#include <linux/module.h>
+#include <linux/moduleparam.h>
+#include <linux/device.h>
+#include <linux/mm.h>
+#include <linux/dmaengine.h>
+#include <linux/dma-mapping.h>
+#include <linux/hrtimer.h>
+#include <linux/dmaengine.h>
+#include <linux/types.h>
+#include <linux/fs.h>
+#include <linux/circ_buf.h>
+#include <linux/cdev.h>
+#include <linux/platform_device.h>
+#include <linux/kernel.h>
+#include <linux/io.h>
+#include <linux/clk.h>
+#include <linux/memory.h>
+#include <linux/mm.h>
+#include <linux/init.h>
+#include <linux/slab.h>
+#include <linux/vmalloc.h>
+#include <linux/ktime.h>
+#include <linux/hrtimer.h>
+#include <linux/spinlock.h>
+#include <linux/wait.h>
+#include <linux/sched.h>
+//#include <mach/jzdma.h>
+#include <soc/gpio.h>
 
 
-static void inline dmic_write_reg(struct mic_dev *mic_dev, unsigned int reg,
+struct dmic_device_info {
+	char name[20];
+	unsigned long record_rate;
+	int record_channel;
+	int record_format;
+	unsigned int gain;
+	unsigned int record_trigger;
+};
+struct jz_gpio_func_def {
+	char *name;
+	int port;
+	int func;
+	unsigned long pins;
+};
+
+struct audio_dmic_device {
+	struct device *dev;
+	spinlock_t pipe_lock;
+
+	struct resource *io_res;
+	struct resource *dma_res;
+	struct clk *clk;
+	void __iomem *iomem;
+
+	struct audio_pipe *pipe;
+
+	struct dmic_device_info *info;
+	struct jz_gpio_func_def dmic_gpio_func;
+};
+
+#define DMIC_DMA_MAX_BURSTSIZE 128
+#define SND_DMIC_DMA_BUFFER_SIZE (16000*2*4)
+
+
+#define DEFAULT_SAMPLERATE 0
+#define DEFAULT_CHANNEL 0
+#define DEFAULT_FORMAT 16
+#define DEFAULT_GAIN 0
+#define DEFAULT_TRIGGER 32
+
+#define MAX_GAIN 0x1f
+#define MAX_TRIGGER 0x3f
+
+
+enum dmic_rate {
+	DMIC_RATE_8000 = 8000,
+	DMIC_RATE_16000 = 16000,
+	DMIC_RATE_48000 = 48000,
+};
+
+static void inline dmic_write_reg(struct audio_dmic_device *dmic, unsigned int reg,
         unsigned int val)
 {
-    struct mic *dmic = &mic_dev->dmic;
-
     writel(val, dmic->iomem + reg);
 }
 
-static unsigned int inline dmic_read_reg(struct mic_dev *mic_dev, unsigned int reg)
+static unsigned int inline dmic_read_reg(struct audio_dmic_device *dmic, unsigned int reg)
 {
-    struct mic *dmic = &mic_dev->dmic;
-
     return readl(dmic->iomem + reg);
 }
+
 #define dmic_set_reg(dev, addr, val, mask, offset)\
     do {    \
         int tmp_val = val;                          \
@@ -277,10 +351,10 @@ static unsigned int inline dmic_read_reg(struct mic_dev *mic_dev, unsigned int r
     dmic_get_reg(dev, DMICDR,DMIC_DR_MASK,DMIC_DR)
 
 #define DMIC_FIFO_DEPTH 64
-
+/*
 void dmic_init(struct mic_dev *mic_dev);
 void dmic_enable(struct mic_dev *mic_dev);
 void dmic_disable(struct mic_dev *mic_dev);
 int dmic_is_enable(struct mic_dev *mic_dev);
-
+*/
 #endif

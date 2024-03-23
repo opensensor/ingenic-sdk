@@ -12,10 +12,10 @@ ccflags-y += -I$(src)/audio/$(SOC_FAMILY)/oss3/include
 include $(src)/isp/Kbuild
 include $(src)/gpio/Kbuild
 include $(src)/misc/sample_pwm/Kbuild
-include $(src)/misc/motor/Kbuild
+###include $(src)/misc/motor/Kbuild
 
 #### PLATFORM ####
-ifeq ($(CONFIG_SOC_T23)$(CONFIG_SOC_T40)$(CONFIG_SOC_T41),y)
+ifeq ($(CONFIG_SOC_T23)$(CONFIG_SOC_T31)$(CONFIG_SOC_T40)$(CONFIG_SOC_T41),y)
 include $(src)/audio/$(SOC_FAMILY)/oss3/Kbuild
 else
 include $(src)/audio/$(SOC_FAMILY)/oss2/Kbuild

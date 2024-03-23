@@ -1,17 +1,13 @@
 
-#ifndef __XB_SND_I2S_H__
-#define __XB_SND_I2S_H__
+#ifndef AUDIO_AIC_H__
+#define AUDIO_AIC_H__
 
 #include <linux/proc_fs.h>
 #include <linux/fs.h>
 #include <linux/seq_file.h>
 #include <asm/io.h>
 #include <linux/delay.h>
-#include "../interface/xb_snd_dsp.h"
-#include "../xb_snd_detect.h"
-
-extern unsigned int DEFAULT_REPLAY_ROUTE;
-extern unsigned int DEFAULT_RECORD_ROUTE;
+#include <codec-common.h>
 
 /**
  * global variable
@@ -22,62 +18,100 @@ extern unsigned int DEFAULT_RECORD_ROUTE;
  *	codec mode
  **/
 
-enum codec_mode {
-	CODEC_MASTER,
-	CODEC_SLAVE,
-};
-extern void volatile __iomem *volatile i2s_iomem;
-
-struct i2s_device {
-	int i2s_irq;
-	spinlock_t i2s_irq_lock;
-	spinlock_t i2s_lock;
+struct codec_info {
 	char name[20];
+	unsigned long rate;
+	int channel;
+	int format;
+	struct codec_sign_configure transfer_info;
+	struct audio_data_type data_type;
+	int again;
+	int dgain;
+	int trigger;
+	int alc_en;
+};
+
+struct audio_aic_device {
+	int aic_irq;
+	struct device *dev;
+	spinlock_t pipe_lock;
+	spinlock_t i2s_lock;
+	spinlock_t i2s_irq_lock;
 
 	struct resource *res;
-	struct clk * i2s_clk;
-	struct clk * i2s_clk1;
-	struct clk * aic_clk;
-	void __iomem * i2s_iomem;
-	bool i2s_is_incall_state;
+	struct clk *mic_clock;
+	struct clk *spk_clock;
+	struct clk *aic_clock;
+	struct clk *ce_rclock;
+	struct clk *ce_tclock;
+	void __iomem *i2s_iomem;
 
-#ifdef CONFIG_JZ_INTERNAL_CODEC_V12
-	struct workqueue_struct *i2s_work_queue;
-	struct work_struct  i2s_codec_work;
-#endif
+	struct audio_pipe *mic_pipe;
+	struct audio_pipe *spk_pipe;
+	struct audio_pipe *aec_pipe;
 
-	struct workqueue_struct *i2s_work_queue_1;
-	struct work_struct i2s_work;
-	unsigned int ioctl_cmd;
-	unsigned long ioctl_arg;
+	struct codec_info *codec_mic_info;
+	struct codec_info *codec_spk_info;
+	struct codec_info *codec_aec_info;
 
-	struct dsp_endpoints *i2s_endpoints;
-	struct codec_info *cur_codec;
-	struct mic_dev *dmic_dev;
+	struct codec_attributes *excodec;
+	struct codec_attributes *incodec;
+	struct codec_attributes *livingcodec;
+
+	struct proc_dir_entry *codec_dir;
+	struct proc_dir_entry *codec_file;
 };
 
+#define AIC_TX_FIFO_DEPTH 64
+#define AIC_RX_FIFO_DEPTH 32
 
-struct codec_info {
-	struct list_head list;
-	struct i2s_device * codec_parent;
-	/*char *name;*/
-	char name[20];
-	unsigned long record_rate;
-	unsigned long replay_rate;
-	int record_codec_channel;
-	int replay_codec_channel;
-	int record_format;
-	int replay_format;
-	enum codec_mode codec_mode;
-	unsigned long codec_clk;
-	int (*codec_ctl)(unsigned int cmd, unsigned long arg);
-	int (*codec_ctl_2)(struct codec_info *codec_dev, unsigned int cmd, unsigned long arg);
-	struct dsp_endpoints *dsp_endpoints;
-};
+#define MAX_SAMPLE_BYTES 2    //every sample is 2 bytes
+#define MAX_SAMPLE_CHANNEL 2  //max record or replay channel is 2
+#define SND_DSP_DMA_BUFFER_SIZE (16000*2*2)
 
-#define NEED_RECONF_DMA         0x00000001
-#define NEED_RECONF_TRIGGER     0x00000002
-#define NEED_RECONF_FILTER      0x00000004
+#define AFMT_0     0x00000000
+//#define AFMT_U8    0x00000001
+//#define AFMT_S8    0x00000002
+#define AFMT_S16LE 0x00000010
+#define AFMT_S16BE 0x00000011
+
+#define MONO	1
+#define STEREO 2
+#define MCLK_DIV_TO_SAMPLE 256
+
+#define DEFAULT_RECORD_TRIGGER 8
+#define DEFAULT_AEC_TRIGGER    8
+#define DEFAULT_REPLAY_TRIGGER 16
+
+#define DEFAULT_RECORD_CLK (8000*256)
+#define DEFAULT_REPLAY_CLK (8000*256)
+
+#define DEFAULT_SAMPLERATE 0
+#define DEFAULT_CHANNEL 0
+
+#define DEFAULT_AGAIN 0
+#define DEFAULT_DGAIN 0
+#define DEFAULT_ALC_EN 0
+
+#define DEFAULT_FRAME_SIZE 0
+#define DEFAULT_VFRAME_SIZE 0
+
+#define CODEC_POWER_UP 1
+#define CODEC_POWER_DOWN 0
+
+#define CODEC_MIC_START 1
+#define CODEC_MIC_STOP 0
+#define CODEC_SPK_START 1
+#define CODEC_SPK_STOP 0
+
+#define VALID_8BIT 8
+#define VALID_16BIT 16
+#define VALID_20BIT 20
+#define VALID_24BIT 24
+
+//#define NEED_RECONF_DMA         0x00000001
+//#define NEED_RECONF_TRIGGER     0x00000002
+//#define NEED_RECONF_FILTER      0x00000004
 
 /**
  * registers
@@ -275,6 +309,7 @@ do {	\
 
 #define I2S_MONOCTR_RIGHT_OFFSET (12)
 #define I2S_MONOCTR_RIGHT_MASK   (0x1 << I2S_MONOCTR_RIGHT_OFFSET)
+#define I2S_STEREOCTR_MASK     (0x3 << I2S_MONOCTR_RIGHT_OFFSET)
 
 #define I2S_MONOCTR_OFFSET     (13)
 #define I2S_MONOCTR_MASK	   (0x1 << I2S_MONOCTR_OFFSET)
@@ -327,15 +362,18 @@ do {	\
 #define __i2s_disable_mono2stereo(i2s_dev)    \
 	i2s_set_reg(i2s_dev, AICCR,0,I2S_M2S_MASK,I2S_M2S_OFFSET)
 
-#define __i2s_enable_monoctr(i2s_dev) \
-	i2s_set_reg(i2s_dev, AICCR, 1, I2S_MONOCTR_MASK, I2S_MONOCTR_OFFSET)
-#define __i2s_disable_monoctr(i2s_dev) \
-	i2s_set_reg(i2s_dev, AICCR, 0, I2S_MONOCTR_MASK, I2S_MONOCTR_OFFSET)
+#define __i2s_enable_monoctr_left(i2s_dev) \
+	i2s_set_reg(i2s_dev, AICCR, 2, I2S_STEREOCTR_MASK, I2S_MONOCTR_RIGHT_OFFSET)
+#define __i2s_disable_monoctr_left(i2s_dev) \
+	i2s_set_reg(i2s_dev, AICCR, 0, I2S_STEREOCTR_MASK, I2S_MONOCTR_RIGHT_OFFSET)
 
 #define __i2s_enable_monoctr_right(i2s_dev)\
-	i2s_set_reg(i2s_dev, AICCR, 1, I2S_MONOCTR_RIGHT_MASK, I2S_MONOCTR_RIGHT_OFFSET)
+	i2s_set_reg(i2s_dev, AICCR, 1, I2S_STEREOCTR_MASK, I2S_MONOCTR_RIGHT_OFFSET)
 #define __i2s_disable_monoctr_right(i2s_dev)\
-	i2s_set_reg(i2s_dev, AICCR, 0, I2S_MONOCTR_RIGHT_MASK, I2S_MONOCTR_RIGHT_OFFSET)
+	i2s_set_reg(i2s_dev, AICCR, 0, I2S_STEREOCTR_MASK, I2S_MONOCTR_RIGHT_OFFSET)
+
+#define __i2s_enable_stereo(i2s_dev)\
+	i2s_set_reg(i2s_dev, AICCR, 0, I2S_STEREOCTR_MASK, I2S_MONOCTR_RIGHT_OFFSET)
 
 #define __i2s_enable_tloop(i2s_dev) \
 	i2s_set_reg(i2s_dev, AICCR, 1, I2S_TLDMS_MASK, I2S_TLDMS_OFFSET)
@@ -363,6 +401,8 @@ do {	\
 	i2s_set_reg(i2s_dev, AICCR,1,I2S_RFLUSH_MASK,I2S_RFLUSH_OFFSET)
 #define __i2s_test_flush_tfifo(i2s_dev)               \
 	i2s_get_reg(i2s_dev, AICCR,I2S_TFLUSH_MASK,I2S_TFLUSH_OFFSET)
+#define __i2s_test_flush_rfifo(i2s_dev)               \
+	i2s_get_reg(i2s_dev, AICCR,I2S_RFLUSH_MASK,I2S_RFLUSH_OFFSET)
 
 #define __i2s_enable_overrun_intr(i2s_dev)    \
 	i2s_set_reg(i2s_dev, AICCR,1,I2S_EROR_MASK,I2S_EROR_OFFSET)
@@ -523,180 +563,4 @@ do {	\
 #define I2S_IDV_OFFSET         (8)
 #define I2S_IDV_MASK           (0xf << I2S_IDV_OFFSET)
 
-static inline unsigned long  __i2s_set_sample_rate(struct i2s_device *i2s_dev, unsigned long sys_clk, unsigned long sync)
-{
-	/*int div = sys_clk/(64*sync) - 1;*/
-	int div = sys_clk/(64*sync);
-//	div = 3;
-	i2s_set_reg(i2s_dev, I2SDIV,div,I2S_DV_MASK,I2S_DV_OFFSET);
-
-	return sys_clk/(64*(div + 1));
-}
-
-static inline unsigned long  __i2s_set_isample_rate(struct i2s_device *i2s_dev, unsigned long sys_clk, unsigned long sync)
-{
-	int div = sys_clk/(64*sync) - 1;
-	i2s_set_reg(i2s_dev, I2SDIV,div,I2S_IDV_MASK,I2S_IDV_OFFSET);
-
-	return sys_clk/(64*(div + 1));
-}
-/*
- * CKCFG
- */
-/*useless*/
-
-/*
- * RGADW
- */
-#define I2S_RGDIN_OFFSET       (0)
-#define I2S_RGDIN_MASK         (0xff << I2S_RGDIN_OFFSET)
-#define I2S_RGADDR_OFFSET      (8)
-#define I2S_RGADDR_MASK        (0x7f << I2S_RGADDR_OFFSET)
-#define I2S_RGWR_OFFSET        (16)
-#define I2S_RGWR_MASK          (0x1  << I2S_RGWR_OFFSET)
-
-#define test_rw_inval(i2s_dev)         \
-	i2s_get_reg(i2s_dev, RGADW,I2S_RGWR_MASK,I2S_RGWR_OFFSET)
-/*
- * RGDATA
- */
-#define I2S_RGDOUT_OFFSET      (0)
-#define I2S_RGDOUT_MASK        (0xff << I2S_RGDOUT_OFFSET)
-#define I2S_IRQ_OFFSET         (8)
-#define I2S_IRQ_MASK           (0x1  << I2S_IRQ_OFFSET)
-#define I2S_RINVAL_OFFSET      (31)
-#define I2S_RINVAL_MASK        (0x1  << I2S_RINVAL_OFFSET)
-
-static int inline read_inter_codec_reg(struct i2s_device *i2s_dev, int addr)
-{
-	int reval;
-	while(test_rw_inval(i2s_dev));
-	i2s_write_reg(i2s_dev, RGADW,((addr << I2S_RGADDR_OFFSET) & I2S_RGADDR_MASK ));
-
-	reval = i2s_read_reg(i2s_dev, RGDATA);
-	reval = i2s_read_reg(i2s_dev, RGDATA);
-	reval = i2s_read_reg(i2s_dev, RGDATA);
-	reval = i2s_read_reg(i2s_dev, RGDATA);
-	reval = i2s_read_reg(i2s_dev, RGDATA);
-	reval = i2s_read_reg(i2s_dev, RGDATA);
-
-	return reval & I2S_RGDOUT_MASK;
-}
-
-static int inline write_inter_codec_reg(struct i2s_device *i2s_dev, int addr,int data)
-{
-	while(test_rw_inval(i2s_dev));
-	i2s_write_reg(i2s_dev, RGADW,(((addr << I2S_RGADDR_OFFSET) & I2S_RGADDR_MASK) |
-				(((data)<< I2S_RGDIN_OFFSET)& I2S_RGDIN_MASK)));
-	i2s_write_reg(i2s_dev,  RGADW,(((addr << I2S_RGADDR_OFFSET) & I2S_RGADDR_MASK) |
-			(((data)<< I2S_RGDIN_OFFSET)& I2S_RGDIN_MASK) |
-			(1 << I2S_RGWR_OFFSET)));
-	if (data != read_inter_codec_reg(i2s_dev, addr))
-		return -1;
-	return 0;
-}
-
-static int inline read_inter_codec_irq(struct i2s_device *i2s_dev)
-{
-	int val = i2s_read_reg(i2s_dev, RGDATA);
-	return (val& I2S_IRQ_MASK);
-}
-
-
-static void inline write_inter_codec_reg_bit(struct i2s_device *i2s_dev, int addr,int bitval,int offset)
-{
-	int val_tmp;
-	val_tmp = read_inter_codec_reg(i2s_dev, addr);
-	if (bitval)
-		val_tmp |= (1 << offset);
-	else
-		val_tmp &= ~(1 << offset);
-
-	write_inter_codec_reg(i2s_dev, addr,val_tmp);
-}
-
-static void inline write_inter_codec_reg_mask(struct i2s_device *i2s_dev, int addr,int val, int mask,int offset)
-{
-	int val_tmp;
-	val_tmp = read_inter_codec_reg(i2s_dev, addr);
-	write_inter_codec_reg(i2s_dev, addr,((val_tmp&(~mask)) | ((val << offset) & mask)));
-}
-
-/**
- * default parameter
- **/
-#define DEF_REPLAY_FMT			16
-#define DEF_REPLAY_CHANNELS		2
-#define DEF_REPLAY_RATE			44100
-
-#define DEF_RECORD_FMT			16
-#define DEF_RECORD_CHANNELS		2
-#define DEF_RECORD_RATE			44100
-
-#define CODEC_RMODE                     0x1
-#define CODEC_WMODE                     0x2
-#define CODEC_RWMODE                    0x3
-
-
-/**
- * i2s codec control cmd
- **/
-enum codec_ioctl_cmd_t {
-	CODEC_INIT,
-	CODEC_TURN_ON,
-	CODEC_TURN_OFF,
-	CODEC_SHUTDOWN,
-	CODEC_RESET,
-	CODEC_SUSPEND,
-	CODEC_RESUME,
-	CODEC_ANTI_POP,
-	CODEC_SET_DEFROUTE,
-	CODEC_SET_DEVICE,
-	CODEC_SET_RECORD_RATE,
-	CODEC_SET_RECORD_DATA_WIDTH,
-	CODEC_SET_MIC_VOLUME,
-	CODEC_SET_RECORD_VOLUME,
-	CODEC_SET_RECORD_CHANNEL,
-	CODEC_SET_REPLAY_RATE,
-	CODEC_SET_REPLAY_DATA_WIDTH,
-	CODEC_SET_REPLAY_VOLUME,
-	CODEC_SET_CALL_REPLAY_VOLUME,
-	CODEC_SET_REPLAY_CHANNEL,
-	CODEC_DAC_MUTE,
-	CODEC_ADC_MUTE,
-	CODEC_DEBUG_ROUTINE,
-	CODEC_SET_STANDBY,
-	CODEC_GET_RECORD_FMT_CAP,
-	CODEC_GET_RECORD_FMT,
-	CODEC_GET_REPLAY_FMT_CAP,
-	CODEC_GET_REPLAY_FMT,
-	CODEC_IRQ_HANDLE,
-	CODEC_GET_HP_STATE,
-	CODEC_DUMP_REG,
-	CODEC_DUMP_GPIO,
-	CODEC_CLR_ROUTE,	//just use for phone pretest
-	CODEC_DEBUG,
-};
-/**
- *	i2s switch state
- **/
-void *jz_set_hp_detect_type(int type,struct snd_board_gpio *hp_det,
-		struct snd_board_gpio *mic_det,
-		struct snd_board_gpio *mic_detect_en,
-		struct snd_board_gpio *mic_select,
-		int  hook_active_level);
-
-int i2s_register_codec(char *name, void *codec_ctl,unsigned long codec_clk,enum codec_mode mode);
-int i2s_register_codec_2(struct codec_info * codec_dev);
-int i2s_release_codec_2(struct codec_info * codec_dev);
-
-/*void i2s_replay_zero_for_flush_codec(void);*/
-
-
-#if 0
-#if defined(CONFIG_JZ_INTERNAL_CODEC)
-extern void codec_irq_set_mask(struct codec_info *codec_dev);
-#endif
-#endif
-
-#endif /* _XB_SND_I2S_H_ */
+#endif /* AUDIO_AIC_H__ */
