@@ -1,8 +1,13 @@
-// SPDX-License-Identifier: GPL-2.0+
 /*
  * sc2336.c
+ *
  * Copyright (C) 2012 Ingenic Semiconductor Co., Ltd.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
  */
+
 
 #include <linux/init.h>
 #include <linux/module.h>
@@ -13,6 +18,7 @@
 #include <linux/clk.h>
 #include <linux/proc_fs.h>
 #include <soc/gpio.h>
+
 #include <tx-isp-common.h>
 #include <sensor-common.h>
 #include <sensor-info.h>
@@ -32,6 +38,14 @@
 #define SENSOR_OUTPUT_MAX_FPS 30
 #define SENSOR_OUTPUT_MIN_FPS 5
 #define SENSOR_VERSION "H20210805a"
+
+#define V4L2_MBUS_FMT_SBGGR10_1X10 0x3007
+
+
+// ugly hack, but oh well
+#undef ISP_PRINT
+#define ISP_PRINT(level, format, ...)			\
+	pr_err(format, ##__VA_ARGS__)
 
 static int reset_gpio = GPIO_PA(18);
 module_param(reset_gpio, int, S_IRUGO);
