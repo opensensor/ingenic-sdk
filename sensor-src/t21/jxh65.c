@@ -292,7 +292,7 @@ static struct regval_list sensor_init_regs_1280_960_25fps[] = {
 	{SENSOR_REG_DELAY,100},
 	{0x45,0x19},
 	{0x1F,0x11},
-	{SENSOR_REG_END, 0x00}	/* END MARKER */
+	{SENSOR_REG_END, 0x00}
 };
 
 /*
@@ -321,13 +321,13 @@ static enum v4l2_mbus_pixelcode sensor_mbus_code[] = {
 
 static struct regval_list sensor_stream_on[] = {
 	{0x12, 0x00},
-	{SENSOR_REG_END, 0x00},	/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 static struct regval_list sensor_stream_off[] = {
 	/* Sensor enter LP11*/
 	{0x12, 0x40},
-	{SENSOR_REG_END, 0x00},	/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 int sensor_read(struct tx_isp_subdev *sd, unsigned char reg,
@@ -614,11 +614,12 @@ static int sensor_g_chip_ident(struct tx_isp_subdev *sd,
 	}
 	ret = sensor_detect(sd, &ident);
 	if (ret) {
-		printk("chip found @ 0x%x (%s) is not an jxh65 chip.\n",
-		       client->addr, client->adapter->name);
+		printk("chip found @ 0x%x (%s) is not an %s chip.\n",
+		       client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
-	printk("%s chip found @ 0x%02x (%s)\n", SENSOR_NAME, client->addr, client->adapter->name);
+	printk("%s chip found @ 0x%02x (%s)\n",
+	       SENSOR_NAME, client->addr, client->adapter->name);
 	if (chip) {
 		memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
 		chip->ident = ident;

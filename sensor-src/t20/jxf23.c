@@ -19,11 +19,11 @@
 #include <sensor-info.h>
 
 #define SENSOR_NAME "jxf23"
-#define SENSOR_CHIP_ID 0xf23
 #define SENSOR_BUS_TYPE TX_SENSOR_CONTROL_INTERFACE_I2C
 #define SENSOR_I2C_ADDRESS 0x40
 #define SENSOR_MAX_WIDTH 1920
 #define SENSOR_MAX_HEIGHT 1080
+#define SENSOR_CHIP_ID 0xf23
 #define SENSOR_CHIP_ID_H (0x0f)
 #define SENSOR_CHIP_ID_L (0x23)
 #define SENSOR_REG_END 0xff
@@ -66,13 +66,13 @@ static struct sensor_info sensor_info = {
 };
 
 struct regval_list {
-    unsigned char reg_num;
-    unsigned char value;
+	unsigned char reg_num;
+	unsigned char value;
 };
 
 struct again_lut {
-    unsigned int value;
-    unsigned int gain;
+	unsigned int value;
+	unsigned int gain;
 };
 
 struct again_lut sensor_again_lut[] = {
@@ -728,7 +728,6 @@ static int sensor_s_stream(struct v4l2_subdev *sd, int enable) {
 			ret = sensor_write_array(sd, sensor_stream_on_dvp);
 		} else if (data_interface == TX_SENSOR_DATA_INTERFACE_MIPI) {
 			ret = sensor_write_array(sd, sensor_stream_on_mipi);
-
 		} else {
 			printk("Don't support this Sensor Data interface\n");
 		}
@@ -738,7 +737,6 @@ static int sensor_s_stream(struct v4l2_subdev *sd, int enable) {
 			ret = sensor_write_array(sd, sensor_stream_off_dvp);
 		} else if (data_interface == TX_SENSOR_DATA_INTERFACE_MIPI) {
 			ret = sensor_write_array(sd, sensor_stream_off_mipi);
-
 		} else {
 			printk("Don't support this Sensor Data interface\n");
 		}
@@ -777,7 +775,6 @@ static int sensor_set_fps(struct tx_isp_sensor *sensor, int fps) {
 		default:
 			printk("Now we do not support this framerate!!!\n");
 	}
-
 	newformat = (((fps >> 16) / (fps & 0xffff)) << 8) + ((((fps >> 16) % (fps & 0xffff)) << 8) / (fps & 0xffff));
 	if (newformat > (max_fps << 8) || newformat < (SENSOR_OUTPUT_MIN_FPS << 8)) {
 		printk("warn: fps(%d) not in range\n", fps);
@@ -877,10 +874,12 @@ static int sensor_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_iden
 	}
 	ret = sensor_detect(sd, &ident);
 	if (ret) {
-		v4l_err(client, "chip found @ 0x%x (%s) is not an %s chip.\n", client->addr, client->adapter->name, SENSOR_NAME);
+		v4l_err(client, "chip found @ 0x%x (%s) is not an %s chip.\n",
+			client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
-	v4l_info(client, "%s chip found @ 0x%02x (%s)\n", SENSOR_NAME, client->addr, client->adapter->name);
+	v4l_info(client, "%s chip found @ 0x%02x (%s)\n",
+		 SENSOR_NAME, client->addr, client->adapter->name);
 	return v4l2_chip_ident_i2c_client(client, chip, ident, 0);
 }
 
@@ -1055,7 +1054,7 @@ static int sensor_probe(struct i2c_client *client, const struct i2c_device_id *i
 		sensor_win_sizes[i].mbus_code = mbus;
 #endif
 	/*
-	       convert sensor-gain into isp-gain,
+	   convert sensor-gain into isp-gain,
 	 */
 	switch (sensor_max_fps) {
 		case TX_SENSOR_MAX_FPS_25:

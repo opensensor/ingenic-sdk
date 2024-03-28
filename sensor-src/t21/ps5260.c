@@ -379,7 +379,7 @@ static struct regval_list sensor_init_regs_1920_1080_15fps[] = {
 	{0xEF, 0x01},
 	{0x02, 0xFB},
 	{SENSOR_REG_DELAY, 0x02},
-	{SENSOR_REG_END, 0x00},	/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 /*
@@ -402,11 +402,11 @@ static struct tx_isp_sensor_win_setting sensor_win_sizes[] = {
  */
 
 static struct regval_list sensor_stream_on[] = {
-	{SENSOR_REG_END, 0x00},	/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 static struct regval_list sensor_stream_off[] = {
-	{SENSOR_REG_END, 0x00},	/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 int sensor_read(struct tx_isp_subdev *sd, unsigned char reg, unsigned char *value)
@@ -510,7 +510,7 @@ static int sensor_detect(struct tx_isp_subdev *sd, unsigned int *ident)
 	ret = sensor_read(sd, 0x00, &v);
 	pr_debug("-----%s: %d ret = %d, v = 0x%02x\n", __func__, __LINE__, ret,v);
 	if (ret < 0) {
-		printk("err: ps5260 write error, ret= %d \n",ret);
+		printk("err: %s write error, ret= %d \n", SENSOR_NAME, ret);
 		return ret;
 	}
 	if (v != SENSOR_CHIP_ID_H)
@@ -745,11 +745,12 @@ static int sensor_g_chip_ident(struct tx_isp_subdev *sd,
 
 	ret = sensor_detect(sd, &ident);
 	if (ret) {
-		printk("chip found @ 0x%x (%s) is not an ps5260 chip.\n",
-		       client->addr, client->adapter->name);
+		printk("chip found @ 0x%x (%s) is not an %s chip.\n",
+		       client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
-	printk("%s chip found @ 0x%02x (%s)\n", SENSOR_NAME, client->addr, client->adapter->name);
+	printk("%s chip found @ 0x%02x (%s)\n",
+	       SENSOR_NAME, client->addr, client->adapter->name);
 	if (chip) {
 		memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
 		chip->ident = ident;

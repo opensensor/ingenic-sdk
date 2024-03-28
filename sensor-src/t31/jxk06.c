@@ -179,7 +179,7 @@ unsigned int sensor_alloc_dgain(unsigned int isp_gain, unsigned char shift, unsi
 }
 
 struct tx_isp_sensor_attribute sensor_attr={
-	.name = "jxk06",
+	.name = SENSOR_NAME,
 	.chip_id = 0x0852,
 	.cbus_type = SENSOR_BUS_TYPE,
 	.cbus_mask = V4L2_SBUS_MASK_SAMPLE_8BITS | V4L2_SBUS_MASK_ADDR_8BITS,
@@ -234,7 +234,7 @@ struct tx_isp_sensor_attribute sensor_attr={
 
 static struct regval_list sensor_init_regs_2560_1920_15fps_mipi_4m[] = {
 	{SENSOR_REG_DELAY, 0x50},
-	{SENSOR_REG_END, 0x00},	/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 static struct regval_list sensor_init_regs_2560_1920_25fps_mipi_4m[] = {
@@ -354,7 +354,7 @@ static struct regval_list sensor_init_regs_2560_1920_25fps_mipi_4m[] = {
 	{0x48, 0x06},
 	{0x00, 0x10},
 	//{SENSOR_REG_DELAY, 0x15},
-	{SENSOR_REG_END, 0x00},	/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 /*
@@ -390,20 +390,16 @@ static enum v4l2_mbus_pixelcode sensor_mbus_code[] = {
  */
 
 static struct regval_list sensor_stream_on_mipi[] = {
-
 	//{0x12, 0x00},
-	{SENSOR_REG_END, 0x00},	/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 static struct regval_list sensor_stream_off_mipi[] = {
-
 	//{0x12, 0x40},
-	{SENSOR_REG_END, 0x00},	/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
-int sensor_read(struct tx_isp_subdev *sd, unsigned char reg,
-		unsigned char *value)
-{
+int sensor_read(struct tx_isp_subdev *sd, unsigned char reg, unsigned char *value) {
 	struct i2c_client *client = tx_isp_get_subdevdata(sd);
 	struct i2c_msg msg[2] = {
 		[0] = {
@@ -578,7 +574,7 @@ static int sensor_init(struct tx_isp_subdev *sd, int enable)
 		wsize = &sensor_win_sizes[1];
 		break;
 	default:
-		ISP_WARNING("jxk06 Do not support this max fps now.\n");
+		ISP_WARNING("Do not support this max fps now.\n");
 	}
 	sensor->video.mbus.width = wsize->width;
 	sensor->video.mbus.height = wsize->height;
@@ -631,7 +627,7 @@ static int sensor_set_fps(struct tx_isp_subdev *sd, int fps)
 		sclk = SENSOR_SUPPORT_SCLK_4M << 1;
 		break;
 	default:
-		ISP_WARNING("jxk06 Do not support this max fps now.\n");
+		ISP_WARNING("Do not support this max fps now.\n");
 	}
 	newformat = (((fps >> 16) / (fps & 0xffff)) << 8) + ((((fps >> 16) % (fps & 0xffff)) << 8) / (fps & 0xffff));
 	if (newformat > (max_fps << 8) || newformat < (SENSOR_OUTPUT_MIN_FPS << 8)) {
@@ -696,7 +692,7 @@ static int sensor_set_mode(struct tx_isp_subdev *sd, int value)
 		wsize = &sensor_win_sizes[1];
 		break;
 	default:
-		ISP_WARNING("jxk06 Do not support this max fps now.\n");
+		ISP_WARNING("Do not support this max fps now.\n");
 	}
 
 	if (wsize) {
@@ -744,13 +740,14 @@ static int sensor_g_chip_ident(struct tx_isp_subdev *sd,
 	}
 	ret = sensor_detect(sd, &ident);
 	if (ret) {
-		ISP_ERROR("chip found @ 0x%x (%s) is not an jxk06 chip.\n",
-				client->addr, client->adapter->name);
+		ISP_ERROR("chip found @ 0x%x (%s) is not an %s chip.\n",
+			  client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
-	ISP_WARNING("jxk06 chip found @ 0x%02x (%s) sensor drv version %s\n", client->addr, client->adapter->name, SENSOR_VERSION);
+	ISP_WARNING("%s chip found @ 0x%02x (%s)\n",
+		    SENSOR_NAME, client->addr, client->adapter->name);
 	if (chip) {
-		memcpy(chip->name, "jxk06", sizeof("jxk06"));
+		memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
 		chip->ident = ident;
 		chip->revision = SENSOR_VERSION;
 	}
@@ -890,7 +887,7 @@ static struct tx_isp_subdev_ops sensor_ops = {
 /* It's the sensor device */
 static u64 tx_isp_module_dma_mask = ~(u64)0;
 struct platform_device sensor_platform_device = {
-	.name = "jxk06",
+	.name = SENSOR_NAME,
 	.id = -1,
 	.dev = {
 		.dma_mask = &tx_isp_module_dma_mask,
@@ -941,7 +938,7 @@ static int sensor_probe(struct i2c_client *client, const struct i2c_device_id *i
 #endif
 		break;
 	default:
-		ISP_WARNING("jxk06 Do not support this resolution now.\n");
+		ISP_WARNING("Do not support this resolution now.\n");
 		break;
 	}
 	sensor->video.attr = &sensor_attr;
@@ -987,7 +984,7 @@ static int sensor_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id sensor_id[] = {
-	{ "jxk06", 0 },
+	{ SENSOR_NAME, 0 },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, sensor_id);
@@ -995,7 +992,7 @@ MODULE_DEVICE_TABLE(i2c, sensor_id);
 static struct i2c_driver sensor_driver = {
 	.driver = {
 		.owner = THIS_MODULE,
-		.name = "jxk06",
+		.name = SENSOR_NAME,
 	},
 	.probe = sensor_probe,
 	.remove = sensor_remove,

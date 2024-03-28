@@ -1,12 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0+
 /*
  * sc4336p.c
- *
  * Copyright (C) 2012 Ingenic Semiconductor Co., Ltd.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 2 as
- * published by the Free Software Foundation.
  */
 
 #include <linux/init.h>
@@ -18,12 +13,12 @@
 #include <linux/clk.h>
 #include <linux/proc_fs.h>
 #include <soc/gpio.h>
-
 #include <tx-isp-common.h>
 #include <sensor-common.h>
 #include <sensor-info.h>
 #include <txx-funcs.h>
 
+#define SENSOR_NAME "sc4336p" 
 #define SENSOR_CHIP_ID_H (0x9c)
 #define SENSOR_CHIP_ID_L (0x42)
 #define SENSOR_REG_END 0xffff
@@ -248,7 +243,7 @@ unsigned int sensor_alloc_dgain(unsigned int isp_gain, unsigned char shift, unsi
 }
 
 struct tx_isp_sensor_attribute sensor_attr={
-        .name = "sc4336p",
+        .name = SENSOR_NAME,
         .chip_id = 0x9c42,
         .cbus_type = TX_SENSOR_CONTROL_INTERFACE_I2C,
         .cbus_mask = TISP_SBUS_MASK_SAMPLE_8BITS | TISP_SBUS_MASK_ADDR_16BITS,
@@ -871,21 +866,22 @@ static int sensor_g_chip_ident(struct tx_isp_subdev *sd,
         }
         ret = sensor_detect(sd, &ident);
         printk("\n");
-         printk("%d\n",ret);
+	printk("%d\n",ret);
 
         printk("\n");
         if (ret) {
-                ISP_ERROR("chip found @ 0x%x (%s) is not an sc4336p chip.\n",
-                          client->addr, client->adapter->name);
+		ISP_ERROR("chip found @ 0x%x (%s) is not an %s chip.\n",
+			  client->addr, client->adapter->name, SENSOR_NAME);
                 return ret;
         }
 #else
 	ident = 0x9c42;
 #endif
-        ISP_WARNING("%s chip found @ 0x%02x (%s)\n", SENSOR_NAME, client->addr, client->adapter->name);
+        ISP_WARNING("%s chip found @ 0x%02x (%s)\n",
+		    SENSOR_NAME, client->addr, client->adapter->name);
         ISP_WARNING("sensor driver version %s\n",SENSOR_VERSION);
         if (chip) {
-                memcpy(chip->name, "sc4336p", sizeof("sc4336p"));
+                memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
                 chip->ident = ident;
                 chip->revision = SENSOR_VERSION;
         }
@@ -1007,7 +1003,7 @@ static struct tx_isp_subdev_ops sensor_ops = {
 /* It's the sensor device */
 static u64 tx_isp_module_dma_mask = ~(u64)0;
 struct platform_device sensor_platform_device = {
-        .name = "sc4336p",
+        .name = SENSOR_NAME,
         .id = -1,
         .dev = {
                 .dma_mask = &tx_isp_module_dma_mask,
@@ -1077,14 +1073,14 @@ static int sensor_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id sensor_id[] = {
-        { "sc4336p", 0 },
+        { SENSOR_NAME, 0 },
         { }
 };
 
 static struct i2c_driver sensor_driver = {
         .driver = {
                 .owner = NULL,
-                .name = "sc4336p",
+                .name = SENSOR_NAME,
         },
         .probe = sensor_probe,
         .remove = sensor_remove,
@@ -1093,7 +1089,7 @@ static struct i2c_driver sensor_driver = {
 
 char * get_sensor_name(void)
 {
-	return "sc4336p";
+	return SENSOR_NAME;
 }
 
 int get_sensor_i2c_addr(void)

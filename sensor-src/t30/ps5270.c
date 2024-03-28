@@ -1274,7 +1274,7 @@ static int sensor_set_fps(struct tx_isp_subdev *sd, int fps)
 	} else if (sensor_raw_mode==SENSOR_RAW_MODE_NATIVE_WDR) {
 		pclk = SENSOR_SUPPORT_PCLK_WDR;
 	} else
-		printk("Now ps5270 Do not support this sensor raw mode.\n");
+		printk("Do not support this sensor raw mode.\n");
 
 	vts = (pclk * (fps & 0xffff) / hts / ((fps & 0xffff0000) >> 16));
 	Cmd_Lpf = vts -1;
@@ -1322,7 +1322,7 @@ static int sensor_set_mode(struct tx_isp_subdev *sd, int value)
 		else if (sensor_raw_mode == SENSOR_RAW_MODE_NATIVE_WDR)
 			wsize = &sensor_win_sizes[2];
 		else
-			printk("Now ps5270 Do not support this sensor raw mode.\n");
+			printk("Do not support this sensor raw mode.\n");
 	} else if (value == TX_ISP_SENSOR_PREVIEW_RES_MAX_FPS) {
 		if (sensor_raw_mode == SENSOR_RAW_MODE_LINEAR_20FPS)
 			wsize = &sensor_win_sizes[0];
@@ -1331,7 +1331,7 @@ static int sensor_set_mode(struct tx_isp_subdev *sd, int value)
 		else if (sensor_raw_mode == SENSOR_RAW_MODE_NATIVE_WDR)
 			wsize = &sensor_win_sizes[2];
 		else
-			printk("Now ps5270 Do not support this sensor raw mode.\n");
+			printk("Do not support this sensor raw mode.\n");
 	}
 
 	if (wsize) {
@@ -1404,11 +1404,12 @@ static int sensor_g_chip_ident(struct tx_isp_subdev *sd,
 
 	ret = sensor_detect(sd, &ident);
 	if (ret) {
-		printk("chip found @ 0x%x (%s) is not an ps5270 chip.\n",
-				client->addr, client->adapter->name);
+		printk("chip found @ 0x%x (%s) is not an %s chip.\n",
+		       client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
-	printk("%s chip found @ 0x%02x (%s)\n", SENSOR_NAME, client->addr, client->adapter->name);
+	printk("%s chip found @ 0x%02x (%s)\n",
+	       SENSOR_NAME, client->addr, client->adapter->name);
 	if (chip) {
 		memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
 		chip->ident = ident;
@@ -1598,7 +1599,7 @@ static int sensor_probe(struct i2c_client *client,
 		sensor->video.attr = &sensor_attr_wdr_20fps;
 		break;
 	default:
-		printk("Now ps5270 Do not support this sensor raw mode.\n");
+		printk("Do not support this sensor raw mode.\n");
 		break;
 	}
 	sensor->video.mbus_change = 0;

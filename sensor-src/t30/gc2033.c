@@ -91,7 +91,8 @@ unsigned int fix_point_mult3(unsigned int a, unsigned int b, unsigned int c)
 	return x;
 }
 
-#define  ANALOG_GAIN_MAX (fix_point_mult2(ANALOG_GAIN_10, (0xf<<TX_ISP_GAIN_FIXED_POINT) + (0x3f<<(TX_ISP_GAIN_FIXED_POINT-6))))
+#define ANALOG_GAIN_MAX (fix_point_mult2(ANALOG_GAIN_10, (0xf<<TX_ISP_GAIN_FIXED_POINT) + (0x3f<<(TX_ISP_GAIN_FIXED_POINT-6))))
+
 unsigned int sensor_gainone_to_reg(unsigned int gain_one, unsigned int *regs)
 {
 	unsigned int gain_one1 = 0;
@@ -987,11 +988,12 @@ static int sensor_g_chip_ident(struct tx_isp_subdev *sd,
 	}
 	ret = sensor_detect(sd, &ident);
 	if (ret) {
-		printk("chip found @ 0x%x (%s) is not an gc2033 chip.\n",
-				client->addr, client->adapter->name);
+		printk("chip found @ 0x%x (%s) is not an %s chip.\n",
+		       client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
-	printk("%s chip found @ 0x%02x (%s)\n", SENSOR_NAME, client->addr, client->adapter->name);
+	printk("%s chip found @ 0x%02x (%s)\n",
+	       SENSOR_NAME, client->addr, client->adapter->name);
 	if (chip) {
 		memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
 		chip->ident = ident;

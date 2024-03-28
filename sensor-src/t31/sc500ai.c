@@ -400,7 +400,7 @@ unsigned int sensor_alloc_dgain(unsigned int isp_gain, unsigned char shift, unsi
 }
 
 struct tx_isp_sensor_attribute sensor_attr={
-	.name = "sc500ai",
+	.name = SENSOR_NAME,
 	.chip_id = 0xce1f,
 	.cbus_type = SENSOR_BUS_TYPE,
 	.cbus_mask = V4L2_SBUS_MASK_SAMPLE_8BITS | V4L2_SBUS_MASK_ADDR_16BITS,
@@ -587,7 +587,7 @@ static struct regval_list sensor_init_regs_2592_1620_30fps_mipi[] = {
     {0x0100,0x01},
 
     {SENSOR_REG_DELAY, 0x10},
-    {SENSOR_REG_END, 0x00},/* END MARKER */
+    {SENSOR_REG_END, 0x00},
 };
 
 static struct regval_list sensor_init_regs_2560_1440_30fps_mipi[] = {
@@ -724,7 +724,7 @@ static struct regval_list sensor_init_regs_2560_1440_30fps_mipi[] = {
     {0x36e9,0x53},
     {0x36f9,0x53},
     {0x0100,0x01},
-    {SENSOR_REG_END, 0x00},/* END MARKER */
+    {SENSOR_REG_END, 0x00},
 };
 
 static struct tx_isp_sensor_win_setting sensor_win_sizes[] = {
@@ -819,7 +819,6 @@ static int sensor_read_array(struct tx_isp_subdev *sd, struct regval_list *vals)
 		}
 		vals++;
 	}
-
 	return 0;
 }
 
@@ -836,7 +835,6 @@ static int sensor_write_array(struct tx_isp_subdev *sd, struct regval_list *vals
 		}
 		vals++;
 	}
-
 	return 0;
 }
 
@@ -891,9 +889,10 @@ static int sensor_set_expo(struct tx_isp_subdev *sd, int value)
 		dpc_flag = true;
 	}
 	if (ret != 0) {
-		ISP_ERROR("err: sc500ai write err %d\n",__LINE__);
+		ISP_ERROR("err: %s write err %d\n", SENSOR_NAME, __LINE__);
 		return ret;
 	}
+
 	return 0;
 }
 
@@ -951,6 +950,7 @@ static int sensor_init(struct tx_isp_subdev *sd, int enable)
 
 	if (!enable)
 		return ISP_SUCCESS;
+
 	sensor->video.mbus.width = wsize->width;
 	sensor->video.mbus.height = wsize->height;
 	sensor->video.mbus.code = wsize->mbus_code;
@@ -960,6 +960,7 @@ static int sensor_init(struct tx_isp_subdev *sd, int enable)
 	ret = sensor_write_array(sd, wsize->regs);
 	if (ret != 0)
 		return ret;
+
 	/*verion diff*/
 	ret = sensor_read(sd, 0x3109, &val);
 	if (1 == val) {
@@ -975,9 +976,9 @@ static int sensor_init(struct tx_isp_subdev *sd, int enable)
 	}
 	if (ret != 0)
 		return ret;
+
 	ret = tx_isp_call_subdev_notify(sd, TX_ISP_EVENT_SYNC_SENSOR_ATTR, &sensor->video);
 	sensor->priv = wsize;
-
 	return 0;
 }
 
@@ -990,7 +991,6 @@ static int sensor_s_stream(struct tx_isp_subdev *sd, int enable)
 	} else {
 		ret = sensor_write_array(sd, sensor_stream_off);
 	}
-
 	return ret;
 }
 
@@ -1009,13 +1009,14 @@ static int sensor_set_fps(struct tx_isp_subdev *sd, int fps)
 		ISP_ERROR("warn: fps(%d) not in range\n", fps);
 		return -1;
 	}
+
 	switch(sensor_resolution) {
-	case SENSOR_RES_400:
-		sclk = SENSOR_SUPPORT_SCLK_4M_FPS_30;
-		break;
-	case SENSOR_RES_370:
-		sclk = SENSOR_SUPPORT_SCLK_3M_FPS_30;
-		break;
+		case SENSOR_RES_400:
+			sclk = SENSOR_SUPPORT_SCLK_4M_FPS_30;
+			break;
+		case SENSOR_RES_370:
+			sclk = SENSOR_SUPPORT_SCLK_3M_FPS_30;
+			break;
 	}
 	ret = sensor_read(sd, 0x320c, &tmp);
 	hts = tmp;
@@ -1024,6 +1025,7 @@ static int sensor_set_fps(struct tx_isp_subdev *sd, int fps)
 		ISP_ERROR("Error: %s read error\n", SENSOR_NAME);
 		return ret;
 	}
+
 	hts = ((hts << 8) + tmp) << 1;
 	vts = sclk * (fps & 0xffff) / hts / ((fps & 0xffff0000) >> 16);
 	ret += sensor_write(sd, 0x320f, (unsigned char)(vts & 0xff));
@@ -1032,13 +1034,13 @@ static int sensor_set_fps(struct tx_isp_subdev *sd, int fps)
 		ISP_ERROR("Error: %s write error\n", SENSOR_NAME);
 		return ret;
 	}
+
 	sensor->video.fps = fps;
 	sensor->video.attr->max_integration_time_native = vts - 8;
 	sensor->video.attr->integration_time_limit = vts - 8;
 	sensor->video.attr->total_height = vts;
 	sensor->video.attr->max_integration_time = vts - 8;
 	ret = tx_isp_call_subdev_notify(sd, TX_ISP_EVENT_SYNC_SENSOR_ATTR, &sensor->video);
-
 	return ret;
 }
 
@@ -1111,14 +1113,15 @@ static int sensor_g_chip_ident(struct tx_isp_subdev *sd,
 	}
 	ret = sensor_detect(sd, &ident);
 	if (ret) {
-		ISP_ERROR("chip found @ 0x%x (%s) is not an sc500ai chip.\n",
-		       client->addr, client->adapter->name);
+		ISP_ERROR("chip found @ 0x%x (%s) is not an %s chip.\n",
+			  client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
-	ISP_WARNING("%s chip found @ 0x%02x (%s)\n", SENSOR_NAME, client->addr, client->adapter->name);
+	ISP_WARNING("%s chip found @ 0x%02x (%s)\n",
+		    SENSOR_NAME, client->addr, client->adapter->name);
 	ISP_WARNING("sensor driver version %s\n",SENSOR_VERSION);
 	if (chip) {
-		memcpy(chip->name, "sc500ai", sizeof("sc500ai"));
+		memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
 		chip->ident = ident;
 		chip->revision = SENSOR_VERSION;
 	}
@@ -1240,7 +1243,7 @@ static struct tx_isp_subdev_ops sensor_ops = {
 /* It's the sensor device */
 static u64 tx_isp_module_dma_mask = ~(u64)0;
 struct platform_device sensor_platform_device = {
-	.name = "sc500ai",
+	.name = SENSOR_NAME,
 	.id = -1,
 	.dev = {
 		.dma_mask = &tx_isp_module_dma_mask,
@@ -1343,7 +1346,7 @@ static int sensor_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id sensor_id[] = {
-	{ "sc500ai", 0 },
+	{ SENSOR_NAME, 0 },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, sensor_id);
@@ -1351,7 +1354,7 @@ MODULE_DEVICE_TABLE(i2c, sensor_id);
 static struct i2c_driver sensor_driver = {
 	.driver = {
 		.owner = THIS_MODULE,
-		.name = "sc500ai",
+		.name = SENSOR_NAME,
 	},
 	.probe = sensor_probe,
 	.remove = sensor_remove,

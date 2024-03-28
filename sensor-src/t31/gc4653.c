@@ -32,6 +32,7 @@
 #define SENSOR_SUPPORT_386RES_30FPS_SCLK (144 * 1000 * 1000)
 #define SENSOR_SUPPORT_207RES_60FPS_SCLK (0x4b0 * 0x4e2 * 60 * 2)
 #define SENSOR_SUPPORT_92RES_60FPS_SCLK (0x5dd * 0x640 * 60 * 2)
+#define SENSOR_OUTPUT_MAX_FPS 30
 #define SENSOR_OUTPUT_MIN_FPS 5
 #define SENSOR_VERSION "H20211211a"
 
@@ -962,10 +963,6 @@ static struct tx_isp_sensor_win_setting sensor_win_sizes[] = {
 
 struct tx_isp_sensor_win_setting *wsize = &sensor_win_sizes[0];
 
-/*
- * the part of driver was fixed.
- */
-
 static struct regval_list sensor_stream_on[] = {
 	{SENSOR_REG_END, 0x00},
 };
@@ -1316,11 +1313,13 @@ static int sensor_g_chip_ident(struct tx_isp_subdev *sd, struct tx_isp_chip_iden
 	}
 	ret = sensor_detect(sd, &ident);
 	if (ret) {
-		ISP_ERROR("chip found @ 0x%x (%s) is not an %s chip.\n", client->addr, client->adapter->name, SENSOR_NAME);
+		ISP_ERROR("chip found @ 0x%x (%s) is not an %s chip.\n",
+			  client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
 
-	ISP_WARNING("%s chip found @ 0x%02x (%s)\n sensor drv version %s\n", SENSOR_NAME, client->addr, client->adapter->name, SENSOR_VERSION);
+	ISP_WARNING("%s chip found @ 0x%02x (%s)\n sensor drv version %s\n",
+		    SENSOR_NAME, client->addr, client->adapter->name, SENSOR_VERSION);
 	if (chip) {
 		memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
 		chip->ident = ident;
@@ -1560,6 +1559,7 @@ static struct tx_isp_subdev_ops sensor_ops = {
 
 /* It's the sensor device */
 static u64 tx_isp_module_dma_mask = ~(u64) 0;
+
 struct platform_device sensor_platform_device = {
 	.name = SENSOR_NAME,
 	.id = -1,
@@ -1727,6 +1727,7 @@ static const struct i2c_device_id sensor_id[] = {
 	{SENSOR_NAME, 0},
 	{}
 };
+
 MODULE_DEVICE_TABLE(i2c, sensor_id);
 
 static struct i2c_driver sensor_driver = {

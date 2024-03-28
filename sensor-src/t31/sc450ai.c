@@ -535,7 +535,7 @@ struct tx_isp_mipi_bus sensor_mipi ={
 };
 
 struct tx_isp_sensor_attribute sensor_attr={
-	.name = "sc450ai",
+	.name = SENSOR_NAME,
 	.chip_id = 0xbd2f,
 	.cbus_type = SENSOR_BUS_TYPE,
 	.cbus_mask = V4L2_SBUS_MASK_SAMPLE_8BITS | V4L2_SBUS_MASK_ADDR_16BITS,
@@ -726,7 +726,7 @@ static struct regval_list sensor_init_regs_2592_1520_25fps_mipi[] = {
 	{0x36e9,0x20},
 	{0x36f9,0x53},
 	{0x0100,0x01},
-	{SENSOR_REG_END, 0x00},/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 
 };
 
@@ -896,7 +896,7 @@ static struct regval_list sensor_init_regs_2696_1528_30fps_mipi[] = {
 	{0x36e9,0x24},
 	{0x36f9,0x53},
 	{0x0100,0x01},
-	{SENSOR_REG_END, 0x00},/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 static struct tx_isp_sensor_win_setting sensor_win_sizes[] = {
@@ -1022,7 +1022,7 @@ static int sensor_detect(struct tx_isp_subdev *sd, unsigned int *ident)
 	unsigned char v;
 
 	ret = sensor_read(sd, 0x3107, &v);
-	printk("-----%s: %d ret = %d, v = 0x%02x\n", __func__, __LINE__, ret,v);
+	ISP_WARNING("-----%s: %d ret = %d, v = 0x%02x\n", __func__, __LINE__, ret,v);
 	if (ret < 0)
 		return ret;
 	if (v != SENSOR_CHIP_ID_H)
@@ -1030,7 +1030,7 @@ static int sensor_detect(struct tx_isp_subdev *sd, unsigned int *ident)
 	*ident = v;
 
 	ret = sensor_read(sd, 0x3108, &v);
-	printk("-----%s: %d ret = %d, v = 0x%02x\n", __func__, __LINE__, ret,v);
+	ISP_WARNING("-----%s: %d ret = %d, v = 0x%02x\n", __func__, __LINE__, ret,v);
 	if (ret < 0)
 		return ret;
 	if (v != SENSOR_CHIP_ID_L)
@@ -1113,9 +1113,9 @@ static int sensor_init(struct tx_isp_subdev *sd, int enable)
 	ret = sensor_write_array(sd, wsize->regs);
 	if (ret)
 		return ret;
+
 	ret = tx_isp_call_subdev_notify(sd, TX_ISP_EVENT_SYNC_SENSOR_ATTR, &sensor->video);
 	sensor->priv = wsize;
-
 	return 0;
 }
 
@@ -1126,12 +1126,10 @@ static int sensor_s_stream(struct tx_isp_subdev *sd, int enable)
 	if (enable) {
 		ret = sensor_write_array(sd, sensor_stream_on_mipi);
 		ISP_WARNING("%s stream on\n", SENSOR_NAME);
-
 	} else {
 		ret = sensor_write_array(sd, sensor_stream_off_mipi);
 		ISP_WARNING("%s stream off\n", SENSOR_NAME);
 	}
-
 	return ret;
 }
 
@@ -1146,14 +1144,12 @@ static int sensor_set_fps(struct tx_isp_subdev *sd, int fps)
 	int ret = 0;
 
 	newformat = (((fps >> 16) / (fps & 0xffff)) << 8) + ((((fps >> 16) % (fps & 0xffff)) << 8) / (fps & 0xffff));
-
 	if (newformat > (SENSOR_OUTPUT_MAX_FPS << 8) || newformat < (SENSOR_OUTPUT_MIN_FPS << 8)) {
 		ISP_ERROR("warn: fps(%d) not in range\n", fps);
 		return -1;
 	}
 /*
 	sclk = SENSOR_SUPPORT_PCLK;
-
 	ret += sensor_read(sd, 0x320c, &tmp);
 	hts = tmp;
 	ret += sensor_read(sd, 0x320d, &tmp);
@@ -1164,16 +1160,12 @@ static int sensor_set_fps(struct tx_isp_subdev *sd, int fps)
 	}
 
 	vts = sclk * (fps & 0xffff) / hts / ((fps & 0xffff0000) >> 16);
-
 	ret = sensor_write(sd, 0x320f, (unsigned char)(vts & 0xff));
 	ret += sensor_write(sd, 0x320e, (unsigned char)(vts >> 8));
-
 */
 	vts = 46800 / ((fps & 0xffff0000) >> 16);	/* VTS25 = 1872  eg: VTS15=VTS25 * (25/15) */
-
 	ret = sensor_write(sd, 0x320f, (unsigned char)(vts & 0xff));
 	ret += sensor_write(sd, 0x320e, (unsigned char)(vts >> 8));
-
 	if (0 != ret) {
 		ISP_ERROR("Error: %s write error\n", SENSOR_NAME);
 		return ret;
@@ -1185,7 +1177,6 @@ static int sensor_set_fps(struct tx_isp_subdev *sd, int fps)
 	sensor->video.attr->total_height = vts;
 	sensor->video.attr->max_integration_time = vts - 4;
 	ret = tx_isp_call_subdev_notify(sd, TX_ISP_EVENT_SYNC_SENSOR_ATTR, &sensor->video);
-
 	return ret;
 }
 
@@ -1239,14 +1230,15 @@ static int sensor_g_chip_ident(struct tx_isp_subdev *sd,
 	}
 	ret = sensor_detect(sd, &ident);
 	if (ret) {
-		ISP_ERROR("chip found @ 0x%x (%s) is not an sc450ai chip.\n",
-		       client->addr, client->adapter->name);
+		ISP_ERROR("chip found @ 0x%x (%s) is not an %s chip.\n",
+			  client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
-	ISP_WARNING("%s chip found @ 0x%02x (%s)\n", SENSOR_NAME, client->addr, client->adapter->name);
+	ISP_WARNING("%s chip found @ 0x%02x (%s)\n",
+		    SENSOR_NAME, client->addr, client->adapter->name);
 	ISP_WARNING("sensor driver version %s\n",SENSOR_VERSION);
 	if (chip) {
-		memcpy(chip->name, "sc450ai", sizeof("sc450ai"));
+		memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
 		chip->ident = ident;
 		chip->revision = SENSOR_VERSION;
 	}
@@ -1363,7 +1355,7 @@ static struct tx_isp_subdev_ops sensor_ops = {
 /* It's the sensor device */
 static u64 tx_isp_module_dma_mask = ~(u64)0;
 struct platform_device sensor_platform_device = {
-	.name = "sc450ai",
+	.name = SENSOR_NAME,
 	.id = -1,
 	.dev = {
 		.dma_mask = &tx_isp_module_dma_mask,
@@ -1457,7 +1449,7 @@ static int sensor_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id sensor_id[] = {
-	{ "sc450ai", 0 },
+	{ SENSOR_NAME, 0 },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, sensor_id);
@@ -1465,7 +1457,7 @@ MODULE_DEVICE_TABLE(i2c, sensor_id);
 static struct i2c_driver sensor_driver = {
 	.driver = {
 		.owner = THIS_MODULE,
-		.name = "sc450ai",
+		.name = SENSOR_NAME,
 	},
 	.probe = sensor_probe,
 	.remove = sensor_remove,

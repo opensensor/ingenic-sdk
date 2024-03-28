@@ -20,11 +20,11 @@
 #include <soc/gpio.h>
 
 #define SENSOR_NAME "bg0806"
-#define SENSOR_CHIP_ID 0x0806
 #define SENSOR_BUS_TYPE TX_SENSOR_CONTROL_INTERFACE_I2C
 #define SENSOR_I2C_ADDRESS 0x32
-#define SENSOR_MAX_WIDTH 0
-#define SENSOR_MAX_HEIGHT 0
+#define SENSOR_MAX_WIDTH 1920
+#define SENSOR_MAX_HEIGHT 1080
+#define SENSOR_CHIP_ID 0x0806
 #define SENSOR_CHIP_ID_H (0x08)
 #define SENSOR_CHIP_ID_L (0x06)
 #define SENSOR_REG_END 0xffff
@@ -37,28 +37,20 @@
 #define DRIVE_CAPABILITY_1
 
 static int reset_gpio = GPIO_PA(18);
-module_param(reset_gpio,
-int, S_IRUGO);
-MODULE_PARM_DESC(reset_gpio,
-"Reset GPIO NUM");
+module_param(reset_gpio, int, S_IRUGO);
+MODULE_PARM_DESC(reset_gpio, "Reset GPIO NUM");
 
 static int pwdn_gpio = -1;
-module_param(pwdn_gpio,
-int, S_IRUGO);
-MODULE_PARM_DESC(pwdn_gpio,
-"Power down GPIO NUM");
+module_param(pwdn_gpio, int, S_IRUGO);
+MODULE_PARM_DESC(pwdn_gpio, "Power down GPIO NUM");
 
 static int sensor_gpio_func = DVP_PA_12BIT;
-module_param(sensor_gpio_func,
-int, S_IRUGO);
-MODULE_PARM_DESC(sensor_gpio_func,
-"Sensor GPIO function");
+module_param(sensor_gpio_func, int, S_IRUGO);
+MODULE_PARM_DESC(sensor_gpio_func, "Sensor GPIO function");
 
 static int data_interface = TX_SENSOR_DATA_INTERFACE_DVP;
-module_param(data_interface,
-int, S_IRUGO);
-MODULE_PARM_DESC(data_interface,
-"Sensor Date interface");
+module_param(data_interface, int, S_IRUGO);
+MODULE_PARM_DESC(data_interface, "Sensor Date interface");
 
 static struct sensor_info sensor_info = {
 	.name = SENSOR_NAME,
@@ -72,13 +64,13 @@ static struct sensor_info sensor_info = {
 };
 
 struct regval_list {
-    uint16_t reg_num;
-    unsigned char value;
+	uint16_t reg_num;
+	unsigned char value;
 };
 
 struct again_lut {
-    unsigned int value;
-    unsigned int gain;
+	unsigned int value;
+	unsigned int gain;
 };
 
 struct tx_isp_sensor_attribute sensor_attr;
@@ -91,8 +83,8 @@ unsigned int sensor_alloc_again(unsigned int isp_gain, unsigned char shift, unsi
 	uint32_t mask;
 	/* low 4 bits are fraction bits */
 	gain_one = math_exp2(isp_gain, shift, TX_ISP_GAIN_FIXED_POINT);
-	if (gain_one >= (uint32_t)(15.5 * (1 << TX_ISP_GAIN_FIXED_POINT)))
-		gain_one = (uint32_t)(15.5 * (1 << TX_ISP_GAIN_FIXED_POINT));
+	if (gain_one >= (uint32_t) (15.5 * (1 << TX_ISP_GAIN_FIXED_POINT)))
+		gain_one = (uint32_t) (15.5 * (1 << TX_ISP_GAIN_FIXED_POINT));
 	regs = gain_one >> (TX_ISP_GAIN_FIXED_POINT - 6);
 	*sensor_again = regs;
 	mask = ~0;
@@ -506,8 +498,7 @@ static int sensor_get_black_pedestal(struct v4l2_subdev *sd, int value) {
 }
 
 static int sensor_init(struct v4l2_subdev *sd, u32 enable) {
-	struct tx_isp_sensor *sensor = (container_of(sd,
-	struct tx_isp_sensor, sd));
+	struct tx_isp_sensor *sensor = (container_of(sd, struct tx_isp_sensor, sd));
 	struct tx_isp_notify_argument arg;
 	struct tx_isp_sensor_win_setting *wsize = &sensor_win_sizes[0];
 	int i;
@@ -619,7 +610,7 @@ static int sensor_set_fps(struct tx_isp_sensor *sensor, int fps) {
 	hts = val << 8;
 	val = 0;
 	ret += sensor_read(sd, 0x000f, &val);
-	hts = val;
+	hts |= val;
 	if (0 != ret) {
 		printk("Error: %s read error\n", SENSOR_NAME);
 		return ret;
@@ -631,7 +622,7 @@ static int sensor_set_fps(struct tx_isp_sensor *sensor, int fps) {
 	height = val << 8;
 	val = 0;
 	ret += sensor_read(sd, 0x0009, &val);
-	height = val;
+	height |= val;
 	if (0 != ret) {
 		printk("Error: %s read error\n", SENSOR_NAME);
 		return ret;
@@ -771,8 +762,7 @@ static long sensor_ops_private_ioctl(struct tx_isp_sensor *sensor, struct isp_pr
 }
 
 static long sensor_ops_ioctl(struct v4l2_subdev *sd, unsigned int cmd, void *arg) {
-	struct tx_isp_sensor *sensor = container_of(sd,
-	struct tx_isp_sensor, sd);
+	struct tx_isp_sensor *sensor = container_of(sd, struct tx_isp_sensor, sd);
 	int ret;
 	switch (cmd) {
 		case VIDIOC_ISP_PRIVATE_IOCTL:
@@ -914,8 +904,8 @@ static const struct i2c_device_id sensor_id[] = {
 	{SENSOR_NAME, 0},
 	{}
 };
-MODULE_DEVICE_TABLE(i2c, sensor_id
-);
+
+MODULE_DEVICE_TABLE(i2c, sensor_id);
 
 static struct i2c_driver sensor_driver = {
 	.driver = {
@@ -928,11 +918,13 @@ static struct i2c_driver sensor_driver = {
 };
 
 static __init int init_sensor(void) {
+	sensor_common_init(&sensor_info);
 	return i2c_add_driver(&sensor_driver);
 }
 
 static __exit void exit_sensor(void) {
 	i2c_del_driver(&sensor_driver);
+	sensor_common_exit();
 }
 
 module_init(init_sensor);

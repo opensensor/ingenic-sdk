@@ -368,7 +368,7 @@ static struct regval_list sensor_init_regs_2048_1536_30fps_mipi_3m[] = {
 	{0x3630, 0x80},
 	{0x3622, 0xf6},
 
-	{SENSOR_REG_END, 0x00},/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 static struct regval_list sensor_init_regs_2304_1536_25fps_mipi[] = {
@@ -523,7 +523,7 @@ static struct regval_list sensor_init_regs_2304_1536_25fps_mipi[] = {
 	{0x3630, 0x80},
 	{0x3622, 0xf6},
 
-	{SENSOR_REG_END, 0x00},/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 static struct regval_list sensor_init_regs_2304_1440_15fps_mipi[] = {
@@ -678,7 +678,7 @@ static struct regval_list sensor_init_regs_2304_1440_15fps_mipi[] = {
 	{0x3622, 0xf6},
 	//{0x0100, 0x01},
 
-	{SENSOR_REG_END, 0x00},/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 /*
  * the order of the sensor_win_sizes is [full_resolution, preview_resolution].
@@ -945,7 +945,7 @@ static int sensor_init(struct tx_isp_subdev *sd, int enable)
 		wsize = &sensor_win_sizes[2];
 		break;
 	default:
-		printk("Now sc4236 Do not support this resolution.\n");
+		printk("Do not support this resolution.\n");
 		break;
 	}
 
@@ -1006,7 +1006,7 @@ static int sensor_set_fps(struct tx_isp_subdev *sd, int fps)
 		max_fps = TX_SENSOR_MAX_FPS_15;
 		break;
 	default:
-		printk("Now sc4236 Do not support this resolution.\n");
+		printk("Do not support this resolution.\n");
 		ret = -1;
 		break;
 	}
@@ -1059,7 +1059,7 @@ static int sensor_set_mode(struct tx_isp_subdev *sd, int value)
 		else if (sensor_resolution == SENSOR_RES_330)
 			wsize = &sensor_win_sizes[2];
 		else
-			printk("Now sc4236 Do not support this resolution.\n");
+			printk("Do not support this resolution.\n");
 	} else if (value == TX_ISP_SENSOR_PREVIEW_RES_MAX_FPS) {
 		if (sensor_resolution == SENSOR_RES_400)
 			wsize = &sensor_win_sizes[0];
@@ -1068,7 +1068,7 @@ static int sensor_set_mode(struct tx_isp_subdev *sd, int value)
 		else if (sensor_resolution == SENSOR_RES_330)
 			wsize = &sensor_win_sizes[2];
 		else
-			printk("Now sc4236 Do not support this resolution.\n");
+			printk("Do not support this resolution.\n");
 	}
 
 	if (wsize) {
@@ -1132,11 +1132,12 @@ static int sensor_g_chip_ident(struct tx_isp_subdev *sd,
 	}
 	ret = sensor_detect(sd, &ident);
 	if (ret) {
-		printk("chip found @ 0x%x (%s) is not an sc4236 chip.\n",
-		       client->addr, client->adapter->name);
+		printk("chip found @ 0x%x (%s) is not an %s chip.\n",
+		       client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
-	printk("%s chip found @ 0x%02x (%s)\n", SENSOR_NAME, client->addr, client->adapter->name);
+	printk("%s chip found @ 0x%02x (%s)\n",
+	       SENSOR_NAME, client->addr, client->adapter->name);
 	if (chip) {
 		memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
 		chip->ident = ident;
@@ -1309,7 +1310,7 @@ static int sensor_probe(struct i2c_client *client,
 		sensor->video.attr = &sensor_attr_3m;
 		break;
 	default:
-		printk("Now sc4236 Do not support this resolution.\n");
+		printk("Do not support this resolution.\n");
 		break;
 	}
 	sensor->video.mbus_change = 0;

@@ -18,6 +18,7 @@
 #include <sensor-info.h>
 #include <txx-funcs.h>
 
+#define SENSOR_NAME "jxk05"
 #define SENSOR_CHIP_ID_H (0x05)
 #define SENSOR_CHIP_ID_L (0x05)
 #define SENSOR_REG_END 0xff
@@ -158,7 +159,7 @@ unsigned int sensor_alloc_dgain(unsigned int isp_gain, unsigned char shift, unsi
 }
 
 struct tx_isp_sensor_attribute sensor_attr={
-	.name = "jxk05",
+	.name = SENSOR_NAME,
 	.chip_id = 0x0505,
 	.cbus_type = TX_SENSOR_CONTROL_INTERFACE_I2C,
 	.cbus_mask = V4L2_SBUS_MASK_SAMPLE_8BITS | V4L2_SBUS_MASK_ADDR_8BITS,
@@ -607,7 +608,7 @@ static int sensor_init(struct tx_isp_subdev *sd, int enable)
 		wsize = &sensor_win_sizes[1];
 		break;
 	default:
-		ISP_WARNING("jxk05 Do not support this max fps now.\n");
+		ISP_WARNING("Do not support this max fps now.\n");
 	}
 	sensor->video.mbus.width = wsize->width;
 	sensor->video.mbus.height = wsize->height;
@@ -660,7 +661,7 @@ static int sensor_set_fps(struct tx_isp_subdev *sd, int fps)
 		sclk = SENSOR_SUPPORT_SCLK_5M << 1;
 		break;
 	default:
-		ISP_WARNING("jxk05 Do not support this max fps now.\n");
+		ISP_WARNING("Do not support this max fps now.\n");
 	}
 	newformat = (((fps >> 16) / (fps & 0xffff)) << 8) + ((((fps >> 16) % (fps & 0xffff)) << 8) / (fps & 0xffff));
 	if (newformat > (max_fps << 8) || newformat < (SENSOR_OUTPUT_MIN_FPS << 8)) {
@@ -725,7 +726,7 @@ static int sensor_set_mode(struct tx_isp_subdev *sd, int value)
 		wsize = &sensor_win_sizes[1];
 		break;
 	default:
-		ISP_WARNING("jxk05 Do not support this max fps now.\n");
+		ISP_WARNING("Do not support this max fps now.\n");
 	}
 
 	if (wsize) {
@@ -773,13 +774,14 @@ static int sensor_g_chip_ident(struct tx_isp_subdev *sd,
 	}
 	ret = sensor_detect(sd, &ident);
 	if (ret) {
-		ISP_ERROR("chip found @ 0x%x (%s) is not an jxk05 chip.\n",
-				client->addr, client->adapter->name);
+		ISP_ERROR("chip found @ 0x%x (%s) is not an %s chip.\n",
+			  client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
-	ISP_WARNING("jxk05 chip found @ 0x%02x (%s) sensor drv version %s\n", client->addr, client->adapter->name, SENSOR_VERSION);
+	ISP_WARNING("%s chip found @ 0x%02x (%s)\n",
+		    SENSOR_NAME, client->addr, client->adapter->name);
 	if (chip) {
-		memcpy(chip->name, "jxk05", sizeof("jxk05"));
+		memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
 		chip->ident = ident;
 		chip->revision = SENSOR_VERSION;
 	}
@@ -889,7 +891,7 @@ static struct tx_isp_subdev_ops sensor_ops = {
 /* It's the sensor device */
 static u64 tx_isp_module_dma_mask = ~(u64)0;
 struct platform_device sensor_platform_device = {
-	.name = "jxk05",
+	.name = SENSOR_NAME,
 	.id = -1,
 	.dev = {
 		.dma_mask = &tx_isp_module_dma_mask,
@@ -939,7 +941,7 @@ static int sensor_probe(struct i2c_client *client, const struct i2c_device_id *i
 
 		break;
 	default:
-		ISP_WARNING("jxk05 Do not support this resolution now.\n");
+		ISP_WARNING("Do not support this resolution now.\n");
 		break;
 	}
 	sensor->video.attr = &sensor_attr;
@@ -983,7 +985,7 @@ static int sensor_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id sensor_id[] = {
-	{ "jxk05", 0 },
+	{ SENSOR_NAME, 0 },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, sensor_id);
@@ -991,7 +993,7 @@ MODULE_DEVICE_TABLE(i2c, sensor_id);
 static struct i2c_driver sensor_driver = {
 	.driver = {
 		.owner = THIS_MODULE,
-		.name = "jxk05",
+		.name = SENSOR_NAME,
 	},
 	.probe = sensor_probe,
 	.remove = sensor_remove,

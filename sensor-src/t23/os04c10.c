@@ -17,6 +17,7 @@
 #include <sensor-common.h>
 #include <sensor-info.h>
 
+#define SENSOR_NAME "os04c10"
 #define SENSOR_CHIP_ID_H (0x53)
 #define SENSOR_CHIP_ID_M (0x04)
 #define SENSOR_CHIP_ID_L (0x43)
@@ -270,7 +271,7 @@ struct tx_isp_mipi_bus sensor_mipi={
 };
 
 struct tx_isp_sensor_attribute sensor_attr={
-	.name = "os04c10",
+	.name = SENSOR_NAME,
 	.chip_id = 0x530541,
 	.cbus_type = TX_SENSOR_CONTROL_INTERFACE_I2C,
 	.cbus_mask = V4L2_SBUS_MASK_SAMPLE_8BITS | V4L2_SBUS_MASK_ADDR_16BITS,
@@ -610,7 +611,7 @@ static struct regval_list sensor_init_regs_2560_1440_30fps[] = {
 	{0x5000, 0xe9},
 	{0x0100, 0x00},
 
-	{SENSOR_REG_END, 0x00},/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 static struct regval_list sensor_init_regs_1920_1080_60fps[] = {
@@ -1186,7 +1187,7 @@ static struct regval_list sensor_init_regs_1920_1080_30fps[] = {
 };
 
 static struct regval_list sensor_init_regs_2560_1440_15fps_dol[] = {
-	{SENSOR_REG_END, 0x00},/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 /*
@@ -1688,13 +1689,14 @@ static int sensor_g_chip_ident(struct tx_isp_subdev *sd,
 	}
 	ret = sensor_detect(sd, &ident);
 	if (ret) {
-		ISP_ERROR("chip found @ 0x%x (%s) is not an os04c10 chip.\n",
-			  client->addr, client->adapter->name);
+		ISP_ERROR("chip found @ 0x%x (%s) is not an %s chip.\n",
+			  client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
-	ISP_WARNING("%s chip found @ 0x%02x (%s)\n", SENSOR_NAME, client->addr, client->adapter->name);
+	ISP_WARNING("%s chip found @ 0x%02x (%s)\n",
+		    SENSOR_NAME, client->addr, client->adapter->name);
 	if (chip) {
-		memcpy(chip->name, "os04c10", sizeof("os04c10"));
+		memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
 		chip->ident = ident;
 		chip->revision = SENSOR_VERSION;
 	}
@@ -1822,7 +1824,7 @@ static struct tx_isp_subdev_ops sensor_ops = {
 /* It's the sensor device */
 static u64 tx_isp_module_dma_mask = ~(u64)0;
 struct platform_device sensor_platform_device = {
-	.name = "os04c10",
+	.name = SENSOR_NAME,
 	.id = -1,
 	.dev = {
 		.dma_mask = &tx_isp_module_dma_mask,
@@ -1961,7 +1963,7 @@ static int sensor_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id sensor_id[] = {
-	{ "os04c10", 0 },
+	{ SENSOR_NAME, 0 },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, sensor_id);
@@ -1969,7 +1971,7 @@ MODULE_DEVICE_TABLE(i2c, sensor_id);
 static struct i2c_driver sensor_driver = {
 	.driver = {
 		.owner = THIS_MODULE,
-		.name = "os04c10",
+		.name = SENSOR_NAME,
 	},
 	.probe = sensor_probe,
 	.remove = sensor_remove,

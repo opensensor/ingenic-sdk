@@ -17,6 +17,7 @@
 #include <sensor-common.h>
 #include <txx-funcs.h>
 
+#define SENSOR_NAME "imx327"
 #define SENSOR_CHIP_ID_H (0xb2)
 #define SENSOR_CHIP_ID_L (0x01)
 #define SENSOR_REG_END 0xffff
@@ -144,7 +145,7 @@ struct tx_isp_mipi_bus mipi_linear = {
 };
 
 struct tx_isp_sensor_attribute imx327_attr={
-	.name = "imx327",
+	.name = SENSOR_NAME,
 	.chip_id = 0xb201,
 	.cbus_type = TX_SENSOR_CONTROL_INTERFACE_I2C,
 	.cbus_mask = TISP_SBUS_MASK_SAMPLE_8BITS | TISP_SBUS_MASK_ADDR_16BITS,
@@ -309,7 +310,7 @@ static struct regval_list imx327_init_regs_1920_1080_30fps_mipi_2dol_lcg[] = {
 	{0x3001, 0x00},//standy cancel
 	{0x3002, 0x00},//Master start
 	{0x3000, 0x01},//standy cancel
-	{SENSOR_REG_END, 0x00},/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 
 };
 
@@ -385,7 +386,7 @@ static struct regval_list imx327_init_regs_1920_1080_30fps_mipi[] = {
 	{0x3001, 0x00},//standy cancel
 	{0x3002, 0x00},//Master start
 	{0x3000, 0x01},//standy cancel
-	{SENSOR_REG_END, 0x00},/* END MARKER */
+	{SENSOR_REG_END, 0x00},
 };
 
 /*
@@ -999,13 +1000,14 @@ static int imx327_g_chip_ident(struct tx_isp_subdev *sd,
 	}
 	ret = imx327_detect(sd, &ident);
 	if (ret) {
-		ISP_ERROR("chip found @ 0x%x (%s) is not an imx327 chip.\n",
-			  client->addr, client->adapter->name);
+		ISP_ERROR("chip found @ 0x%x (%s) is not an %s chip.\n",
+			  client->addr, client->adapter->name, SENSOR_NAME);
 		return ret;
 	}
-	ISP_WARNING("%s chip found @ 0x%02x (%s)\n", SENSOR_NAME, client->addr, client->adapter->name);
+	ISP_WARNING("%s chip found @ 0x%02x (%s)\n",
+		    SENSOR_NAME, client->addr, client->adapter->name);
 	if (chip) {
-		memcpy(chip->name, "imx327", sizeof("imx327"));
+		memcpy(chip->name, SENSOR_NAME, sizeof(SENSOR_NAME));
 		chip->ident = ident;
 		chip->revision = SENSOR_VERSION;
 	}
@@ -1138,7 +1140,7 @@ static struct tx_isp_subdev_ops imx327_ops = {
 /* It's the sensor device */
 static u64 tx_isp_module_dma_mask = ~(u64)0;
 struct platform_device sensor_platform_device = {
-	.name = "imx327",
+	.name = SENSOR_NAME,
 	.id = -1,
 	.dev = {
 		.dma_mask = &tx_isp_module_dma_mask,
@@ -1205,7 +1207,7 @@ static int imx327_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id imx327_id[] = {
-	{ "imx327", 0 },
+	{ SENSOR_NAME, 0 },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, imx327_id);
@@ -1213,7 +1215,7 @@ MODULE_DEVICE_TABLE(i2c, imx327_id);
 static struct i2c_driver imx327_driver = {
 	.driver = {
 		.owner = THIS_MODULE,
-		.name = "imx327",
+		.name = SENSOR_NAME,
 	},
 	.probe = imx327_probe,
 	.remove = imx327_remove,
