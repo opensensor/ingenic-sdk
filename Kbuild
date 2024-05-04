@@ -26,7 +26,6 @@ $(info Building ISP for Kernel $(KERNEL_VERSION))
 include $(src)/$(KERNEL_VERSION)/isp/Kbuild
 
 $(info Building GPIO for Kernel $(KERNEL_VERSION))
-include $(src)/$(KERNEL_VERSION)/gpio/Kbuild
 
 $(info Building PWM for Kernel $(KERNEL_VERSION))
 include $(src)/$(KERNEL_VERSION)/misc/sample_pwm/Kbuild
@@ -38,9 +37,6 @@ include $(src)/$(KERNEL_VERSION)/misc/motor/Kbuild
 ifeq ($(KERNEL_VERSION),3.10)
 $(info Building Audio for Kernel $(KERNEL_VERSION))
 include $(src)/$(KERNEL_VERSION)/audio/$(SOC_FAMILY)/oss2/Kbuild
-else
-$(info Building Audio for Kernel $(KERNEL_VERSION))
-include $(src)/$(KERNEL_VERSION)/audio/$(SOC_FAMILY)/oss3/Kbuild
 endif
 
 ifeq ($(CONFIG_SOC_T23)$(CONFIG_SOC_T31)$(CONFIG_SOC_T40)$(CONFIG_SOC_T41),y)
