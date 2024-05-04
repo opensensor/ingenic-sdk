@@ -28,10 +28,8 @@ include $(src)/$(KERNEL_VERSION)/isp/Kbuild
 $(info Building GPIO for Kernel $(KERNEL_VERSION))
 
 $(info Building PWM for Kernel $(KERNEL_VERSION))
-include $(src)/$(KERNEL_VERSION)/misc/sample_pwm/Kbuild
 
 $(info Building Motor for Kernel $(KERNEL_VERSION))
-include $(src)/$(KERNEL_VERSION)/misc/motor/Kbuild
 
 #### PLATFORM ####
 ifeq ($(KERNEL_VERSION),3.10)
