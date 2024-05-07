@@ -35,7 +35,7 @@
 
 #include <soc/gpio.h>
 #include <soc/base.h>
-#include <dt-bindings/interrupt-controller/t40-irq.h>
+#include <dt-bindings/interrupt-controller/t31-irq.h>
 
 #include <linux/spi/spi.h>
 #include <asm/io.h>
@@ -43,6 +43,7 @@
 #include <asm/uaccess.h>
 #include <asm/cacheflush.h>
 #include <jz_proc.h>
+#include <misc/isp_mem_map.h>
 
 #include <txx-funcs.h>
 
