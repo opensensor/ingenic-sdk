@@ -1757,7 +1757,7 @@ static int sensor_probe(struct i2c_client *client, const struct i2c_device_id *i
 	clk_set_rate(sensor->mclk, 24000000);
     clk_prepare_enable(sensor->mclk);
 
-	private_jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, 0x8000);
+	jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, 0x8000);
 	sensor_attr.dbus_type = data_interface;
 	if ((data_interface == TX_SENSOR_DATA_INTERFACE_DVP) && (sensor_max_fps == TX_SENSOR_MAX_FPS_30)) {
 		ret = set_sensor_gpio_function(sensor_gpio_func);
