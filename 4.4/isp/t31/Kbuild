@@ -15,6 +15,6 @@ OBJS += $(KERNEL_VERSION)/sdk/lib$(SOC_FAMILY)-firmware.a
 $(OUT)-objs := $(OBJS)
 
 # Add the -Wl,-wrap,private_ioremap linker option
-CFLAGS_MODULE += -Wl,-wrap,private_ioremap
+CFLAGS_MODULE += -Wl,-wrap,private_ioremap -Wl,-wrap,private_jzgpio_set_func
 
 obj-m += $(OUT).o

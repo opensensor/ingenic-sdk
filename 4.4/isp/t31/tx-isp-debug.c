@@ -443,8 +443,9 @@ int private_gpio_set_debounce(unsigned gpio, unsigned debounce)
 	return gpio_set_debounce(gpio, debounce);
 }
 
-int private_jzgpio_set_func(enum gpio_port port, enum gpio_function func,unsigned long pins)
-{
+int __wrap_private_jzgpio_set_func(enum gpio_port port, enum gpio_function func, unsigned long pins) {
+	printk(KERN_INFO "private_jzgpio_set_func: called with port = %d, func = %d, pins = %lu\n", port, func, pins);
+	// Call the real private_jzgpio_set_func function
 	return jzgpio_set_func(port, func, pins);
 }
 EXPORT_SYMBOL(private_jzgpio_set_func);
