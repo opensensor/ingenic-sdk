@@ -9,7 +9,7 @@
 #include <linux/i2c.h>
 #include <soc/gpio.h>
 #include "tx-isp-common.h"
-#define private_jzgpio_set_func jzgpio_set_func
+#define jzgpio_set_func jzgpio_set_func
 #else
 #include <soc/gpio.h>
 #include <txx-funcs.h>
@@ -101,23 +101,23 @@ static inline int set_sensor_gpio_function(int func_set) {
 
 	switch (func_set) {
 		case DVP_PA_LOW_8BIT:
-			ret = private_jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, ADDRBASE | 0x0ff);
+			ret = jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, ADDRBASE | 0x0ff);
 			pr_info("set sensor gpio as PA-low-8bit\n");
 			break;
 		case DVP_PA_HIGH_8BIT:
-			ret = private_jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, ADDRBASE | 0xff0);
+			ret = jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, ADDRBASE | 0xff0);
 			pr_info("set sensor gpio as PA-high-8bit\n");
 			break;
 		case DVP_PA_LOW_10BIT:
-			ret = private_jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, ADDRBASE | 0x3ff);
+			ret = jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, ADDRBASE | 0x3ff);
 			pr_info("set sensor gpio as PA-low-10bit\n");
 			break;
 		case DVP_PA_HIGH_10BIT:
-			ret = private_jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, ADDRBASE | 0xffc);
+			ret = jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, ADDRBASE | 0xffc);
 			pr_info("set sensor gpio as PA-high-10bit\n");
 			break;
 		case DVP_PA_12BIT:
-			ret = private_jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, ADDRBASE | 0xfff);
+			ret = jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, ADDRBASE | 0xfff);
 			pr_info("set sensor gpio as PA-12bit\n");
 			break;
 		default:
@@ -139,15 +139,15 @@ static inline int set_sensor_mclk_function(int mclk_set) {
 
 	switch (mclk_set) {
 		case 0:
-			ret = private_jzgpio_set_func(GPIO_PORT_C, GPIO_FUNC_1, 0x80000000);
+			ret = jzgpio_set_func(GPIO_PORT_C, GPIO_FUNC_1, 0x80000000);
 			pr_info("set sensor mclk(%d) gpio\n", mclk_set);
 			break;
 		case 1:
-			ret = private_jzgpio_set_func(GPIO_PORT_C, GPIO_FUNC_1, 0x40000000);
+			ret = jzgpio_set_func(GPIO_PORT_C, GPIO_FUNC_1, 0x40000000);
 			pr_info("set sensor mclk(%d) gpio\n", mclk_set);
 			break;
 		case 2:
-			ret = private_jzgpio_set_func(GPIO_PORT_C, GPIO_FUNC_1, 0x20000000);
+			ret = jzgpio_set_func(GPIO_PORT_C, GPIO_FUNC_1, 0x20000000);
 			pr_info("set sensor mclk(%d) gpio\n", mclk_set);
 			break;
 		default:
@@ -158,7 +158,7 @@ static inline int set_sensor_mclk_function(int mclk_set) {
 #elif defined(CONFIG_SOC_T41)
 	switch (mclk_set) {
 		case 0 ... 2:
-			ret = private_jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, 0x00008000);
+			ret = jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, 0x00008000);
 			pr_info("set sensor mclk(%d) gpio\n", mclk_set);
 			break;
 		default:
