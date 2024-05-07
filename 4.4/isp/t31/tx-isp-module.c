@@ -14,6 +14,12 @@
 extern int tx_isp_init(void);
 extern void tx_isp_exit(void);
 
+static const struct of_device_id tx_isp_of_match[] = {
+		{ .compatible = "ingenic,t31-isp", },
+		{},
+};
+MODULE_DEVICE_TABLE(of, tx_isp_of_match);
+
 static int __init tx_isp_module_init(void)
 {
 	return tx_isp_init();
