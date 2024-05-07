@@ -1,19 +1,23 @@
 SRCS := $(DIR)/tx-isp-debug.c \
         $(DIR)/tx-isp-module.c
 
+# Paths
+LIBWRAPPER := $(DIR)/libwrapper.a
+WRAPPER_O := $(DIR)/wrapper.o
+
 # Compile the wrapper source file into an object file
-wrapper.o: $(DIR)/wrapper.c
+$(WRAPPER_O): $(DIR)/wrapper.c
 	$(CC) -c $< -o $@
 
 # Archive the wrapper object into a static library
-libwrapper.a: wrapper.o
+$(LIBWRAPPER): $(WRAPPER_O)
 	$(AR) rcs $@ $<
 
 # Object files for your original source files
 OBJS := $(SRCS:%.c=%.o) $(ASM_SRCS:%.S=%.o)
 
 # List of libraries to link against
-OUT_OBJS := libwrapper.a $(KERNEL_VERSION)/sdk/lib$(SOC_FAMILY)-firmware.a
+OUT_OBJS := $(LIBWRAPPER) $(KERNEL_VERSION)/sdk/lib$(SOC_FAMILY)-firmware.a
 
 # Combine all objects into a single module
 $(OUT)-objs := $(OBJS) $(OUT_OBJS)
