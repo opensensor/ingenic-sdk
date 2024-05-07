@@ -219,10 +219,13 @@ void private_release_mem_region(resource_size_t start, resource_size_t n)
 	release_mem_region(start, n);
 }
 
-void __iomem * private_ioremap(phys_addr_t offset, unsigned long size)
-{
-	return get_isp_base();
+void __iomem *private_ioremap(phys_addr_t offset, unsigned long size) __attribute__((weak));
+
+void __iomem *private_ioremap(phys_addr_t offset, unsigned long size) {
+    return ioremap(offset, size);
 }
+EXPORT_SYMBOL(private_ioremap);
+
 
 void private_iounmap(const volatile void __iomem *addr)
 {
