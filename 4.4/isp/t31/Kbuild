@@ -1,30 +1,17 @@
-SRCS := $(DIR)/tx-isp-debug.c \
-        $(DIR)/tx-isp-module.c
+# Create a new variable for the tx-isp-debug.c file
+TX_ISP_DEBUG_SRC := $(DIR)/tx-isp-debug.c
 
-# Paths
-WRAPPER_C := $(DIR)/wrapper.c
-WRAPPER_O := $(DIR)/wrapper.o
-LIBWRAPPER := $(DIR)/libwrapper.a
+# Create a new target for building the tx-isp-debug.a file
+$(OUT)-tx-isp-debug-objs := $(TX_ISP_DEBUG_SRC:%.c=%.o)
+$(OUT)-tx-isp-debug.a: $($(OUT)-tx-isp-debug-objs)
+	$(AR) rcs $@ $^
 
-# Compile the wrapper source file into an object file
-$(WRAPPER_O): $(WRAPPER_C)
-	$(CC) -c $< -o $@
+# Update the SRCS variable to exclude tx-isp-debug.c
+SRCS := $(DIR)/tx-isp-module.c
 
-# Archive the wrapper object into a static library
-$(LIBWRAPPER): $(WRAPPER_O)
-	$(AR) rcs $@ $<
-
-# Object files for your original source files
 OBJS := $(SRCS:%.c=%.o) $(ASM_SRCS:%.S=%.o)
+OBJS += $(KERNEL_VERSION)/sdk/lib$(SOC_FAMILY)-firmware.a
 
-# List of libraries to link against
-OUT_OBJS := $(LIBWRAPPER) $(KERNEL_VERSION)/sdk/lib$(SOC_FAMILY)-firmware.a
+$(OUT)-objs := $(OBJS)
 
-# Combine all objects into a single module
-$(OUT)-objs := $(OBJS) $(OUT_OBJS)
-
-# Define the module target
 obj-m += $(OUT).o
-
-# Make sure the wrapper is built before anything else
-$(OBJS): $(LIBWRAPPER)
