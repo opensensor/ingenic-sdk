@@ -220,7 +220,7 @@ void private_release_mem_region(resource_size_t start, resource_size_t n)
 
 void __iomem *__wrap_private_ioremap(phys_addr_t offset, unsigned long size) {
     printk(KERN_INFO "private_ioremap: called with offset!!\n");
-    return ioremap(offset, size, 0);
+    return ioremap(offset, size);
 }
 EXPORT_SYMBOL(private_ioremap);
 
