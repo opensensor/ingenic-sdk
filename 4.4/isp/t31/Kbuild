@@ -3,11 +3,11 @@ SRCS := $(DIR)/tx-isp-debug.c \
 
 # Compile the wrapper source file into an object file
 wrapper.o: $(DIR)/wrapper.c
-    $(CC) -c $< -o $@
+	$(CC) -c $< -o $@
 
 # Archive the wrapper object into a static library
 libwrapper.a: wrapper.o
-    $(AR) rcs $@ $<
+	$(AR) rcs $@ $<
 
 # Object files for your original source files
 OBJS := $(SRCS:%.c=%.o) $(ASM_SRCS:%.S=%.o)
