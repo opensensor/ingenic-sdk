@@ -1,9 +1,11 @@
 SRCS := $(DIR)/tx-isp-debug.c \
-	$(DIR)/tx-isp-module.c
+        $(DIR)/tx-isp-module.c
 
 OBJS := $(SRCS:%.c=%.o) $(ASM_SRCS:%.S=%.o)
 OBJS += $(KERNEL_VERSION)/sdk/lib$(SOC_FAMILY)-firmware.a
 
 $(OUT)-objs := $(OBJS)
+
+LDFLAGS_$(OUT).o := -T $(DIR)/custom_linker.ld
 
 obj-m += $(OUT).o
