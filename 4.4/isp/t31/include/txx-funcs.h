@@ -63,7 +63,7 @@ struct resource * private_request_mem_region(resource_size_t start, resource_siz
 					     const char *name);
 void private_release_mem_region(resource_size_t start, resource_size_t n);
 
-void __iomem * private_ioremap(phys_addr_t offset, unsigned long size);
+void __iomem *private_ioremap(phys_addr_t offset, unsigned long size);
 void private_iounmap(const volatile void __iomem *addr);
 /* interrupt interfaces */
 int private_request_threaded_irq(unsigned int irq, irq_handler_t handler,

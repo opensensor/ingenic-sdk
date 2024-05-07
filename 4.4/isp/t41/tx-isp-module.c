@@ -10,6 +10,7 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/version.h>
+#include <misc/isp_mem_map.h>
 
 extern int tx_isp_init(void);
 extern void tx_isp_exit(void);
