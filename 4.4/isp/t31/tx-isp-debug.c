@@ -222,7 +222,7 @@ void private_release_mem_region(resource_size_t start, resource_size_t n)
 void __iomem *private_ioremap(phys_addr_t offset, unsigned long size) __attribute__((weak));
 
 void __iomem *private_ioremap(phys_addr_t offset, unsigned long size) {
-    return ioremap(offset, size);
+    return ioremap(offset, size, 0);
 }
 EXPORT_SYMBOL(private_ioremap);
 
