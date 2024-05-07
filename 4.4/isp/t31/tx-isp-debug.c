@@ -222,6 +222,7 @@ void private_release_mem_region(resource_size_t start, resource_size_t n)
 void __iomem *private_ioremap(phys_addr_t offset, unsigned long size) __attribute__((weak));
 
 void __iomem *private_ioremap(phys_addr_t offset, unsigned long size) {
+    printk(KERN_INFO "private_ioremap: called with offset!!\n");
     return get_isp_base();
 }
 EXPORT_SYMBOL(private_ioremap);
