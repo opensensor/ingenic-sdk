@@ -2,11 +2,12 @@ SRCS := $(DIR)/tx-isp-debug.c \
         $(DIR)/tx-isp-module.c
 
 # Paths
-LIBWRAPPER := $(DIR)/libwrapper.a
+WRAPPER_C := $(DIR)/wrapper.c
 WRAPPER_O := $(DIR)/wrapper.o
+LIBWRAPPER := $(DIR)/libwrapper.a
 
 # Compile the wrapper source file into an object file
-$(WRAPPER_O): $(DIR)/wrapper.c
+$(WRAPPER_O): $(WRAPPER_C)
 	$(CC) -c $< -o $@
 
 # Archive the wrapper object into a static library
@@ -24,3 +25,6 @@ $(OUT)-objs := $(OBJS) $(OUT_OBJS)
 
 # Define the module target
 obj-m += $(OUT).o
+
+# Make sure the wrapper is built before anything else
+$(OBJS): $(LIBWRAPPER)
