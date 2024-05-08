@@ -218,11 +218,11 @@ void private_release_mem_region(resource_size_t start, resource_size_t n)
 	release_mem_region(start, n);
 }
 
-void __iomem *__wrap_private_ioremap(phys_addr_t offset, unsigned long size) {
-    printk(KERN_INFO "private_ioremap: called with offset!!\n");
+void __iomem *private_ioremap(phys_addr_t offset, unsigned long size) {
+    printk("private_ioremap: called with offset!!\n");
     return ioremap(offset, size);
 }
-EXPORT_SYMBOL(__wrap_private_ioremap);
+EXPORT_SYMBOL(private_ioremap);
 
 void private_iounmap(const volatile void __iomem *addr)
 {
@@ -416,6 +416,7 @@ void private_i2c_unregister_device(struct i2c_client *client)
 /* gpio interfaces */
 int private_gpio_request(unsigned gpio, const char *label)
 {
+	printk("private_gpio_request: called with gpio = %d, label = %s\n", gpio, label);
 	return gpio_request(gpio, label);
 }
 EXPORT_SYMBOL(private_gpio_request);
@@ -442,12 +443,12 @@ int private_gpio_set_debounce(unsigned gpio, unsigned debounce)
 	return gpio_set_debounce(gpio, debounce);
 }
 
-int __wrap_private_jzgpio_set_func(enum gpio_port port, enum gpio_function func, unsigned long pins) {
-	printk(KERN_INFO "private_jzgpio_set_func: called with port = %d, func = %d, pins = %lu\n", port, func, pins);
+int private_jzgpio_set_func(enum gpio_port port, enum gpio_function func, unsigned long pins) {
+	printk("private_jzgpio_set_func: called with port = %d, func = %d, pins = %lu\n", port, func, pins);
 	// Call the real private_jzgpio_set_func function
 	return jzgpio_set_func(port, func, pins);
 }
-EXPORT_SYMBOL(__wrap_private_jzgpio_set_func);
+EXPORT_SYMBOL(private_jzgpio_set_func);
 
 #if 0
 int private_jzgpio_ctrl_pull(enum gpio_port port, int enable_pull,unsigned long pins)
