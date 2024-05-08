@@ -222,8 +222,7 @@ void __iomem *__wrap_private_ioremap(phys_addr_t offset, unsigned long size) {
     printk(KERN_INFO "private_ioremap: called with offset!!\n");
     return ioremap(offset, size);
 }
-EXPORT_SYMBOL(private_ioremap);
-
+EXPORT_SYMBOL(__wrap_private_ioremap);
 
 void private_iounmap(const volatile void __iomem *addr)
 {
@@ -448,7 +447,7 @@ int __wrap_private_jzgpio_set_func(enum gpio_port port, enum gpio_function func,
 	// Call the real private_jzgpio_set_func function
 	return jzgpio_set_func(port, func, pins);
 }
-EXPORT_SYMBOL(private_jzgpio_set_func);
+EXPORT_SYMBOL(__wrap_private_jzgpio_set_func);
 
 #if 0
 int private_jzgpio_ctrl_pull(enum gpio_port port, int enable_pull,unsigned long pins)
