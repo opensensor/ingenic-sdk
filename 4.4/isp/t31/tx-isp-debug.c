@@ -145,30 +145,52 @@ void *private_platform_get_drvdata(struct platform_device *pdev)
 }
 EXPORT_SYMBOL(private_platform_get_drvdata);
 
-int private_platform_device_register(struct platform_device *pdev)
+struct platform_device *private_platform_device_register(struct platform_device *pdev)
 {
-	int i;
+	struct resource res[] = {
+			{
+					.start = 0x13300000,
+					.end = 0x1330ffff,
+					.flags = IORESOURCE_MEM,
+					.name = "isp_mem",
+			},
+			{
+					.start = IRQ_ISP,
+					.end = IRQ_ISP,
+					.flags = IORESOURCE_IRQ,
+					.name = "isp_irq",
+			},
+	};
 
-	printk(KERN_INFO "private_platform_device_register: called for device '%s'\n", pdev->name);
-	printk(KERN_INFO "  device ID: %d\n", pdev->id);
-	printk(KERN_INFO "  number of resources: %d\n", pdev->num_resources);
+	struct platform_device *new_pdev;
 
-	for (i = 0; i < pdev->num_resources; i++) {
-		struct resource *res = &pdev->resource[i];
-		printk(KERN_INFO "  resource %d:\n", i);
-		printk(KERN_INFO "    start: 0x%llx\n", (unsigned long long)res->start);
-		printk(KERN_INFO "    end: 0x%llx\n", (unsigned long long)res->end);
-		printk(KERN_INFO "    flags: 0x%lx\n", res->flags);
-		printk(KERN_INFO "    name: %s\n", res->name ? res->name : "(null)");
+	printk(KERN_INFO "private_platform_device_register: creating new platform device\n");
+
+	new_pdev = platform_device_alloc("ingenic,t31-isp", PLATFORM_DEVID_AUTO);
+	if (!new_pdev) {
+		printk(KERN_ERR "Failed to allocate platform device\n");
+		return ERR_PTR(-ENOMEM);
 	}
 
-	if (pdev->dev.of_node) {
-		printk(KERN_INFO "  device has OF node: %s\n", pdev->dev.of_node->full_name);
-	} else {
-		printk(KERN_INFO "  device does not have an OF node\n");
+	if (platform_device_add_resources(new_pdev, res, ARRAY_SIZE(res))) {
+		printk(KERN_ERR "Failed to add resources to platform device\n");
+		platform_device_put(new_pdev);
+		return ERR_PTR(-ENODEV);
 	}
 
-	return platform_device_register(pdev);
+	if (platform_device_add_data(new_pdev, pdev->dev.platform_data, 0)) {
+		printk(KERN_ERR "Failed to add platform data to platform device\n");
+		platform_device_put(new_pdev);
+		return ERR_PTR(-ENODEV);
+	}
+
+	if (platform_device_add(new_pdev)) {
+		printk(KERN_ERR "Failed to add platform device\n");
+		platform_device_put(new_pdev);
+		return ERR_PTR(-ENODEV);
+	}
+
+	return new_pdev;
 }
 EXPORT_SYMBOL(private_platform_device_register);
 
