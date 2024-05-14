@@ -1,20 +1,9 @@
-# Create a new variable for the tx-isp-debug.c file
-TX_ISP_DEBUG_SRC := $(DIR)/tx-isp-debug.c
-
-# Create a new target for building the tx-isp-debug.a file
-$(OUT)-tx-isp-debug-objs := $(TX_ISP_DEBUG_SRC:%.c=%.o)
-$(OUT)-tx-isp-debug.a: $($(OUT)-tx-isp-debug-objs)
-	$(AR) rcs $@ $^
-
-# Update the SRCS variable to exclude tx-isp-debug.c
-SRCS := $(DIR)/tx-isp-module.c
+SRCS := $(DIR)/tx-isp-debug.c \
+	$(DIR)/tx-isp-module.c
 
 OBJS := $(SRCS:%.c=%.o) $(ASM_SRCS:%.S=%.o)
 OBJS += $(KERNEL_VERSION)/sdk/lib$(SOC_FAMILY)-firmware.a
 
 $(OUT)-objs := $(OBJS)
-
-# Add the -Wl,-wrap,private_ioremap linker option
-CFLAGS_MODULE += -Wl,-wrap,private_ioremap -Wl,-wrap,private_jzgpio_set_func
 
 obj-m += $(OUT).o
