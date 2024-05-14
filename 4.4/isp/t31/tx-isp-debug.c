@@ -145,7 +145,7 @@ void *private_platform_get_drvdata(struct platform_device *pdev)
 }
 EXPORT_SYMBOL(private_platform_get_drvdata);
 
-struct platform_device *private_platform_device_register(struct platform_device *pdev)
+int private_platform_device_register(struct platform_device *pdev)
 {
 	struct resource res[] = {
 			{
