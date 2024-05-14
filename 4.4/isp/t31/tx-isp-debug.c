@@ -145,9 +145,29 @@ void *private_platform_get_drvdata(struct platform_device *pdev)
 }
 EXPORT_SYMBOL(private_platform_get_drvdata);
 
-int private_platform_device_register(struct platform_device *pdev)
+struct platform_device *private_platform_device_register(struct platform_device *pdev)
 {
-	printk("private_platform_device_register: called\n");
+	int i;
+
+	printk(KERN_INFO "private_platform_device_register: called for device '%s'\n", pdev->name);
+	printk(KERN_INFO "  device ID: %d\n", pdev->id);
+	printk(KERN_INFO "  number of resources: %d\n", pdev->num_resources);
+
+	for (i = 0; i < pdev->num_resources; i++) {
+		struct resource *res = &pdev->resource[i];
+		printk(KERN_INFO "  resource %d:\n", i);
+		printk(KERN_INFO "    start: 0x%llx\n", (unsigned long long)res->start);
+		printk(KERN_INFO "    end: 0x%llx\n", (unsigned long long)res->end);
+		printk(KERN_INFO "    flags: 0x%lx\n", res->flags);
+		printk(KERN_INFO "    name: %s\n", res->name ? res->name : "(null)");
+	}
+
+	if (pdev->dev.of_node) {
+		printk(KERN_INFO "  device has OF node: %s\n", pdev->dev.of_node->full_name);
+	} else {
+		printk(KERN_INFO "  device does not have an OF node\n");
+	}
+
 	return platform_device_register(pdev);
 }
 EXPORT_SYMBOL(private_platform_device_register);
