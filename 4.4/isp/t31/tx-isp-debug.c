@@ -140,35 +140,47 @@ EXPORT_SYMBOL(private_platform_set_drvdata);
 
 void *private_platform_get_drvdata(struct platform_device *pdev)
 {
+	printk("private_platform_get_drvdata: called with pdev = %p\n", pdev);
 	return platform_get_drvdata(pdev);
 }
+EXPORT_SYMBOL(private_platform_get_drvdata);
 
 int private_platform_device_register(struct platform_device *pdev)
 {
+	printk("private_platform_device_register: called\n");
 	return platform_device_register(pdev);
 }
+EXPORT_SYMBOL(private_platform_device_register);
 
 
 void private_platform_device_unregister(struct platform_device *pdev)
 {
+	printk("private_platform_device_unregister: called\n");
 	platform_device_unregister(pdev);
 }
+EXPORT_SYMBOL(private_platform_device_unregister);
 
 struct resource *private_platform_get_resource(struct platform_device *dev,
 											   unsigned int type, unsigned int num)
 {
+	printk("private_platform_get_resource: called with type = %d, num = %d\n", type, num);
 	return platform_get_resource(dev, type, num);
 }
+EXPORT_SYMBOL(private_platform_get_resource);
 
 void private_dev_set_drvdata(struct device *dev, void *data)
 {
+	printk("private_dev_set_drvdata: called with dev = %p\n", dev);
 	dev_set_drvdata(dev, data);
 }
+EXPORT_SYMBOL(private_dev_set_drvdata);
 
 void* private_dev_get_drvdata(const struct device *dev)
 {
+	printk("private_dev_get_drvdata: called with dev = %p\n", dev);
 	return dev_get_drvdata(dev);
 }
+EXPORT_SYMBOL(private_dev_get_drvdata);
 
 
 int private_platform_get_irq(struct platform_device *dev, unsigned int num)
