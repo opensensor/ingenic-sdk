@@ -9,19 +9,12 @@ $(OUT)-tx-isp-debug.a: $($(OUT)-tx-isp-debug-objs)
 # Update the SRCS variable to exclude tx-isp-debug.c
 SRCS := $(DIR)/tx-isp-module.c
 
-# Update the file extensions from .c to .cpp
-SRCS := $(SRCS:%.c=%.cpp)
-
-OBJS := $(SRCS:%.cpp=%.o) $(ASM_SRCS:%.S=%.o)
+OBJS := $(SRCS:%.c=%.o) $(ASM_SRCS:%.S=%.o)
 OBJS += $(KERNEL_VERSION)/sdk/lib$(SOC_FAMILY)-firmware.a
 
 $(OUT)-objs := $(OBJS)
 
-$(info Building with OBJS = $(OBJS))
+# Add the -Wl,-wrap,private_ioremap linker option
+CFLAGS_MODULE += -Wl,-wrap,private_ioremap -Wl,-wrap,private_jzgpio_set_func
 
-$(OUT).so: $(OBJS)
-	$(CXX) -shared -fPIC $(CFLAGS_MODULE) -o $@ $^
-
-
-# Remove the kernel object build rule
-# obj-m += $(OUT).o
+obj-m += $(OUT).o
