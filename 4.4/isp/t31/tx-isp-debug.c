@@ -44,7 +44,6 @@
 #include <asm/uaccess.h>
 #include <asm/cacheflush.h>
 #include <jz_proc.h>
-#include <misc/isp_mem_map.h>
 
 #include <txx-funcs.h>
 
@@ -798,14 +797,14 @@ EXPORT_SYMBOL(private_filp_close);
 ssize_t private_vfs_read(struct file *file, char __user *buf, size_t count, loff_t *pos)
 {
 printk("private_vfs_read: called\n");
-return vfs_read(file, buf, count, pos);
+return kernel_read(file, buf, count, pos);
 }
 EXPORT_SYMBOL(private_vfs_read);
 
 ssize_t private_vfs_write(struct file *file, const char __user *buf, size_t count, loff_t *pos)
 {
 printk("private_vfs_write: called\n");
-return vfs_write(file, buf, count, pos);
+return kernel_write(file, buf, count, pos);
 }
 
 loff_t private_vfs_llseek(struct file *file, loff_t offset, int whence)
