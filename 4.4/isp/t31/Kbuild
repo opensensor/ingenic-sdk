@@ -1,22 +1,9 @@
-# Add -O0 to disable optimization
-ccflags-y += -O0
-
 SRCS := $(DIR)/tx-isp-debug.c \
-	$(DIR)/tx-isp-module.c
+	$(DIR)/tx-isp-module.c \
+	$(DIR)/libt31-firmware.c
 
-# Generate assembly files instead of object files
-ASM_FILES := $(SRCS:%.c=%.S)
+OBJS := $(SRCS:%.c=%.o) $(ASM_SRCS:%.S=%.o)
 
-# Rule to generate .S assembly files
-%.S: %.c
-	$(CC) $(ccflags-y) -S -o $@ $<
+$(OUT)-objs := $(OBJS)
 
-# Replace OBJS with ASM_FILES
-OBJS := $(ASM_FILES)
-
-# Since we only want to generate assembly files, no need for linking
-all: $(ASM_FILES)
-
-# This will prevent obj-m from trying to create a module
-# and ensure only .S files are generated
-.PHONY: all
+obj-m += $(OUT).o
