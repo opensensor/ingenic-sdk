@@ -1,1292 +1,3715 @@
-#define unkchar9   unsigned long long
-#define unkchar10   unsigned long long
-#define unkchar11   unsigned long long
-#define unkchar12   unsigned long long
-#define unkchar13   unsigned long long
-#define unkchar14   unsigned long long
-#define unkchar15   unsigned long long
-#define unkchar16   unsigned long long
-
-#define unkuint9   unsigned long long
-#define unkuint10   unsigned long long
-#define unkuint11   unsigned long long
-#define unkuint12   unsigned long long
-#define unkuint13   unsigned long long
-#define unkuint14   unsigned long long
-#define unkuint15   unsigned long long
-#define unkuint16   unsigned long long
-
-#define unkint9   long long
-#define unkint10   long long
-#define unkint11   long long
-#define unkint12   long long
-#define unkint13   long long
-#define unkint14   long long
-#define unkint15   long long
-#define unkint16   long long
-
-#define unkfloat1   float
-#define unkfloat2   float
-#define unkfloat3   float
-#define unkfloat5   double
-#define unkfloat6   double
-#define unkfloat7   double
-#define unkfloat9   long double
-#define unkfloat11   long double
-#define unkfloat12   long double
-#define unkfloat13   long double
-#define unkfloat14   long double
-#define unkfloat15   long double
-#define unkfloat16   long double
-
-#define BADSPACEBASE   void
-#define code   void
 
 typedef enum Elf32_GPRMask_MIPS {
-    gpr_zero=1,
-    gpr_at=2,
-    gpr_v0=4,
-    gpr_v1=8,
-    gpr_a0=16,
-    gpr_a1=32,
-    gpr_a2=64,
-    gpr_a3=128,
-    gpr_t0=256,
-    gpr_t1=512,
-    gpr_t2=1024,
-    gpr_t3=2048,
-    gpr_t4=4096,
-    gpr_t5=8192,
-    gpr_t6=16384,
-    gpr_t7=32768,
-    gpr_s0=65536,
-    gpr_s1=131072,
-    gpr_s2=262144,
-    gpr_s3=524288,
-    gpr_s4=1048576,
-    gpr_s5=2097152,
-    gpr_s6=4194304,
-    gpr_s7=8388608,
-    gpr_t8=16777216,
-    gpr_t9=33554432,
-    gpr_k0=67108864,
-    gpr_k1=134217728,
-    gpr_gp=268435456,
-    gpr_sp=536870912,
-    gpr_fp=1073741824,
-    gpr_ra=2147483648
+	gpr_zero=1,
+	gpr_at=2,
+	gpr_v0=4,
+	gpr_v1=8,
+	gpr_a0=16,
+	gpr_a1=32,
+	gpr_a2=64,
+	gpr_a3=128,
+	gpr_t0=256,
+	gpr_t1=512,
+	gpr_t2=1024,
+	gpr_t3=2048,
+	gpr_t4=4096,
+	gpr_t5=8192,
+	gpr_t6=16384,
+	gpr_t7=32768,
+	gpr_s0=65536,
+	gpr_s1=131072,
+	gpr_s2=262144,
+	gpr_s3=524288,
+	gpr_s4=1048576,
+	gpr_s5=2097152,
+	gpr_s6=4194304,
+	gpr_s7=8388608,
+	gpr_t8=16777216,
+	gpr_t9=33554432,
+	gpr_k0=67108864,
+	gpr_k1=134217728,
+	gpr_gp=268435456,
+	gpr_sp=536870912,
+	gpr_fp=1073741824,
+	gpr_ra=2147483648
 } Elf32_GPRMask_MIPS;
 
-typedef struct Elf32_RegInfo_MIPS Elf32_RegInfo_MIPS, *PElf32_RegInfo_MIPS;
+#define YMFPCI_LEGACY_IOBITS 32
 
-struct Elf32_RegInfo_MIPS {
-    enum Elf32_GPRMask_MIPS ri_gprmask;
-    int field1_0x4[4];
-    int ri_gp_value;
-};
+#define SMK_INODE_CHANGED 4
 
-typedef struct Elf32_Shdr Elf32_Shdr, *PElf32_Shdr;
+#define ALIGN_MASK 15
 
-typedef enum Elf_SectionHeaderType_MIPS {
-    SHT_NULL=0,
-    SHT_PROGBITS=1,
-    SHT_SYMTAB=2,
-    SHT_STRTAB=3,
-    SHT_RELA=4,
-    SHT_HASH=5,
-    SHT_DYNAMIC=6,
-    SHT_NOTE=7,
-    SHT_NOBITS=8,
-    SHT_REL=9,
-    SHT_SHLIB=10,
-    SHT_DYNSYM=11,
-    SHT_INIT_ARRAY=14,
-    SHT_FINI_ARRAY=15,
-    SHT_PREINIT_ARRAY=16,
-    SHT_GROUP=17,
-    SHT_SYMTAB_SHNDX=18,
-    SHT_ANDROID_REL=1610612737,
-    SHT_ANDROID_RELA=1610612738,
-    SHT_GNU_ATTRIBUTES=1879048181,
-    SHT_GNU_HASH=1879048182,
-    SHT_GNU_LIBLIST=1879048183,
-    SHT_CHECKSUM=1879048184,
-    SHT_SUNW_move=1879048186,
-    SHT_SUNW_COMDAT=1879048187,
-    SHT_SUNW_syminfo=1879048188,
-    SHT_GNU_verdef=1879048189,
-    SHT_GNU_verneed=1879048190,
-    SHT_GNU_versym=1879048191,
-    SHT_MIPS_LIBLIST=1879048192,
-    SHT_MIPS_MSYM=1879048193,
-    SHT_MIPS_CONFLICT=1879048194,
-    SHT_MIPS_GPTAB=1879048195,
-    SHT_MIPS_UCODE=1879048196,
-    SHT_MIPS_DEBUG=1879048197,
-    SHT_MIPS_REGINFO=1879048198,
-    SHT_MIPS_PACKAGE=1879048199,
-    SHT_MIPS_PACKSYM=1879048200,
-    SHT_MIPS_RELD=1879048201,
-    =1879048203,
-    SHT_MIPS_CONTENT=1879048204,
-    SHT_MIPS_OPTIONS=1879048205,
-    SHT_MIPS_SHDR=1879048208,
-    SHT_MIPS_FDESC=1879048209,
-    SHT_MIPS_EXTSYM=1879048210,
-    SHT_MIPS_DENSE=1879048211,
-    SHT_MIPS_PDESC=1879048212,
-    SHT_MIPS_LOCSYM=1879048213,
-    SHT_MIPS_AUXSYM=1879048214,
-    SHT_MIPS_OPTSYM=1879048215,
-    SHT_MIPS_LOCSTR=1879048216,
-    SHT_MIPS_LINE=1879048217,
-    SHT_MIPS_RFDESC=1879048218,
-    SHT_MIPS_DELTASYM=1879048219,
-    SHT_MIPS_DELTAINST=1879048220,
-    SHT_MIPS_DELTACLASS=1879048221,
-    SHT_MIPS_DWARF=1879048222,
-    SHT_MIPS_DELTADECL=1879048223,
-    SHT_MIPS_SYMBOL_LIB=1879048224,
-    SHT_MIPS_EVENTS=1879048225,
-    SHT_MIPS_TRANSLATE=1879048226,
-    SHT_MIPS_PIXIE=1879048227,
-    SHT_MIPS_XLATE=1879048228,
-    SHT_MIPS_XLATE_DEBUG=1879048229,
-    SHT_MIPS_WHIRL=1879048230,
-    SHT_MIPS_EH_REGION=1879048231,
-    SHT_MIPS_XLATE_OLD=1879048232,
-    SHT_MIPS_PDR_EXCEPTION=1879048233,
-    SHT_MIPS_ABIFLAGS=1879048234
-} Elf_SectionHeaderType_MIPS;
+#define AA_X_CHILD 8192
 
-struct Elf32_Shdr {
-    int sh_name;
-    enum Elf_SectionHeaderType_MIPS sh_type;
-    int sh_flags;
-    int sh_addr;
-    int sh_offset;
-    int sh_size;
-    int sh_link;
-    int sh_info;
-    int sh_addralign;
-    int sh_entsize;
-};
+#define YDSXGR_MAPOFREC 336
 
-typedef struct Elf32_Rel Elf32_Rel, *PElf32_Rel;
+#define MASK_SYS_STATUS_CMD_DONE 1048576
 
-struct Elf32_Rel {
-    int r_offset; // location to apply the relocation action
-    int r_info; // the symbol table index and the type of relocation
-};
+#define SMACK_PTRACE_MAX 2
 
-typedef struct Elf32_Sym Elf32_Sym, *PElf32_Sym;
+#define STEPSIZE 4
 
-struct Elf32_Sym {
-    int st_name;
-    int st_value;
-    int st_size;
-    char st_info;
-    char st_other;
-    short st_shndx;
-};
+#define MANAGE_SIGNAL_TIME_CODE 1
 
-typedef struct Elf32_Ehdr Elf32_Ehdr, *PElf32_Ehdr;
+#define MINLENGTH 13
 
-struct Elf32_Ehdr {
-    char e_ident_magic_num;
-    char e_ident_magic_str[3];
-    char e_ident_class;
-    char e_ident_data;
-    char e_ident_version;
-    char e_ident_osabi;
-    char e_ident_abiversion;
-    char e_ident_pad[7];
-    short e_type;
-    short e_machine;
-    int e_version;
-    int e_entry;
-    int e_phoff;
-    int e_shoff;
-    int e_flags;
-    short e_ehsize;
-    short e_phentsize;
-    short e_phnum;
-    short e_shentsize;
-    short e_shnum;
-    short e_shstrndx;
-};
+#define CTRL_MIDI_EN 1
 
-typedef long size_t;
+#define MIXART_PCM_DIGITAL 1
+
+#define PCXHR_DSP_RESET_DSP 1
+
+#define PCIR_DSXG_SBBASE 98
+
+#define STREAM_HEADER_SIZE 12
+
+#define CEXPR_L2H2 1024
+
+#define VBLK_FLAG_VOLU_ID2 32
+
+#define VBLK_FLAG_VOLU_ID1 8
+
+#define DIR_MASK 8192
+
+#define FIFO_EMPTY 32
+
+#define ED_NO_CURRENT_CLOCK 41016
+
+#define MAXLEVEL 4194304
+
+#define FREQ_RATIO_OFFSET 19
+
+#define YYTD_ID_TSIZE 8
+
+#define CEXPR_EQ 1
+
+#define ENCRYPTED_DEBUG 0
+
+#define A3D_SLICE_BANK_A 98304
+
+#define ATI_VERB_SET_SINK_INFO_INDEX 1920
+
+#define A3D_SLICE_BANK_B 102400
+
+#define CFQ_WEIGHT_LEGACY_MIN 10
+
+#define CEXPR_AND 2
+
+#define IPC_MSG_IDS 1
+
+#define VORTEX_CODEC_WRITE 8388608
+
+#define EN_CODEC 13056
+
+#define TOMOYO_GC_IN_PROGRESS -1
+
+#define MIXART_PSEUDOREG_PERF_STREAM_LOAD_OFFSET 8304
+
+#define MICROBLAZE_IBL_DEFAULT 128
+
+#define PCXHR_FREQ_REG_MASK 31
+
+#define EBITMAP_NODE_SIZE 32
+
+#define ED_NO_RESPONSE_AT_IRQA 40976
+
+#define AA_X_UNCONFINED 32768
+
+#define AA_EXEC_MMAP 2048
+
+#define BUSY 1
+
+#define A3D_A_HrtfOutR 99232
+
+#define VORTEX_MIXER_RTBASE 138752
+
+#define FOOTER_MAGIC_SIZE 2
+
+#define A3D_A_HrtfOutL 99228
+
+#define OPCODE_OFFSET 24
+
+#define YDSXG_AC97READCMD 32768
+
+#define ED_DSP_VERSION_MISMATCH 40967
+
+#define VORTEX_WTDMA_BUFCFG1 161284
+
+#define VORTEX_WTDMA_BUFCFG0 161280
+
+#define PCXHR_FREQ_QUARTZ_8000 12
+
+#define YDSXGR_ADCFORMAT 200
+
+#define PCXHR_FREQ_SYNC_AES 14
+
+#define ADB_FIFO_EN_SHIFT 21
+
+#define CTRL_SPDIF 0
+
+#define PCXHR_DRIVER_VERSION 2310
+
+#define SMACK_BRINGUP_ALLOW 1
+
+#define SI3054_GPIO_POLARITY 6
+
+#define PCXHR_DATA_CODEC 128
+
+#define EN_AC98 3072
+
+#define AKM_LEFT_LEVEL_CMD 42496
+
+#define TR_E_A2_OUT 8
+
+#define VORTEX_MIXER_CHNBASE 138816
+
+#define XTDLINE_SZ 32
+
+#define MIXART_PCI_OMIMR_OFFSET 52
+
+#define YDSXGR_CONFIG 276
+
+#define DIST_STATES 4
+
+#define VOL_MIN 128
+
+#define VBLK_FLAG_DGR3_IDS 8
+
+#define YDSXG_PLAYBACK_VOICES 64
+
+#define OCON_FS 1
+
+#define SMACK_HASH_SLOTS 16
+
+#define HASHLOG64K 13
+
+#define PCXHR_IRQCS_ACTIVE_PCIDB 8192
+
+#define YMFPCI_LEGACY2_SBIO 12
+
+#define FIFO_PAUSE 2
+
+#define AVTAB_AV 7
+
+#define MIXART_MOTHERBOARD_XLX_BASE_ADDRESS 6291456
+
+#define A3D_A_GainCurrent 98528
+
+#define A3D_A_HrtfTrackTC 99196
+
+#define FSCONTEXT_MNT 2
+
+#define PIN0 8
+
+#define YDSXGR_BUF441OUTVOL 176
+
+#define FIELD_SIZE 5
+
+#define CONTEXT_MNT 1
+
+#define BYTE2 16777216
+
+#define BYTE0 256
+
+#define BYTE1 65536
+
+#define MSG_HOST_RSC_PROTECTION 870500
+
+#define VORTEX_SRC_RTBASE 158720
+
+#define MIXART_AUDIO_LEVEL_DIGITAL_MASK 2
+
+#define AF2_out 512
+
+#define NUM_STREAM_PLAYBACK_ANA 0
+
+#define DIR_SHIFT 13
+
+#define SMACK_CIPSO_MAXLEVEL 255
+
+#define HEADER_FMT_24BITS 16384
+
+#define D_CODES 30
+
+#define DISKLABELMAGIC 2186691927
+
+#define ERROR_VALUE 32768
+
+#define ACC_BM0_PNTR 96
+
+#define DEFAULT_SOURCE_LOW_HIGH 3
+
+#define ADB_FIFO_EN 2097152
+
+#define POLICYDB_VERSION_BOOL 16
+
+#define MIXART_NOTIFY_CARD_MASK 61440
+
+#define ACC_GPIO_STATUS 0
+
+#define PIN3 64
+
+#define PIN1 16
+
+#define ALLOC_WMARK_MASK 3
+
+#define PIN2 32
+
+#define IMA_TEMPLATE_FIELD_ID_MAX_LEN 16
+
+#define PCI_BT_A 76
+
+#define YMFPCI_LEGACY2_IMOD 32768
+
+#define STREAM_FMT_16b 2
+
+#define SBLABEL_MNT 16
+
+#define SOURCE_LINEMIC 4
+
+#define M2_MAX_LEN 8
+
+#define HEADER_FMT_INTEL 32768
+
+#define YDSXG_EFFECT_VOICES 5
+
+#define OFFSET_ADBDMA 0
+
+#define A3D_SLICE_VDBDest 105472
+
+#define MASK_STREAM_IS_ASIO 512
+
+#define MASK_SYS_STATUS_EOBO 268435456
+
+#define YDSXGR_SPDIFINCTRL 52
+
+#define MASK_SYS_STATUS_FREQ 67108864
+
+#define AA_MAY_CREATE 16
+
+#define YYTD_DATA32 4
+
+#define PCXHR_IT_RESET_CHK 1142
+
+#define M1_MIN_LEN 2
+
+#define LENGTH_CODES 29
+
+#define CFQ_WEIGHT_LEGACY_MAX 1000
+
+#define ALLOC_NO_WATERMARKS 4
+
+#define REPEAT_BITS_MAX 63
+
+#define IMA_FIRMWARE_APPRAISE 65536
+
+#define A3D_A_ITDCurrent 98784
+
+#define HEAP_SIZE 573
+
+#define VALID_STREAM_LEVEL_2_MASK 1048576
+
+#define REG_CONT_UNMUTE_INPUTS 131072
+
+#define VORTEX_ADBDMA_STATUS 162448
+
+#define CEXPR_NOT 1
+
+#define PCXHR_STAT_GPI_MASK 12
+
+#define PACKED_MODE_KILL 2
+
+#define MPU401_ACK 254
+
+#define VORTEX_ADB_SR 164864
+
+#define COND_XOR 5
+
+#define REG_STATUS_INTER_SYNC 14
+
+#define A2_SWAP 1048576
+
+#define PCXHR_ISR_HI08_TXDE 2
+
+#define ATI_VERB_GET_SINK_INFO_INDEX 3968
+
+#define E_SOURCE_TOOLS 2048
+
+#define PCXHR_FREQ_QUARTZ_96000 24
+
+#define MSG_INBOUND_POST_HEAD 65544
+
+#define SLAB_CACHE_FLAGS 0
+
+#define MSG_OUTBOUND_POST_TAIL 65564
+
+#define MAY_RMDIR 2
+
+#define TIME_CODE_NEW_MASK 4194304
+
+#define PCXHR_FREQ_QUARTZ_176400 20
+
+#define MASK_SYS_STATUS_EOBI 134217728
+
+#define IDX_BEEP_CFG 4
+
+#define NOP 0
+
+#define ED_DSP_CRASHED_EXC_ILLEGAL 41012
+
+#define CS4271_67_CS 1441819
+
+#define REG_STATUS_SYNC_32000 0
+
+#define HRTF_SZ 56
+
+#define AA_X_NAME 1024
+
+#define GPT_HEADER_SIGNATURE 6075990659671082565
+
+#define AVTAB_TYPE 112
+
+#define MIXART_PCI_OMISR_OFFSET 48
+
+#define EB_ALLOCATE_ALL_STREAM_TRANSFERT_BUFFERS_IMPOSSIBLE 49921
+
+#define YYTD_DATA64 8
+
+#define GPT_MBR_PROTECTIVE 1
+
+#define AA_CLASS_LAST 6
+
+#define E_CLASS_INVALID_CMD 256
+
+#define SGI_LABEL_MAGIC 199600449
+
+#define YYTD_DATA8 1
+
+#define OFFSET_CODECOUT 136
+
+#define PCXHR_SUER1_BIT_C_READ_MASK 64
+
+#define BIT_FMP_HEADER 23
+
+#define PCXHR_FREQ_unsigned short_CLOCK 15
+
+#define MASK_ALL_STREAM 16777215
+
+#define TR_E_A1_IN 1
+
+#define FIFO_START 1
+
+#define MIXART_BA1_BRUTAL_RESET_OFFSET 104
+
+#define EVM_ATTR_FSUUID 1
+
+#define PCXHR_PLAYBACK_STREAMS 4
+
+#define SECURITY_FS_USE_MAX 7
+
+#define VORTEX_FIFO_WTCTRL 90112
+
+#define AA_CLASS_ENTRY 0
+
+#define INTEGRITY_KEYRING_EVM 0
+
+#define FIFO_STOP 0
+
+#define ThreshA1_out 65536
+
+#define CS_COEF_ADC_LI_PGA_MODE 64
+
+#define UDIV_NEEDS_NORMALIZATION 1
+
+#define YDSXGR_AC97CMDADR 98
+
+#define BM0_IRQ_STS 2
+
+#define BM_CTL_DIS 0
+
+#define KEYRING_SEARCH_NO_UPDATE_TIME 4
+
+#define REG_STATUS_SYNC_176400 7
+
+#define PCXHR_ICR_HI08_HLEND 32
+
+#define VORTEX_GAME_AXIS 165904
+
+#define IO_NUM_REG_CONFIG_SRC 12
+
+#define IMA_COLLECTED 32
+
+#define A3D_A_ITDDelayLine 99016
+
+#define MAXD_LOG 16
+
+#define IICTFR 140
+
+#define VBLK_DGR3 53
+
+#define VBLK_DGR4 69
+
+#define AZX_DCAPS_SYNC_WRITE 524288
+
+#define MIXART_FLOAT_P_22_0_TO_HEX 1102053376
+
+#define YYTD_DATA16 2
+
+#define ED_NET_NO_MORE_PACKET 40985
+
+#define FIFO_RDONLY 1
+
+#define YDSXGR_SECADCOUTVOL 140
+
+#define BaseA2_in 172
+
+#define MIXART_OUT_STREAM_SET_LEVEL_RIGHT_AUDIO2 8
+
+#define PCXHR_FIRMWARE_XLX_INT_INDEX 0
+
+#define MIXART_OUT_STREAM_SET_LEVEL_RIGHT_AUDIO1 4
+
+#define YDSXGR_SPDIFOUTVOL 184
+
+#define PCXHR_MAX_CARDS 6
+
+#define FMT_MASK 245760
+
+#define HR222_LINE_CAPTURE_ZERO_LEVEL 223
+
+#define VORTEX_MIDI_CMD 165892
+
+#define MIXART_NOTIFY_CARD_OFFSET 12
+
+#define TOMOYO_RETRY_REQUEST 1
+
+#define BurstA2_in 1024
+
+#define YDSXGR_SPDIFLOOPVOL 188
+
+#define KASAN_STACK_PARTIAL 244
+
+#define TPM_OIAP_SIZE 10
+
+#define MIXART_NOTIFY_PCM_OFFSET 8
+
+#define WT_SUBBUF_MASK 3
+
+#define VORTEX_SRC_DRIFT0 159360
+
+#define POLICYDB_VERSION_NEW_OBJECT_DEFAULTS 27
+
+#define YDSXGR_GLOBALCTRL 8
+
+#define LEN_HIGH_SYMBOLS 256
+
+#define VORTEX_SRC_DRIFT2 159552
+
+#define OCON_FSUSE 5
+
+#define VORTEX_SRC_DRIFT1 159424
+
+#define AVC_CALLBACK_AUDITDENY_DISABLE 128
+
+#define AUDIO_MODE 536870912
+
+#define CS4271_23_CS 1441817
+
+#define EB_ALLOCATE_PIPE_IMPOSSIBLE 49984
+
+#define OFF_PRIV1 6
+
+#define OFF_PRIV2 1856
+
+#define SI3054_MISC_CONTROL 19
+
+#define SMACK_UNLABELED_SOCKET 0
+
+#define SE_MNTMASK 15
+
+#define A3D_B_B10Target 102644
+
+#define VORTEX_RESOURCE_LAST 5
+
+#define OFF_PRIV3 2047
+
+#define PCI_ADP4 312
+
+#define PCI_ADP1 300
+
+#define PCI_ADP3 308
+
+#define PCI_ADP2 304
+
+#define SYM_CATS 7
+
+#define TOMOYO_HASH_BITS 8
+
+#define HR222_LINE_CAPTURE_LEVEL_MAX 255
+
+#define PCXHR_TIMEOUT_DSP 200
+
+#define KASAN_KMALLOC_REDZONE 252
+
+#define LIT_STATES 7
+
+#define VORTEX_MODEM_CTRL 168364
+
+#define SYM_CLASSES 1
+
+#define COND_LAST 7
+
+#define PCXHR_IRQ_FREQ_CHANGE 2048
+
+#define IIC_E 65536
+
+#define MAGIC_PRIVHEAD 5787769106053022020
+
+#define CFQ_WEIGHT_LEGACY_DFL 500
+
+#define HDA_BAR0_FINAL_PROGRAM 16384
+
+#define VORTEX_ADB_CHNBASE_COUNT 24
+
+#define VORTEX_SRC_DATA0 155648
+
+#define IDX_SPDIF_STAT 0
+
+#define HDA_BAR0 32768
+
+#define IMA_MAX_DIGEST_SIZE 64
+
+#define ED_READ_FILE_ERROR 41009
+
+#define IIC_S 131072
+
+#define OFFSET_SPDIFIN 122
+
+#define A3D_SLICE_VDBSource 105504
+
+#define AUDIO_IO_HAS_MUTE_MONITOR_1 2097152
+
+#define ED_NET_CLOSE_ERROR 40984
+
+#define KEYRING_SEARCH_NO_CHECK_PERM 8
+
+#define COMP_BASIC 2
+
+#define SI3054_LINE_STATUS 14
+
+#define E_SOURCE_API 4096
+
+#define SECSID_WILD 4294967295
+
+#define SI3054_GPIO_CONTROL 10
+
+#define WS4_SYNC 1
+
+#define HDA_ENABLE_BUS_MASTER 4
+
+#define VORTEX_MIXER_SR 139008
+
+#define VORTEX_MIX_INVOL_B 131072
+
+#define SMK_LONGLABEL 256
+
+#define VORTEX_MIX_INVOL_A 135168
+
+#define IMA_ACTION_FLAGS 4278190080
+
+#define A3D_SLICE_CReg 105524
+
+#define IO_NUM_REG_CUER 10
+
+#define WS0_CTRL 262144
+
+#define PCXHR_GRANULARITY_MIN 96
+
+#define OFFSET_SPDIFOUT 146
+
+#define SI3054_LINE_CONFIG 16
+
+#define TPM_SEAL_SIZE 87
+
+#define PCXHR_XLX_DATA 44
+
+#define PCXHR_WAIT_DEFAULT 2
+
+#define HR222_LINE_CAPTURE_LEVEL_MIN 0
+
+#define IPC_SEM_IDS 0
+
+#define MIXART_STREAM_STATUS_RUNNING 2
+
+#define PCXHR_CFG_SLAVE_SEL 32
+
+#define LITERAL_CODER_SIZE 768
+
+#define MIXART_PSEUDOREG_MXLX_BASE_ADDR_OFFSET 8348
+
+#define YDSXGR_GPIOINSTATUS 84
+
+#define MIXART_PSEUDOREG_DXLX_SIZE_OFFSET 10652
+
+#define YMFPCI_LEGACY2_MAIM 256
+
+#define AA_ONEXEC 1
+
+#define CEXPR_ATTR 4
+
+#define PCXHR_CHIPSC_RESET_XILINX 65536
+
+#define SHORT_DATA_BITS 3
+
+#define ADB_SHIFT 8
+
+#define ED_NET_WRONG_MSG_SIZE 40989
+
+#define NR_WTROUTES 6
+
+#define DFA_NOMATCH 0
+
+#define YYTH_MAGIC 459175997
+
+#define CRCPOLY_BE 79764919
+
+#define ALLOC_CMA 128
+
+#define VORTEX_CODEC_DATSHIFT 0
+
+#define EB_ALLOCATE_MEM_STREAM_IMPOSSIBLE 49921
+
+#define IMA_MEASURE 1
+
+#define MIXART_MAX_PHYS_CONNECTORS 16
+
+#define CS4271_VOLMUTE_RIGHT 2098433
+
+#define PCXHR_MASK_IT_NO_HF0_HF1 1024
+
+#define AA_MAY_LINK 4096
+
+#define SECURITY_FS_USE_TASK 3
+
+#define REG_STATUS_SYNC_192000 8
+
+#define VORTEX_MIX_VOL_B 133120
+
+#define OFFSET_SHIFT 0
+
+#define YDSXGR_ZVLOOPVOLR 158
+
+#define VORTEX_MIX_VOL_A 137216
+
+#define SMK_INODE_IMPURE 8
+
+#define YDSXGR_ZVLOOPVOLL 158
+
+#define KASAN_GLOBAL_REDZONE 250
+
+#define YYTD_ID_ACCEPT2 6
+
+#define MIXART_PSEUDOREG_DBRD_PRESENCE_OFFSET 10640
+
+#define CEXPR_USER 1
+
+#define CTRLID_GAINS 16
+
+#define VORTEX_RESOURCE_SRC 1
+
+#define SPERR 64
+
+#define ZONE_RECLAIM_SOME 0
+
+#define SOURCE_LINE 0
+
+#define IMA_APPRAISE_LOG 4
+
+#define EOP 1
+
+#define CRCPOLY_LE 3988292384
+
+#define M2_MARKER 64
+
+#define SI3054_DC_TERMINATION 15
+
+#define M1_MAX_OFFSET 1024
+
+#define PCIR_DSXG_ELEGACY 66
+
+#define KASAN_ABI_VERSION 1
+
+#define A3D_A_ITDTarget 98788
+
+#define YDSXGR_RECCTRLSIZE 324
+
+#define YDSXGR_TIMERCTRL 16
+
+#define NR_PCM 16
+
+#define REG_STATUS_AES_1 9
+
+#define A3D_A_HrtfDelayLine 98792
+
+#define REG_STATUS_AES_3 11
+
+#define AA_SID_ALLOC 0
+
+#define REG_STATUS_AES_2 10
+
+#define REG_STATUS_AES_4 12
+
+#define VORTEX_CODEC_DATMASK 65535
+
+#define HASH_DEFAULT_SIZE 64
+
+#define EB_CSE_REFUSED 50431
+
+#define MAY_TRANSMUTE 4096
+
+#define MSG_AGENT_RSC_PROTECTION 870504
+
+#define REG_STATUS_AES_SYNC 8
+
+#define VBLK_SIZE_HEAD 16
+
+#define AA_X_UNSAFE 4096
+
+#define AXIS_RANGE 8191
+
+#define SI3054_CHIPID_DAA_ID 3840
+
+#define CS8420_RECEIVER_ERRORS 2101248
+
+#define BurstA1_out 262144
+
+#define NUM_CAPTURE_SD 1
+
+#define ATI_AUDIODESC_LPCM_STEREO_RATES 4278190080
+
+#define YDSXGR_NATIVEDACOUTVOL 132
+
+#define CS_COEF_DAC_HP_SZC_MODE 3
+
+#define IMA_APPRAISE_MODULES 8
+
+#define REG_STATUS_OPT_NO_VIDEO_SIGNAL 1
+
+#define MSG_TO_AGENT_ITMF_OFFSET 844900
+
+#define OP_REPEAT 27
+
+#define FIFO_MASK 63
+
+#define A3D_SLICE_ABReg 105520
+
+#define PCXHR_GRANULARITY_HR22 192
+
+#define SMACK_CIPSO_DOI_INVALID -1
+
+#define TYPEDATUM_PROPERTY_ATTRIBUTE 2
+
+#define ERR 2
+
+#define A3D_B_A21Target 102636
+
+#define DIST_MODEL_START 4
+
+#define IMA_APPRAISE_ENFORCE 1
+
+#define PCXHR_SOURCE_AUDIO67_UER 262144
+
+#define PABO 1073741824
+
+#define STATES 12
+
+#define HDA_IPFS_EN_INTR 65536
+
+#define POLICYDB_CONFIG_MLS 1
+
+#define L_CODES 286
+
+#define HEADER_FMT_BASE 4275044352
+
+#define YDSXGR_PLAYCTRLBASE 344
+
+#define CLASS_MASK 1792
+
+#define NUM_STREAM_CAPTURE_ANA 0
+
+#define DAUGHTER_VER_MASK 240
+
+#define PCXHR_LINE_PLAYBACK_LEVEL_MIN 0
+
+#define ADB_SUBBUF_MASK 12288
+
+#define AA_CLASS_NET 4
+
+#define REG_STATUS_SYNC_48000 2
+
+#define VORTEX_ADBDMA_CTRL 162304
+
+#define AZX_DCAPS_SNOOP_OFF 4096
+
+#define YDSXGR_NATIVEADCINVOLL 168
+
+#define PCXHR_FREQ_QUARTZ_11025 6
+
+#define ED_DSP_CORRUPTED 40978
+
+#define D_SIZE 8192
+
+#define VOL_MAX 127
+
+#define DTERR 16
+
+#define REG_STATUS_OPT_DAUGHTER_MASK 28
+
+#define YDSXGR_NATIVEADCINVOLR 170
+
+#define REG_STATUS_unsigned short_CLOCK 13
+
+#define DLINE_SZ 40
+
+#define SI3054_GPIO_STATUS 9
+
+#define E_SOURCE_VPCX 10240
+
+#define PCXHR_SOURCE_AUDIO01_SYNC 512
+
+#define SOURCE_DIGISRC 2
+
+#define ATI_SB450_HDAUDIO_ENABLE_SNOOP 2
+
+#define VBLK_PRT3 51
+
+#define BUCKET_LOCKS_PER_CPU 128
+
+#define CMD_NEW 65536
+
+#define ABORT 128
+
+#define E_CLASS_WRONG_CONTEXT 1024
+
+#define AVTAB_MEMBER 32
+
+#define ED_GPIO_ALREADY_OPENED 40998
+
+#define YDSXGR_ADCSLOTSR 192
+
+#define IO_NUM_UER_CHIP_REG 11
+
+#define PCXHR_STAT_SRC_LOCK 1
+
+#define OFFSET_MIXIN 80
+
+#define YMFPCI_LEGACY_SIEN 16384
+
+#define MIXART_FLOAT_M_20_0_TO_HEX 3248488448
+
+#define CS421X_IDX_SPK_CTL 4
+
+#define DIST_MODEL_END 14
+
+#define PCXHR_CHIPSC_DATA_CLK 16777216
+
+#define MIXER_RTBASE_SIZE 56
+
+#define BIT_FMP_MULTICHANNEL 19
+
+#define YDSXGR_RECFORMAT 204
+
+#define VBLK_DSK3 52
+
+#define VORTEX_CODEC_EN 168336
+
+#define NB_STREAM_CAPTURE 1
+
+#define YDSXGR_EFFCTRLSIZE 328
+
+#define ED_DSP_CRASHED 40962
+
+#define VBLK_DSK4 68
+
+#define SE_SBPROC 512
+
+#define MAX_STREAM_BUFFER 5
+
+#define ED_INVALID_GPIO_CMD 40995
+
+#define YMFPCI_LEGACY_SBEN 1
+
+#define LZ4_64KLIMIT 65547
+
+#define ED_DSP_CRASHED_EXC_DSPSTACK_OVERFLOW 41010
+
+#define YDSXGR_SPDIFOUTCTRL 24
+
+#define MIX_DEFOGAIN 8
+
+#define ATI_AUDIODESC_CHANNELS 7
+
+#define E_CLASS_FREE 1792
+
+#define PCXHR_ISR_HI08_ERR 8
+
+#define VIA_IN_STREAM0_FIFO_SIZE_OFFSET 144
+
+#define CS4208_VENDOR_NID 36
+
+#define PageA1_in 156
+
+#define HDA_CFG_CMD 4100
+
+#define POLICYDB_VERSION_DEFAULT_TYPE 28
+
+#define GUID_SIZE 16
+
+#define PACKED_MODE_UNCONFINED 3
+
+#define CS8420_01_CS 524432
+
+#define MASK_SPL_COUNT_HI 16777215
+
+#define YDSXGR_SECSTATUSADR 106
+
+#define CTRL_MIDI_PORT 96
+
+#define ACC_CODEC_CNTL 12
+
+#define NB_STREAM_PLAYBACK 2
+
+#define VORTEX_SRCBLOCK_SR 158912
+
+#define ED_DSP_CHK_TIMED_OUT 42498
+
+#define VORTEX_PCM_ADB 0
+
+#define AZX_DCAPS_SNOOP_MASK 3072
+
+#define BIT_FMP_SD 22
+
+#define EB_STATUS_SEND_IMPOSSIBLE 49951
+
+#define A1_out 4096
+
+#define YDSXGR_SAMPLECOUNT 268
+
+#define AZX_DCAPS_SEPARATE_STREAM_TAG 1073741824
+
+#define A3D_A_B01Current 98544
+
+#define VBLK_FLAG_VOLU_DRIVE 2
+
+#define A3D_B_HrtfTarget 102656
+
+#define M2_MIN_LEN 3
+
+#define EI2C 256
+
+#define EB_ALLOCATE_MEM_PIPE_IMPOSSIBLE 49922
+
+#define IO_NUM_REG_CONT 0
+
+#define A3D_B_GainTarget 102628
+
+#define MINMATCH 4
+
+#define RC_BIT_MODEL_TOTAL_BITS 11
+
+#define MIXART_PSEUDOREG_BOARDNUMBER 8192
+
+#define PCXHR_FREQ_QUARTZ_22050 10
+
+#define WS3_SYNC 16
+
+#define ThreshA2_in 256
+
+#define CS421X_IDX_DEV_CFG 1
+
+#define CFQ_MIN_TT 2
+
+#define ED_STREAM_OVERRUN 42499
+
+#define MSG_FRAME_SIZE 25600
+
+#define MIXART_FLOAT_P__8_0_TO_HEX 1090519040
+
+#define MIXART_PSEUDOREG_DBRD_TYPE_OFFSET 10644
+
+#define CEXPR_DOMBY 4
+
+#define MSG_FRAME_OFFSET 100
+
+#define PAUSE_STATE 0
+
+#define ALLOC_HIGH 32
+
+#define HR222_LINE_PLAYBACK_ZERO_LEVEL 51
+
+#define M4_MAX_LEN 9
+
+#define CEXPR_TARGET 8
+
+#define A3D_B_A12Current 102632
+
+#define GIRT_COUNT 3
+
+#define BL_CODES 19
+
+#define VORTEX_CODEC_IO 168328
+
+#define VORTEX_GAME_LEGACY 165896
+
+#define PCXHR_ISR_HI08_HREQ 128
+
+#define YDSXGR_WORKBASE 356
+
+#define INTEL_SCH_HDA_DEVC_NOSNOOP 2048
+
+#define EBITMAP_BIT 1
+
+#define COMP_STRIPE 1
+
+#define A3D_A_B2Target 98556
+
+#define CS_COEF_ADC_MIC_PGA_MODE 32
+
+#define STREAM_FMT_intel 1
+
+#define VORTEX_DMA_BUFFER 66048
+
+#define IMA_APPRAISED 8
+
+#define REG_STATUS_OPTIONS 0
+
+#define A3D_A_A21Target 98540
+
+#define PCXHR_FREQ_AES_3 3
+
+#define MIXART_MAX_PHYS_IO 16
+
+#define PCXHR_FREQ_AES_4 13
+
+#define AZX_DCAPS_NO_ALIGN_BUFSIZE 2097152
+
+#define ID_IS_CAPTURE 1024
+
+#define OFFSET_XTALKOUT 102
+
+#define XPERMS_ALLOWED 1
+
+#define PCXHR_FREQ_AES_1 7
+
+#define PCXHR_FREQ_AES_2 11
+
+#define XT_HEADPHONE 1
+
+#define BUSY_STATE 113
+
+#define PV 8
+
+#define OFFSET_SRCOUT 32
+
+#define MSG_INBOUND_FREE_HEAD 65536
+
+#define EB_ALLOCATE_PIPE_SAMPLE_BUFFER_IMPOSSIBLE 49922
+
+#define MIXART_DAUGHTER_TYPE_AES 14
+
+#define HASH64KTABLESIZE 8192
+
+#define CS8420_45_CS 524436
+
+#define ED_DSP_CRASHED_EXC_TIMER_REENTRY 41013
+
+#define YDSXGR_GPIOFUNCENABLE 88
+
+#define AA_MAY_DELETE 32
+
+#define FSDEFAULT_MNT 1
+
+#define HDA_ENABLE_SERR 256
+
+#define IMA_TEMPLATE_NUM_FIELDS_MAX 15
+
+#define A2_in 32768
+
+#define CEXPR_H1L2 128
+
+#define ED_REGISTRY_ERROR 41000
+
+#define AVC_CALLBACK_AUDITALLOW_ENABLE 16
+
+#define YDSXGR_PRIADCLOOPVOL 164
+
+#define PCXHR_DSP_OFFSET_MAX 32
+
+#define LIMIT 16
+
+#define MIXART_MOTHERBOARD_XLX_INDEX 0
+
+#define POLICYDB_VERSION_BASE 15
+
+#define VORTEX_SMP_TIMER 168348
+
+#define VORTEX_PCM_SPDIF 1
+
+#define OFFSET_CODECIN 112
+
+#define PCXHR_DSP_TIME_INVALID 268435456
+
+#define DAUGHTER_TYPEVER_MASK 255
+
+#define ROOTCONTEXT_MNT 4
+
+#define BM_CTL_EN 1
+
+#define EB_RI 49920
+
+#define BM_CTL_PAUSE 3
+
+#define KEYQUOTA_LINK_BYTES 4
+
+#define A3D_A_y2 99224
+
+#define N0 64
+
+#define CFQQ_SECT_THR_NONROT 64
+
+#define HDA_IPFS_INTR_MASK 392
+
+#define A3D_A_y1 99220
+
+#define AZX_DCAPS_POSFIX_LPIB 65536
+
+#define PCXHR_DSP_TXM 24
+
+#define PCXHR_DSP_TXL 28
+
+#define MIXART_PSEUDOREG_PERF_MAILBX_LOAD_OFFSET 8316
+
+#define PCXHR_DSP_TXH 20
+
+#define PCXHR_CFG_CLOCK_UER1_SEL_MASK 2
+
+#define YDSXGR_DSPPROGRAMDL 72
+
+#define SYM_TYPES 3
+
+#define ME 2048
+
+#define TR_E_A2_IN 4
+
+#define REG_STATUS_SYNC_96000 5
+
+#define MATCH_LEN_MAX 273
+
+#define HDA_BEEP_MODE_OFF 0
+
+#define ATRR1 16
+
+#define ATRR2 64
+
+#define PCXHR_DSP_CVR 4
+
+#define AMP_VAL_COMPARE_MASK 8191999
+
+#define ATRR0 4
+
+#define MSG_OUTBOUND_POST_STACK 1081344
+
+#define MAGIC_VMDB 1447904322
+
+#define SI3054_GPIO_WAKEUP 8
+
+#define MIXART_FLOAT____0_0_TO_HEX 0
+
+#define PROF_ADD 1
+
+#define PCXHR_ICR_HI08_RREQ 1
+
+#define VBLK_SIZE_PRT3 28
+
+#define MIXART_CAPTURE_STREAMS 1
+
+#define PCXHR_WAIT_IT 25
+
+#define MIXART_PSEUDOREG_DXLX_STATUS_OFFSET 10656
+
+#define PCXHR_IT_UPDATE_RBUFFER 1144
+
+#define OFFSET_EQIN 160
+
+#define NUM_SMK_MNT_OPTS 5
+
+#define AA_X_INDEX_MASK 1023
+
+#define U0_SLOWLOCK 512
+
+#define OFF_VMDB 17
+
+#define ML_MASK 15
+
+#define FREQ_FIELD_OFFSET 15
+
+#define HDA_BAR0_INIT_PROGRAM 4294967295
+
+#define ED_INVALID_ADDRESS 40977
+
+#define YDSXGR_SPDIFOUTVOLL 184
+
+#define YDSXGR_NUMOFSAMPLES 272
+
+#define PCXHR_SUER1_CLOCK_PRESENT_MASK 16
+
+#define CEXPR_L1L2 32
+
+#define BM_EOP_ERR 2
+
+#define CS_DIG_OUT1_PIN_NID 16
+
+#define YDSXGR_SPDIFOUTVOLR 186
+
+#define AZX_FORCE_CODEC_MASK 256
+
+#define A3D_A_x1 99212
+
+#define CONFES_READ_PART_MASK 458752
+
+#define A3D_A_x2 99216
+
+#define MAY_NOT 0
+
+#define SI3054_ATAG_MASK 240
+
+#define CMD_MASK 4278255615
+
+#define MIDI_CLOCK_DIV 97
+
+#define AKM_CLOCK_SUP_55K_CMD 41549
+
+#define XPERMS_AUDITALLOW 2
+
+#define PCXHR_MBOX0_BOOT_HERE 8388608
+
+#define APPARMOR_MODE_NAMES_MAX_INDEX 4
+
+#define IRQ_ERR_MASK 255
+
+#define YYTD_ID_DEF 3
+
+#define AA_SID_INVALID 0
+
+#define PCXHR_IRQ_NOTIFY 8192
+
+#define PCXHR_SELMIC_PREAMPLI_OFFSET 2
+
+#define CS421X_SPDIF_PIN_NID 10
+
+#define RC_MOVE_BITS 5
+
+#define I2_BITS 8
+
+#define MASK_SYS_STATUS_URUN 1073741824
+
+#define I8 24
+
+#define SUN_VTOC_SANITY 1611521774
+
+#define CRC_LE_BITS 32
+
+#define IMA_FIRMWARE_APPRAISED 131072
+
+#define BLK_BATCH_REQ 32
+
+#define I4 20
+
+#define CS8420_VERSION 2129664
+
+#define I2 18
+
+#define IRQ_MODEM 16384
+
+#define YMFPCI_LEGACY_FMEN 2
+
+#define YDSXGR_SECADCLOOPVOLL 160
+
+#define SMACK_PTRACE_DRACONIAN 2
+
+#define OFFSET_A3DIN 112
+
+#define FIFO_U1 262144
+
+#define FIFO_U0 8192
+
+#define OFFSET_XTALKIN 150
+
+#define ZONE_RECLAIM_FULL -1
+
+#define VBLK_VOL5 81
+
+#define ED_CONCURRENCY 40961
+
+#define POLICYDB_VERSION_FILENAME_TRANS 25
+
+#define YMFPCI_LEGACY_MIEN 16
+
+#define HDA_IPFS_FPCI_BAR0 128
+
+#define OFFSET_AC98IN 124
+
+#define MIXART_MOTHERBOARD_ELF_INDEX 1
+
+#define VORTEX_CODEC_ADDSHIFT 16
+
+#define VORTEX_CODEC2_CTRL 168352
+
+#define ROUTE_MASK 65535
+
+#define YDSXGR_SECADCLOOPVOLR 162
+
+#define ATI_VERB_GET_AUDIO_DESCRIPTOR 3958
+
+#define WS1_SYNC 4096
+
+#define REG_STATUS_OPT_NO_COMPANION 224
+
+#define MSG_INBOUND_POST_STACK 1064960
+
+#define IRQ_DMA 16
+
+#define MAY_LINK 0
+
+#define EB_ALLOCATE_EFFECT_POS_IMPOSSIBLE 49929
+
+#define BaseA1_out 160
+
+#define CEXPR_L1H1 512
+
+#define TOMOYO_SOCK_MAX 6
+
+#define CEXPR_L1H2 64
+
+#define YMFPCI_LEGACY_MPUIRQ 14336
+
+#define POLICYDB_VERSION_BOUNDARY 24
+
+#define MIXART_MAX_CARDS 4
+
+#define SE_SBINITIALIZED 256
+
+#define FIFO_SIZE_BITS 6
+
+#define KASAN_STACK_MID 242
+
+#define K3 1859775393
+
+#define YDSXGR_NATIVEDACLOOPVOL 152
+
+#define EFI_PMBR_OSTYPE_EFI_GPT 238
+
+#define K2 1518500249
+
+#define PACKED_FLAG_HAT 1
+
+#define K1 0
+
+#define AVTAB_ALLOWED 1
+
+#define VORTEX_MIX_ENIN 137728
+
+#define MIXART_OUT_STREAM_SET_LEVEL_STREAM_2 32
+
+#define MIXART_OUT_STREAM_SET_LEVEL_STREAM_1 16
+
+#define AZX_DCAPS_COUNT_LPIB_DELAY 33554432
+
+#define IDX_DAC_CFG 3
+
+#define CTRL_SPORT 2097152
+
+#define ED_READ_FILE_INVALID_PARAMETER 41004
+
+#define A2_CLKSRC 4194304
+
+#define CS4210_DAC_NID 2
+
+#define NVIDIA_HDA_OSTRM_COH 76
+
+#define A3D_B_HrtfCurrent 102400
+
+#define BCLK1_OEN 524288
+
+#define REG_STATUS_SYNC_64000 3
+
+#define OFFSET_SPORTOUT 144
+
+#define PCXHR_GRANULARITY 96
+
+#define PCXHR_MBOX0_HF5 1
+
+#define CRC_BE_BITS 32
+
+#define PCXHR_MBOX0_HF4 2
+
+#define SSR 276
+
+#define MIXART_PSEUDOREG_DXLX_BASE_ADDR_OFFSET 10648
+
+#define SMACK_UNCONFINED_OBJECT 3
+
+#define YYTD_ID_CHK 2
+
+#define VORTEX_ADBDMA_BUFCFG1 161796
+
+#define VORTEX_ADBDMA_BUFCFG0 161792
+
+#define KASAN_PAGE_REDZONE 254
+
+#define FSFLOOR_MNT 2
+
+#define VORTEX_PCM_WT 3
+
+#define NR_SRC 16
+
+#define NUM_STREAM_PLAYBACK_DIG 1
+
+#define NVIDIA_HDA_TRANSREG_ADDR 78
+
+#define TPM_UNSEAL_SIZE 104
+
+#define BaseA1_in 148
+
+#define ATI_SPKALLOC_TYPE_HDMI 256
+
+#define ATI_DELAY_AUDIO_LATENCY 65280
+
+#define MIXART_DAUGHTER_TYPE_COBRANET 8
+
+#define AVTAB_XPERMS_ALLOWED 256
+
+#define ED_READ_FILE_INVALID_HANDLE 41007
+
+#define PCXHR_SOURCE_AUDIO01_UER 256
+
+#define EB_RBUFFER_NOT_AVAILABLE 49930
+
+#define MPU401_ENTER_UART 63
+
+#define POLICYDB_BOUNDS_MAXDEPTH 4
+
+#define MIXART_BA0_SIZE 16777216
+
+#define ACC_BM1_CMD 40
+
+#define D_HIGH 4096
+
+#define ACC_CODEC_CNTL_LNK_SHUTDOWN 262144
+
+#define LITERAL_CODERS_MAX 16
+
+#define VORTEX_PCM_A3D 2
+
+#define HDA_ENABLE_IO_SPACE 1
+
+#define YMFPCI_LEGACY_LAD 32768
+
+#define IO_NUM_REG_GENCLK 1
+
+#define AKM_RESET_ON_CMD 41216
+
+#define A3D_A_B2Current 98552
+
+#define INIT_STATE 42
+
+#define DIST_SLOT_BITS 6
+
+#define ACC_CODEC_CNTL_LNK_WRM_RST 131072
+
+#define A3D_A_GainTrackTC 99200
+
+#define A3D_A_HrtfTarget 98560
+
+#define ATI_SPKALLOC_SPKALLOC 127
+
+#define OFFSET_WTOUT 88
+
+#define A3D_B_B01Current 102640
+
+#define AVC_CALLBACK_TRY_REVOKE 2
+
+#define MIXART_AUDIO_LEVEL_ANALOG_MASK 1
+
+#define NVIDIA_HDA_ENABLE_COHBITS 15
+
+#define ED_DSP_SEMAPHORE_TIME_OUT 42501
+
+#define SMACK_CIPSO_DOI_DEFAULT 3
+
+#define ED_NET_WAIT_ERROR 40990
+
+#define PCXHR_FREQ_QUARTZ_88200 28
+
+#define CEXPR_NAMES 5
+
+#define MASK_FIRST_FIELD 31
+
+#define PCXHR_SIZE_MAX_LONG_STATUS 256
+
+#define VORTEX_CODEC_ID_SHIFT 24
+
+#define ADB_MASK 255
+
+#define MSG_OUTBOUND_FREE_TAIL 65556
+
+#define AL 4
+
+#define CTRL_UNKNOWN 16777216
+
+#define EN_AUDIO0 768
+
+#define EN_AUDIO1 12288
+
+#define CONT 2
+
+#define MSG_OUTBOUND_FREE_STACK 1097728
+
+#define PCXHR_ICR_HI08_HDRQ 4
+
+#define PCXHR_IRQ_TIME_CODE 4096
+
+#define PageA1_out 168
+
+#define HASH_MIN_SIZE 4
+
+#define AA_CLASS_RLIMITS 5
+
+#define BUFF_FLAGS_OFFSET 24
+
+#define TOMOYO_EXEC_TMPSIZE 4096
+
+#define YDSXGR_SECSTATUSDATA 104
+
+#define NR_MIXOUT 16
+
+#define CS4210_VENDOR_NID 11
+
+#define MASK_STREAM_HAS_MAPPING 4096
+
+#define D4 36
+
+#define AA_X_NONE 0
+
+#define YMFPCI_LEGACY2_FMIO 3
+
+#define D2 34
+
+#define VORTEX_SPDIF_SMPRATE 168340
+
+#define E_SOURCE_DISPATCHER 12288
+
+#define CTRL_RST 8388608
+
+#define PCIR_DSXG_CTRL 72
+
+#define D8 40
+
+#define PCXHR_PLX 1
+
+#define YDSXGR_LEGACYOUTVOLL 128
+
+#define MIXART_PSEUDOREG_MXLX_STATUS_OFFSET 8356
+
+#define ED_NET_OPEN_ERROR 40983
+
+#define PCXHR_FREQ_QUARTZ_192000 16
+
+#define AUDIT_MAX_INDEX 5
+
+#define PCXHR_CVR_HI08_HC 128
+
+#define PCXHR_CFG_DATAIN_SEL_MASK 8
+
+#define AA_X_TYPE_SHIFT 10
+
+#define PCXHR_MASK_IT_MANAGE_HF5 2048
+
+#define KASAN_KMALLOC_FREE 251
+
+#define MIXART_STREAM_STATUS_DRAINING 3
+
+#define YDSXGR_LEGACYOUTVOLR 130
+
+#define XPERMS_DONTAUDIT 4
+
+#define PRD_EOP 16384
+
+#define VORTEX_ADB_RTBASE 163840
+
+#define M3_MARKER 32
+
+#define PRD_EOT 32768
+
+#define IDX_SPDIF_CTL 1
+
+#define YMFPCI_LEGACY_JPEN 4
+
+#define PCXHR_SUER1_BIT_U_READ_MASK 128
+
+#define HPAGE_RESV_UNMAPPED 2
+
+#define YDSXGR_SPDIFOUTSTATUS 28
+
+#define INVERT_BCLK1 2097152
+
+#define ACC_CODEC_CNTL_WR_CMD -2147483649
+
+#define INVERT_BCLK2 1048576
+
+#define CS4271_VOLMIX 2097921
+
+#define IRQ_FIFO 8
+
+#define VORTEX_ADB_CHNBASE 164532
+
+#define ED_DSP_BUSY 42500
+
+#define SHORT_DATA_BITS_MAX 7
+
+#define VORTEX_WTDMA_START 162560
+
+#define AZX_DCAPS_NO_MSI64 536870912
+
+#define TPM_GETRANDOM_SIZE 14
+
+#define REJECT_UNKNOWN 2
+
+#define YDSXGR_GPIOTYPECONFIG 90
+
+#define I8_BITS 8
+
+#define IMA_DIGSIG 16777216
+
+#define SECURITY_FS_USE_XATTR 1
+
+#define MM_SLOTS_HASH_BITS 10
+
+#define EB_ALLOCATE_STREAM_IMPOSSIBLE 50048
+
+#define COMP_RAID 3
+
+#define PCXHR_DIGITAL_ZERO_LEVEL 439
+
+#define UMUL_TIME 1
+
+#define HDA_PINCFG_HEADPHONE_MIC 8
+
+#define PCXHR_CHIPSC_INIT_VALUE 269317758
+
+#define GPT_PRIMARY_PARTITION_TABLE_LBA 1
+
+#define VORTEX_CTRL 172044
+
+#define ED_COBRANET_ITF_NOT_RESPONDING 42504
+
+#define A3D_B_HrtfDelayLine 102888
+
+#define CEXPR_INCOMP 5
+
+#define PCXHR_SELMIC_PREAMPLI_MASK 12
+
+#define ATI_SPKALLOC_TYPE_DISPLAYPORT 512
+
+#define ProtA1_out 164
+
+#define AA_MAY_ONEXEC 1073741824
+
+#define VBLK_SIZE_VOL5 58
+
+#define PCXHR_XLX_LOFREQ 52
+
+#define VALID_AUDIO_IO_MUTE_MONITOR_1 8
+
+#define YDSXGR_RECSLOTSR 196
+
+#define AZX_DCAPS_INTEL_ICH 3145728
+
+#define IO_NUM_SPEED_RATIO 4
+
+#define CTRL_IRQ_ENABLE 16384
+
+#define CEXPR_OR 3
+
+#define ML_BITS 4
+
+#define DEFCONTEXT_MNT 8
+
+#define VBLK_FLAG_COMP_STRIPE 16
+
+#define POLICYDB_VERSION_POLCAP 22
+
+#define A3D_A_GainTarget 98532
+
+#define VBLK_SIZE_DSK3 12
+
+#define VBLK_SIZE_DSK4 45
+
+#define REG_STATUS_OPT_ANALOG_BOARD 0
+
+#define A3D_A_CoeffTrackTC 99204
+
+#define TOMOYO_MAX_HASH 256
+
+#define EB_SPC_REFUSED 50429
+
+#define MIXART_OUT_STREAM_SET_LEVEL_MUTE_2 128
+
+#define MIXART_OUT_STREAM_SET_LEVEL_MUTE_1 64
+
+#define EB_START_STREAM_REFUSED 50428
+
+#define OFFSET_ADBDMAB 32
+
+#define ED_DSP_TIMED_OUT 42497
+
+#define PCXHR_LINE_CAPTURE_ZERO_LEVEL 224
+
+#define NR_WTBLOCKS 1
+
+#define AA_CLASS_UNKNOWN 1
+
+#define AA_CLASS_FILE 2
+
+#define YDSXG_CTRLLENGTH 12288
+
+#define CS4210_ADC_NID 3
+
+#define AA_MAY_CHMOD 256
+
+#define DEFAULT_TARGET_HIGH 5
+
+#define power_save 0
+
+#define MASK_SYS_STATUS_EOT_PLX 4194304
+
+#define TOMOYO_MAX_IO_READ_QUEUE 64
+
+#define HEADER_FMT_16BITS 8192
+
+#define YDSXGR_PRISTATUSADR 102
+
+#define SYM_NUM 8
+
+#define IMA_NEW_FILE 134217728
+
+#define VORTEX_WTDMA_CTRL 162048
+
+#define A3D_B_GainCurrent 102624
+
+#define ACC_BM1_PRD 44
+
+#define MIXART_NOTIFY_PCM_MASK 3840
+
+#define MIX_OUTL 14
+
+#define GPT_HEADER_REVISION_V1 65536
+
+#define KASAN_STACK_LEFT 241
+
+#define PCXHR_IT_RESET_SEMAPHORE 1116
+
+#define IMA_MEASURED 2
+
+#define MIX_OUTR 15
 
 
 
+#define CS4271_VOLMUTE_LEFT 2098177
 
-void tx_isp_release_device(void);
-int ** pop_buffer_fifo(int **param_1);
-int tx_isp_vic_start(int param_1);
-int ispvic_frame_channel_qbuf(uint param_1,int *param_2);
-int ispvic_frame_channel_clearbuf(uint param_1);
-int tx_isp_vic_probe(int param_1);
-void dump_isp_vic_frd_open(int param_1,int param_2);
-int isp_vic_frd_show(int param_1);
-int tx_isp_vic_activate_subdev(uint param_1);
-int vic_sensor_ops_ioctl(uint param_1,int param_2,short *param_3);
-int vic_sensor_ops_sync_sensor_attr(uint param_1,int param_2);
-void dump_vic_reg(int param_1);
-void check_vic_error(void);
-void tx_vic_enable_irq(void);
-void tx_vic_disable_irq(void);
-int vic_core_s_stream(uint param_1,int param_2);
-int vic_core_ops_init(uint param_1,int param_2);
-int tx_isp_vic_slake_subdev(uint param_1);
-void vic_mdma_enable(int param_1,int param_2,int param_3,uint param_4,int param_5,char param_6);
-uint isp_vic_cmd_set(int param_1,int param_2,uint param_3);
-void vic_pipo_mdma_enable(int param_1);
-int ispvic_frame_channel_s_stream(uint param_1,int param_2);
-void vic_framedone_irq_function(int param_1);
-void vic_mdma_irq_function(int param_1,int param_2);
-int isp_vic_interrupt_service_routine(uint param_1);
-int tx_isp_subdev_pipo(code *param_1,code **param_2);
-int vic_core_ops_ioctl(int param_1,int param_2,int *param_3);
-int vic_core_ops_ioctl(int param_1,int param_2,int *param_3);
-int vin_s_stream(int param_1,int param_2);
-int tx_isp_vin_activate_subdev(int param_1);
-int tx_isp_vin_init(int param_1,int param_2);
-int subdev_sensor_ops_set_input(int param_1,uint *param_2);
-int tx_isp_vin_reset(int param_1);
-int tx_isp_vin_probe(int param_1);
-void video_input_cmd_open(int param_1,int param_2);
-uint video_input_cmd_set(int param_1,uint param_2,uint param_3);
-void video_input_cmd_show(int param_1,int param_2,char *param_3,int param_4);
-int subdev_sensor_ops_release_all_sensor(int param_1);
-int tx_isp_vin_slake_subdev(int param_1);
-int isp_i2c_new_subdev_board(int param_1,int param_2);
-int subdev_sensor_ops_enum_input(int param_1,int *param_2);
-int subdev_sensor_ops_ioctl(int param_1,int param_2,int *param_3);
-int tx_isp_csi_probe(int param_1);
-void dump_isp_csi_open(int param_1,int param_2);
-int isp_csi_show(int param_1);
-int csi_core_ops_init(uint param_1,int param_2);
-int csi_sensor_ops_ioctl(uint param_1,int param_2);
-int csi_sensor_ops_sync_sensor_attr(uint param_1,int param_2);
-int tx_isp_csi_activate_subdev(uint param_1);
-int csi_video_s_stream(uint param_1,int param_2);
-int tx_isp_csi_slake_subdev(uint param_1);
-int dump_csi_reg(int param_1);
-void check_csi_error(void);
-int csi_set_on_lanes(int param_1,uint param_2);
-int isp_core_tunning_open(int param_1,int param_2);
-int isp_core_tunning_release(int param_1,int param_2);
-int apical_isp_hvflip_update(int param_1,uint param_2);
-int apical_isp_mask_s_attr.isra.29(int param_1);
-int apical_isp_gamma_s_attr.isra.34(int param_1);
-int apical_isp_expr_s_ctrl.isra.35(int param_1,int param_2);
-int apical_isp_ae_s_roi.isra.36(int *param_1);
-int apical_isp_ae_zone_weight_s_attr.isra.47(int *param_1);
-int apical_isp_af_hist_s_attr.isra.50(int param_1);
-int apical_isp_af_weight_s_attr.isra.51(int *param_1);
-int apical_isp_core_ops_s_ctrl(int *param_1,uint *param_2);
-int apical_isp_mask_g_attr.isra.68(int *param_1);
-int apical_isp_expr_g_ctrl.isra.72(int *param_1);
-int apical_isp_max_again_g_ctrl.isra.73(int *param_1);
-int apical_isp_max_dgain_g_ctrl.isra.74(int *param_1);
-int apical_isp_ev_g_attr.isra.75(int *param_1);
-int apical_isp_gamma_g_attr.isra.76(int *param_1);
-int apical_isp_ae_g_roi.isra.77(int *param_1);
-int apical_isp_ae_zone_g_ctrl.isra.84(int *param_1);
-int apical_isp_af_zone_g_ctrl.isra.85(int *param_1);
-int apical_isp_ae_zone_weight_g_attr.isra.89(int *param_1);
-int apical_isp_ae_hist_origin_g_attr.isra.92(int *param_1);
-int apical_isp_awb_zone_statis_g_attr.isra.94(int *param_1);
-int apical_isp_af_hist_g_attr.isra.95(int *param_1);
-int apical_isp_af_weight_g_attr.isra.96(int *param_1);
-int tiziano_isp_ae_manual_attr_g_ctrl.isra.103(int *param_1);
-int tiziano_isp_csc_g_attr.isra.108(int *param_1);
-int isp_frame_done_wait(uint param_1,int *param_2);
-int apical_isp_core_ops_g_ctrl(int *param_1,uint *param_2);
-int isp_core_tunning_unlocked_ioctl(int param_1,int param_2,int param_3);
-void isp_frame_done_wakeup(void);
-int isp_core_tuning_event(int param_1,uint param_2);
-int * isp_core_tuning_init(int param_1);
-void isp_core_tuning_deinit(int param_1);
-uint private_math_exp2(uint param_1,uint param_2,uint param_3);
-void private_clk_enable(void);
-void private_clk_disable(void);
-void private_clk_put(void);
-void private_clk_set_rate(void);
-void private_i2c_transfer(void);
-void private_i2c_del_driver(void);
-void private_i2c_get_clientdata(void);
-void private_i2c_set_clientdata(void);
-void private_i2c_add_driver(int param_1);
-void private_gpio_request(void);
-void private_gpio_free(void);
-void private_gpio_direction_output(void);
-void private_jzgpio_set_func(void);
-void private_msleep(void);
-void private_capable(void);
-int private_driver_get_interface(void);
-char private_leading_one_position(uint param_1);
-uint private_log2_int_to_fixed(uint param_1,uint param_2,uint param_3);
-int private_log2_fixed_to_fixed(int param_1,int param_2,uint param_3);
-int private_leading_one_position_64(uint param_1,uint param_2);
-uint private_log2_int_to_fixed_64(uint param_1,uint param_2,uint param_3,uint param_4);
-int private_log2_fixed_to_fixed_64(int param_1,int param_2,int param_3,uint param_4);
-void private_platform_driver_register(void);
-void private_platform_driver_unregister(void);
-void private_platform_set_drvdata(void);
-void private_platform_get_drvdata(int param_1);
-void private_platform_device_register(void);
-void private_platform_device_unregister(void);
-void private_platform_get_resource(void);
-void private_dev_set_drvdata(void);
-void private_dev_get_drvdata(void);
-void private_platform_get_irq(void);
-void private_request_mem_region(void);
-void private_release_mem_region(void);
-void private_ioremap(void);
-void private_iounmap(void);
-void private_request_threaded_irq(void);
-void private_enable_irq(void);
-void private_disable_irq(void);
-void private_free_irq(void);
-void __private_spin_lock_irqsave(void);
-void private_spin_unlock_irqrestore(void);
-void private_spin_lock_init(void);
-void private_mutex_lock(void);
-void private_mutex_unlock(void);
-void private_raw_mutex_init(void);
-void private_clk_get(void);
-void private_clk_is_enabled(void);
-void private_clk_get_rate(void);
-void private_i2c_get_adapter(void);
-void private_i2c_put_adapter(void);
-void private_i2c_register_driver(void);
-void private_i2c_new_device(void);
-void private_i2c_unregister_device(void);
-void private_gpio_direction_input(void);
-void private_gpio_set_debounce(void);
-void private_jzgpio_ctrl_pull(void);
-void private_sched_clock(void);
-void private_try_module_get(void);
-void private_request_module(int param_1,int param_2,int param_3,int param_4);
-void private_module_put(void);
-void private_init_completion(void);
-void private_complete(void);
-void private_wait_for_completion_interruptible(void);
-void private_wait_event_interruptible(void);
-void private_wake_up_all(void);
-void private_wake_up(void);
-void private_init_waitqueue_head(void);
-void private_wait_for_completion_timeout(void);
-void private_misc_register(void);
-void private_misc_deregister(void);
-void private_proc_create_data(int param_1,short param_2);
-void private_seq_read(void);
-void private_seq_lseek(void);
-void private_single_release(void);
-void private_single_open_size(void);
-void private_jz_proc_mkdir(void);
-void private_proc_remove(void);
-void private_seq_printf(int param_1,int param_2,int param_3,int param_4);
-void private_simple_strtoull(void);
-void private_kthread_should_stop(void);
-void private_kthread_run(void);
-void private_kthread_stop(void);
-void private_kmalloc(void);
-void private_kfree(void);
-void private_copy_from_user(void);
-void private_copy_to_user(void);
-void private_nlmsg_new(void);
-void private_nlmsg_put(void);
-void private_netlink_unicast(void);
-void private_netlink_kernel_create(void);
-void private_sock_release(void);
-void private_filp_open(int param_1,int param_2,short param_3);
-void private_filp_close(void);
-void private_vfs_read(void);
-void private_vfs_write(void);
-void private_vfs_llseek(void);
-int private_get_fs(int param_1);
-void private_set_fs(void);
-void private_dma_cache_sync(void);
-void private_getrawmonotonic(void);
-void private_get_init_net(void);
-void private_get_isp_priv_mem(void);
-char * find_new_buffer(void);
-void isp_mem_init(void);
-int isp_malloc_buffer(int param_1);
-void isp_free_buffer(int param_1);
-int isp_printf(void);
-int get_isp_clk(void);
-int private_vmalloc(void);
-void private_vfree(void);
-void private_ktime_set(int *param_1);
-void private_set_current_state(void);
-int private_schedule_hrtimeout(void);
-int private_schedule_work(void);
-void private_do_gettimeofday(void);
-void private_dma_sync_single_for_device(void);
-int private_get_driver_interface(void);
-int * FUN_00019bc4(int *param_1);
-int private_devm_clk_get(void);
-int private_clk_prepare_enable(void);
-void private_clk_disable_unprepare(void);
-void private_devm_clk_put(void);
-int isp_irq_handle(int param_1,int param_2);
-int isp_irq_thread_handle(int param_1,int param_2);
-void tx_isp_enable_irq(int *param_1);
-void tx_isp_disable_irq(int *param_1);
-int tx_isp_request_irq(int *param_1,int *param_2);
-void tx_isp_free_irq(int *param_1);
-int fs_activate_module(uint param_1);
-int __enqueue_in_driver(int param_1);
-void __vb2_queue_cancel(uint param_1);
-void __vb2_queue_free(int param_1,int param_2);
-void dump_isp_framesource_open(int param_1,int param_2);
-int isp_framesource_show(int param_1);
-void __fill_v4l2_buffer(void *param_1,void *param_2);
-int frame_chan_event(int *param_1,int param_2,int param_3);
-int frame_channel_open(int param_1,int param_2);
-int frame_channel_vidioc_set_fmt(uint param_1,int param_2);
-int frame_channel_vidioc_get_fmt(uint param_1,int param_2);
-uint check_state(int param_1);
-int __frame_channel_vb2_streamoff(int param_1,int param_2);
-int fs_slake_module(uint param_1);
-int frame_channel_release(int param_1,int param_2);
-uint frame_channel_unlocked_ioctl(int param_1,uint param_2,uint param_3);
-void tx_isp_frame_chan_deinit(uint param_1);
-int tx_isp_fs_probe(int param_1);
-void sensor_alloc_analog_gain(int param_1,short *param_2);
-void sensor_alloc_analog_gain_short(int param_1,int param_2);
-void sensor_alloc_digital_gain(int param_1,int param_2);
-int sensor_alloc_integration_time(int param_1,int param_2);
-int sensor_alloc_integration_time_short(int param_1,int param_2);
-void sensor_set_integration_time(uint param_1);
-void sensor_set_integration_time_short(uint param_1);
-void sensor_set_analog_gain(int param_1);
-void sensor_set_analog_gain_short(int param_1);
-void sensor_set_digital_gain(int param_1);
-uint sensor_get_normal_fps(void);
-int sensor_read_black_pedestal(void);
-void sensor_end_changes(void);
-short sensor_get_id(void);
-void sensor_set_wdr_mode(void);
-int sensor_fps_control(int param_1,int param_2);
-void sensor_disable_isp(void);
-int sensor_get_lines_per_second(void);
-void sensor_set_mode(char param_1,char *param_2);
-void sensor_start_changes(void);
-void sensor_hw_reset_enable(void);
-void sensor_hw_reset_disable(void);
-void sensor_init(int param_1);
-int sensor_early_init(int param_1);
-int tx_isp_video_s_stream(int param_1,int param_2);
-int tx_isp_video_link_stream(int param_1,int param_2);
-int tx_isp_open(int param_1,int param_2);
-int tx_isp_notify(int param_1,uint param_2,int param_3);
-int find_subdev_link_pad(int param_1,char **param_2);
-int isp_subdev_release_clks(int param_1);
-uint isp_subdev_init_clks(int param_1,int *param_2);
-void tx_isp_unregister_platforms(int *param_1);
-void tx_isp_exit(void);
-int subdev_video_destroy_link(int *param_1);
-int tx_isp_video_link_destroy.isra.5(int param_1);
-int tx_isp_release(int param_1,int param_2);
-int tx_isp_init(void);
-int tx_isp_get_ae_algo_handle.isra.16(int param_1,int param_2);
-int tx_isp_unlocked_ioctl(int param_1,uint param_2,int param_3);
-int private_reset_tx_isp_module(int param_1);
-int tx_isp_reg_set(int param_1,int param_2,uint param_3,int param_4,int param_5);
-int tx_isp_send_event_to_remote(int param_1);
-int tx_isp_module_init(int *param_1,void *param_2);
-void tx_isp_module_deinit(void *param_1);
-int tx_isp_subdev_init(int *param_1,int param_2,int param_3);
-void tx_isp_subdev_deinit(int param_1);
-int tx_isp_create_graph_and_nodes(int param_1);
-int tx_isp_probe(int param_1);
-int * FUN_000202e4(int *param_1);
-uint tisp_math_exp2(uint param_1,uint param_2,uint param_3);
-void fix_point_add(void);
-void fix_point_sub(int param_1,int param_2,uint param_3,uint param_4,uint param_5,uint param_6);
-void fix_point_mult2(int param_1,int param_2,uint param_3,uint param_4,uint param_5,uint param_6);
-void fix_point_mult3(int param_1);
-void fix_point_add_64(void);
-void fix_point_sub_64(int param_1,int param_2,uint param_3,uint param_4,uint param_5,uint param_6);
-void fix_point_mult2_64(int param_1,int param_2,uint param_3,uint param_4,uint param_5,uint param_6);
-void fix_point_mult3_64(int param_1);
-uint64_t fix_point_div_64(int param_1,int param_2,uint param_3,int param_4,uint param_5,uint param_6);
-void fix_point_div(void);
-int fix_point_add_32(int param_1,int param_2,int param_3);
-int fix_point_sub_32(int param_1,uint param_2,uint param_3);
-int fix_point_mult2_32(uint param_1,uint param_2,uint param_3);
-void fix_point_mult3_32(int param_1,int param_2,int param_3,int param_4);
-uint fix_point_div_32(int param_1,uint param_2,uint param_3);
-int fix_point_intp(uint param_1,uint param_2,uint param_3,int param_4,int param_5);
-int table_intp(int param_1,int *param_2,uint param_3,uint param_4);
-int tisp_simple_intp(uint param_1,int param_2,int param_3);
-uint tisp_log2_int_to_fixed(uint param_1,uint param_2,uint param_3);
-int tisp_log2_fixed_to_fixed(int param_1,int param_2,uint param_3);
-uint tisp_log2_int_to_fixed_64(uint param_1,uint param_2,uint param_3,uint param_4);
-int tisp_log2_fixed_to_fixed_64(int param_1,int param_2,int param_3,uint param_4);
-void netlink_rcv_msg(int param_1);
-int netlink_send_msg(void *param_1,uint param_2);
-int tisp_netlink_event_set_cb(int param_1);
-int tisp_netlink_init(void);
-void tisp_netlink_exit(void);
-bool isp_tunning_poll(int param_1,code **param_2);
-int tisp_code_tuning_release(void);
-int tisp_param_operate_process(int *param_1);
-uint isp_tunning_read(int param_1,uint param_2,uint param_3);
-int tisp_code_tuning_open(void);
-int tisp_top_param_array_get(void *param_1,int *param_2);
-int tisp_get_ae_info(int param_1);
-int tisp_set_ae_info(int param_1);
-int tisp_get_awb_info(int param_1);
-int tisp_set_awb_info(int param_1);
-int tisp_reg_map_get(int param_1,int param_2,int *param_3);
-int tisp_reg_map_set(int param_1);
-int tisp_dn_mode_get(int param_1,int *param_2);
-int tisp_dn_mode_set(int param_1);
-int tisp_blc_get_par_cfg(int param_1,int *param_2);
-int tisp_blc_set_par_cfg(int param_1);
-int tisp_lsc_get_par_cfg(int param_1,int *param_2);
-int tisp_lsc_set_par_cfg(int param_1,int param_2);
-int tisp_wdr_get_par_cfg(int param_1,int *param_2);
-int tisp_wdr_set_par_cfg(int param_1);
-int tisp_dpc_get_par_cfg(int param_1,int *param_2);
-int tisp_dpc_set_par_cfg(int param_1);
-int tisp_gib_get_par_cfg(int param_1,int *param_2);
-int tisp_gib_set_par_cfg(int param_1);
-int tisp_rdns_get_par_cfg(int param_1,int *param_2);
-int tisp_rdns_set_par_cfg(int param_1);
-int tisp_adr_get_par_cfg(int param_1,int *param_2);
-int tisp_adr_set_par_cfg(int param_1);
-int tisp_dmsc_get_par_cfg(int param_1,int *param_2);
-int tisp_dmsc_set_par_cfg(int param_1);
-int tisp_ccm_get_par_cfg(int param_1,int *param_2);
-int tisp_ccm_set_par_cfg(int param_1);
-int tisp_gamma_get_par_cfg(int param_1,int *param_2);
-int tisp_gamma_set_par_cfg(int param_1);
-int tisp_defog_get_par_cfg(int param_1,int *param_2);
-int tisp_defog_set_par_cfg(int param_1);
-int tisp_mdns_get_par_cfg(int param_1,int *param_2);
-int tisp_mdns_set_par_cfg(int param_1);
-int tisp_ydns_get_par_cfg(int param_1,int *param_2);
-int tisp_ydns_set_par_cfg(int param_1);
-int tisp_bcsh_get_par_cfg(int param_1,int *param_2);
-int tisp_bcsh_set_par_cfg(int param_1);
-int tisp_clm_get_par_cfg(int param_1,int *param_2);
-int tisp_clm_set_par_cfg(int param_1);
-int tisp_ysp_get_par_cfg(int param_1,int *param_2);
-int tisp_ysp_set_par_cfg(int param_1);
-int tisp_sdns_get_par_cfg(int param_1,int *param_2);
-int tisp_sdns_set_par_cfg(int param_1);
-int tisp_af_get_par_cfg(int param_1,int *param_2);
-int tisp_af_set_par_cfg(int param_1);
-int tisp_hldc_get_par_cfg(int param_1,int *param_2);
-int tisp_hldc_set_par_cfg(int param_1);
-int tisp_ae_get_par_cfg(int param_1,int *param_2);
-int tisp_ae_set_par_cfg(int param_1);
-int tisp_awb_get_par_cfg(int param_1,int *param_2);
-int tisp_awb_set_par_cfg(int param_1);
-int tisp_code_tuning_ioctl(int param_1,uint param_2,uint param_3);
-int tisp_code_create_tuning_node(void);
-int tisp_param_operate_init(void);
-void tisp_code_destroy_tuning_node(void);
-int tisp_param_operate_deinit(void);
-int tisp_again_update(void);
-int tisp_tgain_update(int param_1,int param_2);
-int tisp_ev_update(int param_1,int param_2);
-int tisp_ct_update(int param_1,int param_2);
-int tisp_ae_ir_update(void);
-int ip_done_interrupt_static(void);
-int tisp_deinit(void);
-int tisp_fw_process(void);
-int tisp_channel_start(uint param_1);
-int tisp_channel_stop(uint param_1);
-int tisp_channel_fifo_clear(int param_1);
-int tisp_channel_attr_set(int param_1,int *param_2);
-int tiziano_load_parameters(char *param_1);
-int tisp_init(int *param_1,char *param_2);
-int tiziano_sync_sensor_attr(int *param_1);
-int tisp_event_init(void);
-int tisp_event_set_cb(int param_1,int param_2);
-int tisp_event_push(int param_1);
-int tisp_event_exit(void);
-int tisp_event_process(void);
-void JZ_Isp_Awb_Reg2par(uint *param_1,uint *param_2);
-void JZ_Isp_Awb_Awbg2reg(int *param_1,uint *param_2);
-void JZ_Isp_Get_Awb_Statistics(uint *param_1,uint param_2);
-int tisp_awb_ev_update(int param_1);
-int tiziano_awb_params_refresh(void);
-int tiziano_awb_dump(void);
-void system_reg_write_awb(int param_1,int param_2,int param_3);
-void Tiziano_awb_set_gain(int param_1,uint param_2,int *param_3);
-void Tiziano_awb_fpga(int param_1,int param_2,int param_3,int param_4,uint *param_5,int *param_6,int param_7,uint param_8,int *param_9,uint *param_10,int param_11,int param_12,int param_13);
-int JZ_Isp_Awb(void);
-int tiziano_awb_set_lum_th_freq(void);
-int awb_interrupt_static(void);
-int tiziano_awb_set_hardware_param(void);
-int tiziano_awb_dn_params_refresh(void);
-int tiziano_awb_init(uint param_1,uint param_2);
-int tisp_g_wb_mode(void *param_1);
-void tisp_awb_set_frz(uint param_1);
-void tisp_awb_get_frz(char *param_1);
-int tisp_s_wb_mode(int param_1,int param_2,int param_3);
-void tisp_awb_get_ct(int *param_1);
-void tisp_awb_set_ct(int *param_1);
-void tiziano_s_awb_start(uint param_1,int param_2);
-void tiziano_g_awb_start(int *param_1);
-int tiziano_s_wb_algo(int param_1);
-int tisp_awb_get_zone(void *param_1);
-int tisp_awb_set_cluster_awb_params(int param_1,int param_2,int param_3,int param_4);
-int tisp_awb_get_cluster_awb_params(int *param_1);
-int tisp_awb_set_ct_trend(int param_1,int param_2,int param_3,int param_4);
-int tisp_awb_get_ct_trend(int param_1);
-int tisp_awb_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_awb_param_array_set(int param_1,void *param_2,int *param_3);
-void tisp_awb_algo_init(int param_1);
-void tisp_awb_algo_handle(int param_1);
-int tisp_awb_deinit(void);
-int ISPAWBInterpolation1(uint param_1,int param_2,int param_3,int param_4,uint param_5,uint param_6);
-int ISPAWBInterpolation2(uint param_1,int param_2,int param_3,int param_4,uint param_5,uint param_6);
-uint func_zone_ct_weight(uint param_1,uint *param_2,int param_3,uint param_4,int param_5,int param_6,int param_7);
-void Tiziano_Awb_Ct_Detect(uint *param_1,uint *param_2,int *param_3,uint *param_4,int *param_5,uint **param_6,int param_7,uint *param_8,uint *param_9,int *param_10,int *param_11,int param_12,int param_13,int *param_14,uint *param_15,char *param_16,uint *param_17,int *param_18,uint *param_19,int *param_20);
-int subsection_map(int param_1,int param_2,int param_3,short *param_4,int param_5,int *param_6,int param_7,uint param_8,uint param_9,int param_10);
-void subsection(int *param_1,int param_2,int param_3,short *param_4,int param_5,int param_6,uint param_7,int param_8,int param_9);
-void subsection_up(int *param_1,int param_2,int *param_3,int param_4);
-void subsection_light(int *param_1,int *param_2,int param_3,int *param_4);
-int interpolate_adr_x8_y12(int param_1,int param_2,int param_3,int param_4,int param_5);
-void Tiziano_adr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,int **param_6,int *param_7,int *param_8,int param_9,int *param_10,int param_11,int param_12,int *param_13,int *param_14,int *param_15,int *param_16);
-void cm_control(int *param_1,int param_2,int *param_3);
-int minFun(int param_1,int param_2);
-int maxFun(int param_1,int param_2);
-int Log2(int param_1);
-int absFun(int param_1,int param_2);
-int getVar(int param_1);
-void wdr_detail_para_rgb(int *param_1,int *param_2,int *param_3);
-void Tiziano_wdr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,int *param_6,int *param_7,int *param_8,int *param_9,int *param_10,int *param_11,int *param_12,int *param_13,int *param_14,int *param_15,int *param_16,int *param_17,int *param_18,int *param_19,int *param_20,int *param_21,int *param_22,int *param_23,int *param_24,int param_25,int *param_26,int *param_27,int *param_28,int param_29,int *param_30);
-int tiziano_gamma_lut_parameter(void);
-int tiziano_gamma_params_refresh(void);
-int tisp_gamma_wdr_en(int param_1);
-int tiziano_gamma_dn_params_refresh(void);
-int tiziano_gamma_init(void);
-int tisp_gamma_param_array_get(int param_1,void *param_2,int *param_3);
-int tisp_gamma_param_array_set(int param_1,void *param_2,int *param_3);
-void system_reg_write_gib(int param_1,int param_2,int param_3);
-int tisp_gib_gain_interpolation(uint param_1);
-int tiziano_gib_lut_parameter(void);
-int tiziano_gib_params_refresh(void);
-int tiziano_gib_dn_params_refresh(void);
-void tiziano_gib_deir_reg(int param_1,int param_2,int param_3);
-void tiziano_gib_deir_interpolate(uint *param_1,int param_2,int param_3,int param_4,int *param_5,int *param_6);
-void tiziano_gib_deir_ir_interpolation(uint param_1);
-int tisp_gib_deir_ir_update(uint param_1);
-int tiziano_gib_init(void);
-int tisp_gib_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_gib_param_array_set(int param_1,void *param_2,int *param_3);
-void system_reg_write_gb(int param_1,int param_2,int param_3);
-int tisp_gb_blc_again_interp(uint param_1,int param_2);
-int tisp_gb_init_reg(void);
-int tisp_gb_params_refresh(void);
-int tisp_gb_dn_params_refresh(void);
-int tisp_gb_init(void);
-int tisp_gb_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_gb_param_array_set(int param_1,void *param_2,int *param_3);
-void tisp_lsc_wdr_en(int param_1);
-int tisp_lsc_ct_update(int param_1);
-int tisp_lsc_gain_update(int param_1);
-int tiziano_lsc_params_refresh(void);
-int tiziano_lsc_dn_params_refresh(void);
-int tisp_lsc_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_lsc_judge_ct_update_flag(void);
-bool tisp_lsc_judge_gain_update_flag(void);
-int tisp_lsc_write_lut_datas(void);
-int tiziano_lsc_init(void);
-int tisp_lsc_param_array_set(int param_1,void *param_2,size_t *param_3);
-int tisp_lsc_upside_down_lut(void *param_1,int param_2,int param_3);
-void tisp_lsc_lut_mirror_exchange(int param_1,int param_2,int param_3,int param_4,int param_5);
-int tisp_lsc_mirror_flip(int param_1,int param_2,int param_3,int param_4);
-int tisp_dmsc_out_opt_cfg(void);
-int tisp_dmsc_uu_par_cfg(void);
-int tisp_dmsc_alias_par_cfg(void);
-int tisp_dmsc_uu_np_cfg(void);
-int tisp_dmsc_sp_d_sigma_3_np_cfg(void);
-int tisp_dmsc_sp_d_w_wei_np_cfg(void);
-int tisp_dmsc_sp_d_b_wei_np_cfg(void);
-int tisp_dmsc_sp_ud_w_wei_np_cfg(void);
-int tisp_dmsc_sp_ud_b_wei_np_cfg(void);
-int tisp_dmsc_dir_par_cfg(void);
-int tisp_dmsc_nor_par_cfg(void);
-int tisp_dmsc_sp_d_par_cfg(void);
-int tisp_dmsc_sp_ud_par_cfg(void);
-int tisp_dmsc_sp_alias_par_cfg(void);
-int tisp_dmsc_rgb_alias_par_cfg(void);
-int tisp_dmsc_fc_par_cfg(void);
-int tisp_dmsc_deir_par_cfg(void);
-int tisp_dmsc_awb_gain_par_cfg(void);
-int tisp_dmsc_deir_rgb_par_cfg(void);
-int tisp_dmsc_d_ud_ns_par_cfg(void);
-int tisp_dmsc_intp(uint param_1);
-void tisp_dmsc_wdr_en(int param_1);
-int tisp_dmsc_all_reg_refresh(void);
-int tisp_dmsc_intp_reg_refresh(void);
-int tisp_dmsc_par_refresh(uint param_1,uint param_2,int param_3);
-int tisp_dmsc_refresh(int param_1);
-int tisp_dmsc_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_dmsc_param_array_set(int param_1,void *param_2,size_t *param_3);
-int tisp_dmsc_sharpness_set(char param_1);
-int tiziano_dmsc_params_refresh(void);
-int tiziano_dmsc_dn_params_refresh(void);
-int tiziano_dmsc_init(void);
-char tisp_dmsc_sharpness_get(void);
-int tiziano_ccm_lut_parameter(int param_1);
-void jz_isp_ccm_reg2par(uint *param_1,uint *param_2);
-void jz_isp_ccm_para2reg(uint *param_1,uint *param_2);
-void jz_isp_ccm_parameter_convert(void);
-void tiziano_ct_ccm_interpolation(uint param_1,int param_2);
-int jz_isp_ccm(void);
-int tisp_ccm_ev_update(uint param_1);
-int tisp_ccm_ct_update(uint param_1);
-int tiziano_ccm_params_refresh(void);
-int tisp_ccm_wdr_en(int param_1);
-int tiziano_ccm_dn_params_refresh(void);
-int tiziano_ccm_init(void);
-void tisp_ccm_get_attr(void *param_1);
-int tisp_ccm_set_attr(void *param_1);
-int tisp_ccm_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_ccm_param_array_set(int param_1,void *param_2,size_t *param_3);
-uint tiziano_bcsh_StrenCal.part.0(uint param_1,uint param_2,uint param_3,uint param_4,uint param_5);
-void tiziano_bcsh_dump2(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,int *param_6,int *param_7,int *param_8,int *param_9,int *param_10,int *param_11,int *param_12,int *param_13,int *param_14,int *param_15,int *param_16,int *param_17,int *param_18,int *param_19);
-int tiziano_bcsh_lut_parameter(int *param_1,int *param_2,int *param_3,uint *param_4,int *param_5,uint *param_6,int *param_7,uint *param_8,int *param_9,uint *param_10,int *param_11,int *param_12,uint *param_13,uint *param_14,int *param_15,uint *param_16,int *param_17,uint *param_18,int *param_19);
-void tiziano_bcsh_reg2para(uint *param_1,uint *param_2);
-void tiziano_bcsh_para2reg(uint *param_1,uint *param_2);
-void tiziano_bcsh_Tccm_Comp2Orig(void);
-void tiziano_ct_bcsh_interpolation(uint param_1);
-void tiziano_bcsh_Tccm_RGBYUV(int *param_1,int *param_2,int *param_3,int *param_4);
-void tiziano_bcsh_Tccm_RGB2YUV(int param_1,int param_2);
-void tiziano_bcsh_Toffset_RGBYUV(int *param_1,int *param_2,int *param_3);
-void tiziano_bcsh_Toffset_RGB2YUV(int *param_1,int *param_2);
-uint tiziano_bcsh_StrenCal(uint param_1,uint param_2,uint param_3,uint param_4,uint param_5,int param_6);
-void tiziano_bcsh_TransitParam(void);
-int tiziano_bcsh_update(void);
-int tisp_bcsh_ev_update(uint param_1);
-int tisp_bcsh_ct_update(uint param_1);
-int tisp_bcsh_wdr_en(int param_1);
-void tiziano_bcsh_dump(void);
-int tiziano_bcsh_params_refresh(void);
-int tiziano_bcsh_dn_params_refresh(void);
-int tiziano_bcsh_init(void);
-int tisp_bcsh_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_bcsh_param_array_set(int param_1,int *param_2,size_t *param_3);
-int tisp_bcsh_set_mjpeg_contrast(char param_1,char param_2,char param_3);
-int tisp_bcsh_contrast(char param_1);
-int tisp_bcsh_saturation(char param_1);
-int tisp_bcsh_brightness(char param_1);
-int tisp_bcsh_s_hue(char param_1);
-void tisp_bcsh_g_hue(char *param_1);
-char tisp_bcsh_g_brightness(void);
-char tisp_bcsh_g_saturation(void);
-char tisp_bcsh_g_contrast(void);
-void tisp_bcsh_get_attr(void *param_1);
-int tisp_bcsh_set_attr(void *param_1);
-int tisp_bcsh_s_rgb_coefft(ushort *param_1);
-void tisp_bcsh_g_rgb_coefft(short *param_1);
-int tisp_sharpen_intp(uint param_1);
-int tisp_y_sp_sl_exp_cfg(void);
-int tisp_y_sp_std_scope_cfg(void);
-int tisp_y_sp_uu_cfg(void);
-int tisp_y_sp_fl_thres_cfg(void);
-int tisp_y_sp_v1_v2_coef_cfg(void);
-int tisp_y_sp_w_b_ll_cfg(void);
-int tisp_y_sp_uu_w_b_wei_cfg(void);
-int tisp_y_sp_w_b_sl_cfg(void);
-int tisp_y_sp_uu_fl_sl_cfg(void);
-void tisp_sharpen_wdr_en(int param_1);
-int tisp_sharpen_all_reg_refresh(void);
-int tisp_sharpen_intp_reg_refresh(void);
-int tisp_sharpen_par_refresh(uint param_1,uint param_2,int param_3);
-int tiziano_sharpen_params_refresh(void);
-int tiziano_sharpen_init(void);
-int tisp_sharpen_refresh(int param_1);
-int tiziano_sharpen_dn_params_refresh(void);
-int tisp_sharpen_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_sharpen_param_array_set(int param_1,void *param_2,int *param_3);
-int tisp_sdns_grad_thres_opt_cfg(void);
-int tisp_sdns_h_mv_wei_opt_cfg(void);
-int tisp_sdns_mv_seg_number_num_thres_cfg(void);
-int tisp_sdns_g_det_val_div_cfg(void);
-int tisp_sdns_r_s_mv_cfg(void);
-int tisp_sdns_h_s_cfg(void);
-int tisp_sdns_h_mv_cfg(void);
-int tisp_sdns_dark_light_tt_opt_cfg(void);
-int tisp_sdns_d_s1_thres_cfg(void);
-int tisp_sdns_w_thres_cfg(void);
-int tisp_sdns_hls_en_ave_filter_cfg(void);
-int tisp_sdns_gaussian_y_cfg(void);
-int tisp_sdns_gaussian_x_cfg(void);
-int tisp_sdns_gaussian_k_cfg(void);
-int tisp_sdns_h_line_cfg(void);
-int tisp_sdns_sp_std_en_seg_opt_cfg(void);
-int tisp_sdns_sp_uu_cfg(void);
-int tisp_sdns_sp_v2_d_w_b_ll_hl_flat_cfg(void);
-int tisp_sdns_sp_ud_v2_v1_coef_w_wei_opt_cfg(void);
-int tisp_sdns_sp_ud_w_stren_cfg(void);
-int tisp_sdns_sp_ud_w_limit_b_wei_opt_cfg(void);
-int tisp_sdns_sp_ud_b_stren_cfg(void);
-int tisp_sdns_sp_ud_b_limit_srd_ll_hl_flat_cfg(void);
-int tisp_sdns_sp_ud_stren_shift_opt_cfg(void);
-int tisp_sdns_sp_uu_np_array_cfg(void);
-int tisp_sdns_sp_d_w_wei_np_array_cfg(void);
-int tisp_sdns_sp_d_b_wei_np_array_cfg(void);
-int tisp_sdns_sp_ud_w_wei_np_array_cfg(void);
-int tisp_sdns_sp_ud_b_wei_np_array_cfg(void);
-int tisp_sdns_intp(uint param_1);
-int tisp_sdns_all_reg_refresh(void);
-int tisp_sdns_intp_reg_refresh(void);
-int tisp_sdns_par_refresh(uint param_1,uint param_2,int param_3);
-int tisp_sdns_refresh(int param_1);
-int tisp_sdns_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_sdns_param_array_set(int param_1,void *param_2,size_t *param_3);
-int tisp_s_sdns_ratio(uint param_1);
-int tisp_sdns_wdr_en(int param_1);
-int tiziano_sdns_params_refresh(void);
-int tiziano_sdns_init(void);
-int tiziano_sdns_dn_params_refresh(void);
-int tisp_mdns_top_func_cfg(int param_1);
-int tisp_mdns_y_3d_param_cfg(void);
-int tisp_mdns_y_2d_param_cfg(void);
-int tisp_mdns_c_3d_param_cfg(void);
-int tisp_mdns_c_2d_param_cfg(void);
-int tisp_mdns_intp(uint param_1);
-int tisp_mdns_all_reg_refresh(void);
-int tisp_mdns_top_func_refresh(void);
-int tisp_mdns_reg_trigger(void);
-int tisp_mdns_intp_reg_refresh(void);
-int tisp_mdns_par_refresh(uint param_1,uint param_2);
-int tisp_mdns_bypass(int param_1);
-int tisp_mdns_refresh(int param_1);
-int tisp_mdns_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_mdns_param_array_set(int param_1,void *param_2,int *param_3);
-int tisp_s_mdns_ratio(uint param_1);
-int tisp_mdns_wdr_en(int param_1);
-int tiziano_mdns_params_refresh(void);
-int tiziano_mdns_dn_params_refresh(void);
-int tiziano_mdns_init(int param_1,int param_2);
-int tisp_ctr_md_np_cfg(void);
-int tisp_ctr_std_np_cfg(void);
-int tisp_dpc_s_par_cfg(void);
-int tisp_dpc_d_m1_par_cfg(void);
-int tisp_dpc_d_m2_par_cfg(void);
-int tisp_dpc_d_m3_par_cfg(void);
-int tisp_dpc_cor_par_cfg(void);
-int tisp_ctr_par_cfg(void);
-int tisp_dpc_intp(uint param_1);
-void tisp_dpc_wdr_en(int param_1);
-int tisp_dpc_all_reg_refresh(void);
-int tisp_dpc_intp_reg_refresh(void);
-int tisp_dpc_par_refresh(uint param_1,uint param_2,int param_3);
-int tisp_dpc_refresh(int param_1);
-int tisp_dpc_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_dpc_param_array_set(int param_1,void *param_2,size_t *param_3);
-int tisp_s_dpc_str_internal(uint param_1);
-int tiziano_dpc_params_refresh(void);
-int tiziano_dpc_dn_params_refresh(void);
-int tiziano_dpc_init(void);
-void tisp_g_dpc_str_internal(int *param_1);
-void system_reg_write_clm(int param_1,int param_2,int param_3);
-void clm_lut2reg(ushort *param_1,char *param_2,int param_3,int param_4);
-int tiziano_set_parameter_clm(void);
-int tiziano_clm_params_refresh(void);
-int tiziano_clm_dn_params_refresh(void);
-int tiziano_clm_init(void);
-int tisp_clm_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_clm_param_array_set(int param_1,void *param_2,int *param_3);
-int tisp_set_csc_version(char param_1);
-int tisp_set_user_csc(void *param_1);
-void tisp_get_current_csc(int *param_1,void *param_2);
-int tisp_defog_ev_update(uint param_1,int param_2);
-void tiziano_defog_get_data(int param_1);
-void tiziano_defog_set_reg_params(void);
-int tiziano_defog_interrupt_static(void);
-void tisp_defog_max_filter3(int param_1,char *param_2);
-void tisp_defog_img_filter5(int param_1,char *param_2,int param_3);
-void tisp_defog_soft_process(int param_1,int param_2,int param_3,int param_4,int param_5,uint *param_6,uint *param_7,uint *param_8,uint *param_9,int param_10,int *param_11,int param_12,int param_13,int param_14,uint *param_15,uint *param_16,uint *param_17,uint *param_18,uint *param_19,uint *param_20,uint *param_21,uint *param_22,int *param_23,int *param_24);
-int tiziano_defog_algorithm(void);
-int tisp_defog_process(void);
-int tiziano_defog_params_init(void);
-int tiziano_defog_params_refresh(void);
-void tisp_defog_wdr_en(int param_1);
-int tiziano_defog_dn_params_refresh(void);
-void defog_wei_interpcot(int param_1,int param_2,int param_3,int param_4,uint *param_5);
-int defog_3x3_5x5_params_init(int param_1,int param_2);
-int tiziano_defog_init(uint param_1,uint param_2);
-int tisp_defog_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_defog_param_array_set(int param_1,void *param_2,int *param_3);
-int defog_itp(int param_1,int param_2,int param_3);
-void tisp_g_defog_str_internal(char *param_1);
-void tisp_s_defog_str_internal(char *param_1);
-int tisp_adr_ev_update(uint param_1,int param_2);
-void tiziano_adr_get_data(uint *param_1);
-int tiziano_adr_algorithm(void);
-int tisp_adr_process(void);
-void tisp_adr_set_params(void);
-int tiziano_adr_interrupt_static(void);
-int tiziano_adr_5x5_param_distance(int param_1,int param_2,int param_3,int param_4,int param_5);
-int tiziano_adr_5x5_param(void);
-int tiziano_adr_params_init(void);
-int tiziano_adr_gamma_refresh(void);
-int tisp_adr_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_adr_param_array_set(int param_1,int *param_2,int *param_3);
-void tisp_g_adr_str_internal(int *param_1);
-void tisp_s_adr_str_internal(uint param_1);
-int tiziano_adr_params_refresh(void);
-int tiziano_adr_dn_params_refresh(void);
-int tisp_adr_wdr_en(int param_1);
-int tiziano_adr_init(uint param_1,uint param_2);
-int tisp_hldc_con_par_cfg(void);
-int tisp_hldc_par_refresh(int param_1);
-int tiziano_hldc_params_refresh(void);
-int tiziano_hldc_init(void);
-int tisp_hldc_param_array_get(int param_1,void *param_2,int *param_3);
-int tisp_hldc_param_array_set(int param_1,void *param_2,int *param_3);
-int tisp_set_sensor_integration_time(int param_1);
-int tisp_set_sensor_integration_time_short(int param_1);
-uint tisp_set_sensor_analog_gain(int param_1);
-uint tisp_set_sensor_analog_gain_short(int param_1);
-uint tisp_set_sensor_digital_gain_short(int param_1);
-void tisp_set_sensor_digital_gain(void);
-void JZ_Isp_Ae_Reg2par(uint *param_1,uint *param_2);
-void JZ_Isp_Ae_Dg2reg(int param_1,uint *param_2,uint param_3,int *param_4);
-void printf_func0(uint param_1,uint param_2);
-void printf_func1(uint param_1,uint param_2);
-void tisp_ae0_get_statistics(uint *param_1,uint param_2);
-int ae0_interrupt_static(void);
-void tisp_ae1_get_statistics(uint *param_1,uint param_2);
-int ae1_interrupt_static(void);
-void tisp_ae1_get_hist(uint *param_1);
-int ae1_interrupt_hist(void);
-void tisp_ae0_get_hist(uint *param_1,int param_2,int param_3);
-int ae0_interrupt_hist(void);
-int tisp_ae_get_hist_custome(void *param_1);
-int tisp_ae_set_hist_custome(void);
-int AePweightCalculate(uint param_1,int param_2,int param_3,int param_4);
-void ae0_weight_mean2(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,int param_7,void *param_8,void *param_9,int param_10,int param_11,int param_12,int param_13,int param_14,int param_15,int param_16,int param_17,uint *param_18,int param_19,int param_20,uint *param_21,int *param_22,int *param_23,uint *param_24,uint *param_25);
-void tisp_ae_tune(int *param_1,int *param_2,int *param_3,int param_4,uint param_5,uint param_6);
-int tisp_ae_target(uint param_1,int *param_2,int *param_3,uint param_4);
-void ae0_tune2(int *param_1,int param_2,code *param_3,int param_4,uint param_5,uint *param_6,uint *param_7,uint *param_8,int param_9,int *param_10,int *param_11,int *param_12,int param_13_00,int *param_13,uint *param_14,uint *param_15,int *param_16,uint *param_17,int *param_18,uint *param_19,uint *param_20,int *param_21,int param_23_00,uint *param_22,uint *param_23,int param_26_00,uint *param_24,uint *param_25,uint *param_26,int param_30_00,uint *param_27);
-int tisp_ae_g_min(int *param_1);
-int tisp_ae_s_min(uint param_1,uint param_2,uint param_3,uint param_4);
-void Tiziano_ae0_fpga(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,int *param_7,int param_8,int param_9,int param_10);
-void tisp_set_ae0_ag(void);
-void tisp_set_ae1_ag(void);
-int tisp_ae1_expt(void);
-void tisp_ae_mean_update(uint *param_1,uint *param_2);
-void ae1_weight_mean2(int param_1,int param_2,int param_3);
-int Tiziano_ae1_fpga(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,void *param_7,void *param_8);
-int tisp_ae0_ctrls_update(void);
-int tisp_ae1_ctrls_update(void);
-void tiziano_ae_dump(void);
-int tiziano_ae_params_refresh(void);
-int tiziano_ae_s_max_again(uint param_1);
-int tiziano_ae_s_max_isp_dgain(int param_1);
-int tisp_ae_s_at_list(int param_1,int param_2,int param_3,int param_4);
-int tisp_ae_g_at_list(int *param_1);
-void tiziano_deflicker_expt(int param_1,uint param_2,int param_3,int param_4,uint *param_5,uint *param_6);
-void tiziano_deflicker_expt_tune(void);
-void system_reg_write_ae(int param_1,int param_2,int param_3);
-int tisp_ae1_process_impl(void);
-int tisp_ae1_process(void);
-int tiziano_ae_set_hardware_param(int param_1,uint *param_2,int param_3);
-void tiziano_ae_para_addr(void);
-void tiziano_ae_init_exp_th(void);
-int tisp_ae_wdr_en(int param_1);
-int tiziano_ae_init(int param_1,int param_2,int param_3);
-int tisp_ae_min_max_set(void);
-void tiziano_ae_s_ev_start(int param_1);
-int tisp_ae_state_get(int param_1);
-int tisp_ae_manual_get(void *param_1);
-int tisp_ae_manual_set(int param_1,uint param_2,uint param_3,int param_4,uint param_5);
-int tisp_ae_get_y_zone(void *param_1);
-int tisp_ae_s_comp(uint param_1);
-int tiziano_ae_dn_params_refresh(void);
-void tisp_ae_g_comp(char *param_1);
-void tisp_ae_g_luma(char *param_1);
-void tisp_ae_g_scene_luma(uint *param_1);
-int tisp_ae0_process_impl(void);
-int tisp_ae0_process(void);
-int tisp_ae_get_antiflicker_step(void *param_1,int *param_2);
-int tisp_ae_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_ae_param_array_set(int param_1,void *param_2,int *param_3);
-int tisp_ae_trig(void);
-void tisp_ae_deinit(void);
-void tisp_ae_algo_init(int param_1,int param_2);
-void tisp_ae_algo_handle(int param_1);
-void tisp_af_get_statistics(uint *param_1,int param_2,int param_3);
-void Tiziano_af_fpga(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,int param_7,int param_8,int *param_9,int param_10,int *param_11);
-int tisp_af_process_impl(void);
-int af_interrupt_static(void);
-int tiziano_af_params_refresh(void);
-void tiziano_af_dump(void);
-void system_reg_write_af(int param_1,int param_2,int param_3);
-int tiziano_af_set_hardware_param(void);
-int tiziano_af_init(int param_1,int param_2);
-int tisp_af_get_metric(uint *param_1);
-int tisp_af_get_attr(uint *param_1);
-int tisp_af_set_attr_refresh(void);
-int tisp_af_set_attr(int param_1,int param_2,int param_3,int param_4);
-int tiziano_af_dn_params_refresh(void);
-int tisp_af_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_af_param_array_set(int param_1,void *param_2,size_t *param_3);
-void tisp_af_get_zone(void *param_1);
-int tisp_ydns_param_cfg(void);
-int tisp_ydns_intp(uint param_1);
-int tisp_ydns_all_reg_refresh(void);
-int tisp_ydns_intp_reg_refresh(void);
-int tisp_ydns_par_refresh(uint param_1);
-int tisp_ydns_gain_update(int param_1);
-int tiziano_ydns_params_refresh(void);
-int tiziano_ydns_dn_params_refresh(void);
-int tiziano_ydns_init(void);
-int tisp_ydns_refresh(int param_1);
-int tisp_ydns_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_ydns_param_array_set(int param_1,void *param_2,int *param_3);
-int tisp_rdns_intp(uint param_1);
-int tisp_rdns_awb_gain_par_cfg(void);
-int tisp_rdns_opt_cfg(void);
-int tisp_rdns_slope_cfg(void);
-int tisp_rdns_thres_par_cfg(void);
-int tisp_rdns_gray_np_par_cfg(void);
-int tisp_rdns_text_np_par_cfg(void);
-int tisp_rdns_lum_np_par_cfg(void);
-int tisp_rdns_std_np_par_cfg(void);
-int tisp_rdns_sl_par_cfg(void);
-int tisp_rdns_awb_gain_updata(uint param_1,uint param_2);
-void tisp_rdns_wdr_en(int param_1);
-int tisp_rdns_all_reg_refresh(void);
-int tisp_rdns_intp_reg_refresh(void);
-int tisp_rdns_par_refresh(uint param_1,int param_2,int param_3);
-int tisp_rdns_gain_update(int param_1);
-int tiziano_rdns_params_refresh(void);
-int tiziano_rdns_init(void);
-int tisp_rdns_refresh(int param_1);
-int tiziano_rdns_dn_params_refresh(void);
-int tisp_rdns_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_rdns_param_array_set(int param_1,void *param_2,int *param_3);
-int tiziano_wdr_fusion1_curve(void);
-int tiziano_wdr_fusion1_curve_block_mean1(void);
-int tisp_wdr_rx_ae0_infm(void *param_1,void *param_2);
-int tisp_wdr_rx_ae1_infm(void *param_1,void *param_2);
-int tisp_wdr_rx_ae0_dms(int *param_1,int *param_2,int *param_3,int param_4);
-int tisp_wdr_rx_ae1_dms(void);
-int tisp_wdr_expTime_updata(void);
-int tisp_wdr_ev_update(uint param_1,int param_2);
-int tisp_wdr_ev_calculate(void);
-void tiziano_wdr_get_data(uint *param_1);
-int tiziano_wdr_interrupt_static(void);
-int tiziano_wdr_algorithm(void);
-int tiziano_wdr_soft_para_out(void);
-int tisp_wdr_process(void);
-int tiziano_wdr_5x5_param_distance(int param_1,int param_2,int param_3,int param_4,int param_5);
-int tiziano_wdr_5x5_param(void);
-int tiziano_wdr_params_init(void);
-int tiziano_wdr_gamma_refresh(void);
-int tiziano_wdr_params_refresh(void);
-int tiziano_wdr_dn_params_refresh(void);
-int tiziano_wdr_init(uint param_1,uint param_2);
-int tisp_wdr_param_array_get(int param_1,void *param_2,size_t *param_3);
-int tisp_wdr_param_array_set(int param_1,int *param_2,int *param_3);
-int system_yvu_or_yuv(int param_1,int param_2,uint param_3);
-int tisp_day_or_night_s_ctrl(int param_1);
-int tisp_cust_mode_s_ctrl(int param_1);
-int tisp_cust_mode_g_ctrl(void);
-int tisp_day_or_night_g_ctrl(void);
-int tisp_mirror_enable(int param_1);
-int tisp_hv_flip_enable(uint param_1);
-void tisp_hv_flip_get(char *param_1);
-int tisp_flip_enable(int param_1);
-int tisp_set_fps(uint param_1);
-void tisp_set_brightness(char param_1);
-int tisp_set_ae_comp(uint param_1);
-void tisp_get_ae_comp(void);
-void tisp_get_ae_luma(void);
-void tisp_set_sharpness(char param_1);
-void tisp_set_saturation(char param_1);
-void tisp_set_contrast(char param_1);
-void tisp_set_bcsh_hue(char param_1);
-void tisp_get_brightness(void);
-void tisp_get_sharpness(void);
-void tisp_get_saturation(void);
-void tisp_get_contrast(void);
-void tisp_get_bcsh_hue(void);
-int tisp_top_sel(void);
-int tisp_top_read(void);
-int tisp_g_ncuinfo(int param_1);
-int tisp_s_antiflick(int param_1);
-int tisp_s_Hilightdepress(int param_1);
-int tisp_g_Hilightdepress(int *param_1);
-int tisp_s_BacklightComp(int param_1);
-int tisp_g_BacklightComp(int *param_1);
-int tisp_s_Gamma(void *param_1);
-int tisp_g_Gamma(int param_1);
-int tisp_s_aeroi_weight(int *param_1);
-int tisp_g_aeroi_weight(int param_1);
-int tisp_s_aezone_weight(void *param_1);
-int tisp_g_aezone_weight(int param_1);
-int tisp_s_af_weight(void *param_1);
-int tisp_g_af_weight(int param_1);
-int tisp_g_ev_attr(int *param_1);
-int tisp_g_wb_attr(void);
-int tisp_s_wb_attr(void);
-int tisp_g_wb_zone(void);
-int tisp_g_wb_ct(void);
-int tisp_s_wb_ct(void);
-int tisp_s_awb_cluster(int param_1,int param_2,int param_3,int param_4);
-int tisp_g_awb_cluster(void);
-int tisp_s_awb_ct_trend(void);
-int tisp_g_awb_ct_trend(void);
-int tisp_g_ccm_attr(int param_1);
-int tisp_s_ccm_attr(char *param_1);
-int tisp_g_ae_hist(void);
-int tisp_s_ae_hist(int param_1,int param_2,int param_3,int param_4);
-int tisp_s_ae_at_list(int param_1,int param_2,int param_3,int param_4);
-int tisp_g_ae_at_list(void);
-int tisp_s_3dns_ratio(void);
-int tisp_s_2dns_ratio(void);
-int tisp_s_ae_attr(int param_1);
-int tisp_g_ae_attr(int *param_1);
-int tisp_g_ae_min(int *param_1);
-int tisp_s_ae_min(void);
-int tisp_g_ae_zone(void);
-int tisp_g_af_zone(void);
-int tisp_g_af_metric(void);
-int tisp_g_af_attr(void);
-int tisp_s_af_attr(int param_1,int param_2,int param_3,int param_4);
-void tisp_s_wb_frz(char param_1);
-void tisp_g_wb_frz(void);
-void tisp_s_module_control(uint param_1);
-void tisp_g_module_control(uint *param_1);
-void tisp_s_autozoom_control(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,int param_7,int param_8,int param_9);
-void tisp_g_autozoom_control(void);
-int tisp_s_scaler_level_control(uint param_1,int param_2,uint param_3);
-int tisp_s_fcrop_control(char param_1,uint param_2,int param_3,int param_4,uint param_5);
-void tisp_g_fcrop_control(char *param_1);
-int tisp_s_wdr_en(int param_1);
-int tisp_s_wdr_init_en(int param_1);
-int tisp_g_wdr_en(int *param_1);
-void tisp_s_max_again(void);
-void tisp_s_max_isp_dgain(void);
-int tisp_g_dpc_strength(void);
-int tisp_s_dpc_strength(void);
-int tisp_g_drc_strength(void);
-int tisp_s_drc_strength(void);
-void tisp_mscaler_mask_change(int param_1);
-int tisp_mscaler_mask_setreg(uint param_1,uint param_2,int param_3,int param_4,int param_5,int param_6,int param_7,unsigned long long param_8,unsigned long long param_10,int param_12,int param_13,int param_14,unsigned long long param_15,unsigned long long param_17,int param_19,int param_20,int param_21,unsigned long long param_22,unsigned long long param_24,int param_26,int param_27,int param_28,unsigned long long param_29,unsigned long long param_31,int param_33,int param_34,int param_35,unsigned long long param_36,unsigned long long param_38,int param_40,int param_41,int param_42);
-int tisp_s_mscaler_mask_attr(int param_1,int param_2,int param_3,int param_4);
-int tisp_g_mscaler_mask_attr(int param_1);
-void tisp_s_mscaler_hvflip_mask(uint param_1);
-void tisp_s_ev_start(void);
-void tisp_s_awb_start(void);
-void tisp_g_awb_start(void);
-int tisp_s_awb_algo(void);
-void tisp_deinit_free(void);
-int tisp_s_ae_it_max(int param_1);
-int tisp_g_ae_it_max(int *param_1);
-int tisp_s_adr_enable(int param_1);
-int tisp_s_defog_enable(uint param_1);
-int tisp_set_ae_freeze(int param_1);
-void tisp_get_antiflicker_step(void);
-void tisp_set_ae_attr(int *param_1);
-void tisp_get_ae_attr(void);
-void tisp_get_ae_state(void);
-int tisp_get_blc_attr(uint *param_1);
-int tisp_set_defog_strength(void);
-int tisp_get_defog_strength(void);
-int tisp_set_csc_attr(uint *param_1);
-int tisp_get_csc_attr(int param_1);
-void tisp_ae_algo_deinit(void);
-void tisp_awb_algo_deinit(void);
-int tisp_set_wdr_output_mode(int *param_1);
-int tisp_get_wdr_output_mode(int *param_1);
-int tisp_set_bcsh_fixed_contrast(char *param_1);
-int tisp_set_frame_drop(int param_1,int *param_2);
-int tisp_get_frame_drop(int param_1,int *param_2);
-void tisp_s_rgb_coefft(void);
-void tisp_g_rgb_coefft(void);
-void tisp_lsc_hvflip(void);
-int ispcore_sensor_ops_release_all_sensor(int param_1);
-int ispcore_sensor_ops_ioctl(int param_1,int param_2,int param_3);
-void ispcore_irq_fs_work(void);
-int ispcore_link_setup(void);
-void isp_pre_frame_dequeue(void);
-void isp_ch1_frame_dequeue_delay(void);
-int ispcore_frame_channel_dqbuf(int param_1,int param_2);
-int ispcore_core_ops_ioctl(int param_1,int param_2,int *param_3);
-int isp_fw_process(void);
-int ispcore_irq_thread_handle(uint param_1);
-int ispcore_frame_channel_streamoff(uint *param_1);
-void dump_isp_info_open(int param_1,int param_2);
-int isp_core_cmd_set(int param_1,int param_2,int param_3);
-int ispcore_sync_sensor_attr(uint param_1,void *param_2);
-int isp_info_show.isra.0(int param_1);
-int isp_core_debug_show(int param_1);
-int ispcore_pad_event_handle(uint *param_1,int param_2,void *param_3);
-int ispcore_activate_module(uint param_1);
-void dump_msca_regs(void);
-int system_reg_write(int param_1,int param_2);
-int system_reg_read(int param_1);
-void exception_handle(void);
-void tx_isp_enable_irq(int param_1);
-void tx_isp_disable_irq(int param_1);
-int ispcore_video_s_stream(int param_1,int param_2);
-int ispcore_core_ops_init(uint param_1,int param_2);
-int ispcore_slake_module(uint param_1);
-int tx_isp_core_probe(int param_1);
-int system_irq_func_set(int param_1,int param_2);
-int mbus_to_bayer_write(int param_1);
-int ispcore_interrupt_service_routine(int param_1);
-int tx_isp_vic_remove(int param_1);
-int tx_isp_vin_remove(int param_1);
-int tx_isp_csi_remove(int param_1);
-int tx_isp_fs_remove(void);
-int tx_isp_remove(int param_1);
-int tx_isp_core_remove(void);
-char __ashldi3();
-char alloc_chrdev_region();
-char __udelay();
-char dev_get_drvdata();
-char __class_create();
-void * memmove(void * __dest, void * __src, size_t __n);
-int snprintf(char * __s, size_t __maxlen, char * __format, ...);
-char finish_wait();
-char class_destroy();
-char prepare_to_wait();
-void * memcpy(void * __dest, void * __src, size_t __n);
-char kfree();
-char __wake_up();
-char kfree_skb();
-char schedule_timeout();
-char kmem_cache_alloc();
-char __lshrdi3();
-char cdev_add();
-char preempt_schedule();
-char device_create();
-void * memset(void * __s, int __c, size_t __n);
-char PDE_DATA();
-char __init_waitqueue_head();
-char __copy_user();
-char __might_sleep();
-char arch_local_irq_restore();
-int sprintf(char * __s, char * __format, ...);
-char unregister_chrdev_region();
-char device_destroy();
-char seq_printf();
-char div64_u64();
-char register_chrdev_region();
-char arch_local_irq_save();
-size_t strlen(char * __s);
-char cdev_init();
-char cdev_del();
-char simple_strtoull();
+#define EFI_PMBR_OSTYPE_EFI 239
 
+#define CS8416_VERSION 2129664
+
+#define IICSTA 144
+
+#define YDSXGR_EEPROMCTRL 32
+
+#define MAX_WAIT_FOR_DSP 20
+
+#define IDX_ADC_CFG 2
+
+#define MIXART_NOTIFY_CAPT_MASK 128
+
+#define CS8416_CSB1 2103808
+
+#define CS8416_CSB0 2103552
+
+#define IICCC 256
+
+#define CS8416_CSB3 2104320
+
+#define CS8416_CSB2 2104064
+
+#define CS8416_CSB4 2104576
+
+#define YDSXGR_DLCNTRL 76
+
+#define IO_NUM_REG_MUTE_OUT 2
+
+#define VALID_STREAM_PAN_LEVEL_MASK 8388608
+
+#define WS2_CTRL 1024
+
+#define IMA_MMAP_APPRAISED 2048
+
+#define DFA_START 1
+
+#define MAC_DRIVER_MAGIC 17746
+
+#define VORTEX_ENGINE_CTRL 162536
+
+#define PROBS_TOTAL 14134
+
+#define MIXART_PSEUDOREG_ELF_STATUS_OFFSET 8368
+
+#define YDSXGR_BUF441LOOPVOLL 180
+
+#define NR_WT_PB 32
+
+#define AZX_DCAPS_4K_BDLE_BOUNDARY 8388608
+
+#define PCXHR_ICR_HI08_HF1 16
+
+#define HDA_IPFS_CONFIG 384
+
+#define SI3054_CHIPID_CODEC_ID 4096
+
+#define YDSXGR_MAPOFEFFECT 340
+
+#define MFLIMIT 12
+
+#define ENGINE_INIT 20447232
+
+#define MIX_INR 31
+
+#define IMA_MODULE_APPRAISED 32768
+
+#define MIX_INL 30
+
+#define PCXHR_ICR_HI08_HF0 8
+
+#define POLICYDB_VERSION_MAX 30
+
+#define AA_MAY_CHOWN 512
+
+#define TPM_RETURN_OFFSET 6
+
+#define ED_NET_EEPROM_ERROR 40991
+
+#define YDSXGR_BUF441OUTVOLL 176
+
+#define SECURITY_FS_USE_NATIVE 7
+
+#define LEN_MID_SYMBOLS 8
+
+#define YDSXGR_BUF441OUTVOLR 178
+
+#define LEN_MID_BITS 3
+
+#define MSG_FIFO_SIZE 16
+
+#define TR_E_A1_OUT 2
+
+#define HDA_PINCFG_HEADSET_MIC 4
+
+#define AZX_DCAPS_NO_64BIT 262144
+
+#define POLICYDB_VERSION_NLCLASS 18
+
+#define MASK_SYS_STATUS_ERROR 2147483648
+
+#define AVTAB_AUDITALLOW 2
+
+#define AKM_MUTE_CMD 41869
+
+#define AKM_RIGHT_LEVEL_CMD 42752
+
+#define MRST_N 32768
+
+#define OBJECT_R_VAL 1
+
+#define XTINST_SZ 4
+
+#define TERA_NUM_PLAYBACK 4
+
+#define A1_in 8192
+
+#define CRC32C_POLY_LE 2197175160
+
+#define VORTEX_PCM_I2S 4
+
+#define HPAGE_RESV_OWNER 1
+
+#define KARATSUBA_THRESHOLD 16
+
+#define IMA_FILE_APPRAISE 256
+
+#define YDSXG_DSPLENGTH 128
+
+#define YDSXGR_BUF441LOOPVOLR 182
+
+#define PCIR_DSXG_FMBASE 96
+
+#define AVTAB_ENABLED_OLD 2147483648
+
+#define AF1_out 128
+
+#define SELINUX_KERNEL_STATUS_VERSION 1
+
+#define INITCONTEXTLEN 255
+
+#define CEXPR_ROLE 2
+
+#define ED_RS232_NOT_OPENED 40997
+
+#define PRD_JMP 8192
+
+#define POS_STATES_MAX 16
+
+#define XES_FREQ_COUNT8_48_MAX 3848
+
+#define D_MASK 8191
+
+#define ACC_BM1_PNTR 100
+
+#define WT_SUBBUF_SHIFT 12
+
+#define SYM_BOOLS 5
+
+#define VORTEX_CODEC_CTRL 168324
+
+#define VORTEX_ADBDMA_BUFBASE 160768
+
+#define ThreshA1_in 16777216
+
+#define VORTEX_WT_BASE 36864
+
+#define A1_SWAP 2097152
+
+#define YDSXG_CAPTURE_VOICES 2
+
+#define IMA_MEASURE_HTABLE_SIZE 512
+
+#define POLICYDB_VERSION_RANGETRANS 21
+
+#define DIST_SLOTS 64
+
+#define MAY_LOCK 8192
+
+#define MSG_INBOUND_FREE_STACK 1048576
+
+#define XES_FREQ_COUNT8_MASK 8191
+
+#define YDSXGR_PRIADCLOOPVOLL 164
+
+#define VORTEX_IRQ_SOURCE 172032
+
+#define VORTEX_RESOURCE_A3D 4
+
+#define WARNING_VALUE 0
+
+#define YDSXGR_PRIADCLOOPVOLR 166
+
+#define SEL_VEC_MAX 32
+
+#define VORTEX_FIFO_ADBDATA 81920
+
+#define EB_ALLOCATE_AUDIO_IMPOSSIBLE 50112
+
+#define PCXHR_DSP_RESET_CODEC 8
+
+#define DAUGHTER_TYPE_MASK 15
+
+#define PCXHR_ISR_HI08_TRDY 4
+
+#define VBLK_SIZE_CMP3 22
+
+#define MSG_INBOUND_POST_TAIL 65548
+
+#define SECSID_NULL 0
+
+#define SMK_INODE_TRANSMUTE 2
+
+#define VORTEX_SRC_DATA 157696
+
+#define ED_READ_FILE_NO_INFORMATION 41006
+
+#define YDSXGR_CTRLSELECT 260
+
+#define RC_TOP_VALUE 16777216
+
+#define ED_INVALID_RS232_COM_NUMBER 40992
+
+#define PCXHR_PLX_OFFSET_MIN 64
+
+#define MIXART_FLOAT_P__4_0_TO_HEX 1082130432
+
+#define HEADER_FMT_BASE_FLOAT 4207935488
+
+#define ED_READ_FILE_ALREADY_OPENED 41002
+
+#define LDM_PARTITION 66
+
+#define IO_NUM_REG_IN_ANA_LEVEL 21
+
+#define MIX_DEFIGAIN 8
+
+#define VORTEX_IRQ_CTRL 172036
+
+#define VALID_STREAM_LEVEL_1_MASK 2097152
+
+#define ProtA2_in 176
+
+#define ATI_AUDIODESC_RATES 65280
+
+#define YDSXGR_SECCONFIG 112
+
+#define ED_CANCELLED 40969
+
+#define MAXD_MASK 65535
+
+#define AVTAB_TRANSITION 16
+
+#define AVTAB_ENABLED 32768
+
+#define A1_CLKSRC 134217728
+
+#define PCXHR_FATAL_DSP_ERR 16711680
+
+#define CS4271_89_CS 1441820
+
+#define KEYRING_SEARCH_NO_STATE_CHECK 1
+
+#define START_PAUSE_ON_TIME_CODE 2
+
+#define AZX_DEFAULT_CODECS 4
+
+#define MIXART_HARDW_FILES_MAX_INDEX 3
+
+#define LITERALS 256
+
+#define ALLOC_CPUSET 64
+
+#define ED_NET_REGISTER_ERROR 40981
+
+#define ATI_VERB_GET_AUDIO_VIDEO_DELAY 3963
+
+#define SI3054_GPIO_OH 1
+
+#define E_SOURCE_DRV 8192
+
+#define CS8420_CSB0 2105344
+
+#define CS8420_CSB3 2106112
+
+#define CS8420_CSB4 2106368
+
+#define CS8420_CSB1 2105600
+
+#define AA_MAY_LOCK 1024
+
+#define POLICYDB_VERSION_MIN 15
+
+#define CS8420_CSB2 2105856
+
+#define ED_NOT_INSTALLED 40964
+
+#define ED_FILE_ERROR 40994
+
+#define IRQ_TIMER 4096
+
+#define IPC_SHM_IDS 2
+
+#define YDSXGR_DSPINSTRAM 4096
+
+#define YMFPCI_LEGACY2_JSIO 192
+
+#define IRQ_REG 4
+
+#define POLICYDB_VERSION_CONSTRAINT_NAMES 29
+
+#define AZX_DCAPS_OLD_SSYNC 1048576
+
+#define PRQ 2147483648
+
+#define PCXHR_SUER_CLOCK_PRESENT_MASK 1
+
+#define ED_PENDING_OPERATION 40979
+
+#define SI3054_CHIPID_CODEC_REV_MASK 15
+
+#define TEST_STRING_2_MAX_S1 32
+
+#define HPAGE_RESV_MASK 3
+
+#define YDSXGR_GPIOOUTCTRL 86
+
+#define MIXART_DAUGHTER_TYPE_NONE 0
+
+#define IO_NUM_REG_OUT_ANA_LEVEL 20
+
+#define VORTEX_SPDIF_CFG0 168400
+
+#define VORTEX_SPDIF_CFG1 168404
+
+#define YDSXGR_ZVLOOPVOL 156
+
+#define SMK_NUM_ACCESS_TYPE 7
+
+#define E_SOURCE_BOARD 16384
+
+#define ALLOW_UNKNOWN 4
+
+#define PSR 272
+
+#define VALID_AUDIO_IO_MONITOR_LEVEL 2
+
+#define RC_BIT_MODEL_TOTAL 2048
+
+#define PCXHR_STAT_GPI_OFFSET 2
+
+#define PROF_REPLACE 0
+
+#define OFFSET_EFXIN 128
+
+#define NR_A3D 16
+
+#define TERA_NUM_CAPTURE 3
+
+#define A3D_SLICE_Pointers 105536
+
+#define PCXHR_XLX_STATUS 48
+
+#define FULL_DISTANCES_BITS 7
+
+#define CS4213_VENDOR_NID 9
+
+#define PCXHR_LINE_PLAYBACK_ZERO_LEVEL 104
+
+#define STOP 1
+
+#define PACKED_MODE_ENFORCE 0
+
+#define PageA2_in 180
+
+#define A3D_SLICE_TAIL 106496
+
+#define START_PAUSE_IMMEDIATE 0
+
+#define EB_ALLOCATE_EFFECTS_IMPOSSIBLE 49928
+
+#define REG_CRM_NUMBER 12
+
+#define FIFO_SIZE 64
+
+#define VORTEX_CODEC_CHN 168064
+
+#define OPTIMAL_ML 18
+
+#define YMFPCI_LEGACY_MEN 8
+
+#define VORTEX_CODEC_SPORTCTRL 168332
+
+#define KARMA_LABEL_MAGIC 43862
+
+#define BurstA1_in 67108864
+
+#define OFFSET_EQOUT 126
+
+#define TYPEDATUM_PROPERTY_PRIMARY 1
+
+#define MASK_SYS_TIMER_COUNT 65535
+
+#define TSL1 384
+
+#define TSL2 448
+
+#define RUN_MASK 15
+
+#define XT_DIAMOND 4
+
+#define SMACK_PTRACE_EXACT 1
+
+#define IOCR_INPUTS_OFFSET 8
+
+#define CS_COEF_DAC_SPK_SZC_MODE 48
+
+#define ZONE_RECLAIM_NOSCAN -2
+
+#define M3_MAX_LEN 33
+
+#define VORTEX_CODEC_ADDMASK 8323072
+
+#define YDSXGR_SECADCOUTVOLL 140
+
+#define SIDTAB_HASH_BITS 7
+
+#define YDSXGR_SECADCOUTVOLR 142
+
+#define A3D_A_A12Current 98536
+
+#define PCXHR_FIRMWARE_XLX_COM_INDEX 1
+
+#define ED_DSP_CRASHED_EXC_SYSSTACK_OVERFLOW 41011
+
+#define IRQ_MIDI 8192
+
+#define MIXART_FIRST_ANA_AUDIO_ID 0
+
+#define AA_DO_TEST 1
+
+#define EN_SPORT 196608
+
+#define NR_WTPB 32
+
+#define IO_NUM_REG_STATUS 5
+
+#define PCXHR_SUER_DATA_PRESENT_MASK 2
+
+#define DEFAULT_TARGET_LOW 4
+
+#define A3D_A_ITDTrackTC 99208
+
+#define ED_BOARD_TIME_OUT 42502
+
+#define CEXPR_XTARGET 16
+
+#define PCXHR_PLX_L2PCIDB 100
+
+#define AKM_UNMUTE_CMD 41741
+
+#define LEN_SYMBOLS 272
+
+#define PCXHR_DSP_ICR 0
+
+#define AZX_DCAPS_NO_TCSEL 256
+
+#define ThreshA2_out 1
+
+#define HR222_MICRO_CAPTURE_LEVEL_MIN 0
+
+#define ACC_BM0_STATUS 33
+
+#define PCXHR_DSP_RESET_GPO_MASK 96
+
+#define COND_BOOL 1
+
+#define EB_ALLOCATE_DIFFERED_CMD_IMPOSSIBLE 49923
+
+#define YDSXGR_RECCTRLBASE 348
+
+#define VORTEX_RESOURCE_DMA 0
+
+#define EN_CODEC1 12288
+
+#define EN_CODEC0 768
+
+#define MIXART_AUDIO_LEVEL_MONITOR_MASK 4
+
+#define PCXHR_DSP 2
+
+#define PCXHR_DSP_RESET 32
+
+#define FIFO_VALID 16
+
+#define OFF_TOCB3 2045
+
+#define OFF_TOCB2 2
+
+#define A3D_A_HrtfCurrent 98304
+
+#define OFF_TOCB4 2046
+
+#define M4_MAX_OFFSET 49151
+
+#define ACC_CODEC_CNTL_RD_CMD 2147483648
+
+#define SOURCE_MASK 65280
+
+#define OFF_TOCB1 1
+
+#define ADB_SUBBUF_SHIFT 12
+
+#define HDA_DISABLE_INTR 1024
+
+#define SMK_CIPSOLEN 24
+
+#define MATCH_LEN_MIN 2
+
+#define PMA 1073741824
+
+#define CS_DIG_OUT2_PIN_NID 21
+
+#define AZX_DCAPS_REVERSE_ASSIGN 16777216
+
+#define YDSXGR_NATIVEDACLOOPVOLR 154
+
+#define ED_READ_FILE_END_OF_FILE 41008
+
+#define AKM_RESET_OFF_CMD 41219
+
+#define RC_TOP_BITS 24
+
+#define EB_ALLOCATE_CONTEXT_LIII_IMPOSSIBLE 49931
+
+#define IMA_APPRAISE_FIX 2
+
+#define PCXHR_IT_SEND_BYTE_XILINX 316
+
+#define YDSXGR_NATIVEDACLOOPVOLL 152
+
+#define OFFSET_EFXOUT 104
+
+#define KASAN_STACK_RIGHT 243
+
+#define START_PAUSE_ON_SYNCHRO 1
+
+#define PCXHR_IT_DEBUG 1114
+
+#define PCXHR_STAT_FREQ_UER1_MASK 2
+
+#define VORTEX_RESOURCE_MIXOUT 3
+
+#define CS4271_DAC_CTL 2097665
+
+#define GPT_MBR_HYBRID 2
+
+#define CS4271_45_CS 1441818
+
+#define XES_FREQ_COUNT8_44_MAX 4336
+
+#define SOURCE_MIC 3
+
+#define POLICYDB_VERSION_PERMISSIVE 23
+
+#define WS4_CTRL 4
+
+#define AVC_CALLBACK_GRANT 1
+
+#define YDSXGR_SECADCLOOPVOL 160
+
+#define MAX_NB_ATTEMPTS 256
+
+#define YDSXGR_PRIADCOUTVOL 144
+
+#define LEVEL_REP 320
+
+#define VALID_STREAM_LEVEL_MASK 4194304
+
+#define AVC_CALLBACK_REVOKE 4
+
+#define YDSXGR_ACTIVITY 6
+
+#define CS4271_01_CS 1441816
+
+#define NVIDIA_HDA_ISTRM_COH 77
+
+#define PCXHR_ISR_HI08_RXDF 1
+
+#define YDSXGR_BUF441LOOPVOL 180
+
+#define CS_COEF_ADC_SZC_MASK 3
+
+#define AVTAB_XPERMS 1792
+
+#define POLICYDB_VERSION_MLS 19
+
+#define A3D_A_TAIL 99236
+
+#define VORTEX_ADBDMA_START 162816
+
+#define IIC_ER 524288
+
+#define SI3054_VERB_READ_NODE 2304
+
+#define IIC_EF 131072
+
+#define MASK_DATA_SIZE 16777215
+
+#define ED_INVALID_RS232_INIT 40993
+
+#define TIME_CODE_WAIT_MASK 1048576
+
+#define MSG_INBOUND_FREE_TAIL 65540
+
+#define MSDOS_LABEL_MAGIC 43605
+
+#define CS420X_VENDOR_NID 17
+
+#define M3_MIN_LEN 3
+
+#define MEMORY_USAGE 14
+
+#define NUM_VREFS 6
+
+#define IIC_EL 262144
+
+#define PCXHR_SUER1_DATA_PRESENT_MASK 32
+
+#define HDA_BEEP_MODE_ON 1
+
+#define YMFPCI_LEGACY2_SMOD 6144
+
+#define AVC_CALLBACK_AUDITALLOW_DISABLE 32
+
+#define IIC_EW 1048576
+
+#define PCXHR_MASK_EXTRA_INFO 254
+
+#define ED_UNAVAILABLE_FEATURE 40968
+
+#define MASK_SYS_STATUS_XES 2097152
+
+#define BurstA2_out 4
+
+#define FMT_SHIFT 14
+
+#define EB_STATUS_DIALOG_IMPOSSIBLE 49949
+
+#define A3D_B_ITDTarget 102884
+
+#define KEY_LOOKUP_CREATE 1
+
+#define IIC_EA 2097152
+
+#define YDSXGR_PLAYCTRLSIZE 320
+
+#define YDSXGR_INTFLAG 4
+
+#define LASTLITERALS 5
+
+#define POS_SHIFT 0
+
+#define E_SOURCE_USER 30720
+
+#define OFFSET_A3DOUT 166
+
+#define BM1_IRQ_STS 3
+
+#define HR222_MICRO_CAPTURE_LEVEL_MAX 210
+
+#define REPS 4
+
+#define CRC_BITS 32
+
+#define CS_DMIC2_PIN_NID 18
+
+#define GPIO_CTRL 224
+
+#define DRERR 8
+
+#define AA_X_INHERIT 16384
+
+#define SMACK_CIPSO_SOCKET 1
+
+#define XTGAINS_SZ 10
+
+#define VORTEX_WTDMA_BUFBASE 159744
+
+#define MORE_THAN_ONE_STREAM_LEVEL 1
+
+#define PCXHR_SOURCE_AUDIO23_UER 1024
+
+#define ALIGN_SIZE 16
+
+#define YDSXGR_LEGACYLOOPVOL 148
+
+#define A3D_SLICE_DebugReserved 105532
+
+#define MIXART_DRIVER_VERSION 256
+
+#define IMA_APPRAISE 4
+
+#define AA_MAY_CHANGEHAT 2147483648
+
+#define OP_AMOUNT_0 0
+
+#define PCXHR_XLX_RUER 40
+
+#define OP_AMOUNT_2 2
+
+#define PCXHR_CFG_SYNCDSP_MASK 128
+
+#define OP_AMOUNT_4 4
+
+#define ATIHDMI_NUM_PLAYBACK 8
+
+#define MIXART_AUDIO_LEVEL_MUTE_M1_MASK 16
+
+#define VBLK_FLAG_PART_INDEX 8
+
+#define OP_AMOUNT_8 8
+
+#define CFG_IDX_MIX 99
+
+#define VORTEX_STAT 172040
+
+#define SECURITY_FS_USE_NONE 5
+
+#define PPEF 2147483648
+
+#define MASK_BUFFER_ID 255
+
+#define PCXHR_SUER_BIT_C_READ_MASK 4
+
+#define KSTRTOX_OVERFLOW 2147483648
+
+#define ATI_VERB_GET_SINK_INFO_DATA 3969
+
+#define string_get_size_maxbuf 16
+
+#define CTRL_GAME_PORT 3584
+
+#define FULL_DISTANCES 128
+
+#define VBLK_FLAG_DGR4_IDS 8
+
+#define HDA_IPFS_EN_FPCI 1
+
+#define AZX_DCAPS_RIRB_PRE_DELAY 16384
+
+#define MIXART_PCI_ODBR_OFFSET 96
+
+#define VORTEX_MIXER_CLIP 139136
+
+#define PGP_DIGEST_ALGO_SHA512 10
+
+#define CTRLID_FILTER 8
+
+#define ATI_VERB_GET_SPEAKER_ALLOCATION 3952
+
+#define MIXART_PCM_ANALOG 0
+
+#define WS0_SYNC 65536
+
+#define PCXHR_IRQ_ASYNC 32768
+
+#define CFQQ_SEEK_THR 800
+
+#define VORTEX_RESOURCE_MIXIN 2
+
+#define PCXHR_SUER_BIT_U_WRITE_MASK 2
+
+#define SUN_LABEL_MAGIC 55998
+
+#define VBLK_SIZE_DGR3 12
+
+#define AVTAB_XPERMS_AUDITALLOW 512
+
+#define APERR 32
+
+#define SECURITY_FS_USE_MNTPOINT 6
+
+#define VBLK_SIZE_DGR4 44
+
+#define YDSXG_AC97WRITECMD 0
+
+#define ED_NET_ALLOCATE_MEMORY_IMPOSSIBLE 40980
+
+#define SECURITY_FS_USE_TRANS 2
+
+#define CS8416_01_CS 524440
+
+#define TPM_SIZE_OFFSET 2
+
+#define PCXHR_CFG_INDEPENDANT_SEL 0
+
+#define CEXPR_H1H2 256
+
+#define E_CLASS_INVALID_STD_OBJECT 512
+
+#define XES_FREQ_COUNT8_44_MIN 4744
+
+#define VORTEX_SPDIF_FLAGS 139356
+
+#define PCXHR_WAIT_IT_EXTRA 65
+
+#define CS_COEF_ADC_LI_SZC_MODE 3
+
+#define COPYLENGTH 8
+
+#define NR_ADB 32
+
+#define AVD_FLAGS_PERMISSIVE 1
+
+#define IE_SHIFT 12
+
+#define YDSXGR_CTRLINSTRAM 16384
+
+#define OCON_NODE 4
+
+#define MANAGE_SIGNAL_MIDI 2
+
+#define KEYRING_SEARCH_DO_STATE_CHECK 2
+
+#define SI3054_DTAG_MASK 61440
+
+#define DEFAULT_SOURCE_LOW 1
+
+#define AVC_STRICT 1
+
+#define YDSXGR_MODE 264
+
+#define PCXHR_FREQ_QUARTZ_44100 2
+
+#define MAX_ENTRIES 1000000
+
+#define MIXART_PSEUDOREG 8192
+
+#define CS4271_ADC_CTL 2098689
+
+#define CS8416_FORMAT_DETECT 2099968
+
+#define MSG_BOUND_STACK_SIZE 16384
+
+#define YDSXGR_WORKSIZE 332
+
+#define SMK_INODE_INSTANT 1
+
+#define PCXHR_DSP_TIME_MASK 16777215
+
+#define MIXART_FIRST_DIG_AUDIO_ID 8
+
+#define SKIPSTRENGTH 6
+
+#define AZX_DCAPS_RIRB_DELAY 8192
+
+#define POLICYDB_VERSION_ROLETRANS 26
+
+#define ED_NET_SEND_ERROR 40987
+
+#define IRQ_FATAL 1
+
+#define VORTEX_WTDMA_STAT 163072
+
+#define YDSXGR_ZVOUTVOL 136
+
+#define POLICYDB_VERSION_XPERMS_IOCTL 30
+
+#define RUN_BITS 4
+
+#define FSHAT_MNT 4
+
+#define NUM_PLAYBACK_SD 1
+
+#define VALID_AUDIO_IO_MUTE_LEVEL 4
+
+#define PCXHR_FIRMWARE_FILES_MAX_INDEX 5
+
+#define PCXHR_STAT_MIC_CAPS 16
+
+#define SI3054_CHIPID_INTERNATIONAL 256
+
+#define AA_X_TABLE 2048
+
+#define IMA_AUDITED 128
+
+#define MASK_SYS_STATUS_ORUN 536870912
+
+#define YDSXGR_GPIOININTFLAG 80
+
+#define VORTEX_SRC_SOURCESIZE 158920
+
+#define MIXART_PSEUDOREG_PERF_SYSTEM_LOAD_OFFSET 8312
+
+#define AVTAB_CHANGE 64
+
+#define SIDTAB_HASH_MASK 127
+
+#define MIXART_ALLOW_OUTBOUND_DOORBELL 35
+
+#define MIXART_BA1_SIZE 4096
+
+#define SMACK_PTRACE_DEFAULT 0
+
+#define AF2_in 1024
+
+#define CEXPR_DOM 3
+
+#define OCON_PORT 2
+
+#define YDSXGR_TIMERCOUNT 18
+
+#define SOURCE_DIGITAL 1
+
+#define PRM_RDY_STS 8388608
+
+#define A3D_A_B10Target 98548
+
+#define HEADER_FMT_UPTO11 512
+
+#define HASH_LOG 15
+
+#define SIDTAB_SIZE 128
+
+#define AVC_CALLBACK_AUDITDENY_ENABLE 64
+
+#define COND_EXPR_MAXDEPTH 10
+
+#define MSG_FRAME_NUMBER 32
+
+#define VORTEX_MIDI_DATA 165888
+
+#define MIXART_AUDIO_LEVEL_MUTE_M2_MASK 32
+
+#define COND_OR 3
+
+#define PCXHR_STAT_FREQ_SAVE_MASK 128
+
+#define MIXART_OUT_STREAM_SET_LEVEL_LEFT_AUDIO1 1
+
+#define YDSXGR_AC97CMDDATA 96
+
+#define MIXART_OUT_STREAM_SET_LEVEL_LEFT_AUDIO2 2
+
+#define AUDIO_IO_HAS_MUTE_LEVEL 4194304
+
+#define HEADER_FMT_BASE_LIN 4275044352
+
+#define YDSXGR_NATIVEDACOUTVOLR 134
+
+#define YDSXGR_NATIVEDACOUTVOLL 132
+
+#define ICH6_NUM_CAPTURE 4
+
+#define PCXHR_FREQ_QUARTZ_48000 0
+
+#define A3D_B_B2Current 102648
+
+#define KEYRING_SEARCH_SKIP_EXPIRED 32
+
+#define CS_COEF_DAC_LO_SZC_MODE 12
+
+#define OP_AMOUNT 15
+
+#define EN_SPDIF 786432
+
+#define PCXHR_DIGITAL_LEVEL_MIN 0
+
+#define DEFAULT_TARGET 2
+
+#define M3_MAX_OFFSET 16384
+
+#define YDSXGR_LEGACYOUTVOL 128
+
+#define PCXHR_FREQ_QUARTZ_24000 1
+
+#define HDA_FPCI_BAR0_START 64
+
+#define CFQ_RQ2_WRAP 2
+
+#define REG_STATUS_OPT_COMPANION_MASK 224
+
+#define OP_ZEROS 28
+
+#define CTRL_GAME_EN 8
+
+#define YMFPCI_LEGACY2_MPUIO 48
+
+#define OFFSET_MIXOUT 48
+
+#define M1_MARKER 0
+
+#define HDA_ENABLE_MEM_SPACE 2
+
+#define MAX_PREALLOC_SIZE 33554432
+
+#define OFFSET_SPORTIN 120
+
+#define TOMOYO_MAX_ACL_GROUPS 256
+
+#define TPM_OSAP_SIZE 36
+
+#define SYM_ROLES 2
+
+#define AVC_CALLBACK_ADD_XPERMS 256
+
+#define YYTD_ID_ACCEPT 0
+
+#define MASK_SYS_STATUS_ESA 33554432
+
+#define ACC_BM0_PRD 36
+
+#define MASK_SYS_STATUS_TIMER 16777216
+
+#define CS8416_RUN 2098177
+
+#define SMACK_UNCONFINED_SUBJECT 2
+
+#define ULI_NUM_PLAYBACK 6
+
+#define CS8420_SRC_RATIO 2104832
+
+#define SI3054_MEI_READY 15
+
+#define PSTATE_OFFSET 28
+
+#define FIFO_BITS 473956352
+
+#define START_STATE 1
+
+#define PCXHR_PLX_MBOX0 64
+
+#define ProtA1_in 152
+
+#define PCXHR_PLX_MBOX2 72
+
+#define PCXHR_PLX_MBOX1 68
+
+#define NVIDIA_HDA_ENABLE_COHBIT 1
+
+#define PCXHR_PLX_MBOX4 80
+
+#define PERM_SYMTAB_SIZE 32
+
+#define PCXHR_PLX_MBOX3 76
+
+#define CTRLID_HRTF 1
+
+#define ED_GPIO_NOT_OPENED 40999
+
+#define PCXHR_PLX_MBOX6 88
+
+#define PCXHR_PLX_MBOX5 84
+
+#define ISR 268
+
+#define PCXHR_IRQ_TIMER_PERIOD 48
+
+#define CTRLID_ILD 4
+
+#define PCXHR_PLX_MBOX7 92
+
+#define SMACK_AUDIT_DENIED 1
+
+#define IMA_MODULE_APPRAISE 16384
+
+#define ID_OFFSET 13
+
+#define SI3054_CHIPID 12
+
+#define M1_MAX_LEN 2
+
+#define PCXHR_PLX_CHIPSC 108
+
+#define SI3054_VERB_WRITE_NODE 256
+
+#define TIME_CODE_BACK_MASK 2097152
+
+#define PCXHR_LINE_PLAYBACK_LEVEL_MAX 128
+
+#define YDSXGR_PRIADCOUTVOLR 146
+
+#define IMA_MMAP_APPRAISE 1024
+
+#define HEADER_FMT_UPTO32 256
+
+#define CHIP_SIG_AND_MAP_SPI 16744192
+
+#define YYTD_ID_META 5
+
+#define SI3054_LINE_CFG1 13
+
+#define VORTEX_IRQ_STAT 168348
+
+#define OP_BITS 5
+
+#define OP_SHORT_DATA 29
+
+#define VORTEX_FIFO_WTDATA 65536
+
+#define HR222_LINE_PLAYBACK_LEVEL_MAX 99
+
+#define PCXHR_DSP_RESET_MUTE 2
+
+#define YDSXGR_PRIADCOUTVOLL 144
+
+#define BM_CTL_BYTE_ORD_LE 0
+
+#define DEFAULT_SOURCE_HIGH 2
+
+#define ID_CH_MASK 63
+
+#define CS8420_23_CS 524434
+
+#define SIDTAB_CACHE_LEN 3
+
+#define SYM_COMMONS 0
+
+#define CS421X_IDX_ADC_CFG 2
+
+#define E_CLASS_REAL_TIME_ERROR 1536
+
+#define MASK_DSP_unsigned short 16777215
+
+#define COND_NOT 2
+
+#define I4_BITS 9
+
+#define YYTD_ID_EC 4
+
+#define PCXHR_STAT_FREQ_SYNC_MASK 1
+
+#define ACC_BM1_STATUS 41
+
+#define ED_CANNOT_READ_REGISTRY 40966
+
+#define PCXHR_XLX_SELMIC 64
+
+#define PCXHR_IRQ_TIMER_FREQ 92000
+
+#define AZX_DCAPS_CORBRP_SELF_CLEAR 268435456
+
+#define ED_UNKNOWN_BOARD 40963
+
+#define REG_STATUS_SYNC_128000 6
+
+#define PCXHR_STAT_LEVEL_IN 2
+
+#define SMACK_CIPSO_MAPPED_DEFAULT 251
+
+#define PCXHR_FREQ_QUARTZ_16000 4
+
+#define HDA_PINCFG_NO_HP_FIXUP 1
+
+#define XT_SPEAKER1 3
+
+#define XT_SPEAKER0 2
+
+#define YDSXGR_EFFCTRLBASE 352
+
+#define INTEGRITY_KEYRING_MAX 3
+
+#define BM_CTL_BYTE_ORD_BE 4
+
+#define ULI_NUM_CAPTURE 5
+
+#define CS8420_67_CS 524438
+
+#define PCXHR_MASK_IT_HF0 256
+
+#define CS8420_CLOCK_SRC_CTL 2098177
+
+#define PCXHR_MASK_IT_HF1 512
+
+#define MIXART_STREAM_STATUS_PAUSE 4
+
+#define OCON_NUM 7
+
+#define M4_MARKER 16
+
+#define E_SOURCE_COBRANET 14336
+
+#define MAX_AVTAB_HASH_BUCKETS 65536
+
+#define WU_IRQ_STS 1
+
+#define AFOU 2048
+
+#define PCXHR_IRQCS_ENABLE_PCIIRQ 256
+
+#define OCON_ISID 0
+
+#define CFQ_SERVICE_SHIFT 12
+
+#define SLAB_DEBUG_FLAGS 0
+
+#define SI3054_LINE_RATE 3
+
+#define MSG_FROM_AGENT_ITMF_OFFSET 819300
+
+#define AZX_DCAPS_PM_RUNTIME 67108864
+
+#define CFQ_SLICE_SCALE 5
+
+#define AA_CLASS_DOMAIN 6
+
+#define FSROOT_MNT 8
+
+#define A3D_B_ITDCurrent 102880
+
+#define PCXHR_FREQ_QUARTZ_128000 18
+
+#define OP_ACTION_NOOP 64
+
+#define SI3054_GPIO_CFG 5
+
+#define OP_ACTION_INDEX 16
+
+#define UDIV_TIME 1
+
+#define BaseA2_out 184
+
+#define YDSXGR_GPIOININTENABLE 82
+
+#define MAX_BUF_SIZE 512
+
+#define IER 220
+
+#define MAGIC_VBLK 1447185483
+
+#define AKM_CLOCK_INF_55K_CMD 41536
+
+#define VORTEX_FIFO_ADBCTRL 90368
+
+#define PCXHR_DIGITAL_LEVEL_MAX 511
+
+#define PCXHR_IRQ_TIMER 768
+
+#define MIXART_HOST_ALL_INTERRUPT_MASKED 43
+
+#define REG_STATUS_SYNC_44100 1
+
+#define AZX_DCAPS_POSFIX_VIA 131072
+
+#define ED_DSP_CRASHED_EXC_FATAL_ERROR 41014
+
+#define A3D_B_TAIL 103112
+
+#define MIXART_PSEUDOREG_MXLX_SIZE_OFFSET 8352
+
+#define SI3054_SQ_CONTROL 18
+
+#define SE_SBGENFS 1024
+
+#define PCXHR_IRQ_MASK 47872
+
+#define VORTEX_SRC_U0 159232
+
+#define PCXHR_SUER_BIT_U_READ_MASK 8
+
+#define VORTEX_SRC_U1 159488
+
+#define POLICYDB_VERSION_IPV6 17
+
+#define VORTEX_SRC_U2 159616
+
+#define REG_STATUS_OPT_NO_DAUGHTER 28
+
+#define MAC_STATUS_BOOTABLE 8
+
+#define AA_MAY_META_READ 128
+
+#define YDSXGR_NATIVEDACINVOL 172
+
+#define ATIHDMI_NUM_CAPTURE 0
+
+#define ED_GN 40960
+
+#define HASHTAB_MAX_NODES 4294967295
+
+#define SI3054_CALLPROG_ATT 17
+
+#define VLI_MAX 0
+
+#define MAX_DISTANCE 65535
+
+#define WS1_CTRL 16384
+
+#define MPU401_RESET 255
+
+#define CFQQ_CLOSE_THR 8192
+
+#define ICH6_NUM_PLAYBACK 4
+
+#define PCXHR_DSP_RXM 24
+
+#define PCXHR_DSP_RXL 28
+
+#define PCXHR_DSP_RXH 20
+
+#define A3D_SLICE_Control 105528
+
+#define PCXHR_MASK_IT_WAIT 65536
+
+#define FSTRANS_MNT 16
+
+#define DEFAULT_SOURCE 1
+
+#define YDSXG_DEFAULT_WORK_SIZE 1024
+
+#define E_SOURCE_AUDIO 6144
+
+#define CS4271_AB_CS 1441821
+
+#define VORTEX_SRC_CONVRATIO 159296
+
+#define ALLOC_HARDER 16
+
+#define WS3_CTRL 64
+
+#define AXIS_SIZE 4
+
+#define CS_DMIC1_PIN_NID 14
+
+#define AVTAB_XPERMS_IOCTLDRIVER 2
+
+#define MICROBLAZE_IBL_MAX 512
+
+#define YMFPCI_LEGACY_SDMA 192
+
+#define AA_MAY_CHANGE_PROFILE 2147483648
+
+#define AVTAB_XPERMS_DONTAUDIT 1024
+
+#define OP_ACTION_DATA 32
+
+#define LZ4_ARCH64 0
+
+#define ECS 4
+
+#define OFFSET_MASK 4095
+
+#define DFA_FLAG_VERIFY_STATES 4096
+
+#define HR222_LINE_PLAYBACK_LEVEL_MIN 0
+
+#define SMK_LABELLEN 24
+
+#define CFQ_RQ1_WRAP 1
+
+#define OPS_MAX 26
+
+#define STAT_IRQ 1
+
+#define SI3054_GPIO_STICKY 7
+
+#define DEFAULT_TARGET_LOW_HIGH 6
+
+#define ATI_VERB_SET_AUDIO_DESCRIPTOR 1910
+
+#define CEXPR_MAXDEPTH 5
+
+#define PCIR_DSXG_PWRCTRL2 78
+
+#define PCIR_DSXG_PWRCTRL1 74
+
+#define HDA_CFG_BAR0 4112
+
+#define START 3
+
+#define YYTD_ID_BASE 1
+
+#define REG_STATUS_SYNC_88200 4
+
+#define CS4271_MODE_CTL_2 2098945
+
+#define CS4271_MODE_CTL_1 2097409
+
+#define PCXHR_XLX_HIFREQ 56
+
+#define EB_CONTROL_CMD_IMPOSSIBLE 49950
+
+#define COND_EQ 6
+
+#define EB_CSN_REFUSED 50430
+
+#define REG_CONT_VALSMPTE 2048
+
+#define YDSXGR_PRISTATUSDATA 100
+
+#define VALID_AUDIO_IO_DIGITAL_LEVEL 1
+
+#define YDSXGR_SPDIFLOOPVOLL 188
+
+#define NR_MIXIN 32
+
+#define YDSXGR_SPDIFLOOPVOLR 190
+
+#define MIXART_STREAM_STATUS_OPEN 1
+
+#define PCXHR_ISR_HI08_CHK 16
+
+#define YYTD_ID_NXT 7
+
+#define MIXART_STREAM_STATUS_FREE 0
+
+#define PCXHR_IRQCS_ENABLE_PCIDB 512
+
+#define SI3054_EXTENDED_MID 2
+
+#define PCIR_DSXG_LEGACY 64
+
+#define OFFSET_SRCIN 64
+
+#define MIXART_AUDIO_LEVEL_MUTE_MASK 8
+
+#define EAP 512
+
+#define IMA_EVENT_NAME_LEN_MAX 255
+
+#define AA_CLASS_CAP 3
+
+#define PCIR_DSXG_MPU401BASE 100
+
+#define E_CLASS_GENERAL 0
+
+#define PCXHR_ICR_HI08_TREQ 2
+
+#define UPLD_IIC 1
+
+#define IMA_PERMIT_DIRECTIO 67108864
+
+#define ALLOC_FAIR 256
+
+#define COND_NEQ 7
+
+#define ED_READ_FILE_INVALID_COMMAND 41003
+
+#define SMACK_CIPSO_DIRECT_DEFAULT 250
+
+#define MAXD 65536
+
+#define SI3054_CHIPID_DAA_REV_MASK 240
+
+#define MIXART_AESEBUBOARD_XLX_INDEX 2
+
+#define EC2S 2
+
+#define ENOUGH 2048
+
+#define IMA_AUDIT 64
+
+#define E_CLASS_BAD_SPECIFIC_PARAMETER 1280
+
+#define YDSXGR_SPDIFINSTATUS 56
+
+#define IRQ_PARITY 2
+
+#define ED_CANNOT_OPEN_SVC_MANAGER 40965
+
+#define ALIGN_BITS 4
+
+#define KEY_LOOKUP_PARTIAL 2
+
+#define VORTEX_FIFO_GIRT 94208
+
+#define SECCLASS_NULL 0
+
+#define EB_TOO_MANY_DIFFERED_CMD 49924
+
+#define STREAM_FMT_OFFSET 10
+
+#define LEN_HIGH_BITS 8
+
+#define EC3S 2
+
+#define VLI_UNKNOWN -1
+
+#define AUTO_CFG_MAX_INS 8
+
+#define KASAN_FREE_PAGE 255
+
+#define MSDOS_MBR_SIGNATURE 43605
+
+#define YDSXGR_ZVOUTVOLL 136
+
+#define YDSXGR_STATUS 256
+
+#define PCXHR_CFG_CLOCKIN_SEL_MASK 1
+
+#define SMACK_CIPSO_MAXCATNUM 184
+
+#define ACC_IRQ_STATUS 18
+
+#define E_CLASS_DIRECTSHOW 1792
+
+#define PCXHR_IT_MESSAGE 1140
+
+#define MAY_BRINGUP 16384
+
+#define CS8420_DATA_FLOW_CTL 2097921
+
+#define EC4S 4
+
+#define PCXHR_SIZE_MAX_CMD 8
+
+#define AKM_POWER_CONTROL_CMD 40967
+
+#define PCXHR_XLX_CSUER 60
+
+#define YDSXGR_ZVOUTVOLR 138
+
+#define CONFES_WRITE_PART_MASK 16252928
+
+#define ATI_DELAY_VIDEO_LATENCY 255
+
+#define SND_PRINT_RATES_ADVISED_BUFSIZE 80
+
+#define ED_FLASH_PCCARD_NOT_PRESENT 41015
+
+#define ZONE_RECLAIM_SUCCESS 1
+
+#define YDSXGR_LEGACYLOOPVOLR 150
+
+#define EC5S 8
+
+#define PCXHR_CFG_DEPENDENCY_MASK 96
+
+#define ED_RS232_ALREADY_OPENED 40996
+
+#define YDSXGR_LEGACYLOOPVOLL 148
+
+#define PCXHR_MODIFY_CLOCK_S_BIT 4
+
+#define ED_NET_THREAD_ERROR 40982
+
+#define IRQ_PCMOUT 32
+
+#define IMA_DIGSIG_REQUIRED 33554432
+
+#define IMA_BPRM_APPRAISE 4096
+
+#define FINISH_STATE 666
+
+#define SECURITY_FS_USE_GENFS 4
+
+#define LDM_DB_SIZE 2048
+
+#define AA_MAY_META_WRITE 64
+
+#define SI3054_GPIO_CID 2
+
+#define AVC_CALLBACK_RESET 8
+
+#define PCIR_DSXG_JOYBASE 102
+
+#define MIXART_NOTIFY_SUBS_MASK 127
+
+#define MICROBLAZE_IBL_MIN 32
+
+#define YDSXGR_ZVCTRL 10
+
+#define OCON_NODE6 6
+
+#define NR_WT 64
+
+#define MIXART_MAX_STREAM_PER_CARD 10
+
+#define D_BITS 13
+
+#define ED_NET_NO_MORE_BUFFER 40986
+
+#define EN_MODEM 3072
+
+#define TOMOYO_MAX_PROFILES 256
+
+#define MAX_BITS 15
+
+#define ED_READ_FILE_ALREADY_CLOSED 41005
+
+#define PCXHR_CFG_MASTER_SEL 64
+
+#define TPM_DEBUG 0
+
+#define VORTEX_MIX_SMP 138240
+
+#define ED_NET_RECEIVE_ERROR 40988
+
+#define ED_RT 42496
+
+#define CS_COEF_ADC_MIC_SZC_MODE 3
+
+#define SIDTAB_HASH_BUCKETS 128
+
+#define EC0S 1
+
+#define YDSXGR_P44SLOTSR 208
+
+#define XZ_CHECK_MAX 15
+
+#define MAX_AVTAB_HASH_BITS 16
+
+#define ACC_BM0_CMD 32
+
+#define OFFSET_WT1 128
+
+#define OFFSET_WT0 64
+
+#define PCXHR_FREQ_QUARTZ_64000 26
+
+#define PCXHR_XLX_CFG 36
+
+#define EB_WCC 50176
+
+#define PCXHR_LINE_CAPTURE_LEVEL_MIN 0
+
+#define REPEAT_BITS 6
+
+#define SI3054_MISC_AFE 11
+
+#define CS421X_DMIC_PIN_NID 9
+
+#define SYM_USERS 4
+
+#define AZX_DCAPS_I915_POWERWELL 134217728
+
+#define ATI_SB450_HDAUDIO_MISC_CNTR2_ADDR 66
+
+#define VIA_HDAC_DEVICE_ID 12936
+
+#define MIXART_FLOWTABLE_PTR 12288
+
+#define EC1S 1
+
+#define SMACK_AUDIT_ACCEPT 2
+
+#define OP_ACTION 112
+
+#define MIXART_OIDI 8
+
+#define PCXHR_DSP_RESET_GPO_OFFSET 5
+
+#define E_CLASS_RSRC_IMPOSSIBLE 768
+
+#define MAC_PARTITION_MAGIC 20557
+
+#define TPM_DATA_OFFSET 10
+
+#define SYM_LEVELS 6
+
+#define MIXART_PSEUDOREG_PERF_INTERR_LOAD_OFFSET 8308
+
+#define PCXHR_SIZE_MAX_STATUS 16
+
+#define POLICYDB_VERSION_VALIDATETRANS 19
+
+#define CS421X_IDX_DAC_CFG 3
+
+#define RC_SHIFT_BITS 8
+
+#define VORTEX_SRC_SOURCE 158916
+
+#define ACON1 244
+
+#define ACON2 248
+
+#define IMA_FILE_APPRAISED 512
+
+#define IMA_BPRM_APPRAISED 8192
+
+#define PCXHR_FIRMWARE_DSP_BOOT_INDEX 3
+
+#define YMFPCI_LEGACY2_SBVER 24576
+
+#define EB_CMD_REFUSED 50176
+
+#define VORTEX_SRC_CHNBASE 158784
+
+#define IOCR_OUTPUTS_OFFSET 0
+
+#define PageA2_out 192
+
+#define IRQ_STS 0
+
+#define A2_out 16384
+
+#define LEN_LOW_SYMBOLS 8
+
+#define AZX_DCAPS_NO_MSI 512
+
+#define VORTEX_PCM_LAST 5
+
+#define OFFSET_AC98OUT 148
+
+#define KEY_LOOKUP_FOR_UNLINK 4
+
+#define AA_LINK_SUBSET 1024
+
+#define PCXHR_FIRMWARE_DSP_EPRM_INDEX 2
+
+#define MIXART_PLAYBACK_STREAMS 4
+
+#define FB_BUFFER1 324
+
+#define FB_BUFFER2 328
+
+#define POS_MASK 4095
+
+#define VORTEX_CTRL2 165900
+
+#define ACC_CODEC_STATUS 8
+
+#define REG_STATUS_CURRENT 128
+
+#define CODE_MASK 255
+
+#define YDSXGR_NATIVEADCINVOL 168
+
+#define MSG_OUTBOUND_FREE_HEAD 65552
+
+#define ERROR_MASK 32768
+
+#define POLICYDB_VERSION_AVTAB 20
+
+#define IE_MASK 4096
+
+#define PCXHR_CFG_SRC_MASK 4
+
+#define MAY_UNLINK 1
+
+#define PACKED_MODE_COMPLAIN 1
+
+#define TIME_CODE_VALID_MASK 8388608
+
+#define MIXART_PCM_TOTAL 2
+
+#define VORTEX_ADB_RTBASE_COUNT 173
+
+#define PCXHR_CFG_DATA_UER1_SEL_MASK 16
+
+#define PCXHR_FREQ_QUARTZ_32000 8
+
+#define AA_X_TYPE_MASK 3072
+
+#define HDA_PINCFG_NO_LO_FIXUP 2
+
+#define INTEGRITY_KEYRING_MODULE 1
+
+#define PCXHR_SUER_BIT_C_WRITE_MASK 1
+
+#define VORTEX_SMP_TIME 168344
+
+#define CEXPR_NEQ 2
+
+#define CEXPR_TYPE 4
+
+#define INTEL_SCH_HDA_DEVC 120
+
+#define AVTAB_AUDITDENY 4
+
+#define STS_NEW 131072
+
+#define PCXHR_CHIPSC_GPI_USERI 131072
+
+#define VORTEX_ADBDMA_STAT 163328
+
+#define PCXHR_CHIPSC_DATA_IN 67108864
+
+#define MC1 252
+
+#define AF1_in 256
+
+#define PCXHR_ICR_HI08_INIT 128
+
+#define OCON_NETIF 3
+
+#define AA_SECURE_X_NEEDED 32768
+
+#define MC2 256
+
+#define CFQ_HW_QUEUE_MIN 5
+
+#define ED_XILINX_ERROR 42503
+
+#define PCXHR_FREQ_QUARTZ_12000 9
+
+#define EB_RBUFFERS_TABLE_OVERFLOW 49925
+
+#define WS2_SYNC 256
+
+#define PCXHR_DSP_IVR 12
+
+#define MASK_DSP_unsigned short_LEVEL 511
+
+#define YMFPCI_LEGACY_SBIRQ 1792
+
+#define SI3054_LINE_LEVEL 4
+
+#define CTRLID_ITD 2
+
+#define AVTAB_XPERMS_IOCTLFUNCTION 1
+
+#define ProtA2_out 188
+
+#define CTRL2_GAME_ADCMODE 64
+
+#define YDSXGR_NATIVEDACINVOLR 174
+
+#define YDSXGR_NATIVEDACINVOLL 172
+
+#define HEADER_FMT_MONO 128
+
+#define SI3054_RING_CTRL2 21
+
+#define SI3054_RING_CTRL1 20
+
+#define selinux_enforcing 1
+
+#define PCXHR_SELMIC_PHANTOM_ALIM 128
+
+#define M2_MAX_OFFSET 2048
+
+#define PCXHR_DSP_ISR 8
+
+#define MSG_OUTBOUND_POST_HEAD 65560
+
+#define PCXHR_DSP_RESET_SMPTE 16
+
+#define HEADER_MAGIC_SIZE 6
+
+#define ED_INVALID_SERVICE 41001
+
+#define IMA_APPRAISE_FIRMWARE 16
+
+#define PCXHR_FIRMWARE_DSP_MAIN_INDEX 4
+
+#define A3D_B_B2Target 102652
+
+#define CS5535AUDIO_MAX_DESCRIPTORS 128
+
+#define M4_MIN_LEN 3
+
+#define VBLK_FLAG_VOLU_SIZE 128
+
+#define PCXHR_SOURCE_AUDIO45_UER 4096
+
+#define LEN_LOW_BITS 3
+
+#define MAGIC_TOCBLOCK 6075148374373253963
+
+#define IMA_HASH_BITS 9
+
+#define PCXHR_FREQ_PLL 5
+
+#define FREQ_RATIO_SINGLE_MODE 1
+
+#define BCLK2_OEN 262144
+
+#define PCXHR_MASK_IT_WAIT_EXTRA 131072
+
+#define VBLK_CMP3 50
+
+#define KEYRING_SEARCH_DETECT_TOO_DEEP 16
+
+#define PCXHR_PLX_IRQCS 104
+
+#define COND_AND 4
+
+#define OP_END 30
+
+#define INTEGRITY_KEYRING_IMA 2
+
+#define AVC_EXTENDED_PERMS 2
+
+#define PCXHR_PIPE_STATE_CAPTURE_OFFSET 12
+
+#define HASHTABLESIZE 32768
+
+#define PCXHR_LINE_CAPTURE_LEVEL_MAX 255
+
+#define AZX_DCAPS_CTX_WORKAROUND 32768
+
+#define FIFO_CTRL 2
