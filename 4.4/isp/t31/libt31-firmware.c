@@ -28,25 +28,25 @@ int **pop_buffer_fifo(int **param_1) {
     return NULL;
 }
 
-undefined4 tx_isp_vic_start(int param_1)
+int tx_isp_vic_start(int param_1)
 
 {
   bool bVar1;
   int iVar2;
   undefined *puVar3;
   uint uVar4;
-  undefined4 uVar5;
-  undefined4 *puVar6;
+  int uVar5;
+  int *puVar6;
   int iVar7;
   uint uVar8;
   char *pcVar9;
-  undefined4 uVar10;
+  int uVar10;
   
   iVar2 = *(int *)(*(int *)(param_1 + 0x110) + 0x14);
   if (iVar2 == 1) {
     if (*(int *)(*(int *)(param_1 + 0x110) + 0x18) == 1) {
       isp_printf(1,"sensor type is SONY_MIPI!\n");
-      *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x10) = 0x20000;
+      *(int *)(*(int *)(param_1 + 0xb8) + 0x10) = 0x20000;
       iVar2 = *(int *)(param_1 + 0xb8);
       puVar3 = (undefined *)0x100010;
     }
@@ -64,9 +64,9 @@ undefined4 tx_isp_vic_start(int param_1)
     }
     uVar4 = iVar2 * *(int *)(*(int *)(param_1 + 0x110) + 0x2c);
     *(uint *)(*(int *)(param_1 + 0xb8) + 0x100) = (uVar4 >> 5) + (uint)((uVar4 & 0x1f) != 0);
-    *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0xc) = 2;
-    *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x14) =
-         *(undefined4 *)(*(int *)(param_1 + 0x110) + 0x7c);
+    *(int *)(*(int *)(param_1 + 0xb8) + 0xc) = 2;
+    *(int *)(*(int *)(param_1 + 0xb8) + 0x14) =
+         *(int *)(*(int *)(param_1 + 0x110) + 0x7c);
     *(uint *)(*(int *)(param_1 + 0xb8) + 4) =
          *(int *)(param_1 + 0xdc) << 0x10 | *(uint *)(param_1 + 0xe0);
     iVar2 = *(int *)(param_1 + 0x110);
@@ -90,8 +90,8 @@ undefined4 tx_isp_vic_start(int param_1)
       iVar2 = *(int *)(param_1 + 0xb8);
       uVar5 = 0x4440;
 LAB_0001028c:
-      *(undefined4 *)(iVar2 + 0x1ac) = uVar5;
-      *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1a8) = uVar5;
+      *(int *)(iVar2 + 0x1ac) = uVar5;
+      *(int *)(*(int *)(param_1 + 0xb8) + 0x1a8) = uVar5;
       iVar2 = *(int *)(param_1 + 0xb8);
     }
     else {
@@ -108,9 +108,9 @@ LAB_0001028c:
       isp_printf(2,"Can not support this frame mode!!!\n");
       iVar2 = *(int *)(param_1 + 0xb8);
     }
-    *(undefined4 *)(iVar2 + 0x1b0) = 0x10;
-    **(undefined4 **)(param_1 + 0xb8) = 2;
-    **(undefined4 **)(param_1 + 0xb8) = 4;
+    *(int *)(iVar2 + 0x1b0) = 0x10;
+    **(int **)(param_1 + 0xb8) = 2;
+    **(int **)(param_1 + 0xb8) = 4;
     *(uint *)(*(int *)(param_1 + 0xb8) + 0x1a0) =
          *(int *)(*(int *)(param_1 + 0x110) + 0x74) << 4 |
          *(uint *)(*(int *)(param_1 + 0x110) + 0x78);
@@ -122,7 +122,7 @@ LAB_0001028c:
     *(uint *)(*(int *)(param_1 + 0xb8) + 0x108) =
          CONCAT22(*(undefined2 *)(*(int *)(param_1 + 0x110) + 0x5a),
                   *(undefined2 *)(*(int *)(param_1 + 0x110) + 0x56));
-    puVar6 = *(undefined4 **)(param_1 + 0xb8);
+    puVar6 = *(int **)(param_1 + 0xb8);
 LAB_00010620:
     *puVar6 = 1;
   }
@@ -130,18 +130,18 @@ LAB_00010620:
     if (iVar2 != 5) {
       if (iVar2 == 4) {
         isp_printf(0,"sensor type is BT656!\n");
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0xc) = 0;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0xc) = 0;
         if (*(int *)(*(int *)(param_1 + 0x110) + 0x18) != 0) goto LAB_000103e4;
         *(uint *)(*(int *)(param_1 + 0xb8) + 4) =
              *(int *)(param_1 + 0xdc) << 0x10 | *(uint *)(param_1 + 0xe0);
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0xc) = 0;
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x10) = 0x800c0000;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0xc) = 0;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0x10) = 0x800c0000;
         *(int *)(*(int *)(param_1 + 0xb8) + 0x18) = *(int *)(param_1 + 0xdc) << 1;
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1a4) = 0x100010;
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1ac) = 0x4440;
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1d0) = 0x200;
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1d4) = 0x200;
-        puVar6 = *(undefined4 **)(param_1 + 0xb8);
+        *(int *)(*(int *)(param_1 + 0xb8) + 0x1a4) = 0x100010;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0x1ac) = 0x4440;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0x1d0) = 0x200;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0x1d4) = 0x200;
+        puVar6 = *(int **)(param_1 + 0xb8);
         goto LAB_000104a8;
       }
       if (iVar2 != 3) {
@@ -149,7 +149,7 @@ LAB_00010620:
           isp_printf(1,"%s[%d] do not support this interface\n","tx_isp_vic_start",0x1d6);
           return 0xffffffff;
         }
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0xc) = 3;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0xc) = 3;
         uVar4 = *(uint *)(param_1 + 0xe4);
         if (0x300f < uVar4) {
           if (0x310f < uVar4) {
@@ -285,25 +285,25 @@ LAB_00010858:
              *(int *)(*(int *)(param_1 + 0x110) + 0x28) << 0x1f | uVar8;
         *(uint *)(*(int *)(param_1 + 0xb8) + 4) =
              *(int *)(param_1 + 0xdc) << 0x10 | *(uint *)(param_1 + 0xe0);
-        **(undefined4 **)(param_1 + 0xb8) = 2;
-        **(undefined4 **)(param_1 + 0xb8) = 4;
+        **(int **)(param_1 + 0xb8) = 2;
+        **(int **)(param_1 + 0xb8) = 4;
         do {
         } while (**(int **)(param_1 + 0xb8) != 0);
         **(int **)(param_1 + 0xb8) = 1;
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1a4) = 0x100010;
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1ac) = 0x4210;
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1b0) = 0x10;
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1b4) = 0;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0x1a4) = 0x100010;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0x1ac) = 0x4210;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0x1b0) = 0x10;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0x1b4) = 0;
         iVar2 = *(int *)(param_1 + 0x110);
         goto LAB_0001098c;
       }
       isp_printf(0,"sensor type is BT601!\n");
-      *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0xc) = 1;
+      *(int *)(*(int *)(param_1 + 0xb8) + 0xc) = 1;
       iVar2 = *(int *)(*(int *)(param_1 + 0x110) + 0x18);
       if (iVar2 == 0) {
         *(uint *)(*(int *)(param_1 + 0xb8) + 4) =
              *(int *)(param_1 + 0xdc) << 0x10 | *(uint *)(param_1 + 0xe0);
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0xc) = 1;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0xc) = 1;
         iVar2 = *(int *)(param_1 + 0xb8);
         uVar5 = 0x800c8000;
       }
@@ -311,27 +311,27 @@ LAB_00010858:
         if (iVar2 != 1) goto LAB_000103e4;
         *(uint *)(*(int *)(param_1 + 0xb8) + 4) =
              *(int *)(param_1 + 0xdc) << 0x10 | *(uint *)(param_1 + 0xe0);
-        *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0xc) = 1;
+        *(int *)(*(int *)(param_1 + 0xb8) + 0xc) = 1;
         iVar2 = *(int *)(param_1 + 0xb8);
         uVar5 = 0x88060820;
       }
-      *(undefined4 *)(iVar2 + 0x10) = uVar5;
+      *(int *)(iVar2 + 0x10) = uVar5;
       *(uint *)(*(int *)(param_1 + 0xb8) + 0x18) = *(int *)(param_1 + 0xdc) << 1 | 0x100000;
-      *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x3c) = 0x30;
-      *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1c) = 0x1b8;
-      *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x30) = 0x1402d0;
-      *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x34) = 0x50014;
-      *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x38) = 0x2d00014;
-      *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1a0) = 0;
-      *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1a4) = 0x100010;
-      *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1ac) = 0x4440;
-      **(undefined4 **)(param_1 + 0xb8) = 2;
-      isp_printf(0,"VIC_CTRL : %08x\n",**(undefined4 **)(param_1 + 0xb8));
-      puVar6 = *(undefined4 **)(param_1 + 0xb8);
+      *(int *)(*(int *)(param_1 + 0xb8) + 0x3c) = 0x30;
+      *(int *)(*(int *)(param_1 + 0xb8) + 0x1c) = 0x1b8;
+      *(int *)(*(int *)(param_1 + 0xb8) + 0x30) = 0x1402d0;
+      *(int *)(*(int *)(param_1 + 0xb8) + 0x34) = 0x50014;
+      *(int *)(*(int *)(param_1 + 0xb8) + 0x38) = 0x2d00014;
+      *(int *)(*(int *)(param_1 + 0xb8) + 0x1a0) = 0;
+      *(int *)(*(int *)(param_1 + 0xb8) + 0x1a4) = 0x100010;
+      *(int *)(*(int *)(param_1 + 0xb8) + 0x1ac) = 0x4440;
+      **(int **)(param_1 + 0xb8) = 2;
+      isp_printf(0,"VIC_CTRL : %08x\n",**(int **)(param_1 + 0xb8));
+      puVar6 = *(int **)(param_1 + 0xb8);
       goto LAB_00010620;
     }
     isp_printf(0,"sensor type is BT1120!\n");
-    *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0xc) = 4;
+    *(int *)(*(int *)(param_1 + 0xb8) + 0xc) = 4;
     if (*(int *)(*(int *)(param_1 + 0x110) + 0x18) != 0) {
 LAB_000103e4:
       isp_printf(0,"not support the gpio mode!\n");
@@ -339,15 +339,15 @@ LAB_000103e4:
     }
     *(uint *)(*(int *)(param_1 + 0xb8) + 4) =
          *(int *)(param_1 + 0xdc) << 0x10 | *(uint *)(param_1 + 0xe0);
-    *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x10) = 0x800c0000;
+    *(int *)(*(int *)(param_1 + 0xb8) + 0x10) = 0x800c0000;
     *(int *)(*(int *)(param_1 + 0xb8) + 0x18) = *(int *)(param_1 + 0xdc) << 1;
-    *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1a4) = 0x100010;
-    *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1ac) = 0x4440;
-    puVar6 = *(undefined4 **)(param_1 + 0xb8);
+    *(int *)(*(int *)(param_1 + 0xb8) + 0x1a4) = 0x100010;
+    *(int *)(*(int *)(param_1 + 0xb8) + 0x1ac) = 0x4440;
+    puVar6 = *(int **)(param_1 + 0xb8);
 LAB_000104a8:
     *puVar6 = 2;
-    isp_printf(0,"VIC_CTRL : %08x\n",**(undefined4 **)(param_1 + 0xb8));
-    **(undefined4 **)(param_1 + 0xb8) = 1;
+    isp_printf(0,"VIC_CTRL : %08x\n",**(int **)(param_1 + 0xb8));
+    **(int **)(param_1 + 0xb8) = 1;
   }
   uVar5 = 0;
   iVar2 = *(int *)(param_1 + 0x110);
@@ -367,7 +367,7 @@ LAB_0001098c:
 
 
 
-undefined4 ispvic_frame_channel_qbuf(uint param_1,int *param_2)
+int ispvic_frame_channel_qbuf(uint param_1,int *param_2)
 
 {
   int **ppiVar1;
@@ -378,7 +378,7 @@ undefined4 ispvic_frame_channel_qbuf(uint param_1,int *param_2)
   int iVar6;
   int iVar7;
   int iVar8;
-  undefined4 local_18 [2];
+  int local_18 [2];
   
   iVar7 = 0;
   if ((param_1 != 0) && (param_1 < 0xfffff001)) {
@@ -422,7 +422,7 @@ LAB_00010af8:
 
 
 
-undefined4 ispvic_frame_channel_clearbuf(uint param_1)
+int ispvic_frame_channel_clearbuf(uint param_1)
 
 {
   int *piVar1;
@@ -430,7 +430,7 @@ undefined4 ispvic_frame_channel_clearbuf(uint param_1)
   int iVar3;
   int iVar4;
   int *piVar5;
-  undefined4 local_18 [3];
+  int local_18 [3];
   
   iVar4 = 0;
   if ((param_1 != 0) && (param_1 < 0xfffff001)) {
@@ -449,20 +449,20 @@ undefined4 ispvic_frame_channel_clearbuf(uint param_1)
     *piVar1 = 0x100100;
     piVar1[1] = 0x200200;
   }
-  *(undefined4 *)(iVar4 + 0x210) = 0;
-  *(undefined4 *)(iVar4 + 0x214) = 0;
+  *(int *)(iVar4 + 0x210) = 0;
+  *(int *)(iVar4 + 0x214) = 0;
   private_spin_unlock_irqrestore(piVar5,local_18[0]);
   return 0;
 }
 
 
 
-undefined4 tx_isp_vic_probe(int param_1)
+int tx_isp_vic_probe(int param_1)
 
 {
   void *__s;
   int iVar1;
-  undefined4 uVar2;
+  int uVar2;
   int iVar3;
   
   __s = (void *)private_kmalloc(0x21c,0xd0);
@@ -481,7 +481,7 @@ undefined4 tx_isp_vic_probe(int param_1)
       private_raw_mutex_init((int)__s + 0x130,"&vsd->mlock",0x10000);
       private_raw_mutex_init((int)__s + 0x154,"&vsd->snap_mlock",0x10000);
       private_init_completion((int)__s + 0x148);
-      *(undefined4 *)((int)__s + 0x128) = 1;
+      *(int *)((int)__s + 0x128) = 1;
       dump_vsd = __s;
       *(void **)((int)__s + 0xd4) = __s;
       test_addr = (int)__s + 0x80;
@@ -499,10 +499,10 @@ undefined4 tx_isp_vic_probe(int param_1)
 
 
 
-void dump_isp_vic_frd_open(undefined4 param_1,undefined4 param_2)
+void dump_isp_vic_frd_open(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   uVar1 = PDE_DATA();
                     // WARNING: Could not recover jumptable at 0x000194d4. Too many branches
@@ -525,7 +525,7 @@ int isp_vic_frd_show(int param_1)
   if ((uVar1 != 0) && (uVar1 < 0xfffff001)) {
     uVar1 = *(uint *)(uVar1 + 0xd4);
     if ((uVar1 != 0) && (uVar1 < 0xfffff001)) {
-      *(undefined4 *)(uVar1 + 0x164) = 0;
+      *(int *)(uVar1 + 0x164) = 0;
       iVar2 = 0;
       iVar4 = 0;
       do {
@@ -534,7 +534,7 @@ int isp_vic_frd_show(int param_1)
         iVar4 = iVar4 + *piVar3;
       } while (iVar2 != 0x34);
       *(int *)(uVar1 + 0x164) = iVar4;
-      iVar2 = private_seq_printf(param_1," %d, %d\n",*(undefined4 *)(uVar1 + 0x160));
+      iVar2 = private_seq_printf(param_1," %d, %d\n",*(int *)(uVar1 + 0x160));
       iVar4 = private_seq_printf(param_1,"%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n",
                                  vic_err,DAT_000b2134,DAT_000b2138,DAT_000b213c,DAT_000b2140,
                                  DAT_000b2144,DAT_000b2148,DAT_000b214c,DAT_000b2150,DAT_000b2154,
@@ -548,10 +548,10 @@ int isp_vic_frd_show(int param_1)
 
 
 
-undefined4 tx_isp_vic_activate_subdev(uint param_1)
+int tx_isp_vic_activate_subdev(uint param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   uint uVar2;
   
   uVar1 = 0xffffffea;
@@ -564,7 +564,7 @@ undefined4 tx_isp_vic_activate_subdev(uint param_1)
     if ((uVar2 != 0) && (uVar2 < 0xfffff001)) {
       private_mutex_lock(uVar2 + 0x130);
       if (*(int *)(uVar2 + 0x128) == 1) {
-        *(undefined4 *)(uVar2 + 0x128) = 2;
+        *(int *)(uVar2 + 0x128) = 2;
       }
       private_mutex_unlock(uVar2 + 0x130);
       uVar1 = 0;
@@ -575,12 +575,12 @@ undefined4 tx_isp_vic_activate_subdev(uint param_1)
 
 
 
-undefined4 vic_sensor_ops_ioctl(uint param_1,undefined4 param_2,short *param_3)
+int vic_sensor_ops_ioctl(uint param_1,int param_2,short *param_3)
 
 {
   short sVar1;
-  undefined4 uVar2;
-  undefined4 *puVar3;
+  int uVar2;
+  int *puVar3;
   int iVar4;
   uint uVar5;
   int iVar6;
@@ -610,13 +610,13 @@ switchD_00010fe4_caseD_200000d:
     uVar2 = 0;
     break;
   case 0x200000e:
-    puVar3 = *(undefined4 **)(uVar5 + 0xb8);
+    puVar3 = *(int **)(uVar5 + 0xb8);
     uVar2 = 0x10;
     goto LAB_00011020;
   case 0x2000013:
     uVar2 = 4;
-    **(undefined4 **)(uVar5 + 0xb8) = 0;
-    puVar3 = *(undefined4 **)(uVar5 + 0xb8);
+    **(int **)(uVar5 + 0xb8) = 0;
+    puVar3 = *(int **)(uVar5 + 0xb8);
 LAB_00011020:
     *puVar3 = uVar2;
     uVar2 = 0;
@@ -660,7 +660,7 @@ LAB_00011020:
 
 
 
-undefined4 vic_sensor_ops_sync_sensor_attr(uint param_1,int param_2)
+int vic_sensor_ops_sync_sensor_attr(uint param_1,int param_2)
 
 {
   code *pcVar1;
@@ -694,7 +694,7 @@ void dump_vic_reg(int param_1)
   iVar1 = *(int *)(param_1 + 0xb8);
   iVar2 = 0;
   while( true ) {
-    isp_printf(1,"register is 0x%x, value is 0x%x\n",iVar2,*(undefined4 *)(iVar1 + iVar2));
+    isp_printf(1,"register is 0x%x, value is 0x%x\n",iVar2,*(int *)(iVar1 + iVar2));
     if (iVar2 + 4 == 0x1b4) break;
     iVar1 = *(int *)(param_1 + 0xb8);
     iVar2 = iVar2 + 4;
@@ -718,7 +718,7 @@ void tx_vic_enable_irq(void)
 
 {
   uint uVar1;
-  undefined4 local_18 [3];
+  int local_18 [3];
   
   uVar1 = 0;
   if ((dump_vsd != 0) && (uVar1 = dump_vsd, 0xfffff000 < dump_vsd)) {
@@ -728,7 +728,7 @@ void tx_vic_enable_irq(void)
   if ((uVar1 != 0) && (uVar1 < 0xfffff001)) {
     __private_spin_lock_irqsave(dump_vsd + 0x130,local_18);
     if (*(int *)(dump_vsd + 0x13c) == 0) {
-      *(undefined4 *)(dump_vsd + 0x13c) = 1;
+      *(int *)(dump_vsd + 0x13c) = 1;
       if (*(code **)(uVar1 + 0x84) != (code *)0x0) {
         (**(code **)(uVar1 + 0x84))(uVar1 + 0x80);
       }
@@ -744,7 +744,7 @@ void tx_vic_disable_irq(void)
 
 {
   uint uVar1;
-  undefined4 local_18;
+  int local_18;
   int local_14;
   
   uVar1 = 0;
@@ -756,7 +756,7 @@ void tx_vic_disable_irq(void)
   if ((uVar1 != 0) && (uVar1 < 0xfffff001)) {
     __private_spin_lock_irqsave(dump_vsd + 0x130,&local_18);
     if ((local_14 == 0) && (*(int *)(dump_vsd + 0x13c) != 0)) {
-      *(undefined4 *)(dump_vsd + 0x13c) = 0;
+      *(int *)(dump_vsd + 0x13c) = 0;
       if (*(code **)(uVar1 + 0x88) != (code *)0x0) {
         (**(code **)(uVar1 + 0x88))(uVar1 + 0x80);
       }
@@ -768,10 +768,10 @@ void tx_vic_disable_irq(void)
 
 
 
-undefined4 vic_core_s_stream(uint param_1,int param_2)
+int vic_core_s_stream(uint param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   uint uVar2;
   
   uVar1 = 0xffffffea;
@@ -785,7 +785,7 @@ undefined4 vic_core_s_stream(uint param_1,int param_2)
       if (param_2 == 0) {
         uVar1 = 0;
         if (*(int *)(uVar2 + 0x128) == 4) {
-          *(undefined4 *)(uVar2 + 0x128) = 3;
+          *(int *)(uVar2 + 0x128) = 3;
         }
       }
       else {
@@ -793,7 +793,7 @@ undefined4 vic_core_s_stream(uint param_1,int param_2)
         if (*(int *)(uVar2 + 0x128) != 4) {
           tx_vic_disable_irq(0x5310000);
           uVar1 = tx_isp_vic_start(uVar2);
-          *(undefined4 *)(uVar2 + 0x128) = 4;
+          *(int *)(uVar2 + 0x128) = 4;
           tx_vic_enable_irq(0x5310000);
         }
       }
@@ -804,14 +804,14 @@ undefined4 vic_core_s_stream(uint param_1,int param_2)
 
 
 
-undefined4 vic_core_ops_init(uint param_1,int param_2)
+int vic_core_ops_init(uint param_1,int param_2)
 
 {
   int iVar1;
   code *pcVar2;
-  undefined4 uVar3;
+  int uVar3;
   int iVar4;
-  undefined4 uVar5;
+  int uVar5;
   
   if ((param_1 == 0) || (0xfffff000 < param_1)) {
     isp_printf(2,"The parameter is invalid!\n");
@@ -836,17 +836,17 @@ undefined4 vic_core_ops_init(uint param_1,int param_2)
     }
     uVar3 = 0;
     (*pcVar2)(0x5310000);
-    *(undefined4 *)(iVar4 + 0x128) = uVar5;
+    *(int *)(iVar4 + 0x128) = uVar5;
   }
   return uVar3;
 }
 
 
 
-undefined4 tx_isp_vic_slake_subdev(uint param_1)
+int tx_isp_vic_slake_subdev(uint param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   uint uVar3;
   
@@ -868,7 +868,7 @@ undefined4 tx_isp_vic_slake_subdev(uint param_1)
       }
       private_mutex_lock(uVar3 + 0x130);
       if (*(int *)(uVar3 + 0x128) == 2) {
-        *(undefined4 *)(uVar3 + 0x128) = 1;
+        *(int *)(uVar3 + 0x128) = 1;
       }
       private_mutex_unlock(uVar3 + 0x130);
       uVar1 = 0;
@@ -879,7 +879,7 @@ undefined4 tx_isp_vic_slake_subdev(uint param_1)
 
 
 
-void vic_mdma_enable(int param_1,undefined4 param_2,int param_3,uint param_4,int param_5,
+void vic_mdma_enable(int param_1,int param_2,int param_3,uint param_4,int param_5,
                     byte param_6)
 
 {
@@ -903,7 +903,7 @@ void vic_mdma_enable(int param_1,undefined4 param_2,int param_3,uint param_4,int
     vic_mdma_ch1_sub_get_num = param_4;
   }
   vic_mdma_ch0_sub_get_num = param_4;
-  *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x308) = 1;
+  *(int *)(*(int *)(param_1 + 0xb8) + 0x308) = 1;
   *(uint *)(*(int *)(param_1 + 0xb8) + 0x304) =
        *(int *)(param_1 + 0xdc) << 0x10 | *(uint *)(param_1 + 0xe0);
   *(int *)(*(int *)(param_1 + 0xb8) + 0x310) = iVar4;
@@ -956,7 +956,7 @@ void vic_mdma_enable(int param_1,undefined4 param_2,int param_3,uint param_4,int
 
 // WARNING: Restarted to delay deadcode elimination for space: register
 
-uint isp_vic_cmd_set(int param_1,undefined4 param_2,uint param_3)
+uint isp_vic_cmd_set(int param_1,int param_2,uint param_3)
 
 {
   char cVar1;
@@ -971,22 +971,22 @@ uint isp_vic_cmd_set(int param_1,undefined4 param_2,uint param_3)
   char *pcVar10;
   int iVar11;
   char cVar12;
-  undefined4 uVar13;
+  int uVar13;
   uint uVar14;
   uint uVar15;
   int iVar16;
-  undefined4 uVar17;
+  int uVar17;
   char acStack_90 [64];
-  undefined4 local_50;
+  int local_50;
   uint local_4c;
   undefined *local_48;
   uint local_44;
   code *local_40;
-  undefined4 local_3c;
+  int local_3c;
   undefined *local_38;
   undefined *local_34;
   code *local_30;
-  undefined4 local_2c;
+  int local_2c;
   
   iVar16 = *(int *)(param_1 + 0x70);
   uVar3 = *(uint *)(iVar16 + 0x3c);
@@ -1236,7 +1236,7 @@ LAB_00011fa4:
 LAB_00011fa8:
   if (iVar16 != 0) {
     isp_free_buffer();
-    *(undefined4 *)(uVar14 + 0x140) = 0;
+    *(int *)(uVar14 + 0x140) = 0;
   }
 LAB_00011fc8:
   if (local_44 == 0) {
@@ -1267,7 +1267,7 @@ void vic_pipo_mdma_enable(int param_1)
   int iVar1;
   
   iVar1 = *(int *)(param_1 + 0xdc);
-  *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x308) = 1;
+  *(int *)(*(int *)(param_1 + 0xb8) + 0x308) = 1;
   iVar1 = iVar1 << 1;
   *(uint *)(*(int *)(param_1 + 0xb8) + 0x304) =
        *(int *)(param_1 + 0xdc) << 0x10 | *(uint *)(param_1 + 0xe0);
@@ -1278,13 +1278,13 @@ void vic_pipo_mdma_enable(int param_1)
 
 
 
-undefined4 ispvic_frame_channel_s_stream(uint param_1,int param_2)
+int ispvic_frame_channel_s_stream(uint param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   char *pcVar2;
   int iVar3;
-  undefined4 local_18 [2];
+  int local_18 [2];
   
   iVar3 = 0;
   if ((param_1 != 0) && (param_1 < 0xfffff001)) {
@@ -1307,13 +1307,13 @@ undefined4 ispvic_frame_channel_s_stream(uint param_1,int param_2)
     if (param_2 != *(int *)(iVar3 + 0x210)) {
       __private_spin_lock_irqsave(iVar3 + 500,local_18);
       if (param_2 == 0) {
-        *(undefined4 *)(*(int *)(iVar3 + 0xb8) + 0x300) = 0;
-        *(undefined4 *)(iVar3 + 0x210) = 0;
+        *(int *)(*(int *)(iVar3 + 0xb8) + 0x300) = 0;
+        *(int *)(iVar3 + 0x210) = 0;
       }
       else {
         vic_pipo_mdma_enable(iVar3);
         *(uint *)(*(int *)(iVar3 + 0xb8) + 0x300) = *(int *)(iVar3 + 0x218) << 0x10 | 0x80000020;
-        *(undefined4 *)(iVar3 + 0x210) = 1;
+        *(int *)(iVar3 + 0x210) = 1;
       }
       private_spin_unlock_irqrestore(iVar3 + 500,local_18[0]);
       uVar1 = 0;
@@ -1403,7 +1403,7 @@ void vic_mdma_irq_function(int param_1,int param_2)
     }
     else {
       *(int *)(param_1 + 0x218) = *(int *)(param_1 + 0x218) + -1;
-      (**(code **)(iVar3 + 4))(*(undefined4 *)(iVar3 + 0x14),piVar1);
+      (**(code **)(iVar3 + 4))(*(int *)(iVar3 + 0x14),piVar1);
       ppiVar2 = *(int ***)(param_1 + 0x200);
       *(int **)(param_1 + 0x200) = piVar1;
       piVar1[1] = (int)ppiVar2;
@@ -1422,7 +1422,7 @@ void vic_mdma_irq_function(int param_1,int param_2)
           else {
             *(int *)(param_1 + 0x218) = *(int *)(param_1 + 0x218) + -1;
             isp_printf(1,"line : %d; bank_addr:0x%x; addr:0x%x\n",0x296,iVar7,piVar1[2]);
-            (**(code **)(raw_pipe + 4))(*(undefined4 *)(raw_pipe + 0x14),piVar1);
+            (**(code **)(raw_pipe + 4))(*(int *)(raw_pipe + 0x14),piVar1);
             ppiVar2 = *(int ***)(param_1 + 0x200);
             *(int **)(param_1 + 0x200) = piVar1;
             piVar1[1] = (int)ppiVar2;
@@ -1437,7 +1437,7 @@ void vic_mdma_irq_function(int param_1,int param_2)
         }
         isp_printf(2,"function: %s ; vic dma addrrss error!!!\n","vic_mdma_irq_function");
         isp_printf(2,"VIC_ADDR_DMA_CONTROL : 0x%x\n",
-                   *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x300));
+                   *(int *)(*(int *)(param_1 + 0xb8) + 0x300));
         iVar3 = *(int *)(param_1 + 0x1fc);
         goto LAB_00012504;
       }
@@ -1501,7 +1501,7 @@ LAB_000125c0:
 
 
 
-undefined4 isp_vic_interrupt_service_routine(uint param_1)
+int isp_vic_interrupt_service_routine(uint param_1)
 
 {
   int iVar1;
@@ -1530,7 +1530,7 @@ undefined4 isp_vic_interrupt_service_routine(uint param_1)
         if ((uVar3 & 0x400) != 0) {
           vic_err = vic_err + 1;
           isp_printf(1,"Err [VIC_INT] : hor err ch0 !!!!! 0x3a8 = 0x%08x\n",
-                     *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x3a8));
+                     *(int *)(*(int *)(param_1 + 0xb8) + 0x3a8));
         }
         if ((uVar3 & 0x800) != 0) {
           DAT_000b2160 = DAT_000b2160 + 1;
@@ -1631,16 +1631,16 @@ undefined4 isp_vic_interrupt_service_routine(uint param_1)
         }
         if (((uVar3 & 0xde00) != 0) && (vic_start_ok == '\x01')) {
           isp_printf(1,"error handler!!!\n");
-          **(undefined4 **)(uVar5 + 0xb8) = 4;
+          **(int **)(uVar5 + 0xb8) = 4;
           piVar2 = *(int **)(uVar5 + 0xb8);
           while (*piVar2 != 0) {
             isp_printf(1,"addr ctl is 0x%x\n",*piVar2);
             piVar2 = *(int **)(uVar5 + 0xb8);
           }
           piVar2[0x41] = piVar2[0x41];
-          *(undefined4 *)(*(int *)(uVar5 + 0xb8) + 0x108) =
-               *(undefined4 *)(*(int *)(uVar5 + 0xb8) + 0x108);
-          **(undefined4 **)(uVar5 + 0xb8) = 1;
+          *(int *)(*(int *)(uVar5 + 0xb8) + 0x108) =
+               *(int *)(*(int *)(uVar5 + 0xb8) + 0x108);
+          **(int **)(uVar5 + 0xb8) = 1;
         }
       }
     }
@@ -1651,7 +1651,7 @@ undefined4 isp_vic_interrupt_service_routine(uint param_1)
 
 
 
-undefined4 tx_isp_subdev_pipo(code *param_1,code **param_2)
+int tx_isp_subdev_pipo(code *param_1,code **param_2)
 
 {
   code **ppcVar1;
@@ -1666,10 +1666,10 @@ undefined4 tx_isp_subdev_pipo(code *param_1,code **param_2)
   if ((param_1 != (code *)0x0) && (param_1 < (code *)0xfffff001)) {
     iVar6 = *(int *)(param_1 + 0xd4);
   }
-  *(undefined4 *)(iVar6 + 0x20c) = 1;
+  *(int *)(iVar6 + 0x20c) = 1;
   raw_pipe = param_2;
   if (param_2 == (code **)0x0) {
-    *(undefined4 *)(iVar6 + 0x214) = 0;
+    *(int *)(iVar6 + 0x214) = 0;
   }
   else {
     iVar7 = iVar6 + 0x1fc;
@@ -1696,17 +1696,17 @@ undefined4 tx_isp_subdev_pipo(code *param_1,code **param_2)
       *ppiVar4 = piVar2;
       iVar5 = iVar3 + 0xc6;
       iVar3 = iVar3 + 1;
-      *(undefined4 *)(*(int *)(iVar6 + 0xb8) + iVar5 * 4) = 0;
+      *(int *)(*(int *)(iVar6 + 0xb8) + iVar5 * 4) = 0;
       piVar2 = piVar2 + 7;
     } while (iVar3 != 5);
-    *(undefined4 *)(iVar6 + 0x214) = 1;
+    *(int *)(iVar6 + 0x214) = 1;
   }
   return 0;
 }
 
 
 
-int vic_core_ops_ioctl(int param_1,int param_2,undefined4 *param_3)
+int vic_core_ops_ioctl(int param_1,int param_2,int *param_3)
 
 {
   code *pcVar1;
@@ -1743,7 +1743,7 @@ int vic_core_ops_ioctl(int param_1,int param_2,undefined4 *param_3)
     if (pcVar1 == (code *)0x0) {
       return 0;
     }
-    param_3 = (undefined4 *)*param_3;
+    param_3 = (int *)*param_3;
   }
   iVar2 = (*pcVar1)(param_1,param_3);
 LAB_00013074:
@@ -1755,7 +1755,7 @@ LAB_00013074:
 
 
 
-int vic_core_ops_ioctl(int param_1,int param_2,undefined4 *param_3)
+int vic_core_ops_ioctl(int param_1,int param_2,int *param_3)
 
 {
   code *pcVar1;
@@ -1778,7 +1778,7 @@ int vic_core_ops_ioctl(int param_1,int param_2,undefined4 *param_3)
 int vin_s_stream(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   code **ppcVar2;
   code *pcVar3;
   int iVar4;
@@ -1810,18 +1810,18 @@ int vin_s_stream(int param_1,int param_2)
   if (param_2 == 0) {
     uVar1 = 3;
   }
-  *(undefined4 *)(param_1 + 0xf4) = uVar1;
+  *(int *)(param_1 + 0xf4) = uVar1;
   return 0;
 }
 
 
 
-undefined4 tx_isp_vin_activate_subdev(int param_1)
+int tx_isp_vin_activate_subdev(int param_1)
 
 {
   private_mutex_lock(param_1 + 0xe8);
   if (*(int *)(param_1 + 0xf4) == 1) {
-    *(undefined4 *)(param_1 + 0xf4) = 2;
+    *(int *)(param_1 + 0xf4) = 2;
   }
   private_mutex_unlock(param_1 + 0xe8);
   *(int *)(param_1 + 0xf8) = *(int *)(param_1 + 0xf8) + 1;
@@ -1835,7 +1835,7 @@ int tx_isp_vin_init(int param_1,int param_2)
 {
   int iVar1;
   code *pcVar2;
-  undefined4 uVar3;
+  int uVar3;
   
   if (*(int *)(param_1 + 0xe4) == 0) {
     isp_printf(1,"[%d] Don\'t have active sensor!\n",0x158);
@@ -1863,7 +1863,7 @@ int tx_isp_vin_init(int param_1,int param_2)
   if (param_2 == 0) {
     uVar3 = 2;
   }
-  *(undefined4 *)(param_1 + 0xf4) = uVar3;
+  *(int *)(param_1 + 0xf4) = uVar3;
   return iVar1;
 }
 
@@ -1873,10 +1873,10 @@ int subdev_sensor_ops_set_input(int param_1,uint *param_2)
 
 {
   int iVar1;
-  undefined4 uVar2;
+  int uVar2;
   int iVar3;
   int *piVar4;
-  undefined4 local_20 [3];
+  int local_20 [3];
   
   local_20[0] = 0;
   if (param_1 == 0) {
@@ -1939,12 +1939,12 @@ LAB_000134d8:
     }
     if (*(code **)(param_1 + 0x7c) == (code *)0x0) {
       iVar1 = -0x203;
-      uVar2 = *(undefined4 *)(iVar3 + 0x13c);
+      uVar2 = *(int *)(iVar3 + 0x13c);
     }
     else {
       iVar1 = (**(code **)(param_1 + 0x7c))(param_1,0x1000000,local_20);
       if (iVar1 == 0) {
-        *(undefined4 *)(param_1 + 0xe4) = 0;
+        *(int *)(param_1 + 0xe4) = 0;
         if (*(code **)(iVar3 + 0x7c) != (code *)0x0) {
           iVar3 = (**(code **)(iVar3 + 0x7c))(iVar3,0x1000001,0);
           if (iVar3 != 0) {
@@ -1954,7 +1954,7 @@ LAB_000134d8:
         }
         goto LAB_000134d8;
       }
-      uVar2 = *(undefined4 *)(iVar3 + 0x13c);
+      uVar2 = *(int *)(iVar3 + 0x13c);
     }
     isp_printf(1,"Failed to deinit the pipeline of %s.\n",uVar2);
   }
@@ -1996,11 +1996,11 @@ int tx_isp_vin_reset(int param_1)
 
 
 
-undefined4 tx_isp_vin_probe(int param_1)
+int tx_isp_vin_probe(int param_1)
 
 {
   void *__s;
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   int iVar3;
   
@@ -2014,15 +2014,15 @@ undefined4 tx_isp_vin_probe(int param_1)
     private_raw_mutex_init((int)__s + 0xe8,"&vin->mlock",0x10000);
     *(int *)((int)__s + 0xdc) = (int)__s + 0xdc;
     *(int *)((int)__s + 0xe0) = (int)__s + 0xdc;
-    *(undefined4 *)((int)__s + 0xf8) = 0;
-    *(undefined4 *)((int)__s + 0xe4) = 0;
+    *(int *)((int)__s + 0xf8) = 0;
+    *(int *)((int)__s + 0xe4) = 0;
     iVar3 = *(int *)(param_1 + 0x58);
     iVar2 = tx_isp_subdev_init(param_1,__s,vin_subdev_ops);
     if (iVar2 == 0) {
       *(void **)((int)__s + 0xd8) = __s;
       private_platform_set_drvdata(param_1,__s);
       *(undefined1 **)((int)__s + 0x34) = video_input_cmd_fops;
-      *(undefined4 *)((int)__s + 0xf4) = 1;
+      *(int *)((int)__s + 0xf4) = 1;
       uVar1 = 0;
     }
     else {
@@ -2037,10 +2037,10 @@ undefined4 tx_isp_vin_probe(int param_1)
 
 
 
-void video_input_cmd_open(undefined4 param_1,undefined4 param_2)
+void video_input_cmd_open(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   uVar1 = PDE_DATA();
                     // WARNING: Could not recover jumptable at 0x000194d4. Too many branches
@@ -2059,9 +2059,9 @@ uint video_input_cmd_set(int param_1,uint param_2,uint param_3)
   uint uVar3;
   undefined1 *__s;
   int iVar4;
-  undefined4 uVar5;
+  int uVar5;
   code *pcVar6;
-  undefined4 uVar7;
+  int uVar7;
   char *pcVar8;
   char *pcVar9;
   char cVar10;
@@ -2071,10 +2071,10 @@ uint video_input_cmd_set(int param_1,uint param_2,uint param_3)
   uint uVar14;
   int unaff_gp;
   int local_48 [2];
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
+  int local_40;
+  int local_3c;
+  int local_38;
+  int local_34;
   int local_30 [2];
   
   iVar13 = *(int *)(param_1 + 0x70);
@@ -2234,15 +2234,15 @@ LAB_00013b6c:
 
 
 
-void video_input_cmd_show(int param_1,undefined4 param_2,undefined1 *param_3,undefined4 param_4)
+void video_input_cmd_show(int param_1,int param_2,undefined1 *param_3,int param_4)
 
 {
   int iVar1;
   uint uVar2;
   undefined1 *puStackX_8;
-  undefined4 uStackX_c;
+  int uStackX_c;
   char *pcStack_18;
-  undefined4 **ppuStack_14;
+  int **ppuStack_14;
   undefined1 **appuStack_10 [3];
   
   uVar2 = *(uint *)(param_1 + 0x3c);
@@ -2272,10 +2272,10 @@ void video_input_cmd_show(int param_1,undefined4 param_2,undefined1 *param_3,und
 
 
 
-undefined4 subdev_sensor_ops_release_all_sensor(int param_1)
+int subdev_sensor_ops_release_all_sensor(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int *piVar2;
   int *piVar3;
   int iVar4;
@@ -2320,11 +2320,11 @@ undefined4 subdev_sensor_ops_release_all_sensor(int param_1)
 
 
 
-undefined4 tx_isp_vin_slake_subdev(int param_1)
+int tx_isp_vin_slake_subdev(int param_1)
 
 {
   int iVar1;
-  undefined4 local_18 [3];
+  int local_18 [3];
   
   iVar1 = *(int *)(param_1 + 0xf8);
   if (iVar1 != 0) {
@@ -2351,7 +2351,7 @@ undefined4 tx_isp_vin_slake_subdev(int param_1)
     }
     private_mutex_lock(param_1 + 0xe8);
     if (*(int *)(param_1 + 0xf4) == 2) {
-      *(undefined4 *)(param_1 + 0xf4) = 1;
+      *(int *)(param_1 + 0xf4) = 1;
     }
     private_mutex_unlock(param_1 + 0xe8);
     return 0;
@@ -2361,7 +2361,7 @@ undefined4 tx_isp_vin_slake_subdev(int param_1)
 
 
 
-int isp_i2c_new_subdev_board(undefined4 param_1,int param_2)
+int isp_i2c_new_subdev_board(int param_1,int param_2)
 
 {
   int iVar1;
@@ -2371,10 +2371,10 @@ int isp_i2c_new_subdev_board(undefined4 param_1,int param_2)
   if ((*(short *)(param_2 + 0x16) != 0) &&
      (iVar1 = private_i2c_new_device(param_1,param_2), iVar1 != 0)) {
     if ((*(int *)(iVar1 + 0x1c) != 0) &&
-       (iVar2 = private_try_module_get(*(undefined4 *)(*(int *)(iVar1 + 0x1c) + 0x2c)), iVar2 != 0))
+       (iVar2 = private_try_module_get(*(int *)(*(int *)(iVar1 + 0x1c) + 0x2c)), iVar2 != 0))
     {
       iVar2 = private_i2c_get_clientdata(iVar1);
-      private_module_put(*(undefined4 *)(*(int *)(iVar1 + 0x1c) + 0x2c));
+      private_module_put(*(int *)(*(int *)(iVar1 + 0x1c) + 0x2c));
       if (iVar2 != 0) {
         return iVar2;
       }
@@ -2386,14 +2386,14 @@ int isp_i2c_new_subdev_board(undefined4 param_1,int param_2)
 
 
 
-undefined4 subdev_sensor_ops_enum_input(int param_1,int *param_2)
+int subdev_sensor_ops_enum_input(int param_1,int *param_2)
 
 {
   bool bVar1;
   char cVar2;
   int iVar3;
   int *piVar4;
-  undefined4 uVar5;
+  int uVar5;
   char *pcVar6;
   int *piVar7;
   
@@ -2437,7 +2437,7 @@ LAB_00013fe4:
 
 
 
-int subdev_sensor_ops_ioctl(int param_1,undefined4 param_2,undefined4 *param_3)
+int subdev_sensor_ops_ioctl(int param_1,int param_2,int *param_3)
 
 {
   bool bVar1;
@@ -2447,11 +2447,11 @@ int subdev_sensor_ops_ioctl(int param_1,undefined4 param_2,undefined4 *param_3)
   code *pcVar5;
   int iVar6;
   int **ppiVar7;
-  undefined4 *puVar8;
+  int *puVar8;
   uint uVar9;
   int *piVar10;
   char cVar11;
-  undefined4 uVar12;
+  int uVar12;
   char *pcVar13;
   int **ppiVar14;
   int *piVar15;
@@ -2464,14 +2464,14 @@ int subdev_sensor_ops_ioctl(int param_1,undefined4 param_2,undefined4 *param_3)
     if (param_1 == 0) {
       return -0x16;
     }
-    if (param_3 == (undefined4 *)0x0) {
+    if (param_3 == (int *)0x0) {
       return -0x16;
     }
     if (*(int *)(param_1 + 0xf4) == 1) goto LAB_000141d4;
     if (param_3[8] == 1) {
       iVar4 = private_i2c_get_adapter(param_3[0xf]);
       if (iVar4 == 0) {
-        puVar8 = (undefined4 *)param_3[0xf];
+        puVar8 = (int *)param_3[0xf];
         pcVar13 = "Failed to get I2C adapter %d, deferring probe\n";
 LAB_0001444c:
         isp_printf(2,pcVar13,puVar8);
@@ -2515,8 +2515,8 @@ LAB_00014410:
         *(int **)(iVar4 + 0xe8) = piVar15;
         *piVar15 = iVar4 + 0xe4;
         private_mutex_unlock(param_1 + 0xe8);
-        *(undefined4 *)(uVar9 + 0x78) = *(undefined4 *)(param_1 + 0x78);
-        isp_printf(0,"Registered sensor subdevice %s\n",*(undefined4 *)(uVar9 + 8));
+        *(int *)(uVar9 + 0x78) = *(int *)(param_1 + 0x78);
+        isp_printf(0,"Registered sensor subdevice %s\n",*(int *)(uVar9 + 8));
         return 0;
       }
     }
@@ -2535,7 +2535,7 @@ LAB_000142d4:
     if (param_1 == 0) {
       return -0x16;
     }
-    if (param_3 == (undefined4 *)0x0) {
+    if (param_3 == (int *)0x0) {
       return -0x16;
     }
     piVar15 = (int *)(param_1 + 0xe8);
@@ -2556,7 +2556,7 @@ LAB_00014558:
         do {
           cVar3 = *(char *)puVar8;
           ppiVar7 = (int **)((int)ppiVar7 + 1);
-          puVar8 = (undefined4 *)((int)puVar8 + 1);
+          puVar8 = (int *)((int)puVar8 + 1);
           cVar11 = cVar2;
           if (cVar3 != cVar2) break;
           bVar1 = cVar2 != '\0';
@@ -2607,11 +2607,11 @@ LAB_000141d4:
     if (param_1 == 0) {
       return -0x16;
     }
-    if (param_3 != (undefined4 *)0x0) {
+    if (param_3 != (int *)0x0) {
       uVar12 = 0xffffffff;
       if (uVar9 != 0) {
         if (uVar9 < 0xfffff001) {
-          uVar12 = *(undefined4 *)(uVar9 + 0xdc);
+          uVar12 = *(int *)(uVar9 + 0xdc);
         }
         else {
           uVar12 = 0xffffffff;
@@ -2673,14 +2673,14 @@ LAB_00014188:
 
 
 
-undefined4 tx_isp_csi_probe(int param_1)
+int tx_isp_csi_probe(int param_1)
 
 {
   void *__s;
   int iVar1;
   int *piVar2;
   int iVar3;
-  undefined4 uVar4;
+  int uVar4;
   
   __s = (void *)private_kmalloc(0x148,0xd0);
   if (__s == (void *)0x0) {
@@ -2699,13 +2699,13 @@ undefined4 tx_isp_csi_probe(int param_1)
       }
       else {
         uVar4 = private_ioremap(*piVar2,(piVar2[1] + 1) - *piVar2);
-        *(undefined4 *)((int)__s + 0x13c) = uVar4;
+        *(int *)((int)__s + 0x13c) = uVar4;
         if (*(int *)((int)__s + 0xb8) != 0) {
           *(undefined1 **)((int)__s + 0x34) = isp_csi_fops;
           *(int **)((int)__s + 0x138) = piVar2;
           private_raw_mutex_init((int)__s + 300,"&csd->mlock",0x10000);
           private_platform_set_drvdata(param_1,__s);
-          *(undefined4 *)((int)__s + 0x128) = 1;
+          *(int *)((int)__s + 0x128) = 1;
           dump_csd = __s;
           *(void **)((int)__s + 0xd4) = __s;
           return 0;
@@ -2728,10 +2728,10 @@ undefined4 tx_isp_csi_probe(int param_1)
 
 
 
-void dump_isp_csi_open(undefined4 param_1,undefined4 param_2)
+void dump_isp_csi_open(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   uVar1 = PDE_DATA();
                     // WARNING: Could not recover jumptable at 0x000194d4. Too many branches
@@ -2777,7 +2777,7 @@ int isp_csi_show(int param_1)
     else {
       iVar2 = *(int *)(uVar1 + 0xb8);
     }
-    iVar2 = seq_printf(param_1,"0x0014 is  0x%08x\n",*(undefined4 *)(iVar2 + 0x14));
+    iVar2 = seq_printf(param_1,"0x0014 is  0x%08x\n",*(int *)(iVar2 + 0x14));
     iVar5 = iVar5 + iVar2;
   }
   return iVar5;
@@ -2785,11 +2785,11 @@ int isp_csi_show(int param_1)
 
 
 
-undefined4 csi_core_ops_init(uint param_1,int param_2)
+int csi_core_ops_init(uint param_1,int param_2)
 
 {
-  undefined4 uVar1;
-  undefined4 *puVar2;
+  int uVar1;
+  int *puVar2;
   uint uVar3;
   uint uVar4;
   int iVar5;
@@ -2817,12 +2817,12 @@ undefined4 csi_core_ops_init(uint param_1,int param_2)
           *(uint *)(*(int *)(uVar4 + 0xb8) + 4) = *(byte *)(*(int *)(uVar4 + 0x110) + 0x24) - 1;
           *(uint *)(*(int *)(uVar4 + 0xb8) + 8) = *(uint *)(*(int *)(uVar4 + 0xb8) + 8) & 0xfffffffe
           ;
-          *(undefined4 *)(*(int *)(uVar4 + 0xb8) + 0xc) = 0;
+          *(int *)(*(int *)(uVar4 + 0xb8) + 0xc) = 0;
           private_msleep(1);
           *(uint *)(*(int *)(uVar4 + 0xb8) + 0x10) =
                *(uint *)(*(int *)(uVar4 + 0xb8) + 0x10) & 0xfffffffe;
           private_msleep(1);
-          *(undefined4 *)(*(int *)(uVar4 + 0xb8) + 0xc) = 1;
+          *(int *)(*(int *)(uVar4 + 0xb8) + 0xc) = 1;
           private_msleep(1);
           if (*(int *)(*(int *)(uVar4 + 0x110) + 0x3c) == 0) {
             iVar5 = *(int *)(*(int *)(uVar4 + 0x110) + 0x1c);
@@ -2846,23 +2846,23 @@ undefined4 csi_core_ops_init(uint param_1,int param_2)
             *(uint *)(iVar5 + 0x160) = uVar3;
             *(uint *)(*(int *)(uVar4 + 0x13c) + 0x1e0) = uVar3;
             *(uint *)(*(int *)(uVar4 + 0x13c) + 0x260) = uVar3;
-            puVar2 = *(undefined4 **)(uVar4 + 0x13c);
+            puVar2 = *(int **)(uVar4 + 0x13c);
           }
           else {
-            puVar2 = *(undefined4 **)(uVar4 + 0x13c);
+            puVar2 = *(int **)(uVar4 + 0x13c);
           }
           *puVar2 = 0x7d;
-          *(undefined4 *)(*(int *)(uVar4 + 0x13c) + 0x128) = 0x3f;
-          *(undefined4 *)(*(int *)(uVar4 + 0xb8) + 0x10) = 1;
+          *(int *)(*(int *)(uVar4 + 0x13c) + 0x128) = 0x3f;
+          *(int *)(*(int *)(uVar4 + 0xb8) + 0x10) = 1;
           private_msleep(10);
           uVar1 = 3;
         }
         else if (iVar5 == 2) {
-          *(undefined4 *)(*(int *)(uVar4 + 0xb8) + 0xc) = 0;
-          *(undefined4 *)(*(int *)(uVar4 + 0xb8) + 0xc) = 1;
-          **(undefined4 **)(uVar4 + 0x13c) = 0x7d;
-          *(undefined4 *)(*(int *)(uVar4 + 0x13c) + 0x80) = 0x3e;
-          *(undefined4 *)(*(int *)(uVar4 + 0x13c) + 0x2cc) = 1;
+          *(int *)(*(int *)(uVar4 + 0xb8) + 0xc) = 0;
+          *(int *)(*(int *)(uVar4 + 0xb8) + 0xc) = 1;
+          **(int **)(uVar4 + 0x13c) = 0x7d;
+          *(int *)(*(int *)(uVar4 + 0x13c) + 0x80) = 0x3e;
+          *(int *)(*(int *)(uVar4 + 0x13c) + 0x2cc) = 1;
           uVar1 = 3;
         }
         else {
@@ -2870,7 +2870,7 @@ undefined4 csi_core_ops_init(uint param_1,int param_2)
           uVar1 = 3;
         }
       }
-      *(undefined4 *)(uVar4 + 0x128) = uVar1;
+      *(int *)(uVar4 + 0x128) = uVar1;
       uVar1 = 0;
     }
   }
@@ -2879,18 +2879,18 @@ undefined4 csi_core_ops_init(uint param_1,int param_2)
 
 
 
-undefined4 csi_sensor_ops_ioctl(uint param_1,int param_2)
+int csi_sensor_ops_ioctl(uint param_1,int param_2)
 
 {
   if ((param_1 != 0) && (param_1 < 0xfffff001)) {
     if (param_2 == 0x200000e) {
       if (*(int *)(*(int *)(param_1 + 0x110) + 0x14) == 1) {
-        *(undefined4 *)(param_1 + 0x128) = 3;
+        *(int *)(param_1 + 0x128) = 3;
       }
     }
     else if (param_2 == 0x200000f) {
       if (*(int *)(*(int *)(param_1 + 0x110) + 0x14) == 1) {
-        *(undefined4 *)(param_1 + 0x128) = 4;
+        *(int *)(param_1 + 0x128) = 4;
       }
     }
     else if (param_2 == 0x200000c) {
@@ -2903,10 +2903,10 @@ undefined4 csi_sensor_ops_ioctl(uint param_1,int param_2)
 
 
 
-undefined4 csi_sensor_ops_sync_sensor_attr(uint param_1,int param_2)
+int csi_sensor_ops_sync_sensor_attr(uint param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   code *pcVar2;
   
   if ((param_1 == 0) || (0xfffff000 < param_1)) {
@@ -2928,12 +2928,12 @@ undefined4 csi_sensor_ops_sync_sensor_attr(uint param_1,int param_2)
 
 
 
-undefined4 tx_isp_csi_activate_subdev(uint param_1)
+int tx_isp_csi_activate_subdev(uint param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   uint uVar2;
-  undefined4 *puVar3;
+  int *puVar3;
   uint uVar4;
   
   uVar1 = 0xffffffea;
@@ -2946,9 +2946,9 @@ undefined4 tx_isp_csi_activate_subdev(uint param_1)
     if ((uVar2 != 0) && (uVar2 < 0xfffff001)) {
       private_mutex_lock(uVar2 + 300);
       if (*(int *)(uVar2 + 0x128) == 1) {
-        *(undefined4 *)(uVar2 + 0x128) = 2;
-        puVar3 = *(undefined4 **)(param_1 + 0xbc);
-        if ((puVar3 != (undefined4 *)0x0) && (uVar4 = 0, puVar3 < (undefined4 *)0xfffff001)) {
+        *(int *)(uVar2 + 0x128) = 2;
+        puVar3 = *(int **)(param_1 + 0xbc);
+        if ((puVar3 != (int *)0x0) && (uVar4 = 0, puVar3 < (int *)0xfffff001)) {
           for (; uVar4 < *(uint *)(param_1 + 0xc0); uVar4 = uVar4 + 1) {
             private_clk_enable(*puVar3);
             puVar3 = puVar3 + 1;
@@ -2964,10 +2964,10 @@ undefined4 tx_isp_csi_activate_subdev(uint param_1)
 
 
 
-undefined4 csi_video_s_stream(uint param_1,int param_2)
+int csi_video_s_stream(uint param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   if ((param_1 == 0) || (0xfffff000 < param_1)) {
     isp_printf(2,"The parameter is invalid!\n");
@@ -2978,7 +2978,7 @@ undefined4 csi_video_s_stream(uint param_1,int param_2)
     if (param_2 == 0) {
       uVar1 = 3;
     }
-    *(undefined4 *)(param_1 + 0x128) = uVar1;
+    *(int *)(param_1 + 0x128) = uVar1;
     uVar1 = 0;
   }
   else {
@@ -2989,14 +2989,14 @@ undefined4 csi_video_s_stream(uint param_1,int param_2)
 
 
 
-undefined4 tx_isp_csi_slake_subdev(uint param_1)
+int tx_isp_csi_slake_subdev(uint param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   uint uVar2;
   int iVar3;
   uint uVar4;
-  undefined4 *puVar5;
+  int *puVar5;
   
   uVar1 = 0xffffffea;
   if (param_1 != 0) {
@@ -3016,11 +3016,11 @@ undefined4 tx_isp_csi_slake_subdev(uint param_1)
       }
       private_mutex_lock(uVar4 + 300);
       if (*(int *)(uVar4 + 0x128) == 2) {
-        *(undefined4 *)(uVar4 + 0x128) = 1;
+        *(int *)(uVar4 + 0x128) = 1;
         uVar2 = *(uint *)(param_1 + 0xbc);
         if ((uVar2 != 0) && (uVar2 < 0xfffff001)) {
           iVar3 = *(int *)(param_1 + 0xc0);
-          puVar5 = (undefined4 *)(uVar2 + iVar3 * 4);
+          puVar5 = (int *)(uVar2 + iVar3 * 4);
           while( true ) {
             iVar3 = iVar3 + -1;
             puVar5 = puVar5 + -1;
@@ -3038,23 +3038,23 @@ undefined4 tx_isp_csi_slake_subdev(uint param_1)
 
 
 
-undefined4 dump_csi_reg(int param_1)
+int dump_csi_reg(int param_1)
 
 {
   isp_printf(0,"****>>>>> dump csi reg <<<<<******\n");
-  isp_printf(0,"**********VERSION =%08x\n",**(undefined4 **)(param_1 + 0xb8));
-  isp_printf(0,"**********N_LANES =%08x\n",*(undefined4 *)(*(int *)(param_1 + 0xb8) + 4));
-  isp_printf(0,"**********PHY_SHUTDOWNZ = %08x\n",*(undefined4 *)(*(int *)(param_1 + 0xb8) + 8));
-  isp_printf(0,"**********DPHY_RSTZ = %08x\n",*(undefined4 *)(*(int *)(param_1 + 0xb8) + 0xc));
-  isp_printf(0,"**********CSI2_RESETN =%08x\n",*(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x10));
-  isp_printf(0,"**********PHY_STATE = %08x\n",*(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x14));
-  isp_printf(0,"**********DATA_IDS_1 = %08x\n",*(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x18));
-  isp_printf(0,"**********DATA_IDS_2 = %08x\n",*(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x1c));
-  isp_printf(0,"**********ERR1 = %08x\n",*(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x20));
-  isp_printf(0,"**********ERR2 = %08x\n",*(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x24));
-  isp_printf(0,"**********MASK1 =%08x\n",*(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x28));
-  isp_printf(0,"**********MASK2 =%08x\n",*(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x2c));
-  isp_printf(0,"**********PHY_TST_CTRL0 = %08x\n",*(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x30));
+  isp_printf(0,"**********VERSION =%08x\n",**(int **)(param_1 + 0xb8));
+  isp_printf(0,"**********N_LANES =%08x\n",*(int *)(*(int *)(param_1 + 0xb8) + 4));
+  isp_printf(0,"**********PHY_SHUTDOWNZ = %08x\n",*(int *)(*(int *)(param_1 + 0xb8) + 8));
+  isp_printf(0,"**********DPHY_RSTZ = %08x\n",*(int *)(*(int *)(param_1 + 0xb8) + 0xc));
+  isp_printf(0,"**********CSI2_RESETN =%08x\n",*(int *)(*(int *)(param_1 + 0xb8) + 0x10));
+  isp_printf(0,"**********PHY_STATE = %08x\n",*(int *)(*(int *)(param_1 + 0xb8) + 0x14));
+  isp_printf(0,"**********DATA_IDS_1 = %08x\n",*(int *)(*(int *)(param_1 + 0xb8) + 0x18));
+  isp_printf(0,"**********DATA_IDS_2 = %08x\n",*(int *)(*(int *)(param_1 + 0xb8) + 0x1c));
+  isp_printf(0,"**********ERR1 = %08x\n",*(int *)(*(int *)(param_1 + 0xb8) + 0x20));
+  isp_printf(0,"**********ERR2 = %08x\n",*(int *)(*(int *)(param_1 + 0xb8) + 0x24));
+  isp_printf(0,"**********MASK1 =%08x\n",*(int *)(*(int *)(param_1 + 0xb8) + 0x28));
+  isp_printf(0,"**********MASK2 =%08x\n",*(int *)(*(int *)(param_1 + 0xb8) + 0x2c));
+  isp_printf(0,"**********PHY_TST_CTRL0 = %08x\n",*(int *)(*(int *)(param_1 + 0xb8) + 0x30));
   return 0;
 }
 
@@ -3079,7 +3079,7 @@ void check_csi_error(void)
 
 
 
-undefined4 csi_set_on_lanes(int param_1,uint param_2)
+int csi_set_on_lanes(int param_1,uint param_2)
 
 {
   isp_printf(0,"%s:----------> lane num: %d\n","csi_set_on_lanes",param_2 & 0xff);
@@ -3090,10 +3090,10 @@ undefined4 csi_set_on_lanes(int param_1,uint param_2)
 
 
 
-undefined4 isp_core_tunning_open(undefined4 param_1,int param_2)
+int isp_core_tunning_open(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   
   iVar2 = *(int *)(*(int *)(*(int *)(param_2 + 0x70) + 200) + 0x1bc);
@@ -3101,8 +3101,8 @@ undefined4 isp_core_tunning_open(undefined4 param_1,int param_2)
   if (*(int *)(iVar2 + 0x40c4) == 2) {
     frame_done_cnt = 0;
     DAT_000b220c = 0;
-    *(undefined4 *)(iVar2 + 0x40c4) = 3;
-    *(undefined4 *)(iVar2 + 0x40ac) = 0;
+    *(int *)(iVar2 + 0x40c4) = 3;
+    *(int *)(iVar2 + 0x40ac) = 0;
     uVar1 = 0;
   }
   return uVar1;
@@ -3110,7 +3110,7 @@ undefined4 isp_core_tunning_open(undefined4 param_1,int param_2)
 
 
 
-undefined4 isp_core_tunning_release(undefined4 param_1,int param_2)
+int isp_core_tunning_release(int param_1,int param_2)
 
 {
   int iVar1;
@@ -3119,11 +3119,11 @@ undefined4 isp_core_tunning_release(undefined4 param_1,int param_2)
   isp_printf(0,"##### %s %d #####\n","isp_core_tunning_release",0xacc);
   if (*(int *)(iVar1 + 0x40c4) != 2) {
     if (*(int *)(iVar1 + 0x40ac) == 0) {
-      *(undefined4 *)(iVar1 + 0x40c4) = 2;
+      *(int *)(iVar1 + 0x40c4) = 2;
     }
     else {
       isp_free_buffer();
-      *(undefined4 *)(iVar1 + 0x40c4) = 2;
+      *(int *)(iVar1 + 0x40c4) = 2;
     }
   }
   return 0;
@@ -3131,11 +3131,11 @@ undefined4 isp_core_tunning_release(undefined4 param_1,int param_2)
 
 
 
-undefined4 apical_isp_hvflip_update(int param_1,uint param_2)
+int apical_isp_hvflip_update(int param_1,uint param_2)
 
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  int uVar1;
+  int uVar2;
   
   if (*(int *)(param_1 + 0x134) != 1) {
     param_2 = param_2 & 0xff;
@@ -3157,9 +3157,9 @@ undefined4 apical_isp_hvflip_update(int param_1,uint param_2)
     uVar1 = 1;
   }
 LAB_00015358:
-  tisp_lsc_hvflip(*(undefined4 *)(param_1 + 0x124),*(undefined4 *)(param_1 + 0x128),uVar1,uVar2);
+  tisp_lsc_hvflip(*(int *)(param_1 + 0x124),*(int *)(param_1 + 0x128),uVar1,uVar2);
   *(uint *)(param_1 + 0x1ac) = param_2;
-  *(undefined4 *)(param_1 + 0x1a8) = 1;
+  *(int *)(param_1 + 0x1a8) = 1;
   param_2 = param_2 & 0xfd;
 LAB_00015378:
   tisp_s_mscaler_hvflip_mask(param_2);
@@ -3169,15 +3169,15 @@ LAB_00015378:
 
 
 
-undefined4 apical_isp_mask_s_attr_isra_29(undefined4 param_1)
+int apical_isp_mask_s_attr_isra_29(int param_1)
 
 {
   uint uVar1;
   undefined local_158 [160];
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined4 local_b0;
-  undefined4 local_ac;
+  int local_b8;
+  int local_b4;
+  int local_b0;
+  int local_ac;
   undefined local_a8 [164];
   
   private_copy_from_user(&local_b8,param_1,0xac);
@@ -3222,18 +3222,18 @@ int apical_isp_gamma_s_attr_isra_34(int param_1)
 
 
 
-undefined4 apical_isp_expr_s_ctrl_isra_35(int param_1,undefined4 param_2)
+int apical_isp_expr_s_ctrl_isra_35(int param_1,int param_2)
 
 {
   uint uVar1;
   char *pcVar2;
-  undefined4 uVar3;
+  int uVar3;
   int iVar4;
-  undefined4 local_108;
+  int local_108;
   uint local_98;
-  undefined4 local_94;
-  undefined4 local_90;
-  undefined4 local_8c;
+  int local_94;
+  int local_90;
+  int local_8c;
   undefined local_88 [32];
   int local_68;
   int local_18;
@@ -3384,15 +3384,15 @@ LAB_00015888:
 
 
 
-undefined4 apical_isp_af_hist_s_attr_isra_50(undefined4 param_1)
+int apical_isp_af_hist_s_attr_isra_50(int param_1)
 
 {
   uint uVar1;
   undefined local_100 [72];
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined4 local_b0;
-  undefined4 local_ac;
+  int local_b8;
+  int local_b4;
+  int local_b0;
+  int local_ac;
   undefined local_a8 [2];
   undefined2 local_a6;
   undefined2 local_a4;
@@ -3614,23 +3614,23 @@ int apical_isp_core_ops_s_ctrl(int *param_1,uint *param_2)
   byte bVar1;
   uint uVar2;
   code *pcVar3;
-  undefined4 *******pppppppuVar4;
+  int *******pppppppuVar4;
   uint uVar5;
   int iVar6;
-  undefined4 uVar7;
+  int uVar7;
   char *pcVar8;
   char *pcVar9;
   int iVar10;
-  undefined4 local_4d0;
-  undefined4 local_4cc;
-  undefined4 local_4c8;
-  undefined4 *******local_b0;
+  int local_4d0;
+  int local_4cc;
+  int local_4c8;
+  int *******local_b0;
   uint local_ac;
   uint local_a8;
-  undefined4 local_a4;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
+  int local_a4;
+  int local_a0;
+  int local_9c;
+  int local_98;
   uint local_18;
   ushort local_14;
   ushort local_12;
@@ -3643,7 +3643,7 @@ int apical_isp_core_ops_s_ctrl(int *param_1,uint *param_2)
   }
   if (uVar5 < 0x800003a) {
     if (uVar5 == 0x800000d) {
-      local_b0 = *(undefined4 ********)param_2[1];
+      local_b0 = *(int ********)param_2[1];
       iVar6 = tisp_s_wb_ct(&local_b0);
       if (iVar6 == 0) {
         return 0;
@@ -3667,34 +3667,34 @@ int apical_isp_core_ops_s_ctrl(int *param_1,uint *param_2)
               private_copy_from_user(&local_18,param_2[1],8);
               switch(local_18) {
               case 0:
-                local_b0 = (undefined4 *******)0x0;
+                local_b0 = (int *******)0x0;
                 break;
               case 1:
-                local_b0 = (undefined4 *******)0x1;
+                local_b0 = (int *******)0x1;
                 break;
               case 2:
-                local_b0 = (undefined4 *******)0x2;
+                local_b0 = (int *******)0x2;
                 break;
               case 3:
-                local_b0 = (undefined4 *******)0x3;
+                local_b0 = (int *******)0x3;
                 break;
               case 4:
-                local_b0 = (undefined4 *******)0x4;
+                local_b0 = (int *******)0x4;
                 break;
               case 5:
-                local_b0 = (undefined4 *******)0x5;
+                local_b0 = (int *******)0x5;
                 break;
               case 6:
-                local_b0 = (undefined4 *******)0x6;
+                local_b0 = (int *******)0x6;
                 break;
               case 7:
-                local_b0 = (undefined4 *******)0x7;
+                local_b0 = (int *******)0x7;
                 break;
               case 8:
-                local_b0 = (undefined4 *******)0x8;
+                local_b0 = (int *******)0x8;
                 break;
               case 9:
-                local_b0 = (undefined4 *******)0x9;
+                local_b0 = (int *******)0x9;
                 break;
               default:
                 isp_printf(1,"%s:%d::Can not support this mode!!!\n","apical_isp_wb_s_ctrl",0x52d);
@@ -3757,18 +3757,18 @@ LAB_00015da4:
               return 0;
             }
             bVar1 = *(byte *)(param_2 + 1);
-            param_1[0x1023] = (int)(undefined4 *******)(uint)bVar1;
+            param_1[0x1023] = (int)(int *******)(uint)bVar1;
             pcVar3 = tisp_set_contrast;
-            local_b0 = (undefined4 *******)(uint)bVar1;
+            local_b0 = (int *******)(uint)bVar1;
           }
           else if (uVar5 == 0x980902) {
             if (*(int *)(*(int *)(*param_1 + 0xd4) + 0xf4) == 0x2011) {
               return 0;
             }
             bVar1 = *(byte *)(param_2 + 1);
-            param_1[0x1024] = (int)(undefined4 *******)(uint)bVar1;
+            param_1[0x1024] = (int)(int *******)(uint)bVar1;
             pcVar3 = tisp_set_saturation;
-            local_b0 = (undefined4 *******)(uint)bVar1;
+            local_b0 = (int *******)(uint)bVar1;
           }
           else {
             if (uVar5 != 0x980900) {
@@ -3778,9 +3778,9 @@ LAB_00015da4:
               return 0;
             }
             bVar1 = *(byte *)(param_2 + 1);
-            param_1[0x1025] = (int)(undefined4 *******)(uint)bVar1;
+            param_1[0x1025] = (int)(int *******)(uint)bVar1;
             pcVar3 = tisp_set_brightness;
-            local_b0 = (undefined4 *******)(uint)bVar1;
+            local_b0 = (int *******)(uint)bVar1;
           }
           goto LAB_00016aec;
         }
@@ -3805,9 +3805,9 @@ LAB_00015da4:
             return 0;
           }
           bVar1 = *(byte *)(param_2 + 1);
-          param_1[0xfdb] = (int)(undefined4 *******)(uint)bVar1;
+          param_1[0xfdb] = (int)(int *******)(uint)bVar1;
           pcVar3 = tisp_set_sharpness;
-          local_b0 = (undefined4 *******)(uint)bVar1;
+          local_b0 = (int *******)(uint)bVar1;
           goto LAB_00016aec;
         }
         if (uVar5 != 0x980915) {
@@ -3868,9 +3868,9 @@ LAB_000168f4:
         if (uVar5 != 0x8000023) {
           return -1;
         }
-        if ((undefined4 *******)param_2[1] < (undefined4 *******)0x100) {
+        if ((int *******)param_2[1] < (int *******)0x100) {
           pcVar3 = tisp_set_ae_comp;
-          local_b0 = (undefined4 *******)param_2[1];
+          local_b0 = (int *******)param_2[1];
           goto LAB_00016aec;
         }
         pcVar9 = "AE COMP Value set overflow!\n";
@@ -3878,7 +3878,7 @@ LAB_000168f4:
       }
       if (uVar5 == 0x8000028) {
         pcVar3 = tisp_s_max_again;
-        local_b0 = (undefined4 *******)param_2[1];
+        local_b0 = (int *******)param_2[1];
 LAB_00016aec:
         (*pcVar3)(local_b0);
         return 0;
@@ -3892,7 +3892,7 @@ LAB_00016aec:
       }
       if (uVar5 == 0x8000029) {
         pcVar3 = tisp_s_max_isp_dgain;
-        local_b0 = (undefined4 *******)param_2[1];
+        local_b0 = (int *******)param_2[1];
         goto LAB_00016aec;
       }
       if (uVar5 != 0x800002a) {
@@ -3934,13 +3934,13 @@ LAB_00016aec:
           iVar6 = tisp_s_ae_min(local_b0,local_ac,local_a8,local_a4);
           return iVar6;
         }
-        pppppppuVar4 = (undefined4 *******)private_kmalloc(0x42c,0xd0);
-        if (pppppppuVar4 != (undefined4 *******)0x0) {
+        pppppppuVar4 = (int *******)private_kmalloc(0x42c,0xd0);
+        if (pppppppuVar4 != (int *******)0x0) {
           private_copy_from_user(&local_b0,param_2[1],0x10);
-          pppppppuVar4[0x105] = (undefined4 ******)((uint)local_b0 & 0xff);
-          pppppppuVar4[0x106] = (undefined4 ******)((uint)local_b0 >> 8 & 0xff);
-          pppppppuVar4[0x107] = (undefined4 ******)((uint)local_b0 >> 0x10 & 0xff);
-          pppppppuVar4[0x108] = (undefined4 ******)((uint)local_b0 >> 0x18);
+          pppppppuVar4[0x105] = (int ******)((uint)local_b0 & 0xff);
+          pppppppuVar4[0x106] = (int ******)((uint)local_b0 >> 8 & 0xff);
+          pppppppuVar4[0x107] = (int ******)((uint)local_b0 >> 0x10 & 0xff);
+          pppppppuVar4[0x108] = (int ******)((uint)local_b0 >> 0x18);
           for (uVar5 = 0; uVar5 < 0x41c; uVar5 = uVar5 + 1) {
             *(undefined *)((int)&local_4d0 + uVar5) =
                  *(undefined *)((int)pppppppuVar4 + uVar5 + 0x10);
@@ -4004,7 +4004,7 @@ LAB_00016aec:
       }
       iVar6 = *(int *)(*param_1 + 0xd4);
       param_1[0x1029] = param_2[1];
-      *(undefined4 *)(iVar6 + 0x178) = 1;
+      *(int *)(iVar6 + 0x178) = 1;
       return 0;
     }
     if (0x80000e1 < uVar5) {
@@ -4021,7 +4021,7 @@ LAB_00016aec:
       }
       if (uVar5 < 0x8000101) {
         if (uVar5 == 0x80000e6) {
-          local_b0 = (undefined4 *******)param_2[1];
+          local_b0 = (int *******)param_2[1];
           pcVar3 = tisp_s_ev_start;
           goto LAB_00016aec;
         }
@@ -4082,13 +4082,13 @@ LAB_00016aec:
           if (uVar5 == 1) {
             if ((param_1[0x1029] & 0xfffffffdU) == 0) {
               iVar6 = 2;
-              *(undefined4 *)(iVar10 + 0x178) = 2;
+              *(int *)(iVar10 + 0x178) = 2;
             }
             else {
               if ((param_1[0x1029] & 0xfffffffdU) != 1) {
                 return 0;
               }
-              *(undefined4 *)(iVar10 + 0x178) = 2;
+              *(int *)(iVar10 + 0x178) = 2;
               iVar6 = 3;
             }
             param_1[0x1029] = iVar6;
@@ -4104,7 +4104,7 @@ LAB_00016aec:
                 return 0;
               }
             }
-            *(undefined4 *)(iVar10 + 0x178) = uVar7;
+            *(int *)(iVar10 + 0x178) = uVar7;
             return 0;
           }
           return 0;
@@ -4118,11 +4118,11 @@ LAB_00016aec:
         if (0x8000161 < uVar5) {
           if (uVar5 == 0x8000164) {
             if (param_2[1] == 1) {
-              *(undefined4 *)(*(int *)(*param_1 + 0xd4) + 0x15c) = 0;
+              *(int *)(*(int *)(*param_1 + 0xd4) + 0x15c) = 0;
               pcVar9 = "@@@ isp bypass disable @@@\n";
             }
             else {
-              *(undefined4 *)(*(int *)(*param_1 + 0xd4) + 0x15c) = 1;
+              *(int *)(*(int *)(*param_1 + 0xd4) + 0x15c) = 1;
               pcVar9 = "@@@ isp bypass enable @@@\n";
             }
             isp_printf(0,pcVar9);
@@ -4153,8 +4153,8 @@ LAB_00016cc8:
           }
           return -1;
         }
-        local_b0 = (undefined4 *******)param_2[1];
-        if (local_b0 < (undefined4 *******)0x100) {
+        local_b0 = (int *******)param_2[1];
+        if (local_b0 < (int *******)0x100) {
           pcVar3 = tisp_set_bcsh_hue;
           goto LAB_00016aec;
         }
@@ -4257,8 +4257,8 @@ LAB_000169c4:
           return -1;
         }
         iVar6 = *param_1;
-        local_b0 = (undefined4 *******)param_2[1];
-        if (local_b0 == *(undefined4 ********)(*(int *)(iVar6 + 0xd4) + 300)) {
+        local_b0 = (int *******)param_2[1];
+        if (local_b0 == *(int ********)(*(int *)(iVar6 + 0xd4) + 300)) {
           return 0;
         }
         if (iVar6 == 0) {
@@ -4306,7 +4306,7 @@ LAB_00016c64:
 
 
 
-undefined4 apical_isp_mask_g_attr_isra_68(undefined4 *param_1)
+int apical_isp_mask_g_attr_isra_68(int *param_1)
 
 {
   undefined auStack_b8 [176];
@@ -4318,7 +4318,7 @@ undefined4 apical_isp_mask_g_attr_isra_68(undefined4 *param_1)
 
 
 
-undefined4 apical_isp_expr_g_ctrl_isra_72(undefined4 *param_1)
+int apical_isp_expr_g_ctrl_isra_72(int *param_1)
 
 {
   undefined local_98 [48];
@@ -4342,12 +4342,12 @@ undefined4 apical_isp_expr_g_ctrl_isra_72(undefined4 *param_1)
 
 
 
-int apical_isp_max_again_g_ctrl_isra_73(undefined4 *param_1)
+int apical_isp_max_again_g_ctrl_isra_73(int *param_1)
 
 {
   int iVar1;
   undefined auStack_90 [32];
-  undefined4 local_70;
+  int local_70;
   
   iVar1 = tisp_g_ev_attr(auStack_90);
   if (iVar1 == 0) {
@@ -4361,12 +4361,12 @@ int apical_isp_max_again_g_ctrl_isra_73(undefined4 *param_1)
 
 
 
-int apical_isp_max_dgain_g_ctrl_isra_74(undefined4 *param_1)
+int apical_isp_max_dgain_g_ctrl_isra_74(int *param_1)
 
 {
   int iVar1;
   undefined auStack_90 [36];
-  undefined4 local_6c;
+  int local_6c;
   
   iVar1 = tisp_g_ev_attr(auStack_90);
   if (iVar1 == 0) {
@@ -4380,23 +4380,23 @@ int apical_isp_max_dgain_g_ctrl_isra_74(undefined4 *param_1)
 
 
 
-int apical_isp_ev_g_attr_isra_75(undefined4 *param_1)
+int apical_isp_ev_g_attr_isra_75(int *param_1)
 
 {
   int iVar1;
   undefined auStack_a8 [4];
-  undefined4 local_a4;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
-  undefined4 local_90;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
-  undefined4 local_18;
-  undefined4 local_14;
+  int local_a4;
+  int local_a0;
+  int local_9c;
+  int local_98;
+  int local_94;
+  int local_90;
+  int local_28;
+  int local_24;
+  int local_20;
+  int local_1c;
+  int local_18;
+  int local_14;
   
   iVar1 = tisp_g_ev_attr(auStack_a8);
   if (iVar1 == 0) {
@@ -4416,7 +4416,7 @@ int apical_isp_ev_g_attr_isra_75(undefined4 *param_1)
 
 
 
-int apical_isp_gamma_g_attr_isra_76(undefined4 *param_1)
+int apical_isp_gamma_g_attr_isra_76(int *param_1)
 
 {
   int iVar1;
@@ -4445,7 +4445,7 @@ int apical_isp_gamma_g_attr_isra_76(undefined4 *param_1)
 
 
 
-int apical_isp_ae_g_roi_isra_77(undefined4 *param_1)
+int apical_isp_ae_g_roi_isra_77(int *param_1)
 
 {
   int iVar1;
@@ -4473,7 +4473,7 @@ int apical_isp_ae_g_roi_isra_77(undefined4 *param_1)
           iVar6 = iVar3 + iVar4;
           iVar5 = iVar3 * 4;
           iVar3 = iVar3 + 1;
-          local_f8[iVar6] = (char)*(undefined4 *)(iVar1 + iVar5 + iVar7);
+          local_f8[iVar6] = (char)*(int *)(iVar1 + iVar5 + iVar7);
         } while (iVar3 != 0xf);
         iVar4 = iVar4 + 0xf;
         iVar7 = iVar4 * 4;
@@ -4490,7 +4490,7 @@ int apical_isp_ae_g_roi_isra_77(undefined4 *param_1)
 
 
 
-undefined4 apical_isp_ae_zone_g_ctrl_isra_84(undefined4 *param_1)
+int apical_isp_ae_zone_g_ctrl_isra_84(int *param_1)
 
 {
   undefined auStack_390 [904];
@@ -4502,7 +4502,7 @@ undefined4 apical_isp_ae_zone_g_ctrl_isra_84(undefined4 *param_1)
 
 
 
-undefined4 apical_isp_af_zone_g_ctrl_isra_85(undefined4 *param_1)
+int apical_isp_af_zone_g_ctrl_isra_85(int *param_1)
 
 {
   undefined auStack_390 [904];
@@ -4514,7 +4514,7 @@ undefined4 apical_isp_af_zone_g_ctrl_isra_85(undefined4 *param_1)
 
 
 
-int apical_isp_ae_zone_weight_g_attr_isra_89(undefined4 *param_1)
+int apical_isp_ae_zone_weight_g_attr_isra_89(int *param_1)
 
 {
   int iVar1;
@@ -4542,7 +4542,7 @@ int apical_isp_ae_zone_weight_g_attr_isra_89(undefined4 *param_1)
           iVar6 = iVar3 + iVar4;
           iVar5 = iVar3 * 4;
           iVar3 = iVar3 + 1;
-          local_f8[iVar6] = (char)*(undefined4 *)(iVar1 + iVar5 + iVar7);
+          local_f8[iVar6] = (char)*(int *)(iVar1 + iVar5 + iVar7);
         } while (iVar3 != 0xf);
         iVar4 = iVar4 + 0xf;
         iVar7 = iVar4 * 4;
@@ -4559,11 +4559,11 @@ int apical_isp_ae_zone_weight_g_attr_isra_89(undefined4 *param_1)
 
 
 
-undefined4 apical_isp_ae_hist_origin_g_attr_isra_92(undefined4 *param_1)
+int apical_isp_ae_hist_origin_g_attr_isra_92(int *param_1)
 
 {
   void *__src;
-  undefined4 uVar1;
+  int uVar1;
   undefined auStack_410 [1028];
   
   __src = (void *)private_kmalloc(0x42c,0xd0);
@@ -4583,11 +4583,11 @@ undefined4 apical_isp_ae_hist_origin_g_attr_isra_92(undefined4 *param_1)
 
 
 
-undefined4 apical_isp_awb_zone_statis_g_attr_isra_94(undefined4 *param_1)
+int apical_isp_awb_zone_statis_g_attr_isra_94(int *param_1)
 
 {
   void *__src;
-  undefined4 uVar1;
+  int uVar1;
   undefined auStack_2b8 [684];
   
   __src = (void *)private_vmalloc(0x1c);
@@ -4607,13 +4607,13 @@ undefined4 apical_isp_awb_zone_statis_g_attr_isra_94(undefined4 *param_1)
 
 
 
-undefined4 apical_isp_af_hist_g_attr_isra_95(undefined4 *param_1)
+int apical_isp_af_hist_g_attr_isra_95(int *param_1)
 
 {
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined4 local_b0;
-  undefined4 local_ac;
+  int local_b8;
+  int local_b4;
+  int local_b0;
+  int local_ac;
   undefined local_a8;
   undefined local_a7;
   undefined2 local_a6;
@@ -4662,10 +4662,10 @@ undefined4 apical_isp_af_hist_g_attr_isra_95(undefined4 *param_1)
   undefined local_68;
   undefined2 local_66;
   undefined local_64;
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
+  int local_60;
+  int local_5c;
+  int local_58;
+  int local_54;
   undefined local_50;
   undefined local_4f;
   undefined2 local_4e;
@@ -4774,7 +4774,7 @@ undefined4 apical_isp_af_hist_g_attr_isra_95(undefined4 *param_1)
 
 
 
-int apical_isp_af_weight_g_attr_isra_96(undefined4 *param_1)
+int apical_isp_af_weight_g_attr_isra_96(int *param_1)
 
 {
   int iVar1;
@@ -4802,7 +4802,7 @@ int apical_isp_af_weight_g_attr_isra_96(undefined4 *param_1)
           iVar6 = iVar3 + iVar4;
           iVar5 = iVar3 * 4;
           iVar3 = iVar3 + 1;
-          local_f8[iVar6] = (char)*(undefined4 *)(iVar1 + iVar5 + iVar7);
+          local_f8[iVar6] = (char)*(int *)(iVar1 + iVar5 + iVar7);
         } while (iVar3 != 0xf);
         iVar4 = iVar4 + 0xf;
         iVar7 = iVar4 * 4;
@@ -4819,7 +4819,7 @@ int apical_isp_af_weight_g_attr_isra_96(undefined4 *param_1)
 
 
 
-undefined4 tiziano_isp_ae_manual_attr_g_ctrl_isra_103(undefined4 *param_1)
+int tiziano_isp_ae_manual_attr_g_ctrl_isra_103(int *param_1)
 
 {
   undefined auStack_a0 [152];
@@ -4831,10 +4831,10 @@ undefined4 tiziano_isp_ae_manual_attr_g_ctrl_isra_103(undefined4 *param_1)
 
 
 
-undefined4 tiziano_isp_csc_g_attr_isra_108(undefined4 *param_1)
+int tiziano_isp_csc_g_attr_isra_108(int *param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   undefined auStack_50 [68];
   
   uVar1 = tisp_get_csc_attr(auStack_50);
@@ -4844,16 +4844,16 @@ undefined4 tiziano_isp_csc_g_attr_isra_108(undefined4 *param_1)
 
 
 
-undefined4 isp_frame_done_wait(uint param_1,undefined4 *param_2)
+int isp_frame_done_wait(uint param_1,int *param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int *unaff_gp;
-  undefined4 local_38;
+  int local_38;
   int local_34;
   undefined *local_30;
-  undefined4 ***local_2c;
-  undefined4 ***local_28;
+  int ***local_2c;
+  int ***local_28;
   
   frame_done_cond = 0;
   local_38 = 0;
@@ -4899,19 +4899,19 @@ int apical_isp_core_ops_g_ctrl(int *param_1,uint *param_2)
   char *pcVar4;
   uint *puVar5;
   char *pcVar6;
-  undefined4 uVar7;
+  int uVar7;
   int iVar8;
   int unaff_gp;
   uint local_98;
   uint local_94;
   uint local_90;
   int local_8c;
-  undefined4 local_88;
+  int local_88;
   int local_84;
   ushort local_80;
   uint local_7c;
   uint local_18;
-  undefined4 local_14;
+  int local_14;
   
   uVar3 = *param_2;
   if (uVar3 == 0x8000032) {
@@ -5150,17 +5150,17 @@ LAB_00018540:
                 iVar8 = private_kmalloc(0x42c,0xd0);
                 if (iVar8 != 0) {
                   tisp_g_ae_hist(iVar8);
-                  local_98 = CONCAT13((char)*(undefined4 *)(iVar8 + 0x420),
-                                      CONCAT12((char)*(undefined4 *)(iVar8 + 0x41c),
-                                               CONCAT11((char)*(undefined4 *)(iVar8 + 0x418),
-                                                        (char)*(undefined4 *)(iVar8 + 0x414))));
-                  local_94 = CONCAT22((short)*(undefined4 *)(iVar8 + 0x404),
-                                      (short)*(undefined4 *)(iVar8 + 0x400));
-                  local_90 = CONCAT22((short)*(undefined4 *)(iVar8 + 0x40c),
-                                      (short)*(undefined4 *)(iVar8 + 0x408));
-                  local_8c = CONCAT13((char)*(undefined4 *)(iVar8 + 0x428),
-                                      CONCAT12((char)*(undefined4 *)(iVar8 + 0x424),
-                                               (short)*(undefined4 *)(iVar8 + 0x410)));
+                  local_98 = CONCAT13((char)*(int *)(iVar8 + 0x420),
+                                      CONCAT12((char)*(int *)(iVar8 + 0x41c),
+                                               CONCAT11((char)*(int *)(iVar8 + 0x418),
+                                                        (char)*(int *)(iVar8 + 0x414))));
+                  local_94 = CONCAT22((short)*(int *)(iVar8 + 0x404),
+                                      (short)*(int *)(iVar8 + 0x400));
+                  local_90 = CONCAT22((short)*(int *)(iVar8 + 0x40c),
+                                      (short)*(int *)(iVar8 + 0x408));
+                  local_8c = CONCAT13((char)*(int *)(iVar8 + 0x428),
+                                      CONCAT12((char)*(int *)(iVar8 + 0x424),
+                                               (short)*(int *)(iVar8 + 0x410)));
                   private_copy_to_user(param_2[1],&local_98,0x10);
                   private_kfree(iVar8);
                   return 0;
@@ -5309,9 +5309,9 @@ LAB_00018668:
               uVar7 = 0x14;
               local_98 = (uint)*(ushort *)(*(int *)(iVar8 + 0x120) + 0xb0);
               local_94 = (uint)*(ushort *)(*(int *)(iVar8 + 0x120) + 0xb2);
-              local_90 = *(undefined4 *)(iVar8 + 300);
+              local_90 = *(int *)(iVar8 + 300);
               local_8c = *(int *)(iVar8 + 0x124);
-              local_88 = *(undefined4 *)(iVar8 + 0x128);
+              local_88 = *(int *)(iVar8 + 0x128);
               goto LAB_00017f18;
             }
             if (uVar3 < 0x8000045) {
@@ -5464,7 +5464,7 @@ LAB_000186d0:
 
 
 
-int isp_core_tunning_unlocked_ioctl(int param_1,int param_2,undefined4 param_3)
+int isp_core_tunning_unlocked_ioctl(int param_1,int param_2,int param_3)
 
 {
   int iVar1;
@@ -5533,10 +5533,10 @@ void isp_frame_done_wakeup(void)
 
 
 
-undefined4 isp_core_tuning_event(int param_1,uint param_2)
+int isp_core_tuning_event(int param_1,uint param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   if (param_2 == 0x4000001) {
     uVar1 = 1;
@@ -5547,9 +5547,9 @@ undefined4 isp_core_tuning_event(int param_1,uint param_2)
         isp_frame_done_wakeup();
       }
       else if (param_2 == 0x4000003) {
-        uVar1 = *(undefined4 *)(param_1 + 0x40a4);
+        uVar1 = *(int *)(param_1 + 0x40a4);
         tisp_day_or_night_s_ctrl(uVar1);
-        *(undefined4 *)(param_1 + 0x40a4) = uVar1;
+        *(int *)(param_1 + 0x40a4) = uVar1;
       }
       return 0;
     }
@@ -5558,21 +5558,21 @@ undefined4 isp_core_tuning_event(int param_1,uint param_2)
     }
     uVar1 = 2;
   }
-  *(undefined4 *)(param_1 + 0x40c4) = uVar1;
+  *(int *)(param_1 + 0x40c4) = uVar1;
   return 0;
 }
 
 
 
-undefined4 * isp_core_tuning_init(undefined4 param_1)
+int * isp_core_tuning_init(int param_1)
 
 {
-  undefined4 *__s;
+  int *__s;
   
-  __s = (undefined4 *)private_kmalloc(0x40d0,0xd0);
-  if (__s == (undefined4 *)0x0) {
+  __s = (int *)private_kmalloc(0x40d0,0xd0);
+  if (__s == (int *)0x0) {
     isp_printf(2,"Failed to allocate isp image tuning device\n");
-    __s = (undefined4 *)0x0;
+    __s = (int *)0x0;
   }
   else {
     memset(__s,0,0x40d0);
@@ -5720,7 +5720,7 @@ void private_i2c_set_clientdata(void)
 
 
 
-void private_i2c_add_driver(undefined4 param_1)
+void private_i2c_add_driver(int param_1)
 
 {
                     // WARNING: Could not recover jumptable at 0x00018be8. Too many branches
@@ -5875,7 +5875,7 @@ uint private_log2_int_to_fixed(uint param_1,uint param_2,uint param_3)
 
 
 
-int private_log2_fixed_to_fixed(undefined4 param_1,int param_2,uint param_3)
+int private_log2_fixed_to_fixed(int param_1,int param_2,uint param_3)
 
 {
   int iVar1;
@@ -5985,7 +5985,7 @@ uint private_log2_int_to_fixed_64(uint param_1,uint param_2,uint param_3,uint pa
 
 
 
-int private_log2_fixed_to_fixed_64(undefined4 param_1,undefined4 param_2,int param_3,uint param_4)
+int private_log2_fixed_to_fixed_64(int param_1,int param_2,int param_3,uint param_4)
 
 {
   int iVar1;
@@ -5994,422 +5994,15 @@ int private_log2_fixed_to_fixed_64(undefined4 param_1,undefined4 param_2,int par
   return iVar1 - (param_3 << (param_4 & 0x1f));
 }
 
-
-
-void private_platform_driver_register(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019078. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 4))();
-  return;
-}
-
-
-
-void private_platform_driver_unregister(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x0001908c. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 8))();
-  return;
-}
-
-
-
-void private_platform_set_drvdata(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000190a0. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0xc))();
-  return;
-}
-
-
-
-void private_platform_get_drvdata(int param_1)
-
-{
-  dev_get_drvdata(param_1 + 0x10);
-  return;
-}
-
-
-
-void private_platform_device_register(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000190c4. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x14))();
-  return;
-}
-
-
-
-void private_platform_device_unregister(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000190d8. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x18))();
-  return;
-}
-
-
-
-void private_platform_get_resource(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000190ec. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1c))();
-  return;
-}
-
-
-
-void private_dev_set_drvdata(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019100. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x20))();
-  return;
-}
-
-
-
-void private_dev_get_drvdata(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019114. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x24))();
-  return;
-}
-
-
-
-void private_platform_get_irq(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019128. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x28))();
-  return;
-}
-
-
-
-void private_request_mem_region(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x0001913c. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x2c))();
-  return;
-}
-
-
-
-void private_release_mem_region(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019150. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x30))();
-  return;
-}
-
-
-
-void private_ioremap(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019164. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x34))();
-  return;
-}
-
-
-
-void private_iounmap(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019178. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x38))();
-  return;
-}
-
-
-
-void private_request_threaded_irq(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x0001918c. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x5c))();
-  return;
-}
-
-
-
-void private_enable_irq(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000191a0. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x60))();
-  return;
-}
-
-
-
-void private_disable_irq(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000191b4. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 100))();
-  return;
-}
-
-
-
-void private_free_irq(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000191c8. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x68))();
-  return;
-}
-
-
-
-void __private_spin_lock_irqsave(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000191dc. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x6c))();
-  return;
-}
-
-
-
-void private_spin_unlock_irqrestore(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000191f0. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x70))();
-  return;
-}
-
-
-
-void private_spin_lock_init(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019204. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x74))();
-  return;
-}
-
-
-
-void private_mutex_lock(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019218. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x78))();
-  return;
-}
-
-
-
-void private_mutex_unlock(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x0001922c. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x7c))();
-  return;
-}
-
-
-
-void private_raw_mutex_init(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019240. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x80))();
-  return;
-}
-
-
-
-void private_clk_get(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019254. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x84))();
-  return;
-}
-
-
-
-void private_clk_is_enabled(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019268. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x8c))();
-  return;
-}
-
-
-
-void private_clk_get_rate(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x0001927c. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x94))();
-  return;
-}
-
-
-
-void private_i2c_get_adapter(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019290. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0xc0))();
-  return;
-}
-
-
-
-void private_i2c_put_adapter(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000192a4. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0xc4))();
-  return;
-}
-
-
-
-void private_i2c_register_driver(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000192b8. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0xcc))();
-  return;
-}
-
-
-
-void private_i2c_new_device(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000192cc. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0xd4))();
-  return;
-}
-
-
-
-void private_i2c_unregister_device(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000192e0. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0xe0))();
-  return;
-}
-
-
-
-void private_gpio_direction_input(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000192f4. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x110))();
-  return;
-}
-
-
-
-void private_gpio_set_debounce(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019308. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x114))();
-  return;
-}
-
-
-
-void private_jzgpio_ctrl_pull(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x0001931c. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x11c))();
-  return;
-}
-
-
-
-void private_sched_clock(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019330. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x128))();
-  return;
-}
-
-
-
-void private_try_module_get(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019344. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 300))();
-  return;
-}
-
-
-
 void private_request_module
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+               (int param_1,int param_2,int param_3,int param_4)
 
 {
-  undefined4 local_res8;
-  undefined4 local_resc;
-  undefined4 local_18;
-  undefined4 **local_14;
-  undefined4 *local_10 [3];
+  int local_res8;
+  int local_resc;
+  int local_18;
+  int **local_14;
+  int *local_10 [3];
   
   local_10[0] = &local_res8;
   local_14 = local_10;
@@ -6543,7 +6136,7 @@ void private_misc_deregister(void)
 
 
 
-void private_proc_create_data(undefined4 param_1,undefined2 param_2)
+void private_proc_create_data(int param_1,undefined2 param_2)
 
 {
                     // WARNING: Could not recover jumptable at 0x00019484. Too many branches
@@ -6620,14 +6213,14 @@ void private_proc_remove(void)
 
 
 
-void private_seq_printf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+void private_seq_printf(int param_1,int param_2,int param_3,int param_4)
 
 {
-  undefined4 local_res8;
-  undefined4 local_resc;
-  undefined4 local_18;
-  undefined4 **local_14;
-  undefined4 *local_10 [3];
+  int local_res8;
+  int local_resc;
+  int local_18;
+  int **local_14;
+  int *local_10 [3];
   
   local_10[0] = &local_res8;
   local_14 = local_10;
@@ -6637,258 +6230,6 @@ void private_seq_printf(undefined4 param_1,undefined4 param_2,undefined4 param_3
   (**(code **)(pfaces + 0x17c))(param_1,&_LC0,&local_18);
   return;
 }
-
-
-
-void private_simple_strtoull(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x0001955c. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x180))();
-  return;
-}
-
-
-
-void private_kthread_should_stop(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019570. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x184))();
-  return;
-}
-
-
-
-void private_kthread_run(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019584. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x188))();
-  return;
-}
-
-
-
-void private_kthread_stop(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019598. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x18c))();
-  return;
-}
-
-
-
-void private_kmalloc(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000195ac. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 400))();
-  return;
-}
-
-
-
-void private_kfree(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000195c0. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x194))();
-  return;
-}
-
-
-
-void private_copy_from_user(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000195d4. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x198))();
-  return;
-}
-
-
-
-void private_copy_to_user(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000195e8. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x19c))();
-  return;
-}
-
-
-
-void private_nlmsg_new(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000195fc. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1a0))();
-  return;
-}
-
-
-
-void private_nlmsg_put(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019610. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1a4))();
-  return;
-}
-
-
-
-void private_netlink_unicast(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019624. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1a8))();
-  return;
-}
-
-
-
-void private_netlink_kernel_create(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019638. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1ac))();
-  return;
-}
-
-
-
-void private_sock_release(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x0001964c. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1b0))();
-  return;
-}
-
-
-
-void private_filp_open(undefined4 param_1,undefined4 param_2,undefined2 param_3)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019660. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1b4))(param_1,param_2,param_3);
-  return;
-}
-
-
-
-void private_filp_close(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019674. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1b8))();
-  return;
-}
-
-
-
-void private_vfs_read(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019688. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1bc))();
-  return;
-}
-
-
-
-void private_vfs_write(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x0001969c. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1c0))();
-  return;
-}
-
-
-
-void private_vfs_llseek(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000196b0. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1c4))();
-  return;
-}
-
-
-
-undefined4 private_get_fs(undefined4 param_1)
-
-{
-  (**(code **)(pfaces + 0x1c8))();
-  return param_1;
-}
-
-
-
-void private_set_fs(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x000196f8. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1cc))();
-  return;
-}
-
-
-
-void private_dma_cache_sync(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x0001970c. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1d0))();
-  return;
-}
-
-
-
-void private_getrawmonotonic(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019720. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1d4))();
-  return;
-}
-
-
-
-void private_get_init_net(void)
-
-{
-                    // WARNING: Could not recover jumptable at 0x00019734. Too many branches
-                    // WARNING: Treating indirect jump as call
-  (**(code **)(pfaces + 0x1d8))();
-  return;
-}
-
 
 
 void private_get_isp_priv_mem(void)
@@ -6906,7 +6247,7 @@ undefined * find_new_buffer(void)
 
 {
   int iVar1;
-  undefined4 *puVar2;
+  int *puVar2;
   
   puVar2 = &ispmem;
   iVar1 = 0;
@@ -6927,7 +6268,7 @@ undefined * find_new_buffer(void)
 void isp_mem_init(void)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   memset(&ispmem,0,0x1ac);
   private_get_isp_priv_mem(&ispmem,&DAT_000b2224);
@@ -6935,19 +6276,19 @@ void isp_mem_init(void)
   DAT_000b23bc = (undefined *)find_new_buffer();
   *DAT_000b23bc = 0;
   uVar1 = ispmem;
-  *(undefined4 *)(DAT_000b23bc + 4) = 0;
-  *(undefined4 *)(DAT_000b23bc + 8) = 0;
-  *(undefined4 *)(DAT_000b23bc + 0xc) = uVar1;
-  *(undefined4 *)(DAT_000b23bc + 0x10) = DAT_000b2224;
+  *(int *)(DAT_000b23bc + 4) = 0;
+  *(int *)(DAT_000b23bc + 8) = 0;
+  *(int *)(DAT_000b23bc + 0xc) = uVar1;
+  *(int *)(DAT_000b23bc + 0x10) = DAT_000b2224;
   return;
 }
 
 
 
-undefined4 isp_malloc_buffer(int param_1)
+int isp_malloc_buffer(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   int iVar3;
   char *pcVar4;
@@ -6979,7 +6320,7 @@ LAB_00019940:
               if (*(int *)(pcVar4 + 8) != 0) {
                 *(int *)(*(int *)(pcVar4 + 8) + 4) = iVar2;
               }
-              *(undefined4 *)(iVar2 + 8) = *(undefined4 *)(pcVar4 + 8);
+              *(int *)(iVar2 + 8) = *(int *)(pcVar4 + 8);
               *(int *)(pcVar4 + 8) = iVar2;
             }
             *(uint *)(pcVar4 + 0x10) = uVar5;
@@ -6995,7 +6336,7 @@ LAB_00019940:
       private_mutex_unlock(&DAT_000b23c0);
       uVar1 = 0;
       if (pcVar4 != (char *)0x0) {
-        uVar1 = *(undefined4 *)(pcVar4 + 0xc);
+        uVar1 = *(int *)(pcVar4 + 0xc);
       }
     }
   }
@@ -7022,7 +6363,7 @@ LAB_00019a24:
         if ((((*pcVar1 == '\0') && (__s != (char *)0x0)) && (*__s == '\0')) &&
            (*(int *)(pcVar1 + 0x10) + *(int *)(pcVar1 + 0xc) == *(int *)(__s + 0xc))) {
           *(int *)(pcVar1 + 0x10) = *(int *)(__s + 0x10) + *(int *)(pcVar1 + 0x10);
-          *(undefined4 *)(pcVar1 + 8) = *(undefined4 *)(__s + 8);
+          *(int *)(pcVar1 + 8) = *(int *)(__s + 8);
           if (*(int *)(__s + 8) != 0) {
             *(char **)(*(int *)(__s + 8) + 4) = pcVar1;
           }
@@ -7051,7 +6392,7 @@ LAB_00019a24:
 
 
 
-void private_ktime_set(undefined4 *param_1)
+void private_ktime_set(int *param_1)
 
 {
   *param_1 = 0;
@@ -7060,22 +6401,22 @@ void private_ktime_set(undefined4 *param_1)
 }
 
 
-undefined4 * FUN_00019bc4(undefined4 *param_1)
+int * FUN_00019bc4(int *param_1)
 
 {
-  undefined4 local_10 [2];
+  int local_10 [2];
   
   memset(local_10,0,4);
   *param_1 = local_10[0];
   return param_1;
 }
 
-undefined4 isp_irq_handle(undefined4 param_1,int param_2)
+int isp_irq_handle(int param_1,int param_2)
 
 {
   code *pcVar1;
   int iVar2;
-  undefined4 uVar3;
+  int uVar3;
   int *piVar4;
   
   if (param_2 + -0x80 != 0) {
@@ -7110,7 +6451,7 @@ LAB_00019ee0:
 
 
 
-undefined4 isp_irq_thread_handle(undefined4 param_1,int param_2)
+int isp_irq_thread_handle(int param_1,int param_2)
 
 {
   code *pcVar1;
@@ -7137,7 +6478,7 @@ undefined4 isp_irq_thread_handle(undefined4 param_1,int param_2)
 
 
 
-void tx_isp_enable_irq(undefined4 *param_1)
+void tx_isp_enable_irq(int *param_1)
 
 {
                     // WARNING: Could not recover jumptable at 0x000191a0. Too many branches
@@ -7148,7 +6489,7 @@ void tx_isp_enable_irq(undefined4 *param_1)
 
 
 
-void tx_isp_disable_irq(undefined4 *param_1)
+void tx_isp_disable_irq(int *param_1)
 
 {
                     // WARNING: Could not recover jumptable at 0x000191b4. Too many branches
@@ -7159,14 +6500,14 @@ void tx_isp_disable_irq(undefined4 *param_1)
 
 
 
-undefined4 tx_isp_request_irq(undefined4 *param_1,int *param_2)
+int tx_isp_request_irq(int *param_1,int *param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   int iVar3;
   
-  if ((param_1 == (undefined4 *)0x0) || (param_2 == (int *)0x0)) {
+  if ((param_1 == (int *)0x0) || (param_2 == (int *)0x0)) {
     isp_printf(2,"%s[%d] the parameters are invalid!\n","tx_isp_request_irq",0x4d);
     uVar1 = 0xffffffea;
   }
@@ -7213,10 +6554,10 @@ void tx_isp_free_irq(int *param_1)
 
 
 
-undefined4 fs_activate_module(uint param_1)
+int fs_activate_module(uint param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   int iVar3;
   
@@ -7230,12 +6571,12 @@ undefined4 fs_activate_module(uint param_1)
       iVar3 = 0;
       while( true ) {
         if (*(int *)(param_1 + 0xe0) <= iVar3) {
-          *(undefined4 *)(param_1 + 0xe4) = 2;
+          *(int *)(param_1 + 0xe4) = 2;
           return 0;
         }
         iVar2 = iVar3 * 0x2ec + *(int *)(param_1 + 0xdc);
         if (*(int *)(iVar2 + 0x2d0) != 1) break;
-        *(undefined4 *)(iVar2 + 0x2d0) = 2;
+        *(int *)(iVar2 + 0x2d0) = 2;
         iVar3 = iVar3 + 1;
       }
       isp_printf(2,"The state of channel%d is invalid when be activated!\n");
@@ -7254,11 +6595,11 @@ int __enqueue_in_driver(int param_1)
   int iVar2;
   
   iVar2 = *(int *)(param_1 + 0x44);
-  *(undefined4 *)(param_1 + 0x48) = 3;
+  *(int *)(param_1 + 0x48) = 3;
   *(undefined *)(param_1 + 0x4c) = 3;
-  iVar1 = tx_isp_send_event_to_remote(*(undefined4 *)(iVar2 + 0x298),0x3000005,param_1 + 0x68);
+  iVar1 = tx_isp_send_event_to_remote(*(int *)(iVar2 + 0x298),0x3000005,param_1 + 0x68);
   if ((iVar1 != 0) && (iVar1 != -0x203)) {
-    isp_printf(2,"Failed to qbuf to driver; chan%d!\n",*(undefined4 *)(iVar2 + 0x29c));
+    isp_printf(2,"Failed to qbuf to driver; chan%d!\n",*(int *)(iVar2 + 0x29c));
   }
   return iVar1;
 }
@@ -7271,12 +6612,12 @@ void __vb2_queue_cancel(uint param_1)
   bool bVar1;
   uint uVar2;
   int *piVar3;
-  undefined4 local_18 [2];
+  int local_18 [2];
   
   local_18[0] = 0;
   if ((param_1 != 0) && (param_1 < 0xfffff001)) {
     if ((*(uint *)(param_1 + 0x20c) & 1) != 0) {
-      tx_isp_send_event_to_remote(*(undefined4 *)(param_1 + 0x298),0x3000004,0);
+      tx_isp_send_event_to_remote(*(int *)(param_1 + 0x298),0x3000004,0);
     }
     *(byte *)(param_1 + 0x20c) = *(byte *)(param_1 + 0x20c) & 0xfe;
     *(uint *)(param_1 + 0x1ec) = param_1 + 0x1ec;
@@ -7284,15 +6625,15 @@ void __vb2_queue_cancel(uint param_1)
     __private_spin_lock_irqsave(param_1 + 0x200,local_18);
     *(uint *)(param_1 + 0x1f8) = param_1 + 0x1f8;
     *(uint *)(param_1 + 0x1fc) = param_1 + 0x1f8;
-    *(undefined4 *)(param_1 + 500) = 0;
-    *(undefined4 *)(param_1 + 0x200) = 0;
+    *(int *)(param_1 + 500) = 0;
+    *(int *)(param_1 + 0x200) = 0;
     private_spin_unlock_irqrestore(param_1 + 0x200,local_18[0]);
-    tx_isp_send_event_to_remote(*(undefined4 *)(param_1 + 0x298),0x3000007,0);
+    tx_isp_send_event_to_remote(*(int *)(param_1 + 0x298),0x3000007,0);
     private_wake_up_all(param_1 + 0x204);
     piVar3 = (int *)(param_1 + 0xe8);
     uVar2 = 0;
     while (bVar1 = uVar2 < *(uint *)(param_1 + 0x1e8), uVar2 = uVar2 + 1, bVar1) {
-      *(undefined4 *)(*piVar3 + 0x48) = 0;
+      *(int *)(*piVar3 + 0x48) = 0;
       piVar3 = piVar3 + 1;
     }
   }
@@ -7306,16 +6647,16 @@ void __vb2_queue_free(int param_1,int param_2)
 {
   uint uVar1;
   int iVar2;
-  undefined4 local_20 [2];
+  int local_20 [2];
   
   uVar1 = *(int *)(param_1 + 0x1e8) - param_2;
   local_20[0] = 0;
   iVar2 = param_1 + uVar1 * 4;
   while( true ) {
     if (*(uint *)(param_1 + 0x1e8) <= uVar1) break;
-    private_kfree(*(undefined4 *)(iVar2 + 0xe8));
+    private_kfree(*(int *)(iVar2 + 0xe8));
     uVar1 = uVar1 + 1;
-    *(undefined4 *)(iVar2 + 0xe8) = 0;
+    *(int *)(iVar2 + 0xe8) = 0;
     iVar2 = iVar2 + 4;
   }
   *(uint *)(param_1 + 0x1e8) = *(uint *)(param_1 + 0x1e8) - param_2;
@@ -7325,16 +6666,16 @@ void __vb2_queue_free(int param_1,int param_2)
   *(int *)(param_1 + 0x1f8) = param_1 + 0x1f8;
   *(int *)(param_1 + 0x1fc) = param_1 + 0x1f8;
   private_spin_unlock_irqrestore(param_1 + 0x200,local_20[0]);
-  tx_isp_send_event_to_remote(*(undefined4 *)(param_1 + 0x298),0x3000007,0);
+  tx_isp_send_event_to_remote(*(int *)(param_1 + 0x298),0x3000007,0);
   return;
 }
 
 
 
-void dump_isp_framesource_open(undefined4 param_1,undefined4 param_2)
+void dump_isp_framesource_open(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   uVar1 = PDE_DATA();
                     // WARNING: Could not recover jumptable at 0x000194d4. Too many branches
@@ -7360,7 +6701,7 @@ int isp_framesource_show(int param_1)
   int *piVar10;
   uint uVar11;
   int iVar12;
-  undefined4 local_40 [2];
+  int local_40 [2];
   char *local_38;
   int local_34;
   int local_30;
@@ -7394,7 +6735,7 @@ int isp_framesource_show(int param_1)
                                    (int)*(char *)(iVar9 + 0x248),(int)*(char *)(iVar9 + 0x249),
                                    (int)*(char *)(iVar9 + 0x24a),(int)*(char *)(iVar9 + 0x24b));
         iVar4 = private_seq_printf(param_1,"output resolution: %d * %d\n",
-                                   *(undefined4 *)(iVar9 + 0x240),*(undefined4 *)(iVar9 + 0x244));
+                                   *(int *)(iVar9 + 0x240),*(int *)(iVar9 + 0x244));
         if (*(char *)(iVar9 + 0x284) == '\0') {
           pcVar7 = "disable";
         }
@@ -7407,8 +6748,8 @@ int isp_framesource_show(int param_1)
           cVar1 = *(char *)(iVar9 + 0x270);
         }
         else {
-          iVar8 = private_seq_printf(param_1,"scaler width: %d\n",*(undefined4 *)(iVar9 + 0x288));
-          iVar3 = private_seq_printf(param_1,"scaler height: %d\n",*(undefined4 *)(iVar9 + 0x28c));
+          iVar8 = private_seq_printf(param_1,"scaler width: %d\n",*(int *)(iVar9 + 0x288));
+          iVar3 = private_seq_printf(param_1,"scaler height: %d\n",*(int *)(iVar9 + 0x28c));
           iVar5 = iVar5 + iVar8 + iVar3;
           cVar1 = *(char *)(iVar9 + 0x270);
         }
@@ -7421,28 +6762,28 @@ int isp_framesource_show(int param_1)
         iVar8 = private_seq_printf(param_1,"crop : %s\n",pcVar7);
         iVar5 = iVar5 + iVar8;
         if (*(char *)(iVar9 + 0x270) != '\0') {
-          iVar8 = private_seq_printf(param_1,"crop top: %d\n",*(undefined4 *)(iVar9 + 0x274));
-          iVar3 = private_seq_printf(param_1,"crop left: %d\n",*(undefined4 *)(iVar9 + 0x278));
-          iVar4 = private_seq_printf(param_1,"crop width: %d\n",*(undefined4 *)(iVar9 + 0x27c));
-          iVar6 = private_seq_printf(param_1,"crop height: %d\n",*(undefined4 *)(iVar9 + 0x280));
+          iVar8 = private_seq_printf(param_1,"crop top: %d\n",*(int *)(iVar9 + 0x274));
+          iVar3 = private_seq_printf(param_1,"crop left: %d\n",*(int *)(iVar9 + 0x278));
+          iVar4 = private_seq_printf(param_1,"crop width: %d\n",*(int *)(iVar9 + 0x27c));
+          iVar6 = private_seq_printf(param_1,"crop height: %d\n",*(int *)(iVar9 + 0x280));
           iVar5 = iVar5 + iVar8 + iVar3 + iVar4 + iVar6;
         }
         iVar8 = private_seq_printf(param_1,"the state of buffers:\n");
         __private_spin_lock_irqsave(iVar9 + 0x2c4,local_40);
-        iVar3 = private_seq_printf(param_1,"queue count: %d\n",*(undefined4 *)(iVar9 + 0x218));
+        iVar3 = private_seq_printf(param_1,"queue count: %d\n",*(int *)(iVar9 + 0x218));
         iVar3 = iVar5 + iVar8 + iVar3;
         iVar4 = *(int *)(iVar9 + 0x210);
         iVar8 = iVar9 + 0x210;
         while (iVar4 != iVar8) {
           local_38 = (char *)(iVar4 + -0x58);
           local_34 = iVar8;
-          iVar8 = private_seq_printf(param_1,"queue addr: 0x%08lx\n",*(undefined4 *)(iVar4 + -0x24))
+          iVar8 = private_seq_printf(param_1,"queue addr: 0x%08lx\n",*(int *)(iVar4 + -0x24))
           ;
           iVar3 = iVar3 + iVar8;
           iVar8 = local_34;
           iVar4 = *(int *)(local_38 + 0x58);
         }
-        iVar8 = private_seq_printf(param_1,"done count: %d\n",*(undefined4 *)(iVar9 + 0x224));
+        iVar8 = private_seq_printf(param_1,"done count: %d\n",*(int *)(iVar9 + 0x224));
         iVar3 = iVar3 + iVar8;
         iVar4 = *(int *)(iVar9 + 0x21c);
         pcVar7 = "done addr: 0x%08lx\n";
@@ -7451,7 +6792,7 @@ int isp_framesource_show(int param_1)
           local_38 = pcVar7;
           local_34 = iVar4 + -0x60;
           local_30 = iVar8;
-          iVar8 = private_seq_printf(param_1,pcVar7,*(undefined4 *)(iVar4 + -0x2c));
+          iVar8 = private_seq_printf(param_1,pcVar7,*(int *)(iVar4 + -0x2c));
           iVar3 = iVar3 + iVar8;
           pcVar7 = local_38;
           iVar8 = local_30;
@@ -7459,9 +6800,9 @@ int isp_framesource_show(int param_1)
         }
         private_spin_unlock_irqrestore(iVar9 + 0x2c4,local_40[0]);
         iVar4 = private_seq_printf(param_1,"the output buffers is: %d\n",
-                                   *(undefined4 *)(iVar9 + 0x2e0));
+                                   *(int *)(iVar9 + 0x2e0));
         iVar8 = private_seq_printf(param_1,"the losted buffers is: %d\n",
-                                   *(undefined4 *)(iVar9 + 0x2e4));
+                                   *(int *)(iVar9 + 0x2e4));
         iVar8 = iVar3 + iVar4 + iVar8;
         if (iVar12 == 0) {
           iVar3 = private_seq_printf(param_1,"ch0_pre_dequeue_drop is: %d\n",
@@ -7483,9 +6824,9 @@ int isp_framesource_show(int param_1)
           if (iVar4 != 0) {
             local_38 = pcVar7;
             local_34 = iVar3;
-            iVar3 = private_seq_printf(param_1,pcVar7,iVar9,*(undefined4 *)(iVar4 + 0x48),
-                                       *(undefined *)(iVar4 + 0x4c),*(undefined4 *)(iVar4 + 0x50),
-                                       *(undefined4 *)(iVar4 + 0x54));
+            iVar3 = private_seq_printf(param_1,pcVar7,iVar9,*(int *)(iVar4 + 0x48),
+                                       *(undefined *)(iVar4 + 0x4c),*(int *)(iVar4 + 0x50),
+                                       *(int *)(iVar4 + 0x54));
             iVar8 = iVar8 + iVar3;
             pcVar7 = local_38;
             iVar3 = local_34;
@@ -7514,8 +6855,8 @@ void __fill_v4l2_buffer(void *param_1,void *param_2)
   
   iVar3 = *(int *)((int)param_1 + 0x44);
   memcpy(param_2,param_1,0x34);
-  *(undefined4 *)((int)param_2 + 0x3c) = *(undefined4 *)((int)param_1 + 0x3c);
-  *(undefined4 *)((int)param_2 + 0x40) = *(undefined4 *)((int)param_1 + 0x40);
+  *(int *)((int)param_2 + 0x3c) = *(int *)((int)param_1 + 0x3c);
+  *(int *)((int)param_2 + 0x40) = *(int *)((int)param_1 + 0x40);
   uVar1 = *(uint *)((int)param_2 + 0xc) & 0xffff1bb8;
   *(uint *)((int)param_2 + 0xc) = uVar1;
   uVar1 = uVar1 | *(uint *)(iVar3 + 0x14);
@@ -7545,13 +6886,13 @@ void __fill_v4l2_buffer(void *param_1,void *param_2)
 
 
 
-undefined4 frame_chan_event(int *param_1,int param_2,int param_3)
+int frame_chan_event(int *param_1,int param_2,int param_3)
 
 {
   int iVar1;
   int **ppiVar2;
   uint uVar3;
-  undefined4 uVar4;
+  int uVar4;
   int iVar5;
   byte bVar6;
   byte bVar7;
@@ -7560,7 +6901,7 @@ undefined4 frame_chan_event(int *param_1,int param_2,int param_3)
   int *piVar9;
   int local_40;
   int local_3c;
-  undefined4 local_38 [2];
+  int local_38 [2];
   int *local_30;
   int *local_2c;
   
@@ -7589,14 +6930,14 @@ LAB_0001ad30:
       if (piVar8[-9] == *(int *)(param_3 + 8)) {
         *(undefined *)(piVar8 + -3) = 0x65;
         if (bVar6 == 0) goto LAB_0001ae08;
-        uVar4 = *(undefined4 *)(iVar5 + 0x2c0);
+        uVar4 = *(int *)(iVar5 + 0x2c0);
         goto LAB_0001ad88;
       }
       bVar6 = bVar6 + 1;
     }
     __src = (void *)0x0;
     if (bVar6 != 0) {
-      uVar4 = *(undefined4 *)(iVar5 + 0x2c0);
+      uVar4 = *(int *)(iVar5 + 0x2c0);
 LAB_0001ad88:
       isp_printf(1,"mscaler: index = %d, buffer idx = %d\n",uVar4,bVar6);
       piVar8 = (int *)"buflist:0x%08lx\n";
@@ -7606,8 +6947,8 @@ LAB_0001ad88:
         isp_printf(1,piVar8,piVar9[-9]);
         piVar8 = local_30;
       }
-      isp_printf(1,"buf get:0x%08x isp_index = %d\n",*(undefined4 *)(param_3 + 8),
-                 *(undefined4 *)(param_3 + 0x18));
+      isp_printf(1,"buf get:0x%08x isp_index = %d\n",*(int *)(param_3 + 8),
+                 *(int *)(param_3 + 0x18));
       dump_msca_regs();
       goto LAB_0001ae08;
     }
@@ -7663,7 +7004,7 @@ LAB_0001ad88:
     __src = (void *)(iVar1 + -0x58);
     memcpy(ch0_pre_dequeue_vb,__src,0x68);
     ch0_pre_dequeue_vb._64_4_ = uVar3 << 0x10 | 1;
-    *(undefined4 *)(iVar1 + -0x18) = ch0_pre_dequeue_vb._64_4_;
+    *(int *)(iVar1 + -0x18) = ch0_pre_dequeue_vb._64_4_;
     isp_ch0_pre_dequeue_valid_lines = uVar3;
     *(undefined *)(iVar5 + 0x238) = 0;
     isp_ch0_pdq_cnt = isp_ch0_pdq_cnt + 1;
@@ -7677,7 +7018,7 @@ LAB_0001ae08:
         if ((piVar9 == (int *)0x0) || (piVar8[-4] != 3)) {
           isp_printf(1,
                      "error: %s, %d ch = %d, vb = %p, buf = 0x%lx, state = %d, loop = %d, idx = %d\n"
-                     ,"frame_channel_buffer_done",0x111,*(undefined4 *)(iVar5 + 0x2c0),piVar9,
+                     ,"frame_channel_buffer_done",0x111,*(int *)(iVar5 + 0x2c0),piVar9,
                      piVar8[-9],piVar8[-4],bVar7,bVar6);
           dump_msca_regs();
           *(int *)(iVar5 + 0x2e4) = *(int *)(iVar5 + 0x2e4) + 1;
@@ -7767,12 +7108,12 @@ LAB_0001af80:
     }
   }
   isp_printf(1,"vb is null, buf get:0x%08x lastaddr = 0x%08x idx=%d isp_index = %d\n",
-             *(undefined4 *)(param_3 + 8),*(undefined4 *)(lastaddr + *(int *)(iVar5 + 0x2c0) * 4),
-             bVar6,*(undefined4 *)(param_3 + 0x18));
+             *(int *)(param_3 + 8),*(int *)(lastaddr + *(int *)(iVar5 + 0x2c0) * 4),
+             bVar6,*(int *)(param_3 + 0x18));
   isp_err3 = isp_err3 + 1;
   iVar1 = *(int *)(iVar5 + 0x2c0);
 LAB_0001b100:
-  *(undefined4 *)(lastaddr + iVar1 * 4) = *(undefined4 *)(param_3 + 8);
+  *(int *)(lastaddr + iVar1 * 4) = *(int *)(param_3 + 8);
 LAB_0001b11c:
   private_spin_unlock_irqrestore(iVar5 + 0x2c4,local_38[0]);
   return 0;
@@ -7783,10 +7124,10 @@ code_r0x0001b0a4:
 
 
 
-undefined4 frame_channel_open(undefined4 param_1,int param_2)
+int frame_channel_open(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   uint uVar2;
   int iVar3;
   
@@ -7797,17 +7138,17 @@ undefined4 frame_channel_open(undefined4 param_1,int param_2)
     if (*(int *)(uVar2 + 0x2d0) < 2) {
       private_mutex_unlock(iVar3);
       isp_printf(2,"Frame channel%d is slake now, Please activate it firstly!\n",
-                 *(undefined4 *)(uVar2 + 0x2c0));
+                 *(int *)(uVar2 + 0x2c0));
       uVar1 = 0xffffffff;
     }
     else {
       private_mutex_unlock(iVar3);
       memset((void *)(uVar2 + 0x23c),0,0x70);
-      *(undefined4 *)(uVar2 + 0x2e0) = 0;
-      *(undefined4 *)(uVar2 + 0x2e4) = 0;
+      *(int *)(uVar2 + 0x2e0) = 0;
+      *(int *)(uVar2 + 0x2e4) = 0;
       private_init_completion(uVar2 + 0x2d4);
-      __vb2_queue_free(uVar2 + 0x24,*(undefined4 *)(uVar2 + 0x20c));
-      *(undefined4 *)(uVar2 + 0x2d0) = 3;
+      __vb2_queue_free(uVar2 + 0x24,*(int *)(uVar2 + 0x20c));
+      *(int *)(uVar2 + 0x2d0) = 3;
       uVar1 = 0;
     }
   }
@@ -7816,7 +7157,7 @@ undefined4 frame_channel_open(undefined4 param_1,int param_2)
 
 
 
-int frame_channel_vidioc_set_fmt(uint param_1,undefined4 param_2)
+int frame_channel_vidioc_set_fmt(uint param_1,int param_2)
 
 {
   int iVar1;
@@ -7842,9 +7183,9 @@ int frame_channel_vidioc_set_fmt(uint param_1,undefined4 param_2)
         goto LAB_0001b2e0;
       }
       if (local_64 == 8) {
-        iVar1 = tx_isp_send_event_to_remote(*(undefined4 *)(param_1 + 700),0x3000002,local_80);
+        iVar1 = tx_isp_send_event_to_remote(*(int *)(param_1 + 700),0x3000002,local_80);
         if ((iVar1 != 0) && (iVar1 != -0x203)) {
-          isp_printf(2,"Failed to set fmt to frame chan%d!\n",*(undefined4 *)(param_1 + 0x2c0));
+          isp_printf(2,"Failed to set fmt to frame chan%d!\n",*(int *)(param_1 + 0x2c0));
           return iVar1;
         }
         iVar1 = private_copy_to_user(param_2,local_80,0x70);
@@ -7875,20 +7216,20 @@ LAB_0001b38c:
 
 
 
-int frame_channel_vidioc_get_fmt(uint param_1,undefined4 param_2)
+int frame_channel_vidioc_get_fmt(uint param_1,int param_2)
 
 {
   int iVar1;
-  undefined4 local_80 [4];
-  undefined4 local_70;
-  undefined4 local_64;
+  int local_80 [4];
+  int local_70;
+  int local_64;
   
   iVar1 = -0x16;
   if (param_1 != 0) {
     if (0xfffff000 < param_1) {
       return iVar1;
     }
-    iVar1 = tx_isp_send_event_to_remote(*(undefined4 *)(param_1 + 700),0x3000001,local_80);
+    iVar1 = tx_isp_send_event_to_remote(*(int *)(param_1 + 700),0x3000001,local_80);
     if ((iVar1 == 0) || (iVar1 == -0x203)) {
       local_64 = 8;
       local_70 = 4;
@@ -7904,7 +7245,7 @@ int frame_channel_vidioc_get_fmt(uint param_1,undefined4 param_2)
       }
     }
     else {
-      isp_printf(2,"Failed to set fmt to frame chan%d!\n",*(undefined4 *)(param_1 + 0x2c0));
+      isp_printf(2,"Failed to set fmt to frame chan%d!\n",*(int *)(param_1 + 0x2c0));
     }
   }
   return iVar1;
@@ -7926,16 +7267,16 @@ uint check_state(int param_1)
 
 
 
-undefined4 __frame_channel_vb2_streamoff(int param_1,int param_2)
+int __frame_channel_vb2_streamoff(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   char *pcVar2;
   
   if (*(int *)(param_1 + 0x24) == param_2) {
     if ((*(uint *)(param_1 + 0x230) & 1) != 0) {
       __vb2_queue_cancel(param_1 + 0x24);
-      *(undefined4 *)(param_1 + 0x2d0) = 3;
+      *(int *)(param_1 + 0x2d0) = 3;
       return 0;
     }
     pcVar2 = "streamoff: not streaming\n";
@@ -7951,10 +7292,10 @@ undefined4 __frame_channel_vb2_streamoff(int param_1,int param_2)
 
 
 
-undefined4 fs_slake_module(uint param_1)
+int fs_slake_module(uint param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   int iVar3;
   
@@ -7968,15 +7309,15 @@ undefined4 fs_slake_module(uint param_1)
       for (iVar3 = 0; iVar3 < *(int *)(param_1 + 0xe0); iVar3 = iVar3 + 1) {
         iVar2 = iVar3 * 0x2ec + *(int *)(param_1 + 0xdc);
         if (*(int *)(iVar2 + 0x2d0) == 4) {
-          __frame_channel_vb2_streamoff(iVar2,*(undefined4 *)(iVar2 + 0x24));
-          __vb2_queue_free(iVar2 + 0x24,*(undefined4 *)(iVar2 + 0x20c));
-          *(undefined4 *)(iVar2 + 0x2d0) = 1;
+          __frame_channel_vb2_streamoff(iVar2,*(int *)(iVar2 + 0x24));
+          __vb2_queue_free(iVar2 + 0x24,*(int *)(iVar2 + 0x20c));
+          *(int *)(iVar2 + 0x2d0) = 1;
         }
         else {
-          *(undefined4 *)(iVar2 + 0x2d0) = 1;
+          *(int *)(iVar2 + 0x2d0) = 1;
         }
       }
-      *(undefined4 *)(param_1 + 0xe4) = 1;
+      *(int *)(param_1 + 0xe4) = 1;
       uVar1 = 0;
     }
   }
@@ -7985,18 +7326,18 @@ undefined4 fs_slake_module(uint param_1)
 
 
 
-undefined4 frame_channel_release(undefined4 param_1,int param_2)
+int frame_channel_release(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   uint uVar2;
   
   uVar2 = *(uint *)(param_2 + 0x70);
   uVar1 = 0xffffffea;
   if (((uVar2 != 0) && (uVar2 < 0xfffff001)) && (uVar1 = 0, *(int *)(uVar2 + 0x2d0) == 4)) {
-    __frame_channel_vb2_streamoff(uVar2,*(undefined4 *)(uVar2 + 0x24));
-    __vb2_queue_free(uVar2 + 0x24,*(undefined4 *)(uVar2 + 0x20c));
-    *(undefined4 *)(uVar2 + 0x2d0) = 2;
+    __frame_channel_vb2_streamoff(uVar2,*(int *)(uVar2 + 0x24));
+    __vb2_queue_free(uVar2 + 0x24,*(int *)(uVar2 + 0x20c));
+    *(int *)(uVar2 + 0x2d0) = 2;
     uVar1 = 0;
   }
   return uVar1;
@@ -8022,9 +7363,9 @@ uint frame_channel_unlocked_ioctl(int param_1,uint param_2,uint param_3)
   int local_74;
   int local_70;
   uint local_6c;
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined4 local_60;
+  int local_68;
+  int local_64;
+  int local_60;
   int local_48;
   uint local_44;
   uint local_40;
@@ -8129,18 +7470,18 @@ LAB_0001bb94:
         iVar7 = *(int *)(uVar9 + 0x2c0);
         *(uint *)(iVar2 + 0x34) = local_44;
         *(uint *)(iVar2 + 0x38) = local_40;
-        *(undefined4 *)(iVar2 + 0x10) = local_68;
-        *(undefined4 *)(iVar2 + 0x14) = local_64;
-        *(undefined4 *)(iVar2 + 0x18) = local_60;
+        *(int *)(iVar2 + 0x10) = local_68;
+        *(int *)(iVar2 + 0x14) = local_64;
+        *(int *)(iVar2 + 0x18) = local_60;
         *(uint *)(iVar2 + 0xc) = local_6c & 0xffff1bb8;
         private_dma_sync_single_for_device(0,local_44,local_40,2);
         if ((isp_ch0_pre_dequeue_time != 0) && (iVar7 == 0)) {
-          *(undefined4 *)(local_44 | 0xa0000000) = 0x12345678;
+          *(int *)(local_44 | 0xa0000000) = 0x12345678;
         }
         *(int *)(iVar2 + 0x68) = iVar2 + 0x68;
         *(int *)(iVar2 + 0x6c) = iVar2 + 0x68;
         *(uint *)(iVar2 + 0x70) = local_44;
-        *(undefined4 *)(iVar2 + 0x48) = 2;
+        *(int *)(iVar2 + 0x48) = 2;
         *(undefined *)(iVar2 + 0x4c) = 2;
         private_mutex_lock(uVar9 + 0x28);
         __private_spin_lock_irqsave(uVar9 + 0x2c4,&local_34);
@@ -8149,7 +7490,7 @@ LAB_0001bb94:
         *(uint *)(iVar2 + 0x58) = uVar9 + 0x210;
         *(int **)(iVar2 + 0x5c) = piVar3;
         *piVar3 = iVar2 + 0x58;
-        *(undefined4 *)(iVar2 + 0x48) = 1;
+        *(int *)(iVar2 + 0x48) = 1;
         *(int *)(uVar9 + 0x218) = *(int *)(uVar9 + 0x218) + 1;
         private_spin_unlock_irqrestore(uVar9 + 0x2c4,local_34);
         if ((*(uint *)(uVar9 + 0x230) & 1) != 0) {
@@ -8186,7 +7527,7 @@ LAB_0001b7dc:
     }
     iVar2 = private_copy_from_user(&local_78,param_3,4);
     if (iVar2 == 0) {
-      uVar9 = tx_isp_send_event_to_remote(*(undefined4 *)(uVar9 + 700),0x3000008,&local_78);
+      uVar9 = tx_isp_send_event_to_remote(*(int *)(uVar9 + 700),0x3000008,&local_78);
       if (uVar9 == 0) {
         return 0;
       }
@@ -8248,7 +7589,7 @@ LAB_0001becc:
                     *(uint *)(uVar9 + 0x20c) = uVar11;
                     local_78 = uVar11;
                     uVar4 = tx_isp_send_event_to_remote
-                                      (*(undefined4 *)(uVar9 + 700),0x3000008,&local_34);
+                                      (*(int *)(uVar9 + 700),0x3000008,&local_34);
                     if ((uVar4 != 0) && (uVar4 != 0xfffffdfd)) {
                       isp_printf(2,"streamon: driver refused to start streaming\n");
                       return uVar4;
@@ -8264,11 +7605,11 @@ LAB_0001becc:
                     if (0xfffff000 < uVar9 + 0x40) {
                       return 0;
                     }
-                    *(undefined4 *)(uVar9 + 0x40) = *(undefined4 *)(uVar9 + 0x23c);
+                    *(int *)(uVar9 + 0x40) = *(int *)(uVar9 + 0x23c);
                     memcpy((void *)(uVar9 + 0x44),(void *)(uVar9 + 0x240),0x30);
                     return 0;
                   }
-                  piVar3 = (int *)private_kmalloc(*(undefined4 *)(uVar9 + 0x34),0xd0);
+                  piVar3 = (int *)private_kmalloc(*(int *)(uVar9 + 0x34),0xd0);
                   if (piVar3 == (int *)0x0) {
                     isp_printf(2,"Memory alloc for buffer struct failed\n");
                     uVar11 = uVar10;
@@ -8305,7 +7646,7 @@ LAB_0001becc:
               pcVar8 = "querybuf: buffer index out of range\n";
               goto LAB_0001b7dc;
             }
-            __fill_v4l2_buffer(*(undefined4 *)(uVar9 + (local_78 + 0x3a) * 4 + 0x24),&local_78);
+            __fill_v4l2_buffer(*(int *)(uVar9 + (local_78 + 0x3a) * 4 + 0x24),&local_78);
             goto LAB_0001b884;
           }
         }
@@ -8323,7 +7664,7 @@ LAB_0001becc:
             do {
               if ((uVar4 & 1) == 0) {
                 isp_printf(2,"Streaming off, will not wait for buffers,chan index %d\n",
-                           *(undefined4 *)(uVar9 + 0x2c0));
+                           *(int *)(uVar9 + 0x2c0));
                 return 0xffffffea;
               }
               local_30 = uVar9 + 0x224;
@@ -8416,7 +7757,7 @@ LAB_0001b910:
       goto LAB_0001b7d8;
     }
     if (*(int *)(uVar9 + 0x2d0) != 3) {
-      isp_printf(2,"The state of frame channel%d is invalid(%d)!\n",*(undefined4 *)(uVar9 + 0x2c0));
+      isp_printf(2,"The state of frame channel%d is invalid(%d)!\n",*(int *)(uVar9 + 0x2c0));
       return 0xffffffff;
     }
     if ((param_3 == 0) || (0xfffff000 < param_3)) goto LAB_0001b7d8;
@@ -8434,14 +7775,14 @@ LAB_0001b910:
           piVar3 = (int *)*piVar3;
         }
         *(byte *)(uVar9 + 0x230) = *(byte *)(uVar9 + 0x230) | 1;
-        uVar4 = tx_isp_send_event_to_remote(*(undefined4 *)(uVar9 + 700),0x3000003,0);
+        uVar4 = tx_isp_send_event_to_remote(*(int *)(uVar9 + 700),0x3000003,0);
         if ((uVar4 != 0) && (uVar4 != 0xfffffdfd)) {
           isp_printf(2,"streamon: driver refused to start streaming\n");
           __vb2_queue_cancel(uVar9 + 0x24);
           *(byte *)(uVar9 + 0x230) = *(byte *)(uVar9 + 0x230) & 0xfe;
           return uVar4;
         }
-        *(undefined4 *)(uVar9 + 0x2d0) = 4;
+        *(int *)(uVar9 + 0x2d0) = 4;
         isp_printf(0,"Streamon successful\n");
         return 0;
       }
@@ -8466,25 +7807,25 @@ void tx_isp_frame_chan_deinit(uint param_1)
   if ((param_1 != 0) && (param_1 < 0xfffff001)) {
     private_misc_deregister();
     __vb2_queue_cancel(param_1 + 0x24);
-    __vb2_queue_free(param_1 + 0x24,*(undefined4 *)(param_1 + 0x20c));
-    *(undefined4 *)(param_1 + 0x2d0) = 1;
+    __vb2_queue_free(param_1 + 0x24,*(int *)(param_1 + 0x20c));
+    *(int *)(param_1 + 0x2d0) = 1;
   }
   return;
 }
 
 
 
-undefined4 tx_isp_fs_probe(int param_1)
+int tx_isp_fs_probe(int param_1)
 
 {
   byte bVar1;
   void *__s;
-  undefined4 uVar2;
+  int uVar2;
   int iVar3;
   void *__s_00;
   int iVar4;
   uint uVar5;
-  undefined4 *puVar6;
+  int *puVar6;
   int iVar7;
   
   __s = (void *)private_kmalloc(0xe8,0xd0);
@@ -8501,7 +7842,7 @@ undefined4 tx_isp_fs_probe(int param_1)
       *(uint *)((int)__s + 0xe0) = uVar5;
       if (uVar5 == 0) {
 LAB_0001c4bc:
-        *(undefined4 *)((int)__s + 0xe4) = 1;
+        *(int *)((int)__s + 0xe4) = 1;
         private_platform_set_drvdata(param_1,__s);
         *(undefined1 **)((int)__s + 0x34) = isp_framesource_fops;
         *(void **)((int)__s + 0xd4) = __s;
@@ -8514,10 +7855,10 @@ LAB_0001c4bc:
       while( true ) {
         if (*(int *)((int)__s + 0xe0) <= iVar3) goto LAB_0001c4bc;
         iVar7 = iVar3 * 0x2ec;
-        puVar6 = (undefined4 *)(*(int *)((int)__s + 0xdc) + iVar7);
+        puVar6 = (int *)(*(int *)((int)__s + 0xdc) + iVar7);
         uVar5 = iVar3 * 0x24 + *(int *)((int)__s + 0xcc);
-        if (puVar6 == (undefined4 *)0x0) break;
-        if ((undefined4 *)0xfffff000 < puVar6) {
+        if (puVar6 == (int *)0x0) break;
+        if ((int *)0xfffff000 < puVar6) {
           uVar2 = 0xffffffea;
           goto LAB_0001c58c;
         }
@@ -8539,7 +7880,7 @@ LAB_0001c4bc:
             uVar2 = 0xfffffffe;
             goto LAB_0001c58c;
           }
-          if ((undefined4 *)0xfffff000 < puVar6 + 9) {
+          if ((int *)0xfffff000 < puVar6 + 9) {
             private_misc_deregister(puVar6);
             uVar2 = 0xffffffea;
             goto LAB_0001c58c;
@@ -8587,10 +7928,10 @@ LAB_0001c58c:
 
 
 
-void sensor_alloc_analog_gain(undefined4 param_1,undefined2 *param_2)
+void sensor_alloc_analog_gain(int param_1,undefined2 *param_2)
 
 {
-  undefined4 local_10 [2];
+  int local_10 [2];
   
   local_10[0] = 0;
   (**(code **)(*(int *)(g_ispcore + 0x120) + 0xc0))(param_1,0x10,local_10);
@@ -8600,10 +7941,10 @@ void sensor_alloc_analog_gain(undefined4 param_1,undefined2 *param_2)
 
 
 
-void sensor_alloc_analog_gain_short(undefined4 param_1,int param_2)
+void sensor_alloc_analog_gain_short(int param_1,int param_2)
 
 {
-  undefined4 local_10 [2];
+  int local_10 [2];
   
   local_10[0] = 0;
   (**(code **)(*(int *)(g_ispcore + 0x120) + 0xc4))(param_1,0x10,local_10);
@@ -8613,10 +7954,10 @@ void sensor_alloc_analog_gain_short(undefined4 param_1,int param_2)
 
 
 
-void sensor_alloc_digital_gain(undefined4 param_1,int param_2)
+void sensor_alloc_digital_gain(int param_1,int param_2)
 
 {
-  undefined4 local_10 [2];
+  int local_10 [2];
   
   local_10[0] = 0;
   (**(code **)(*(int *)(g_ispcore + 0x120) + 200))(param_1,0x10,local_10);
@@ -8626,11 +7967,11 @@ void sensor_alloc_digital_gain(undefined4 param_1,int param_2)
 
 
 
-undefined4 sensor_alloc_integration_time(undefined4 param_1,int param_2)
+int sensor_alloc_integration_time(int param_1,int param_2)
 
 {
   code *pcVar1;
-  undefined4 local_10 [2];
+  int local_10 [2];
   
   pcVar1 = *(code **)(*(int *)(g_ispcore + 0x120) + 0xd0);
   local_10[0] = 0;
@@ -8646,10 +7987,10 @@ undefined4 sensor_alloc_integration_time(undefined4 param_1,int param_2)
 
 
 
-undefined4 sensor_alloc_integration_time_short(undefined4 param_1,int param_2)
+int sensor_alloc_integration_time_short(int param_1,int param_2)
 
 {
-  undefined4 local_10 [2];
+  int local_10 [2];
   
   local_10[0] = 0;
   if (*(int *)(*(int *)(g_ispcore + 0x120) + 0xd0) == 0) {
@@ -8676,10 +8017,10 @@ void sensor_set_integration_time(uint param_1)
   if (param_1 != *(uint *)(iVar2 + 0xac)) {
     *(uint *)(iVar2 + 0xec) = (*(uint *)(iVar2 + 0xec) & 0xffff0000) + param_1;
     *(uint *)(iVar2 + 0xac) = param_1;
-    *(undefined4 *)(iVar1 + 0x198) = 1;
+    *(int *)(iVar1 + 0x198) = 1;
     *(uint *)(iVar1 + 0x19c) = param_1;
-    *(undefined4 *)(iVar1 + 0x1b0) = 1;
-    *(undefined4 *)(iVar1 + 0x1b4) = *(undefined4 *)(iVar2 + 0xec);
+    *(int *)(iVar1 + 0x1b0) = 1;
+    *(int *)(iVar1 + 0x1b4) = *(int *)(iVar2 + 0xec);
   }
   return;
 }
@@ -8695,7 +8036,7 @@ void sensor_set_integration_time_short(uint param_1)
   param_1 = param_1 & 0xffff;
   if (param_1 != *(uint *)(*(int *)(g_ispcore + 0x120) + 0xdc)) {
     *(uint *)(*(int *)(g_ispcore + 0x120) + 0xdc) = param_1;
-    *(undefined4 *)(iVar1 + 0x1a0) = 1;
+    *(int *)(iVar1 + 0x1a0) = 1;
     *(uint *)(iVar1 + 0x1a4) = param_1;
   }
   return;
@@ -8714,10 +8055,10 @@ void sensor_set_analog_gain(int param_1)
   if (*(int *)(iVar2 + 0x9c) != param_1) {
     *(uint *)(iVar2 + 0xec) = (uint)*(ushort *)(iVar2 + 0xec) | param_1 << 0x10;
     *(int *)(iVar2 + 0x9c) = param_1;
-    *(undefined4 *)(iVar1 + 0x180) = 1;
+    *(int *)(iVar1 + 0x180) = 1;
     *(int *)(iVar1 + 0x184) = param_1;
-    *(undefined4 *)(iVar1 + 0x1b0) = 1;
-    *(undefined4 *)(iVar1 + 0x1b4) = *(undefined4 *)(iVar2 + 0xec);
+    *(int *)(iVar1 + 0x1b0) = 1;
+    *(int *)(iVar1 + 0x1b4) = *(int *)(iVar2 + 0xec);
   }
   return;
 }
@@ -8732,7 +8073,7 @@ void sensor_set_analog_gain_short(int param_1)
   iVar1 = g_ispcore;
   if (*(int *)(*(int *)(g_ispcore + 0x120) + 0xe4) != param_1) {
     *(int *)(*(int *)(g_ispcore + 0x120) + 0xe4) = param_1;
-    *(undefined4 *)(iVar1 + 0x188) = 1;
+    *(int *)(iVar1 + 0x188) = 1;
     *(int *)(iVar1 + 0x18c) = param_1;
   }
   return;
@@ -8748,7 +8089,7 @@ void sensor_set_digital_gain(int param_1)
   iVar1 = g_ispcore;
   if (*(int *)(*(int *)(g_ispcore + 0x120) + 0xa0) != param_1) {
     *(int *)(*(int *)(g_ispcore + 0x120) + 0xa0) = param_1;
-    *(undefined4 *)(iVar1 + 400) = 1;
+    *(int *)(iVar1 + 400) = 1;
     *(int *)(iVar1 + 0x194) = param_1;
   }
   return;
@@ -8769,7 +8110,7 @@ uint sensor_get_normal_fps(void)
 
 
 
-undefined4 sensor_read_black_pedestal(void)
+int sensor_read_black_pedestal(void)
 
 {
   return 0;
@@ -8801,7 +8142,7 @@ void sensor_set_wdr_mode(void)
 
 
 
-undefined4 sensor_fps_control(undefined4 param_1,int param_2)
+int sensor_fps_control(int param_1,int param_2)
 
 {
   int iVar1;
@@ -8817,7 +8158,7 @@ undefined4 sensor_fps_control(undefined4 param_1,int param_2)
   *(uint *)(param_2 + 0x54) = (uint)*(ushort *)(iVar2 + 0xda);
   *(uint *)(param_2 + 0x30) = (uint)*(ushort *)(iVar2 + 0xb4);
   *(uint *)(param_2 + 0x34) = (uint)*(ushort *)(iVar2 + 0xaa);
-  return *(undefined4 *)(iVar1 + 300);
+  return *(int *)(iVar1 + 300);
 }
 
 
@@ -8830,7 +8171,7 @@ void sensor_disable_isp(void)
 
 
 
-undefined4 sensor_get_lines_per_second(void)
+int sensor_get_lines_per_second(void)
 
 {
   return 0;
@@ -8853,8 +8194,8 @@ void sensor_set_mode(undefined param_1,undefined *param_2)
     iVar4 = *(int *)(g_ispcore + 0x120);
     iVar3 = (**(code **)(g_ispcore + 0x7c))(g_ispcore,0x200000d,local_20);
     if (iVar3 == 0) {
-      *(short *)(param_2 + 6) = (short)*(undefined4 *)(iVar2 + 0xec);
-      *(short *)(param_2 + 8) = (short)*(undefined4 *)(iVar2 + 0xf0);
+      *(short *)(param_2 + 6) = (short)*(int *)(iVar2 + 0xec);
+      *(short *)(param_2 + 8) = (short)*(int *)(iVar2 + 0xf0);
       *(undefined2 *)(param_2 + 2) = *(undefined2 *)(iVar4 + 0xb0);
       *(undefined2 *)(param_2 + 4) = *(undefined2 *)(iVar4 + 0xb2);
       *(uint *)(param_2 + 0x28) = (uint)*(ushort *)(iVar4 + 0xa4);
@@ -8904,8 +8245,8 @@ void sensor_init(int param_1)
   int iVar1;
   
   iVar1 = *(int *)(g_ispcore + 0x120);
-  *(undefined4 *)(param_1 + 0x20) = *(undefined4 *)(iVar1 + 0x94);
-  *(undefined4 *)(param_1 + 0x24) = *(undefined4 *)(iVar1 + 0x98);
+  *(int *)(param_1 + 0x20) = *(int *)(iVar1 + 0x94);
+  *(int *)(param_1 + 0x24) = *(int *)(iVar1 + 0x98);
   *(char *)(param_1 + 0x3a) = (char)*(undefined2 *)(iVar1 + 0xb6);
   *(char *)(param_1 + 0x3b) = (char)*(undefined2 *)(iVar1 + 0xb8);
   *(char *)(param_1 + 0x3c) = (char)*(undefined2 *)(iVar1 + 0xba);
@@ -8913,7 +8254,7 @@ void sensor_init(int param_1)
   *(uint *)(param_1 + 0x2c) = (uint)*(ushort *)(iVar1 + 0xb4);
   *(uint *)(param_1 + 0x50) = (uint)*(ushort *)(iVar1 + 0xd8);
   *(uint *)(param_1 + 0x54) = (uint)*(ushort *)(iVar1 + 0xda);
-  *(undefined4 *)(param_1 + 0x58) = *(undefined4 *)(iVar1 + 0xe0);
+  *(int *)(param_1 + 0x58) = *(int *)(iVar1 + 0xe0);
   *(code **)(param_1 + 0x5c) = sensor_hw_reset_disable;
   *(code **)(param_1 + 0x60) = sensor_hw_reset_enable;
   *(code **)(param_1 + 100) = sensor_alloc_analog_gain;
@@ -8941,10 +8282,10 @@ void sensor_init(int param_1)
 
 
 
-undefined4 sensor_early_init(int param_1)
+int sensor_early_init(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   uVar1 = 0xffffffea;
   if ((param_1 != 0) && (uVar1 = 0, g_ispcore == 0)) {
@@ -9055,7 +8396,7 @@ int tx_isp_video_link_stream(int param_1,int param_2)
 
 
 
-int tx_isp_open(undefined4 param_1,int param_2)
+int tx_isp_open(int param_1,int param_2)
 
 {
   int iVar1;
@@ -9071,7 +8412,7 @@ int tx_isp_open(undefined4 param_1,int param_2)
     return 0;
   }
   piVar6 = (int *)(iVar4 + 0x2c);
-  *(undefined4 *)(iVar4 + 0x10c) = 0xffffffff;
+  *(int *)(iVar4 + 0x10c) = 0xffffffff;
   iVar1 = 0;
   iVar5 = *piVar6;
   do {
@@ -9100,7 +8441,7 @@ LAB_0001d048:
 
 
 
-int tx_isp_notify(undefined4 param_1,uint param_2,undefined4 param_3)
+int tx_isp_notify(int param_1,uint param_2,int param_3)
 
 {
   code *pcVar1;
@@ -9215,29 +8556,29 @@ LAB_0001d250:
 
 
 
-undefined4 isp_subdev_release_clks(int param_1)
+int isp_subdev_release_clks(int param_1)
 
 {
-  undefined4 *puVar1;
+  int *puVar1;
   uint uVar2;
-  undefined4 *puVar3;
+  int *puVar3;
   
-  puVar1 = *(undefined4 **)(param_1 + 0xbc);
-  if (puVar1 != (undefined4 *)0x0) {
+  puVar1 = *(int **)(param_1 + 0xbc);
+  if (puVar1 != (int *)0x0) {
     puVar3 = puVar1;
     for (uVar2 = 0; uVar2 < *(uint *)(param_1 + 0xc0); uVar2 = uVar2 + 1) {
       private_clk_put(*puVar3);
       puVar3 = puVar3 + 1;
     }
     private_kfree(puVar1);
-    *(undefined4 *)(param_1 + 0xbc) = 0;
+    *(int *)(param_1 + 0xbc) = 0;
   }
   return 0;
 }
 
 
 
-uint isp_subdev_init_clks(int param_1,undefined4 *param_2)
+uint isp_subdev_init_clks(int param_1,int *param_2)
 
 {
   uint *__s;
@@ -9248,7 +8589,7 @@ uint isp_subdev_init_clks(int param_1,undefined4 *param_2)
   
   iVar4 = *(int *)(param_1 + 0xc0);
   if (iVar4 == 0) {
-    *(undefined4 *)(param_1 + 0xbc) = 0;
+    *(int *)(param_1 + 0xbc) = 0;
   }
   else {
     __s = (uint *)private_kmalloc(iVar4 << 2,0xd0);
@@ -9260,7 +8601,7 @@ uint isp_subdev_init_clks(int param_1,undefined4 *param_2)
     iVar2 = 0;
     puVar3 = __s;
     do {
-      uVar1 = private_clk_get(*(undefined4 *)(param_1 + 4),*param_2);
+      uVar1 = private_clk_get(*(int *)(param_1 + 4),*param_2);
       *puVar3 = uVar1;
       if (0xfffff000 < uVar1) {
         isp_printf(2,"Failed to get %s clock %ld\n",*param_2,uVar1);
@@ -9327,23 +8668,23 @@ void tx_isp_exit(void)
 
 
 
-undefined4 subdev_video_destroy_link(int *param_1)
+int subdev_video_destroy_link(int *param_1)
 
 {
-  undefined4 *puVar1;
+  int *puVar1;
   int iVar2;
   int iVar3;
   
   if (param_1[3] != 0) {
     iVar3 = *param_1;
-    puVar1 = (undefined4 *)param_1[2];
+    puVar1 = (int *)param_1[2];
     iVar2 = param_1[1];
     *param_1 = 0;
     param_1[1] = 0;
     param_1[2] = 0;
     param_1[3] = 0;
     *(undefined *)(iVar3 + 7) = 2;
-    if (puVar1 != (undefined4 *)0x0) {
+    if (puVar1 != (int *)0x0) {
       *puVar1 = 0;
       puVar1[1] = 0;
       puVar1[2] = 0;
@@ -9377,7 +8718,7 @@ int tx_isp_video_link_destroy_isra_5(int param_1)
     do {
       while( true ) {
         if (iVar6 <= iVar5) {
-          *(undefined4 *)(param_1 + 0x118) = 0xffffffff;
+          *(int *)(param_1 + 0x118) = 0xffffffff;
           return 0;
         }
         iVar1 = find_subdev_link_pad(param_1,iVar4);
@@ -9399,7 +8740,7 @@ LAB_0001d66c:
 
 
 
-int tx_isp_release(undefined4 param_1,int param_2)
+int tx_isp_release(int param_1,int param_2)
 
 {
   int iVar1;
@@ -9480,23 +8821,23 @@ int tx_isp_init(void)
 
 
 
-undefined4 tx_isp_get_ae_algo_handle_isra_16(int param_1,undefined4 param_2)
+int tx_isp_get_ae_algo_handle_isra_16(int param_1,int param_2)
 
 {
   undefined2 uVar1;
   void *pvVar2;
   int iVar3;
-  undefined4 uVar4;
+  int uVar4;
   int iVar5;
   undefined auStack_b0 [4];
-  undefined4 local_ac;
-  undefined4 local_a8;
-  undefined4 local_a4;
-  undefined4 local_a0;
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined4 local_4c;
-  undefined4 local_44;
+  int local_ac;
+  int local_a8;
+  int local_a4;
+  int local_a0;
+  int local_68;
+  int local_64;
+  int local_4c;
+  int local_44;
   
   iVar5 = *(int *)(param_1 + 0xd4);
   private_wait_for_completion_interruptible(&ae_algo_comp);
@@ -9506,10 +8847,10 @@ undefined4 tx_isp_get_ae_algo_handle_isra_16(int param_1,undefined4 param_2)
   memcpy((void *)(ae_info_mine + 0x38c),ae_statis_mine,0x400);
   iVar3 = ae_info_mine;
   pvVar2 = ae_statis_mine;
-  *(char *)(ae_info_mine + 0x78c) = (char)*(undefined4 *)((int)ae_statis_mine + 0x414);
-  *(char *)(iVar3 + 0x78d) = (char)*(undefined4 *)((int)pvVar2 + 0x418);
-  *(char *)(iVar3 + 0x78e) = (char)*(undefined4 *)((int)pvVar2 + 0x41c);
-  *(char *)(iVar3 + 0x78f) = (char)*(undefined4 *)((int)pvVar2 + 0x420);
+  *(char *)(ae_info_mine + 0x78c) = (char)*(int *)((int)ae_statis_mine + 0x414);
+  *(char *)(iVar3 + 0x78d) = (char)*(int *)((int)pvVar2 + 0x418);
+  *(char *)(iVar3 + 0x78e) = (char)*(int *)((int)pvVar2 + 0x41c);
+  *(char *)(iVar3 + 0x78f) = (char)*(int *)((int)pvVar2 + 0x420);
   uVar1 = *(undefined2 *)((int)pvVar2 + 0x400);
   *(char *)(iVar3 + 0x790) = (char)uVar1;
   *(char *)(iVar3 + 0x791) = (char)((ushort)uVar1 >> 8);
@@ -9525,24 +8866,24 @@ undefined4 tx_isp_get_ae_algo_handle_isra_16(int param_1,undefined4 param_2)
   uVar1 = *(undefined2 *)((int)pvVar2 + 0x410);
   *(char *)(iVar3 + 0x798) = (char)uVar1;
   *(char *)(iVar3 + 0x799) = (char)((ushort)uVar1 >> 8);
-  *(char *)(iVar3 + 0x79a) = (char)*(undefined4 *)((int)pvVar2 + 0x424);
-  *(char *)(iVar3 + 0x79b) = (char)*(undefined4 *)((int)pvVar2 + 0x428);
+  *(char *)(iVar3 + 0x79a) = (char)*(int *)((int)pvVar2 + 0x424);
+  *(char *)(iVar3 + 0x79b) = (char)*(int *)((int)pvVar2 + 0x428);
   tisp_get_ae_attr(auStack_b0);
   iVar3 = ae_info_mine;
-  *(undefined4 *)(ae_info_mine + 0x7a0) = local_a4;
-  *(undefined4 *)(iVar3 + 0x7a4) = local_ac;
-  *(undefined4 *)(iVar3 + 0x7a8) = local_a8;
-  *(undefined4 *)(iVar3 + 0x7ac) = local_a0;
-  *(undefined4 *)(iVar3 + 0x7b0) = local_64;
-  *(undefined4 *)(iVar3 + 0x7b4) = local_68;
-  *(undefined4 *)(iVar3 + 0x7b8) = local_4c;
-  *(undefined4 *)(iVar3 + 0x7bc) = local_44;
-  *(undefined4 *)(iVar3 + 0x7c0) = *(undefined4 *)(iVar5 + 0x17c);
+  *(int *)(ae_info_mine + 0x7a0) = local_a4;
+  *(int *)(iVar3 + 0x7a4) = local_ac;
+  *(int *)(iVar3 + 0x7a8) = local_a8;
+  *(int *)(iVar3 + 0x7ac) = local_a0;
+  *(int *)(iVar3 + 0x7b0) = local_64;
+  *(int *)(iVar3 + 0x7b4) = local_68;
+  *(int *)(iVar3 + 0x7b8) = local_4c;
+  *(int *)(iVar3 + 0x7bc) = local_44;
+  *(int *)(iVar3 + 0x7c0) = *(int *)(iVar5 + 0x17c);
   *(uint *)(iVar3 + 0x7c4) = (uint)*(ushort *)(*(int *)(iVar5 + 0x120) + 0xb0);
   *(uint *)(iVar3 + 0x7c8) = (uint)*(ushort *)(*(int *)(iVar5 + 0x120) + 0xb2);
-  *(undefined4 *)(iVar3 + 0x7cc) = *(undefined4 *)(iVar5 + 300);
-  *(undefined4 *)(iVar3 + 2000) = *(undefined4 *)(iVar5 + 0x124);
-  *(undefined4 *)(iVar3 + 0x7d4) = *(undefined4 *)(iVar5 + 0x128);
+  *(int *)(iVar3 + 0x7cc) = *(int *)(iVar5 + 300);
+  *(int *)(iVar3 + 2000) = *(int *)(iVar5 + 0x124);
+  *(int *)(iVar3 + 0x7d4) = *(int *)(iVar5 + 0x128);
   iVar3 = private_copy_to_user(param_2,iVar3,0x7d8);
   uVar4 = 0;
   if (iVar3 != 0) {
@@ -9556,7 +8897,7 @@ undefined4 tx_isp_get_ae_algo_handle_isra_16(int param_1,undefined4 param_2)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-int tx_isp_unlocked_ioctl(int param_1,uint param_2,undefined4 param_3)
+int tx_isp_unlocked_ioctl(int param_1,uint param_2,int param_3)
 
 {
   char cVar1;
@@ -9565,10 +8906,10 @@ int tx_isp_unlocked_ioctl(int param_1,uint param_2,undefined4 param_3)
   int iVar4;
   code *pcVar5;
   int *piVar6;
-  undefined4 uVar7;
+  int uVar7;
   char *pcVar8;
   char *pcVar9;
-  undefined4 uVar10;
+  int uVar10;
   int iVar11;
   int iVar12;
   uint uVar13;
@@ -9583,17 +8924,17 @@ int tx_isp_unlocked_ioctl(int param_1,uint param_2,undefined4 param_3)
   int local_88;
   int local_84;
   int local_80;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_68;
-  undefined4 local_64;
+  int local_74;
+  int local_70;
+  int local_6c;
+  int local_68;
+  int local_64;
   uint *local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
+  int local_44;
+  int local_40;
+  int local_3c;
+  int local_38;
+  int local_34;
   int local_30;
   code *local_2c;
   
@@ -9964,7 +9305,7 @@ LAB_0001eb70:
     local_98[0] = 1;
     iVar16 = *(int *)(iVar17 + 0xd4);
     if (*(int *)(iVar16 + 0x17c) != 1) {
-      *(undefined4 *)(iVar16 + 0x17c) = 1;
+      *(int *)(iVar16 + 0x17c) = 1;
       if (wdr_switch != 0) {
         if ((iVar17 != 0) && (*(code **)(iVar17 + 0x7c) != (code *)0x0)) {
           (**(code **)(iVar17 + 0x7c))(iVar17,0x2000013,local_98);
@@ -9979,11 +9320,11 @@ LAB_0001eb70:
           }
           iVar17 = *(int *)(iVar16 + 0x120);
         }
-        *(undefined4 *)(iVar17 + 0xac) = 0;
-        *(undefined4 *)(iVar17 + 0xdc) = 0;
-        *(undefined4 *)(iVar17 + 0x9c) = 0;
-        *(undefined4 *)(iVar17 + 0xe4) = 0;
-        *(undefined4 *)(iVar17 + 0xa0) = 0;
+        *(int *)(iVar17 + 0xac) = 0;
+        *(int *)(iVar17 + 0xdc) = 0;
+        *(int *)(iVar17 + 0x9c) = 0;
+        *(int *)(iVar17 + 0xe4) = 0;
+        *(int *)(iVar17 + 0xa0) = 0;
       }
       wdr_switch = 1;
     }
@@ -10128,11 +9469,11 @@ LAB_0001e278:
       tisp_ae_algo_init(1,piVar6);
       piVar6[0x1b] = *(int *)(iVar16 + 300);
       piVar6[3] = *(int *)(iVar11 + 0xac);
-      iVar17 = private_math_exp2(*(undefined4 *)(iVar11 + 0x9c),0x10,10);
+      iVar17 = private_math_exp2(*(int *)(iVar11 + 0x9c),0x10,10);
       piVar6[4] = iVar17;
       piVar6[5] = 0x400;
       piVar6[0xf] = *(int *)(iVar11 + 0xdc);
-      iVar17 = private_math_exp2(*(undefined4 *)(iVar11 + 0xe4),0x10,10);
+      iVar17 = private_math_exp2(*(int *)(iVar11 + 0xe4),0x10,10);
       piVar6[0x10] = iVar17;
       piVar6[0x11] = 0x400;
       if (*(int *)(iVar16 + 0x17c) == 0) {
@@ -10182,25 +9523,25 @@ LAB_0001f218:
           return 0;
         }
         iVar11 = *(int *)(iVar17 + 0x120);
-        *(undefined4 *)(iVar17 + 0x17c) = 0;
+        *(int *)(iVar17 + 0x17c) = 0;
         if (wdr_switch != 0) {
           if ((iVar16 != 0) && (*(code **)(iVar16 + 0x7c) != (code *)0x0)) {
             (**(code **)(iVar16 + 0x7c))(iVar16,0x2000013,local_98);
           }
           tisp_s_wdr_en(local_98[0]);
           if (iVar16 == 0) {
-            *(undefined4 *)(iVar11 + 0xac) = 0;
+            *(int *)(iVar11 + 0xac) = 0;
           }
           else {
             if (*(code **)(iVar16 + 0x7c) != (code *)0x0) {
               (**(code **)(iVar16 + 0x7c))(iVar16,0x200000c,local_98);
             }
-            *(undefined4 *)(iVar11 + 0xac) = 0;
+            *(int *)(iVar11 + 0xac) = 0;
           }
-          *(undefined4 *)(iVar11 + 0xdc) = 0;
-          *(undefined4 *)(iVar11 + 0x9c) = 0;
-          *(undefined4 *)(iVar11 + 0xe4) = 0;
-          *(undefined4 *)(iVar11 + 0xa0) = 0;
+          *(int *)(iVar11 + 0xdc) = 0;
+          *(int *)(iVar11 + 0x9c) = 0;
+          *(int *)(iVar11 + 0xe4) = 0;
+          *(int *)(iVar11 + 0xa0) = 0;
         }
         wdr_switch = 1;
         return 0;
@@ -10363,7 +9704,7 @@ LAB_0001e790:
           return 0;
         }
         isp_printf(0,"%s,%d: buf size too small\n","tx_isp_wdr_set_buf",0x334,uVar18,uVar19,uVar20);
-        *(undefined4 *)(iVar16 + 0x17c) = 0;
+        *(int *)(iVar16 + 0x17c) = 0;
         tisp_s_wdr_en(0);
         return -0xe;
       }
@@ -10402,7 +9743,7 @@ LAB_0001dde0:
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 private_reset_tx_isp_module(int param_1)
+int private_reset_tx_isp_module(int param_1)
 
 {
   int iVar1;
@@ -10425,7 +9766,7 @@ undefined4 private_reset_tx_isp_module(int param_1)
 
 
 
-undefined4 tx_isp_reg_set(int param_1,int param_2,uint param_3,int param_4,int param_5)
+int tx_isp_reg_set(int param_1,int param_2,uint param_3,int param_4,int param_5)
 
 {
   uint uVar1;
@@ -10443,10 +9784,10 @@ undefined4 tx_isp_reg_set(int param_1,int param_2,uint param_3,int param_4,int p
 
 
 
-undefined4 tx_isp_send_event_to_remote(int param_1)
+int tx_isp_send_event_to_remote(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   code *UNRECOVERED_JUMPTABLE;
   
   if (((param_1 != 0) && (*(int *)(param_1 + 0xc) != 0)) &&
@@ -10462,26 +9803,26 @@ undefined4 tx_isp_send_event_to_remote(int param_1)
 
 
 
-undefined4 tx_isp_module_init(undefined4 *param_1,void *param_2)
+int tx_isp_module_init(int *param_1,void *param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   if (param_2 == (void *)0x0) {
     isp_printf(2,"%s the parameters are invalid!\n","tx_isp_module_init");
     uVar1 = 0xffffffea;
   }
   else {
-    if ((param_1 != (undefined4 *)0x0) && ((void *)param_1[0x16] != (void *)0x0)) {
+    if ((param_1 != (int *)0x0) && ((void *)param_1[0x16] != (void *)0x0)) {
       memcpy(param_2,(void *)param_1[0x16],4);
     }
-    *(undefined4 *)((int)param_2 + 0x78) = 0;
+    *(int *)((int)param_2 + 0x78) = 0;
     memset((void *)((int)param_2 + 0x38),0,0x40);
-    *(undefined4 *)((int)param_2 + 8) = *param_1;
+    *(int *)((int)param_2 + 8) = *param_1;
     *(code **)((int)param_2 + 0x7c) = tx_isp_notify;
-    *(undefined4 *)((int)param_2 + 0x30) = 0;
-    *(undefined4 *)((int)param_2 + 0x34) = 0;
-    *(undefined4 **)((int)param_2 + 4) = param_1 + 4;
+    *(int *)((int)param_2 + 0x30) = 0;
+    *(int *)((int)param_2 + 0x34) = 0;
+    *(int **)((int)param_2 + 4) = param_1 + 4;
     uVar1 = 0;
   }
   return uVar1;
@@ -10501,7 +9842,7 @@ void tx_isp_module_deinit(void *param_1)
 
 
 
-int tx_isp_subdev_init(undefined4 *param_1,int param_2,undefined4 param_3)
+int tx_isp_subdev_init(int *param_1,int param_2,int param_3)
 
 {
   bool bVar1;
@@ -10521,11 +9862,11 @@ int tx_isp_subdev_init(undefined4 *param_1,int param_2,undefined4 param_3)
   int *piVar14;
   void *__s_00;
   
-  if ((param_1 == (undefined4 *)0x0) || (param_2 == 0)) {
+  if ((param_1 == (int *)0x0) || (param_2 == 0)) {
     isp_printf(2,"%s the parameters are invalid!\n","tx_isp_subdev_init");
     return -0x16;
   }
-  *(undefined4 *)(param_2 + 0xc4) = param_3;
+  *(int *)(param_2 + 0xc4) = param_3;
   iVar5 = tx_isp_module_init();
   if (iVar5 != 0) {
     isp_printf(2,0x7ffc0,*param_1);
@@ -10585,7 +9926,7 @@ LAB_0001f690:
       *(int **)(param_2 + 0xb4) = piVar14;
       if (*pcVar12 == '\x01') {
         *(uint *)(param_2 + 0xc0) = (uint)(byte)pcVar12[4];
-        iVar5 = isp_subdev_init_clks(param_2,*(undefined4 *)(pcVar12 + 8));
+        iVar5 = isp_subdev_init_clks(param_2,*(int *)(pcVar12 + 8));
         if (iVar5 == 0) {
           for (iVar5 = 0; iVar5 < (int)(uint)(byte)pcVar12[0xc]; iVar5 = iVar5 + 1) {
             if (*(char *)(*(int *)(pcVar12 + 0x10) + iVar5 * 2) == '\x02') {
@@ -10602,7 +9943,7 @@ LAB_0001f81c:
             if (*(ushort *)(param_2 + 0xca) != 0) {
               __s_00 = (void *)private_kmalloc((uint)*(ushort *)(param_2 + 0xca) * 0x24,0xd0);
               if (__s == (void *)0x0) {
-                isp_printf(2,"Failed to malloc %s\'s inpads\n",*(undefined4 *)(param_2 + 8));
+                isp_printf(2,"Failed to malloc %s\'s inpads\n",*(int *)(param_2 + 8));
                 private_kfree(0);
                 goto LAB_0001f91c;
               }
@@ -10650,13 +9991,13 @@ LAB_0001f81c:
             }
             goto LAB_0001f81c;
           }
-          isp_printf(2,"Failed to malloc %s\'s outpads\n",*(undefined4 *)(param_2 + 8));
+          isp_printf(2,"Failed to malloc %s\'s outpads\n",*(int *)(param_2 + 8));
 LAB_0001f91c:
           isp_subdev_release_clks(param_2);
           iVar5 = -0xc;
         }
         else {
-          isp_printf(2,"Failed to init %s\'s clks!\n",*(undefined4 *)(param_2 + 8));
+          isp_printf(2,"Failed to init %s\'s clks!\n",*(int *)(param_2 + 8));
         }
       }
       else {
@@ -10665,13 +10006,13 @@ LAB_0001f91c:
           return 0;
         }
         *(uint *)(param_2 + 0xc0) = (uint)(byte)pcVar12[4];
-        iVar5 = isp_subdev_init_clks(param_2,*(undefined4 *)(pcVar12 + 8));
+        iVar5 = isp_subdev_init_clks(param_2,*(int *)(pcVar12 + 8));
         if (iVar5 == 0) {
           return 0;
         }
       }
       isp_printf(2,"[%d] Failed to init subdev!\n",0x77d);
-      private_iounmap(*(undefined4 *)(param_2 + 0xb8));
+      private_iounmap(*(int *)(param_2 + 0xb8));
 LAB_0001f9ac:
       private_release_mem_region(*piVar14,(piVar14[1] + 1) - *piVar14);
 LAB_0001f9c8:
@@ -10712,30 +10053,30 @@ void tx_isp_subdev_deinit(int param_1)
   }
   else {
     private_release_mem_region(*piVar1,(piVar1[1] + 1) - *piVar1);
-    *(undefined4 *)(param_1 + 0xb4) = 0;
+    *(int *)(param_1 + 0xb4) = 0;
     iVar2 = *(int *)(param_1 + 0x80);
   }
   if (iVar2 != 0) {
     tx_isp_free_irq(param_1 + 0x80);
   }
   tx_isp_module_deinit(param_1);
-  *(undefined4 *)(param_1 + 0xc4) = 0;
+  *(int *)(param_1 + 0xc4) = 0;
   return;
 }
 
 
 
-undefined4 tx_isp_create_graph_and_nodes(int param_1)
+int tx_isp_create_graph_and_nodes(int param_1)
 
 {
   char *pcVar1;
   int iVar2;
   int iVar3;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
+  int *puVar4;
+  int *puVar5;
   uint uVar6;
   
-  puVar4 = (undefined4 *)(param_1 + 0x84);
+  puVar4 = (int *)(param_1 + 0x84);
   puVar5 = puVar4;
   for (uVar6 = 0; uVar6 < *(uint *)(param_1 + 0x80); uVar6 = uVar6 + 1) {
     pcVar1 = (char *)private_platform_get_drvdata(*puVar5);
@@ -10761,8 +10102,8 @@ LAB_0001fca4:
         iVar3 = private_platform_get_drvdata(*puVar5);
         if (*(int *)(iVar3 + 0x30) != 0) {
           *(int *)(iVar3 + 0x14) = *(int *)(iVar3 + 0x30);
-          *(undefined4 *)(iVar3 + 0x10) = *(undefined4 *)(iVar3 + 8);
-          *(undefined4 *)(iVar3 + 0xc) = 0xff;
+          *(int *)(iVar3 + 0x10) = *(int *)(iVar3 + 8);
+          *(int *)(iVar3 + 0xc) = 0xff;
           iVar2 = private_misc_register(iVar3 + 0xc);
           if (iVar2 < 0) {
             isp_printf(2,"Failed to register tx-isp miscdev(%d.%d)!\n",*(undefined *)(iVar3 + 2),
@@ -10780,7 +10121,7 @@ LAB_0001fca4:
         }
         if (*(int *)(iVar3 + 0x34) != 0) {
           private_proc_create_data
-                    (*(undefined4 *)(iVar3 + 8),0x124,*(undefined4 *)(param_1 + 0x11c),
+                    (*(int *)(iVar3 + 8),0x124,*(int *)(param_1 + 0x11c),
                      *(int *)(iVar3 + 0x34),iVar3);
         }
         uVar6 = uVar6 + 1;
@@ -10817,7 +10158,7 @@ int tx_isp_probe(int param_1)
   code cVar8;
   int iVar9;
   code **ppcVar10;
-  undefined4 *puVar11;
+  int *puVar11;
   int iVar12;
   
   __s = (void *)private_kmalloc(0x120,0xd0);
@@ -10833,7 +10174,7 @@ int tx_isp_probe(int param_1)
     }
     else if (*(byte *)(iVar9 + 4) < 0x11) {
       iVar12 = 0;
-      puVar11 = (undefined4 *)((int)__s + 0x84);
+      puVar11 = (int *)((int)__s + 0x84);
       while( true ) {
         if ((int)(uint)*(byte *)(iVar9 + 4) <= iVar12) break;
         ppcVar7 = *(code ***)(*(int *)(iVar9 + 8) + iVar12 * 4);
@@ -10879,7 +10220,7 @@ int tx_isp_probe(int param_1)
       private_spin_lock_init((int)__s + 0x114);
       iVar4 = tx_isp_module_init(param_1,__s);
       if (iVar4 == 0) {
-        *(undefined4 *)((int)__s + 0xc) = 0xff;
+        *(int *)((int)__s + 0xc) = 0xff;
         *(undefined1 **)((int)__s + 0x30) = tx_isp_fops;
         *(undefined1 **)((int)__s + 0x14) = tx_isp_fops;
         *(char **)((int)__s + 0x10) = "tx-isp";
@@ -10905,7 +10246,7 @@ int tx_isp_probe(int param_1)
                          ,"Dec  6 2022");
               return 0;
             }
-            private_proc_remove(*(undefined4 *)((int)__s + 0x11c));
+            private_proc_remove(*(int *)((int)__s + 0x11c));
           }
           private_misc_deregister((int)__s + 0xc);
         }
@@ -10917,7 +10258,7 @@ int tx_isp_probe(int param_1)
         iVar4 = -0xc;
       }
 LAB_00020044:
-      tx_isp_unregister_platforms((undefined4 *)((int)__s + 0x84));
+      tx_isp_unregister_platforms((int *)((int)__s + 0x84));
     }
     else {
       isp_printf(2,"The number of platform device is too much!\n");
@@ -10930,10 +10271,10 @@ LAB_00020044:
 
 
 
-undefined4 * FUN_000202e4(undefined4 *param_1)
+int * FUN_000202e4(int *param_1)
 
 {
-  undefined4 local_10 [2];
+  int local_10 [2];
   
   memset(local_10,0,4);
   *param_1 = local_10[0];
@@ -10980,7 +10321,7 @@ void fix_point_add(void)
 
 
 
-void fix_point_sub(undefined4 param_1,undefined4 param_2,uint param_3,uint param_4,uint param_5,
+void fix_point_sub(int param_1,int param_2,uint param_3,uint param_4,uint param_5,
                   uint param_6)
 
 {
@@ -10992,7 +10333,7 @@ void fix_point_sub(undefined4 param_1,undefined4 param_2,uint param_3,uint param
 
 
 
-void fix_point_mult2(int param_1,undefined4 param_2,uint param_3,uint param_4,uint param_5,
+void fix_point_mult2(int param_1,int param_2,uint param_3,uint param_4,uint param_5,
                     uint param_6)
 
 {
@@ -11000,7 +10341,7 @@ void fix_point_mult2(int param_1,undefined4 param_2,uint param_3,uint param_4,ui
   undefined8 uVar2;
   longlong lVar3;
   longlong lVar4;
-  undefined4 uVar5;
+  int uVar5;
   
   if (param_1 == 0) {
     uVar2 = 0;
@@ -11011,7 +10352,7 @@ void fix_point_mult2(int param_1,undefined4 param_2,uint param_3,uint param_4,ui
   uVar1 = (uint)((ulonglong)uVar2 >> 0x20);
   lVar3 = __lshrdi3(param_3,param_4,param_1);
   lVar4 = __lshrdi3(param_5,param_6,param_1);
-  uVar5 = (undefined4)((ulonglong)lVar4 >> 0x20);
+  uVar5 = (int)((ulonglong)lVar4 >> 0x20);
   param_3 = (uint)uVar2 & param_3;
   param_5 = (uint)uVar2 & param_5;
   __ashldi3((int)(lVar3 * lVar4),(int)((ulonglong)(lVar3 * lVar4) >> 0x20),param_1);
@@ -11027,10 +10368,10 @@ void fix_point_mult2(int param_1,undefined4 param_2,uint param_3,uint param_4,ui
 void fix_point_mult3(int param_1)
 
 {
-  undefined4 unaff_s0;
-  undefined4 unaff_s1;
-  undefined4 unaff_s2;
-  undefined4 unaff_s3;
+  int unaff_s0;
+  int unaff_s1;
+  int unaff_s2;
+  int unaff_s3;
   uint uVar1;
   ulonglong uVar2;
   longlong lVar3;
@@ -11038,7 +10379,7 @@ void fix_point_mult3(int param_1)
   ulonglong uVar5;
   uint param_7;
   uint param_8;
-  undefined4 uVar6;
+  int uVar6;
   
   uVar5 = fix_point_mult2();
   if (param_1 == 0) {
@@ -11049,7 +10390,7 @@ void fix_point_mult3(int param_1)
   }
   lVar3 = __lshrdi3((int)uVar5,(int)(uVar5 >> 0x20),param_1);
   lVar4 = __lshrdi3(param_7,param_8,param_1);
-  uVar6 = (undefined4)((ulonglong)lVar4 >> 0x20);
+  uVar6 = (int)((ulonglong)lVar4 >> 0x20);
   uVar1 = (uint)(uVar2 >> 0x20) & param_8;
   __ashldi3((int)(lVar3 * lVar4),(int)((ulonglong)(lVar3 * lVar4) >> 0x20),param_1);
   lVar3 = (uVar2 & uVar5) * CONCAT44(uVar1,(uint)uVar2 & param_7);
@@ -11068,7 +10409,7 @@ void fix_point_add_64(void)
 
 
 
-void fix_point_sub_64(undefined4 param_1,undefined4 param_2,uint param_3,uint param_4,uint param_5,
+void fix_point_sub_64(int param_1,int param_2,uint param_3,uint param_4,uint param_5,
                      uint param_6)
 
 {
@@ -11080,7 +10421,7 @@ void fix_point_sub_64(undefined4 param_1,undefined4 param_2,uint param_3,uint pa
 
 
 
-void fix_point_mult2_64(int param_1,undefined4 param_2,uint param_3,uint param_4,uint param_5,
+void fix_point_mult2_64(int param_1,int param_2,uint param_3,uint param_4,uint param_5,
                        uint param_6)
 
 {
@@ -11090,7 +10431,7 @@ void fix_point_mult2_64(int param_1,undefined4 param_2,uint param_3,uint param_4
   longlong lVar4;
   longlong lVar5;
   uint uVar6;
-  undefined4 uVar7;
+  int uVar7;
   
   uVar3 = __lshrdi3(0xffffffff,0xffffffff,0x40 - param_1);
   uVar2 = (uint)((ulonglong)uVar3 >> 0x20);
@@ -11098,7 +10439,7 @@ void fix_point_mult2_64(int param_1,undefined4 param_2,uint param_3,uint param_4
   lVar4 = __lshrdi3(param_3,param_4,param_1);
   param_3 = param_3 & uVar6;
   lVar5 = __lshrdi3(param_5,param_6,param_1);
-  uVar7 = (undefined4)((ulonglong)lVar5 >> 0x20);
+  uVar7 = (int)((ulonglong)lVar5 >> 0x20);
   __ashldi3((int)(lVar4 * lVar5),(int)((ulonglong)(lVar4 * lVar5) >> 0x20),param_1);
   iVar1 = (param_6 & uVar2) * param_3 + (param_4 & uVar2) * (param_5 & uVar6);
   lVar4 = (ulonglong)param_3 * (ulonglong)(param_5 & uVar6);
@@ -11114,10 +10455,10 @@ void fix_point_mult3_64(int param_1)
   int iVar1;
   uint uVar2;
   uint uVar3;
-  undefined4 unaff_s0;
-  undefined4 unaff_s1;
-  undefined4 unaff_s2;
-  undefined4 unaff_s3;
+  int unaff_s0;
+  int unaff_s1;
+  int unaff_s2;
+  int unaff_s3;
   uint uVar4;
   undefined8 uVar5;
   longlong lVar6;
@@ -11126,7 +10467,7 @@ void fix_point_mult3_64(int param_1)
   uint param_7;
   uint param_8;
   uint uVar9;
-  undefined4 uVar10;
+  int uVar10;
   
   uVar8 = fix_point_mult2_64();
   uVar3 = (uint)((ulonglong)uVar8 >> 0x20);
@@ -11137,7 +10478,7 @@ void fix_point_mult3_64(int param_1)
   uVar3 = uVar3 & uVar2;
   uVar4 = (uint)uVar8 & uVar9;
   lVar7 = __lshrdi3(param_7,param_8,param_1);
-  uVar10 = (undefined4)((ulonglong)lVar7 >> 0x20);
+  uVar10 = (int)((ulonglong)lVar7 >> 0x20);
   __ashldi3((int)(lVar6 * lVar7),(int)((ulonglong)(lVar6 * lVar7) >> 0x20),param_1);
   iVar1 = (param_8 & uVar2) * uVar4 + uVar3 * (param_7 & uVar9);
   lVar6 = (ulonglong)uVar4 * (ulonglong)(param_7 & uVar9);
@@ -11148,7 +10489,7 @@ void fix_point_mult3_64(int param_1)
 
 
 
-ulonglong fix_point_div_64(int param_1,undefined4 param_2,uint param_3,int param_4,uint param_5,
+ulonglong fix_point_div_64(int param_1,int param_2,uint param_3,int param_4,uint param_5,
                           uint param_6)
 
 {
@@ -11212,7 +10553,7 @@ void fix_point_div(void)
 
 
 
-int fix_point_add_32(undefined4 param_1,int param_2,int param_3)
+int fix_point_add_32(int param_1,int param_2,int param_3)
 
 {
   return param_2 + param_3;
@@ -11220,7 +10561,7 @@ int fix_point_add_32(undefined4 param_1,int param_2,int param_3)
 
 
 
-int fix_point_sub_32(undefined4 param_1,uint param_2,uint param_3)
+int fix_point_sub_32(int param_1,uint param_2,uint param_3)
 
 {
   if (param_2 < param_3) {
@@ -11249,10 +10590,10 @@ int fix_point_mult2_32(uint param_1,uint param_2,uint param_3)
 
 
 
-void fix_point_mult3_32(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+void fix_point_mult3_32(int param_1,int param_2,int param_3,int param_4)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   code *UNRECOVERED_JUMPTABLE;
   
   UNRECOVERED_JUMPTABLE = fix_point_mult2_32;
@@ -11356,11 +10697,11 @@ int fix_point_intp(uint param_1,uint param_2,uint param_3,int param_4,int param_
 
 
 
-undefined4 table_intp(undefined4 param_1,undefined4 *param_2,uint param_3,uint param_4)
+int table_intp(int param_1,int *param_2,uint param_3,uint param_4)
 
 {
   uint uVar1;
-  undefined4 uVar2;
+  int uVar2;
   uint uVar3;
   
   if (param_4 <= (uint)param_2[1]) {
@@ -11475,7 +10816,7 @@ uint tisp_log2_int_to_fixed(uint param_1,uint param_2,uint param_3)
 
 
 
-int tisp_log2_fixed_to_fixed(undefined4 param_1,int param_2,uint param_3)
+int tisp_log2_fixed_to_fixed(int param_1,int param_2,uint param_3)
 
 {
   int iVar1;
@@ -11573,7 +10914,7 @@ uint tisp_log2_int_to_fixed_64(uint param_1,uint param_2,uint param_3,uint param
 
 
 
-int tisp_log2_fixed_to_fixed_64(undefined4 param_1,undefined4 param_2,int param_3,uint param_4)
+int tisp_log2_fixed_to_fixed_64(int param_1,int param_2,int param_3,uint param_4)
 
 {
   int iVar1;
@@ -11603,10 +10944,10 @@ void netlink_rcv_msg(int param_1)
 
 
 
-undefined4 netlink_send_msg(void *param_1,uint param_2)
+int netlink_send_msg(void *param_1,uint param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   int iVar3;
   
@@ -11632,7 +10973,7 @@ undefined4 netlink_send_msg(void *param_1,uint param_2)
 
 
 
-undefined4 tisp_netlink_event_set_cb(undefined4 param_1)
+int tisp_netlink_event_set_cb(int param_1)
 
 {
   net_event_process = param_1;
@@ -11641,10 +10982,10 @@ undefined4 tisp_netlink_event_set_cb(undefined4 param_1)
 
 
 
-undefined4 tisp_netlink_init(void)
+int tisp_netlink_init(void)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   nlsk = private_netlink_kernel_create(&init_net,0x17,nlcfg);
   uVar1 = 0;
@@ -11671,7 +11012,7 @@ void tisp_netlink_exit(void)
 
 
 
-bool isp_tunning_poll(undefined4 param_1,code **param_2)
+bool isp_tunning_poll(int param_1,code **param_2)
 
 {
   if ((param_2 != (code **)0x0) && (*param_2 != (code *)0x0)) {
@@ -11683,7 +11024,7 @@ bool isp_tunning_poll(undefined4 param_1,code **param_2)
 
 
 
-undefined4 tisp_code_tuning_release(void)
+int tisp_code_tuning_release(void)
 
 {
   private_kfree(tisp_par_ioctl);
@@ -11693,28 +11034,28 @@ undefined4 tisp_code_tuning_release(void)
 
 
 
-undefined4 tisp_param_operate_process(int *param_1)
+int tisp_param_operate_process(int *param_1)
 
 {
   code *pcVar1;
-  undefined4 *__dest;
+  int *__dest;
   int iVar2;
   int *piVar3;
   uint uVar4;
   char *pcVar5;
   int iVar6;
-  undefined4 uVar7;
+  int uVar7;
   int *piVar8;
-  undefined4 local_4d8;
-  undefined4 local_4d4;
-  undefined4 local_4d0;
+  int local_4d8;
+  int local_4d4;
+  int local_4d0;
   int local_b8;
-  undefined4 local_b4;
-  undefined4 local_b0;
-  undefined4 local_ac;
-  undefined4 local_a8;
-  undefined4 local_a4;
-  undefined4 local_a0;
+  int local_b4;
+  int local_b0;
+  int local_ac;
+  int local_a8;
+  int local_a4;
+  int local_a0;
   int local_20 [3];
   
   piVar3 = opmsg;
@@ -11916,7 +11257,7 @@ LAB_00021fd8:
           goto LAB_00021fd8;
         }
         if (iVar2 == 0xd) {
-          __dest = (undefined4 *)private_kmalloc(0x42c,0xd0);
+          __dest = (int *)private_kmalloc(0x42c,0xd0);
           memcpy(__dest,piVar8,0x42c);
           for (uVar4 = 0; uVar4 < 0x41c; uVar4 = uVar4 + 1) {
             *(undefined *)((int)&local_4d8 + uVar4) = *(undefined *)((int)__dest + uVar4 + 0x10);
@@ -11945,15 +11286,15 @@ LAB_00022148:
           else {
             if (iVar2 != 0x10) {
               if (iVar2 == 9) {
-                __dest = (undefined4 *)(uint)*(byte *)(param_1 + 2);
+                __dest = (int *)(uint)*(byte *)(param_1 + 2);
                 pcVar1 = tisp_set_brightness;
               }
               else if (iVar2 == 6) {
-                __dest = (undefined4 *)(uint)*(byte *)(param_1 + 2);
+                __dest = (int *)(uint)*(byte *)(param_1 + 2);
                 pcVar1 = tisp_set_saturation;
               }
               else if (iVar2 == 7) {
-                __dest = (undefined4 *)(uint)*(byte *)(param_1 + 2);
+                __dest = (int *)(uint)*(byte *)(param_1 + 2);
                 pcVar1 = tisp_set_sharpness;
               }
               else {
@@ -11983,7 +11324,7 @@ LAB_00022148:
                   }
                   goto LAB_000222e4;
                 }
-                __dest = (undefined4 *)(uint)*(byte *)(param_1 + 2);
+                __dest = (int *)(uint)*(byte *)(param_1 + 2);
                 pcVar1 = tisp_set_contrast;
               }
               goto LAB_00022148;
@@ -12125,7 +11466,7 @@ uint isp_tunning_read(int param_1,uint param_2,uint param_3)
 
 
 
-undefined4 tisp_code_tuning_open(void)
+int tisp_code_tuning_open(void)
 
 {
   tisp_par_ioctl = (void *)private_kmalloc(0x500c,0xd0);
@@ -12135,7 +11476,7 @@ undefined4 tisp_code_tuning_open(void)
 
 
 
-undefined4 tisp_top_param_array_get(void *param_1,undefined4 *param_2)
+int tisp_top_param_array_get(void *param_1,int *param_2)
 
 {
   tisp_g_wdr_en(&DAT_000b2634);
@@ -12146,51 +11487,51 @@ undefined4 tisp_top_param_array_get(void *param_1,undefined4 *param_2)
 
 
 
-undefined4 tisp_get_ae_info(int param_1)
+int tisp_get_ae_info(int param_1)
 
 {
-  *(undefined4 *)(param_1 + 4) = 0x98;
+  *(int *)(param_1 + 4) = 0x98;
   memcpy((void *)(param_1 + 0xc),&tisp_ae_ctrls,0x98);
   return 0;
 }
 
 
 
-undefined4 tisp_set_ae_info(int param_1)
+int tisp_set_ae_info(int param_1)
 
 {
-  *(undefined4 *)(param_1 + 4) = 0x98;
+  *(int *)(param_1 + 4) = 0x98;
   memcpy(&tisp_ae_ctrls,(void *)(param_1 + 0xc),0x98);
   return 0;
 }
 
 
 
-undefined4 tisp_get_awb_info(int param_1)
+int tisp_get_awb_info(int param_1)
 
 {
   undefined auStack_28 [32];
   
   tisp_g_wb_attr(auStack_28);
-  *(undefined4 *)(param_1 + 4) = 0x1c;
+  *(int *)(param_1 + 4) = 0x1c;
   memcpy((void *)(param_1 + 0xc),auStack_28,0x1c);
   return 0;
 }
 
 
 
-undefined4 tisp_set_awb_info(int param_1)
+int tisp_set_awb_info(int param_1)
 
 {
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
-  undefined4 local_18;
-  undefined4 local_14;
-  undefined4 local_10;
+  int local_28;
+  int local_24;
+  int local_20;
+  int local_1c;
+  int local_18;
+  int local_14;
+  int local_10;
   
-  *(undefined4 *)(param_1 + 4) = 0x1c;
+  *(int *)(param_1 + 4) = 0x1c;
   memcpy(&local_28,(void *)(param_1 + 0xc),0x1c);
   tisp_s_wb_attr(local_28,local_24,local_20,local_1c,local_18,local_14,local_10);
   return 0;
@@ -12198,11 +11539,11 @@ undefined4 tisp_set_awb_info(int param_1)
 
 
 
-undefined4 tisp_reg_map_get(int param_1,int param_2,undefined4 *param_3)
+int tisp_reg_map_get(int param_1,int param_2,int *param_3)
 
 {
   int local_res0 [4];
-  undefined4 local_18 [2];
+  int local_18 [2];
   
   local_res0[0] = param_1;
   local_18[0] = system_reg_read(param_1 + -0x13300000);
@@ -12214,10 +11555,10 @@ undefined4 tisp_reg_map_get(int param_1,int param_2,undefined4 *param_3)
 
 
 
-undefined4 tisp_reg_map_set(int param_1)
+int tisp_reg_map_set(int param_1)
 
 {
-  undefined4 local_18;
+  int local_18;
   int local_14 [2];
   
   memcpy(local_14,(void *)(param_1 + 0xc),4);
@@ -12229,11 +11570,11 @@ undefined4 tisp_reg_map_set(int param_1)
 
 
 
-undefined4 tisp_dn_mode_get(int param_1,undefined4 *param_2)
+int tisp_dn_mode_get(int param_1,int *param_2)
 
 {
   int iVar1;
-  undefined4 local_18 [3];
+  int local_18 [3];
   
   iVar1 = tisp_day_or_night_g_ctrl();
   if (iVar1 == 0) {
@@ -12252,10 +11593,10 @@ undefined4 tisp_dn_mode_get(int param_1,undefined4 *param_2)
 
 
 
-undefined4 tisp_dn_mode_set(int param_1)
+int tisp_dn_mode_set(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int local_10 [3];
   
   memcpy(local_10,(void *)(param_1 + 0xc),4);
@@ -12270,7 +11611,7 @@ undefined4 tisp_dn_mode_set(int param_1)
 
 
 
-undefined4 tisp_blc_get_par_cfg(int param_1,int *param_2)
+int tisp_blc_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12290,7 +11631,7 @@ undefined4 tisp_blc_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_blc_set_par_cfg(int param_1)
+int tisp_blc_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12308,7 +11649,7 @@ undefined4 tisp_blc_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_lsc_get_par_cfg(int param_1,int *param_2)
+int tisp_lsc_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12335,10 +11676,10 @@ undefined4 tisp_lsc_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_lsc_set_par_cfg(int param_1,int param_2)
+int tisp_lsc_set_par_cfg(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   int local_20 [2];
   
@@ -12378,7 +11719,7 @@ undefined4 tisp_lsc_set_par_cfg(int param_1,int param_2)
 
 
 
-undefined4 tisp_wdr_get_par_cfg(int param_1,int *param_2)
+int tisp_wdr_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12398,7 +11739,7 @@ undefined4 tisp_wdr_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_wdr_set_par_cfg(int param_1)
+int tisp_wdr_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12416,7 +11757,7 @@ undefined4 tisp_wdr_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_dpc_get_par_cfg(int param_1,int *param_2)
+int tisp_dpc_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12436,7 +11777,7 @@ undefined4 tisp_dpc_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_dpc_set_par_cfg(int param_1)
+int tisp_dpc_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12454,7 +11795,7 @@ undefined4 tisp_dpc_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_gib_get_par_cfg(int param_1,int *param_2)
+int tisp_gib_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12474,7 +11815,7 @@ undefined4 tisp_gib_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_gib_set_par_cfg(int param_1)
+int tisp_gib_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12492,7 +11833,7 @@ undefined4 tisp_gib_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_rdns_get_par_cfg(int param_1,int *param_2)
+int tisp_rdns_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12512,7 +11853,7 @@ undefined4 tisp_rdns_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_rdns_set_par_cfg(int param_1)
+int tisp_rdns_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12530,7 +11871,7 @@ undefined4 tisp_rdns_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_adr_get_par_cfg(int param_1,int *param_2)
+int tisp_adr_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12550,7 +11891,7 @@ undefined4 tisp_adr_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_adr_set_par_cfg(int param_1)
+int tisp_adr_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12568,7 +11909,7 @@ undefined4 tisp_adr_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_dmsc_get_par_cfg(int param_1,int *param_2)
+int tisp_dmsc_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12588,7 +11929,7 @@ undefined4 tisp_dmsc_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_dmsc_set_par_cfg(int param_1)
+int tisp_dmsc_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12606,7 +11947,7 @@ undefined4 tisp_dmsc_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_ccm_get_par_cfg(int param_1,int *param_2)
+int tisp_ccm_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12626,7 +11967,7 @@ undefined4 tisp_ccm_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_ccm_set_par_cfg(int param_1)
+int tisp_ccm_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12644,7 +11985,7 @@ undefined4 tisp_ccm_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_gamma_get_par_cfg(int param_1,int *param_2)
+int tisp_gamma_get_par_cfg(int param_1,int *param_2)
 
 {
   int local_18 [2];
@@ -12660,7 +12001,7 @@ undefined4 tisp_gamma_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_gamma_set_par_cfg(int param_1)
+int tisp_gamma_set_par_cfg(int param_1)
 
 {
   int local_18 [3];
@@ -12673,7 +12014,7 @@ undefined4 tisp_gamma_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_defog_get_par_cfg(int param_1,int *param_2)
+int tisp_defog_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12693,7 +12034,7 @@ undefined4 tisp_defog_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_defog_set_par_cfg(int param_1)
+int tisp_defog_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12711,7 +12052,7 @@ undefined4 tisp_defog_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_mdns_get_par_cfg(int param_1,int *param_2)
+int tisp_mdns_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12731,7 +12072,7 @@ undefined4 tisp_mdns_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_mdns_set_par_cfg(int param_1)
+int tisp_mdns_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12749,7 +12090,7 @@ undefined4 tisp_mdns_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_ydns_get_par_cfg(int param_1,int *param_2)
+int tisp_ydns_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12769,7 +12110,7 @@ undefined4 tisp_ydns_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_ydns_set_par_cfg(int param_1)
+int tisp_ydns_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12787,7 +12128,7 @@ undefined4 tisp_ydns_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_bcsh_get_par_cfg(int param_1,int *param_2)
+int tisp_bcsh_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12807,7 +12148,7 @@ undefined4 tisp_bcsh_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_bcsh_set_par_cfg(int param_1)
+int tisp_bcsh_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12825,7 +12166,7 @@ undefined4 tisp_bcsh_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_clm_get_par_cfg(int param_1,int *param_2)
+int tisp_clm_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12845,7 +12186,7 @@ undefined4 tisp_clm_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_clm_set_par_cfg(int param_1)
+int tisp_clm_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12863,7 +12204,7 @@ undefined4 tisp_clm_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_ysp_get_par_cfg(int param_1,int *param_2)
+int tisp_ysp_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12883,7 +12224,7 @@ undefined4 tisp_ysp_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_ysp_set_par_cfg(int param_1)
+int tisp_ysp_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12901,7 +12242,7 @@ undefined4 tisp_ysp_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_sdns_get_par_cfg(int param_1,int *param_2)
+int tisp_sdns_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12921,7 +12262,7 @@ undefined4 tisp_sdns_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_sdns_set_par_cfg(int param_1)
+int tisp_sdns_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12939,7 +12280,7 @@ undefined4 tisp_sdns_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_af_get_par_cfg(int param_1,int *param_2)
+int tisp_af_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -12959,7 +12300,7 @@ undefined4 tisp_af_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_af_set_par_cfg(int param_1)
+int tisp_af_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -12977,7 +12318,7 @@ undefined4 tisp_af_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_hldc_get_par_cfg(undefined4 param_1,int *param_2)
+int tisp_hldc_get_par_cfg(int param_1,int *param_2)
 
 {
   int local_10 [2];
@@ -12991,10 +12332,10 @@ undefined4 tisp_hldc_get_par_cfg(undefined4 param_1,int *param_2)
 
 
 
-undefined4 tisp_hldc_set_par_cfg(undefined4 param_1)
+int tisp_hldc_set_par_cfg(int param_1)
 
 {
-  undefined4 local_10 [3];
+  int local_10 [3];
   
   local_10[0] = 0;
   tisp_hldc_param_array_set(0x3ac,param_1,local_10);
@@ -13003,7 +12344,7 @@ undefined4 tisp_hldc_set_par_cfg(undefined4 param_1)
 
 
 
-undefined4 tisp_ae_get_par_cfg(int param_1,int *param_2)
+int tisp_ae_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -13023,7 +12364,7 @@ undefined4 tisp_ae_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_ae_set_par_cfg(int param_1)
+int tisp_ae_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -13041,7 +12382,7 @@ undefined4 tisp_ae_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_awb_get_par_cfg(int param_1,int *param_2)
+int tisp_awb_get_par_cfg(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -13061,7 +12402,7 @@ undefined4 tisp_awb_get_par_cfg(int param_1,int *param_2)
 
 
 
-undefined4 tisp_awb_set_par_cfg(int param_1)
+int tisp_awb_set_par_cfg(int param_1)
 
 {
   int iVar1;
@@ -13079,16 +12420,16 @@ undefined4 tisp_awb_set_par_cfg(int param_1)
 
 
 
-undefined4 tisp_code_tuning_ioctl(undefined4 param_1,uint param_2,uint param_3)
+int tisp_code_tuning_ioctl(int param_1,uint param_2,uint param_3)
 
 {
   uint uVar1;
   code *pcVar2;
-  undefined4 *puVar3;
+  int *puVar3;
   char *pcVar4;
   int iVar5;
   size_t __n;
-  undefined4 uVar6;
+  int uVar6;
   uint uVar7;
   int unaff_gp;
   
@@ -13406,7 +12747,7 @@ LAB_00023f9c:
 
 
 
-undefined4 tisp_code_create_tuning_node(void)
+int tisp_code_create_tuning_node(void)
 
 {
   uint local_18 [2];
@@ -13430,10 +12771,10 @@ undefined4 tisp_code_create_tuning_node(void)
 
 
 
-undefined4 tisp_param_operate_init(void)
+int tisp_param_operate_init(void)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   opmsg = private_kmalloc(&Elf32_RegInfo_MIPS_00010018,0xd0);
   if (opmsg == 0) {
@@ -13467,7 +12808,7 @@ void tisp_code_destroy_tuning_node(void)
 
 
 
-undefined4 tisp_param_operate_deinit(void)
+int tisp_param_operate_deinit(void)
 
 {
   tisp_netlink_exit();
@@ -13481,7 +12822,7 @@ undefined4 tisp_param_operate_deinit(void)
 
 
 
-undefined4 tisp_again_update(void)
+int tisp_again_update(void)
 
 {
   return 0;
@@ -13489,7 +12830,7 @@ undefined4 tisp_again_update(void)
 
 
 
-undefined4 tisp_tgain_update(undefined4 param_1,undefined4 param_2)
+int tisp_tgain_update(int param_1,int param_2)
 
 {
   tisp_gib_gain_interpolation();
@@ -13507,7 +12848,7 @@ undefined4 tisp_tgain_update(undefined4 param_1,undefined4 param_2)
 
 
 
-undefined4 tisp_ev_update(int param_1,int param_2)
+int tisp_ev_update(int param_1,int param_2)
 
 {
   int iVar1;
@@ -13540,7 +12881,7 @@ undefined4 tisp_ev_update(int param_1,int param_2)
 
 
 
-undefined4 tisp_ct_update(undefined4 param_1,undefined4 param_2)
+int tisp_ct_update(int param_1,int param_2)
 
 {
   uint uVar1;
@@ -13560,7 +12901,7 @@ undefined4 tisp_ct_update(undefined4 param_1,undefined4 param_2)
 
 
 
-undefined4 tisp_ae_ir_update(void)
+int tisp_ae_ir_update(void)
 
 {
   tisp_gib_deir_ir_update();
@@ -13569,7 +12910,7 @@ undefined4 tisp_ae_ir_update(void)
 
 
 
-undefined4 ip_done_interrupt_static(void)
+int ip_done_interrupt_static(void)
 
 {
   uint uVar1;
@@ -13583,7 +12924,7 @@ undefined4 ip_done_interrupt_static(void)
 
 
 
-undefined4 tisp_deinit(void)
+int tisp_deinit(void)
 
 {
   int iVar1;
@@ -13642,7 +12983,7 @@ undefined4 tisp_deinit(void)
 
 
 
-undefined4 tisp_fw_process(void)
+int tisp_fw_process(void)
 
 {
   tisp_event_process();
@@ -13651,23 +12992,23 @@ undefined4 tisp_fw_process(void)
 
 
 
-undefined4 tisp_channel_start(uint param_1)
+int tisp_channel_start(uint param_1)
 
 {
   bool bVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
+  int uVar2;
+  int uVar3;
+  int uVar4;
+  int uVar5;
+  int uVar6;
+  int uVar7;
+  int uVar8;
+  int uVar9;
   uint uVar10;
   uint uVar11;
   int iVar12;
   uint uVar13;
-  undefined4 *unaff_s7;
+  int *unaff_s7;
   
   if (msca_ch_en == 0xffffffff) {
     msca_ch_en = 0;
@@ -13734,7 +13075,7 @@ undefined4 tisp_channel_start(uint param_1)
 
 
 
-undefined4 tisp_channel_stop(uint param_1)
+int tisp_channel_stop(uint param_1)
 
 {
   uint uVar1;
@@ -13762,7 +13103,7 @@ undefined4 tisp_channel_stop(uint param_1)
 
 
 
-undefined4 tisp_channel_fifo_clear(int param_1)
+int tisp_channel_fifo_clear(int param_1)
 
 {
   int iVar1;
@@ -13777,7 +13118,7 @@ undefined4 tisp_channel_fifo_clear(int param_1)
 
 
 
-undefined4 tisp_channel_attr_set(int param_1,int *param_2)
+int tisp_channel_attr_set(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -13795,7 +13136,7 @@ undefined4 tisp_channel_attr_set(int param_1,int *param_2)
   int iVar13;
   uint uVar14;
   uint uVar15;
-  undefined4 *__dest;
+  int *__dest;
   uint uVar16;
   uint uVar17;
   
@@ -13888,7 +13229,7 @@ LAB_000254bc:
 
 
 
-undefined4 tiziano_load_parameters(char *param_1)
+int tiziano_load_parameters(char *param_1)
 
 {
   char cVar1;
@@ -13904,15 +13245,15 @@ undefined4 tiziano_load_parameters(char *param_1)
   char cVar10;
   uint *puVar11;
   uint *puVar12;
-  undefined4 uVar13;
+  int uVar13;
   code *pcVar14;
   uint uVar15;
   char *pcVar16;
   uint uVar17;
   char *pcVar18;
-  undefined4 uVar19;
+  int uVar19;
   char acStack_88 [64];
-  undefined4 local_48;
+  int local_48;
   code *local_44;
   code *local_40;
   code *local_3c;
@@ -13967,10 +13308,10 @@ LAB_00025880:
     if (iVar5 < 1) {
       if (iVar5 == 0) {
         if (*(uint *)(__s + 0x2c) < uVar17) goto LAB_0002589c;
-        uVar13 = *(undefined4 *)(__s + 0x28);
+        uVar13 = *(int *)(__s + 0x28);
       }
       else {
-        uVar13 = *(undefined4 *)(__s + 0x28);
+        uVar13 = *(int *)(__s + 0x28);
       }
       private_vfs_read(uVar4,uVar13,uVar17,pcVar14);
       private_filp_close(uVar4,0);
@@ -14059,10 +13400,10 @@ LAB_00025b70:
           }
           if (iVar5 == 0) {
             if (*(uint *)(__s + 0x2c) < uVar17) goto LAB_00025b70;
-            uVar13 = *(undefined4 *)(__s + 0x28);
+            uVar13 = *(int *)(__s + 0x28);
           }
           else {
-            uVar13 = *(undefined4 *)(__s + 0x28);
+            uVar13 = *(int *)(__s + 0x28);
           }
           (*local_30)(uVar4,uVar13,uVar17);
           private_filp_close(uVar4,0);
@@ -14122,7 +13463,7 @@ LAB_00025b70:
             *(uint **)(__s + 0x30) = puVar11;
             memcpy(pvVar3,puVar11,0x137f0);
 LAB_00025d80:
-            private_vfree(*(undefined4 *)(__s + 0x28));
+            private_vfree(*(int *)(__s + 0x28));
             private_vfree(__s);
             return 0;
           }
@@ -14153,14 +13494,14 @@ LAB_00025b78:
   private_filp_close(uVar4,0);
   private_set_fs(uVar19);
 LAB_00025db0:
-  private_kfree(*(undefined4 *)(__s + 0x28));
+  private_kfree(*(int *)(__s + 0x28));
   private_kfree(__s);
   return 0xffffffff;
 }
 
 
 
-undefined4 tisp_init(int *param_1,char *param_2)
+int tisp_init(int *param_1,char *param_2)
 
 {
   uint uVar1;
@@ -14171,15 +13512,15 @@ undefined4 tisp_init(int *param_1,char *param_2)
   int iVar6;
   uint uVar7;
   uint uVar8;
-  undefined4 *puVar9;
+  int *puVar9;
   int iVar10;
-  undefined4 uVar11;
-  undefined4 *puVar12;
-  undefined4 *puVar13;
-  undefined4 uVar14;
+  int uVar11;
+  int *puVar12;
+  int *puVar13;
+  int uVar14;
   uint uVar15;
-  undefined4 local_54;
-  undefined4 local_4c;
+  int local_54;
+  int local_4c;
   
   memset(&tispinfo,0,0x74);
   memset(&sensor_info,0,0x60);
@@ -14198,25 +13539,25 @@ undefined4 tisp_init(int *param_1,char *param_2)
   iVar5 = tiziano_load_parameters(param_2);
   pvVar3 = tparams_day;
   if (isp_memopt == 1) {
-    *(undefined4 *)((int)tparams_day + 0xbb50) = 0;
-    *(undefined4 *)((int)pvVar3 + 0xbb58) = 1;
-    *(undefined4 *)((int)pvVar3 + 0xbb68) = 0;
-    *(undefined4 *)((int)pvVar3 + 0xbb60) = 0;
+    *(int *)((int)tparams_day + 0xbb50) = 0;
+    *(int *)((int)pvVar3 + 0xbb58) = 1;
+    *(int *)((int)pvVar3 + 0xbb68) = 0;
+    *(int *)((int)pvVar3 + 0xbb60) = 0;
     pvVar2 = tparams_night;
-    *(undefined4 *)((int)tparams_night + 0xbb50) = 0;
-    *(undefined4 *)((int)pvVar2 + 0xbb58) = 1;
-    *(undefined4 *)((int)pvVar2 + 0xbb68) = 0;
-    *(undefined4 *)((int)pvVar2 + 0xbb60) = 0;
+    *(int *)((int)tparams_night + 0xbb50) = 0;
+    *(int *)((int)pvVar2 + 0xbb58) = 1;
+    *(int *)((int)pvVar2 + 0xbb68) = 0;
+    *(int *)((int)pvVar2 + 0xbb60) = 0;
     iVar6 = tparams_cust;
     if (tparams_cust != 0) {
-      *(undefined4 *)(tparams_cust + 0xbb50) = 0;
-      *(undefined4 *)(iVar6 + 0xbb58) = 1;
-      *(undefined4 *)(iVar6 + 0xbb68) = 0;
-      *(undefined4 *)(iVar6 + 0xbb60) = 0;
+      *(int *)(tparams_cust + 0xbb50) = 0;
+      *(int *)(iVar6 + 0xbb58) = 1;
+      *(int *)(iVar6 + 0xbb68) = 0;
+      *(int *)(iVar6 + 0xbb60) = 0;
     }
-    puVar13 = (undefined4 *)((int)pvVar3 + 0xd838);
-    puVar12 = (undefined4 *)((int)pvVar2 + 0xd838);
-    puVar9 = (undefined4 *)(iVar6 + 0xd838);
+    puVar13 = (int *)((int)pvVar3 + 0xd838);
+    puVar12 = (int *)((int)pvVar2 + 0xd838);
+    puVar9 = (int *)(iVar6 + 0xd838);
     do {
       *puVar13 = 0;
       *puVar12 = 0;
@@ -14226,7 +13567,7 @@ undefined4 tisp_init(int *param_1,char *param_2)
       puVar9 = puVar9 + 1;
       puVar13 = puVar13 + 1;
       puVar12 = puVar12 + 1;
-    } while (puVar9 != (undefined4 *)(iVar6 + 0xd85c));
+    } while (puVar9 != (int *)(iVar6 + 0xd85c));
   }
   if (iVar5 == 0) {
     memcpy(&DAT_00094400,tparams_day,0x137f0);
@@ -14522,7 +13863,7 @@ LAB_00026168:
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_sync_sensor_attr(undefined4 *param_1)
+int tiziano_sync_sensor_attr(int *param_1)
 
 {
   sensor_info = *param_1;
@@ -14568,12 +13909,12 @@ undefined4 tiziano_sync_sensor_attr(undefined4 *param_1)
 
 
 
-undefined4 tisp_event_init(void)
+int tisp_event_init(void)
 
 {
-  undefined4 *puVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  int *puVar1;
+  int *puVar2;
+  int *puVar3;
   
   puVar1 = &DAT_000b27b0;
   DAT_000b2b70 = &DAT_000b2b70;
@@ -14586,7 +13927,7 @@ undefined4 tisp_event_init(void)
     puVar2[1] = puVar2;
     puVar2 = puVar2 + 0xc;
     puVar3 = DAT_000b2b7c;
-    if ((undefined4 **)puVar2 == &DAT_000b2b70) break;
+    if ((int **)puVar2 == &DAT_000b2b70) break;
     *puVar2 = puVar2;
   }
   do {
@@ -14596,7 +13937,7 @@ undefined4 tisp_event_init(void)
     *puVar3 = puVar1;
     puVar1 = puVar1 + 0xc;
     puVar3 = DAT_000b2b7c;
-  } while ((undefined4 **)puVar1 != &DAT_000b2b70);
+  } while ((int **)puVar1 != &DAT_000b2b70);
   tevent_info = 0;
   __init_waitqueue_head(&DAT_000b27a4,"&x->wait",0x10000);
   return 0;
@@ -14604,21 +13945,21 @@ undefined4 tisp_event_init(void)
 
 
 
-undefined4 tisp_event_set_cb(int param_1,undefined4 param_2)
+int tisp_event_set_cb(int param_1,int param_2)
 
 {
-  *(undefined4 *)(cb + param_1 * 4) = param_2;
+  *(int *)(cb + param_1 * 4) = param_2;
   return 0;
 }
 
 
 
-undefined4 tisp_event_push(int param_1)
+int tisp_event_push(int param_1)
 
 {
   int **ppiVar1;
   int **ppiVar2;
-  undefined4 uVar3;
+  int uVar3;
   int *piVar4;
   int iVar5;
   
@@ -14663,11 +14004,11 @@ undefined4 tisp_event_push(int param_1)
 
 
 
-undefined4 tisp_event_exit(void)
+int tisp_event_exit(void)
 
 {
   undefined auStack_38 [8];
-  undefined4 local_30;
+  int local_30;
   
   local_30 = 0;
   tisp_event_push(auStack_38);
@@ -14676,12 +14017,12 @@ undefined4 tisp_event_exit(void)
 
 
 
-undefined4 tisp_event_process(void)
+int tisp_event_process(void)
 
 {
   int **ppiVar1;
   int iVar2;
-  undefined4 uVar3;
+  int uVar3;
   int *piVar4;
   int **ppiVar5;
   
@@ -14871,7 +14212,7 @@ void JZ_Isp_Get_Awb_Statistics(uint *param_1,uint param_2)
 
 
 
-undefined4 tisp_awb_ev_update(undefined4 param_1)
+int tisp_awb_ev_update(int param_1)
 
 {
   _ev = param_1;
@@ -14880,7 +14221,7 @@ undefined4 tisp_awb_ev_update(undefined4 param_1)
 
 
 
-undefined4 tiziano_awb_params_refresh(void)
+int tiziano_awb_params_refresh(void)
 
 {
   memcpy(&_awb_parameter,&DAT_00095410,0xb4);
@@ -14916,10 +14257,10 @@ undefined4 tiziano_awb_params_refresh(void)
 
 
 
-undefined4 tiziano_awb_dump(void)
+int tiziano_awb_dump(void)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   if (DumpNum_32174 != 0) {
     return 0xb0000;
@@ -14976,10 +14317,10 @@ undefined4 tiziano_awb_dump(void)
 
 
 
-void system_reg_write_awb(int param_1,undefined4 param_2,undefined4 param_3)
+void system_reg_write_awb(int param_1,int param_2,int param_3)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   if (param_1 == 1) {
     uVar1 = 0xb000;
@@ -14996,13 +14337,13 @@ LAB_00027a48:
 
 
 
-void Tiziano_awb_set_gain(int param_1,uint param_2,undefined4 *param_3)
+void Tiziano_awb_set_gain(int param_1,uint param_2,int *param_3)
 
 {
   int iVar1;
   int iVar2;
-  undefined4 local_28;
-  undefined4 local_24;
+  int local_28;
+  int local_24;
   uint local_20;
   uint local_1c;
   
@@ -15038,15 +14379,15 @@ void Tiziano_awb_set_gain(int param_1,uint param_2,undefined4 *param_3)
 
 
 void Tiziano_awb_fpga(int param_1,int param_2,int param_3,int param_4,uint *param_5,int *param_6,
-                     int param_7,uint param_8,undefined4 *param_9,uint *param_10,int param_11,
-                     undefined4 param_12,undefined4 param_13)
+                     int param_7,uint param_8,int *param_9,uint *param_10,int param_11,
+                     int param_12,int param_13)
 
 {
   bool bVar1;
   bool bVar2;
   bool bVar3;
   bool bVar4;
-  undefined4 uVar5;
+  int uVar5;
   int iVar6;
   undefined *puVar7;
   undefined *puVar8;
@@ -15054,10 +14395,10 @@ void Tiziano_awb_fpga(int param_1,int param_2,int param_3,int param_4,uint *para
   undefined *puVar10;
   uint uVar11;
   uint uVar12;
-  undefined4 *puVar13;
-  undefined4 *puVar14;
-  undefined4 *puVar15;
-  undefined4 *puVar16;
+  int *puVar13;
+  int *puVar14;
+  int *puVar15;
+  int *puVar16;
   int iVar17;
   int iVar18;
   uint uVar19;
@@ -15066,21 +14407,21 @@ void Tiziano_awb_fpga(int param_1,int param_2,int param_3,int param_4,uint *para
   int iVar22;
   int iVar23;
   int iVar24;
-  undefined4 *puVar25;
+  int *puVar25;
   uint *puVar26;
   uint uVar27;
   int iVar28;
   int *piVar29;
   undefined8 uVar30;
-  undefined4 local_f8;
-  undefined4 local_f4;
+  int local_f8;
+  int local_f4;
   uint *local_c0;
   int *local_bc;
   uint local_b8;
   uint local_b4;
   int local_b0 [2];
   uint local_a8;
-  undefined4 *local_a4;
+  int *local_a4;
   int local_a0;
   uint local_9c;
   uint local_98;
@@ -15100,16 +14441,16 @@ void Tiziano_awb_fpga(int param_1,int param_2,int param_3,int param_4,uint *para
   code *local_60;
   uint local_5c;
   int *local_58;
-  undefined4 *local_54;
-  undefined4 *local_50;
+  int *local_54;
+  int *local_50;
   int local_4c;
-  undefined4 *local_48;
-  undefined4 *local_44;
+  int *local_48;
+  int *local_44;
   uint local_40;
   int local_3c;
   int local_38;
-  undefined4 *local_34;
-  undefined4 *local_30;
+  int *local_34;
+  int *local_30;
   
   local_70 = param_8;
   local_a4 = param_9;
@@ -15143,21 +14484,21 @@ void Tiziano_awb_fpga(int param_1,int param_2,int param_3,int param_4,uint *para
   local_74 = fix_point_mult2_32;
   puVar15 = &zone_rgbg;
   puVar13 = &zone_pix_cnt;
-  for (local_54 = (undefined4 *)0x0; local_54 != (undefined4 *)iVar24;
-      local_54 = (undefined4 *)((int)local_54 + 1)) {
-    puVar25 = (undefined4 *)((int)puVar15 + iVar23);
+  for (local_54 = (int *)0x0; local_54 != (int *)iVar24;
+      local_54 = (int *)((int)local_54 + 1)) {
+    puVar25 = (int *)((int)puVar15 + iVar23);
     local_58 = (int *)(local_88 + iVar23);
-    puVar14 = (undefined4 *)((int)puVar13 + iVar23);
+    puVar14 = (int *)((int)puVar13 + iVar23);
     piVar29 = (int *)(local_80 + iVar23);
     iVar17 = iVar23 + iVar28;
     puVar26 = (uint *)(local_84 + iVar23);
-    puVar16 = (undefined4 *)(local_8c + iVar23);
-    for (local_50 = (undefined4 *)0x0; local_50 != (undefined4 *)local_a8;
-        local_50 = (undefined4 *)((int)local_50 + 1)) {
+    puVar16 = (int *)(local_8c + iVar23);
+    for (local_50 = (int *)0x0; local_50 != (int *)local_a8;
+        local_50 = (int *)((int)local_50 + 1)) {
       if (*puVar26 == 0) {
         *puVar25 = 0;
         *puVar14 = 0;
-        *(undefined4 *)((int)puVar25 + iVar17 + iVar21) = 0;
+        *(int *)((int)puVar25 + iVar17 + iVar21) = 0;
       }
       else {
         local_4c = iVar21;
@@ -15171,7 +14512,7 @@ void Tiziano_awb_fpga(int param_1,int param_2,int param_3,int param_4,uint *para
         uVar5 = (*local_74)(uVar20,(uint)(*local_58 << (uVar20 & 0x1f)) / *puVar26,local_64);
         *puVar25 = uVar5;
         uVar5 = (*local_74)(uVar20,(uint)(*piVar29 << (uVar20 & 0x1f)) / *puVar26,local_60);
-        *(undefined4 *)((int)puVar25 + local_38 + local_4c) = uVar5;
+        *(int *)((int)puVar25 + local_38 + local_4c) = uVar5;
         *local_48 = *local_44;
         puVar13 = local_30;
         puVar14 = local_48;
@@ -15295,9 +14636,9 @@ void Tiziano_awb_fpga(int param_1,int param_2,int param_3,int param_4,uint *para
       iVar17 = iVar21 + iVar23;
       uVar27 = uVar27 + 1;
       if (*(uint *)(local_8c + iVar17) <= local_70) {
-        *(undefined4 *)((int)local_54 + iVar17) = 0;
-        *(undefined4 *)((int)local_54 + iVar23 + iVar21 + (int)local_58) = 0;
-        *(undefined4 *)((int)&zone_pix_cnt + iVar17) = 0;
+        *(int *)((int)local_54 + iVar17) = 0;
+        *(int *)((int)local_54 + iVar23 + iVar21 + (int)local_58) = 0;
+        *(int *)((int)&zone_pix_cnt + iVar17) = 0;
       }
       iVar23 = iVar23 + 4;
     }
@@ -15343,9 +14684,9 @@ LAB_000281f4:
   }
   for (; iVar21 != iVar24; iVar21 = iVar21 + 1) {
     for (iVar28 = 0; iVar22 != iVar28; iVar28 = iVar28 + 4) {
-      *(undefined4 *)((int)puVar13 + iVar28) = *(undefined4 *)((int)puVar15 + iVar28);
-      *(undefined4 *)((int)puVar13 + iVar28 + (int)local_58) =
-           *(undefined4 *)((int)puVar15 + iVar28 + (int)local_58);
+      *(int *)((int)puVar13 + iVar28) = *(int *)((int)puVar15 + iVar28);
+      *(int *)((int)puVar13 + iVar28 + (int)local_58) =
+           *(int *)((int)puVar15 + iVar28 + (int)local_58);
     }
     puVar15 = puVar15 + uVar9;
     puVar13 = puVar13 + uVar9;
@@ -15500,7 +14841,7 @@ LAB_00028710:
 
 
 
-undefined4 JZ_Isp_Awb(void)
+int JZ_Isp_Awb(void)
 
 {
   uint uVar1;
@@ -15508,9 +14849,9 @@ undefined4 JZ_Isp_Awb(void)
   uint uVar3;
   undefined local_a8 [96];
   undefined auStack_48 [8];
-  undefined4 local_40;
+  int local_40;
   int local_38;
-  undefined4 local_34;
+  int local_34;
   
   uVar1 = _ev;
   _awb_ct_last = _awb_ct;
@@ -15601,7 +14942,7 @@ LAB_00028840:
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_awb_set_lum_th_freq(void)
+int tiziano_awb_set_lum_th_freq(void)
 
 {
   uint uVar1;
@@ -15625,12 +14966,12 @@ undefined4 tiziano_awb_set_lum_th_freq(void)
 
 
 
-undefined4 awb_interrupt_static(void)
+int awb_interrupt_static(void)
 
 {
   int iVar1;
   undefined auStack_40 [8];
-  undefined4 local_38;
+  int local_38;
   
   iVar1 = system_reg_read(0xb050);
   private_dma_cache_sync(0,iVar1 * 0x1000 + DAT_000b272c,0x1000,0);
@@ -15643,7 +14984,7 @@ undefined4 awb_interrupt_static(void)
 
 
 
-undefined4 tiziano_awb_set_hardware_param(void)
+int tiziano_awb_set_hardware_param(void)
 
 {
   uint uVar1;
@@ -15693,7 +15034,7 @@ LAB_00028f00:
 
 
 
-undefined4 tiziano_awb_dn_params_refresh(void)
+int tiziano_awb_dn_params_refresh(void)
 
 {
   first_frame = 1;
@@ -15705,10 +15046,10 @@ undefined4 tiziano_awb_dn_params_refresh(void)
 
 
 
-undefined4 tiziano_awb_init(uint param_1,uint param_2)
+int tiziano_awb_init(uint param_1,uint param_2)
 
 {
-  undefined4 *puVar1;
+  int *puVar1;
   uint uVar2;
   
   awb_first = 0;
@@ -15741,7 +15082,7 @@ undefined4 tiziano_awb_init(uint param_1,uint param_2)
 
 
 
-undefined4 tisp_g_wb_mode(void *param_1)
+int tisp_g_wb_mode(void *param_1)
 
 {
   memcpy(param_1,&tisp_wb_attr,0x1c);
@@ -15772,7 +15113,7 @@ void tisp_awb_get_frz(undefined *param_1)
 
 
 
-undefined4 tisp_s_wb_mode(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+int tisp_s_wb_mode(int param_1,int param_2,int param_3)
 
 {
   switch(param_1) {
@@ -15833,7 +15174,7 @@ undefined4 tisp_s_wb_mode(undefined4 param_1,undefined4 param_2,undefined4 param
 
 
 
-void tisp_awb_get_ct(undefined4 *param_1)
+void tisp_awb_get_ct(int *param_1)
 
 {
   *param_1 = _awb_ct;
@@ -15842,7 +15183,7 @@ void tisp_awb_get_ct(undefined4 *param_1)
 
 
 
-void tisp_awb_set_ct(undefined4 *param_1)
+void tisp_awb_set_ct(int *param_1)
 
 {
   awb_ct_manual = *param_1;
@@ -15858,8 +15199,8 @@ void tiziano_s_awb_start(uint param_1,int param_2)
   int iVar2;
   uint uVar3;
   int iVar4;
-  undefined4 uStack_28;
-  undefined4 uStack_24;
+  int uStack_28;
+  int uStack_24;
   uint uStack_20;
   uint uStack_1c;
   
@@ -15876,7 +15217,7 @@ void tiziano_s_awb_start(uint param_1,int param_2)
   _awb_mf_para._20_4_ = param_2;
   uStack_20 = param_1;
   uStack_1c = param_2;
-  iVar2 = fix_point_mult2_32(_AwbPointPos,param_1 << (_AwbPointPos & 0x1f),(undefined4)_wb_static);
+  iVar2 = fix_point_mult2_32(_AwbPointPos,param_1 << (_AwbPointPos & 0x1f),(int)_wb_static);
   iVar4 = 1 << (uVar3 & 0x1f);
   uStack_20 = (uint)(iVar2 + iVar4) >> (uVar1 & 0x1f);
   iVar2 = fix_point_mult2_32(uVar1,uStack_1c << (uVar1 & 0x1f),_wb_static._4_4_);
@@ -15905,7 +15246,7 @@ void tiziano_s_awb_start(uint param_1,int param_2)
 
 
 
-void tiziano_g_awb_start(undefined4 *param_1)
+void tiziano_g_awb_start(int *param_1)
 
 {
   *param_1 = _awb_mf_para._8_4_;
@@ -15915,7 +15256,7 @@ void tiziano_g_awb_start(undefined4 *param_1)
 
 
 
-undefined4 tiziano_s_wb_algo(int param_1)
+int tiziano_s_wb_algo(int param_1)
 
 {
   if (param_1 == 1) {
@@ -15934,7 +15275,7 @@ undefined4 tiziano_s_wb_algo(int param_1)
 
 
 
-undefined4 tisp_awb_get_zone(void *param_1)
+int tisp_awb_get_zone(void *param_1)
 
 {
   memcpy(param_1,&tisp_wb_zone_attr,0x2a3);
@@ -15943,22 +15284,22 @@ undefined4 tisp_awb_get_zone(void *param_1)
 
 
 
-undefined4
+int
 tisp_awb_set_cluster_awb_params
-          (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+          (int param_1,int param_2,int param_3,int param_4)
 
 {
-  undefined4 *puVar1;
-  undefined4 *puVar2;
+  int *puVar1;
+  int *puVar2;
   undefined *puVar3;
   undefined local_res0 [12];
-  undefined4 local_resc;
+  int local_resc;
   
   puVar2 = &_awb_cluster;
   local_resc = param_4;
   puVar3 = &stack0x0000001c;
   do {
-    puVar1 = (undefined4 *)((int)register0x00000074 + 0xc);
+    puVar1 = (int *)((int)register0x00000074 + 0xc);
     register0x00000074 = (BADSPACEBASE *)((int)register0x00000074 + 4);
     puVar2[1] = *puVar1;
     puVar2 = puVar2 + 1;
@@ -15971,7 +15312,7 @@ tisp_awb_set_cluster_awb_params
 
 
 
-undefined4 tisp_awb_get_cluster_awb_params(undefined4 *param_1)
+int tisp_awb_get_cluster_awb_params(int *param_1)
 
 {
   int iVar1;
@@ -15980,7 +15321,7 @@ undefined4 tisp_awb_get_cluster_awb_params(undefined4 *param_1)
   iVar1 = 0;
   do {
     iVar2 = iVar1 + 4;
-    *(undefined4 *)((int)param_1 + iVar1 + 0xc) = *(undefined4 *)((int)&DAT_000a9710 + iVar1);
+    *(int *)((int)param_1 + iVar1 + 0xc) = *(int *)((int)&DAT_000a9710 + iVar1);
     iVar1 = iVar2;
   } while (iVar2 != 0x1c);
   *param_1 = _awb_cluster;
@@ -15991,44 +15332,44 @@ undefined4 tisp_awb_get_cluster_awb_params(undefined4 *param_1)
 
 
 
-undefined4
-tisp_awb_set_ct_trend(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+int
+tisp_awb_set_ct_trend(int param_1,int param_2,int param_3,int param_4)
 
 {
-  undefined4 *puVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
-  undefined4 local_res0 [4];
+  int *puVar1;
+  int *puVar2;
+  int uVar3;
+  int local_res0 [4];
   
   local_res0[0] = param_1;
   local_res0[1] = param_2;
   local_res0[2] = param_3;
   local_res0[3] = param_4;
   puVar1 = &_awb_trend;
-  puVar2 = (undefined4 *)&stack0x00000018;
+  puVar2 = (int *)&stack0x00000018;
   do {
-    uVar3 = *(undefined4 *)register0x00000074;
+    uVar3 = *(int *)register0x00000074;
     register0x00000074 = (BADSPACEBASE *)((int)register0x00000074 + 4);
     puVar1[1] = uVar3;
     puVar1 = puVar1 + 1;
-  } while ((undefined4 *)register0x00000074 != puVar2);
+  } while ((int *)register0x00000074 != puVar2);
   awb_moa = 1;
   return 0;
 }
 
 
 
-undefined4 tisp_awb_get_ct_trend(int param_1)
+int tisp_awb_get_ct_trend(int param_1)
 
 {
-  undefined4 *puVar1;
+  int *puVar1;
   int iVar2;
-  undefined4 *puVar3;
+  int *puVar3;
   
   iVar2 = 0;
   do {
-    puVar1 = (undefined4 *)((int)&DAT_000a96f4 + iVar2);
-    puVar3 = (undefined4 *)(param_1 + iVar2);
+    puVar1 = (int *)((int)&DAT_000a96f4 + iVar2);
+    puVar3 = (int *)(param_1 + iVar2);
     iVar2 = iVar2 + 4;
     *puVar3 = *puVar1;
   } while (iVar2 != 0x18);
@@ -16037,7 +15378,7 @@ undefined4 tisp_awb_get_ct_trend(int param_1)
 
 
 
-undefined4 tisp_awb_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_awb_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -16146,11 +15487,11 @@ LAB_000296f4:
 
 
 
-undefined4 tisp_awb_param_array_set(undefined4 param_1,void *param_2,undefined4 *param_3)
+int tisp_awb_param_array_set(int param_1,void *param_2,int *param_3)
 
 {
-  undefined4 uVar1;
-  undefined4 *__dest;
+  int uVar1;
+  int *__dest;
   undefined8 *__dest_00;
   undefined1 *puVar2;
   
@@ -16260,7 +15601,7 @@ LAB_0002997c:
 
 
 
-void tisp_awb_algo_init(undefined4 param_1)
+void tisp_awb_algo_init(int param_1)
 
 {
   tawb_custom_en = param_1;
@@ -16272,17 +15613,17 @@ void tisp_awb_algo_init(undefined4 param_1)
 void tisp_awb_algo_handle(int param_1)
 
 {
-  undefined4 local_1c;
+  int local_1c;
   
   if (*(int *)(param_1 + 8) == 1) {
-    tisp_s_wb_attr(1,*(undefined4 *)(param_1 + 0xc),*(undefined4 *)(param_1 + 0x10),local_1c);
+    tisp_s_wb_attr(1,*(int *)(param_1 + 0xc),*(int *)(param_1 + 0x10),local_1c);
   }
   return;
 }
 
 
 
-undefined4 tisp_awb_deinit(void)
+int tisp_awb_deinit(void)
 
 {
   if (tawb_custom_en == 1) {
@@ -16296,7 +15637,7 @@ undefined4 tisp_awb_deinit(void)
 int ISPAWBInterpolation1(uint param_1,int param_2,int param_3,int param_4,uint param_5,uint param_6)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   
   iVar2 = param_3 << (param_1 & 0x1f);
@@ -16317,7 +15658,7 @@ int ISPAWBInterpolation1(uint param_1,int param_2,int param_3,int param_4,uint p
 int ISPAWBInterpolation2(uint param_1,int param_2,int param_3,int param_4,uint param_5,uint param_6)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   
   if (param_6 < param_5) {
@@ -16334,8 +15675,8 @@ int ISPAWBInterpolation2(uint param_1,int param_2,int param_3,int param_4,uint p
 
 
 
-uint func_zone_ct_weight(uint param_1,uint *param_2,int param_3,uint param_4,undefined4 param_5,
-                        undefined4 param_6,undefined4 param_7)
+uint func_zone_ct_weight(uint param_1,uint *param_2,int param_3,uint param_4,int param_5,
+                        int param_6,int param_7)
 
 {
   uint uVar1;
@@ -16397,18 +15738,18 @@ LAB_00020f08:
 void Tiziano_Awb_Ct_Detect
                (uint *param_1,uint *param_2,int *param_3,uint *param_4,int *param_5,uint **param_6,
                int param_7,uint *param_8,uint *param_9,int *param_10,int *param_11,int param_12,
-               int param_13,undefined4 *param_14,uint *param_15,undefined1 *param_16,uint *param_17,
-               undefined4 *param_18,uint *param_19,undefined4 *param_20)
+               int param_13,int *param_14,uint *param_15,undefined1 *param_16,uint *param_17,
+               int *param_18,uint *param_19,int *param_20)
 
 {
   bool bVar1;
   uint *puVar2;
-  undefined4 uVar3;
+  int uVar3;
   uint uVar4;
   uint *puVar5;
   uint uVar6;
   uint uVar7;
-  undefined4 uVar8;
+  int uVar8;
   code *pcVar9;
   int iVar10;
   int iVar11;
@@ -16416,7 +15757,7 @@ void Tiziano_Awb_Ct_Detect
   int iVar13;
   int *piVar14;
   uint *puVar15;
-  undefined4 *puVar16;
+  int *puVar16;
   int iVar17;
   uint *puVar18;
   uint *puVar19;
@@ -16447,7 +15788,7 @@ void Tiziano_Awb_Ct_Detect
   code *local_ac;
   uint *local_a8;
   code *local_a4;
-  undefined4 *local_a0;
+  int *local_a0;
   uint *local_9c;
   uint *local_98;
   uint *local_94;
@@ -16466,15 +15807,15 @@ void Tiziano_Awb_Ct_Detect
   uint local_60;
   int local_5c;
   uint *local_58;
-  undefined4 *local_54;
+  int *local_54;
   undefined1 *local_50;
-  undefined4 *local_4c;
+  int *local_4c;
   uint local_48;
   uint *local_44;
   uint *local_40;
   int local_3c;
   int local_38;
-  undefined4 *local_34;
+  int *local_34;
   int local_30;
   int local_2c;
   
@@ -16485,7 +15826,7 @@ void Tiziano_Awb_Ct_Detect
   local_bc = param_12;
   local_74 = param_13;
   local_b0 = (uint *)param_5;
-  local_54 = (undefined4 *)*param_14;
+  local_54 = (int *)*param_14;
   local_68 = param_14[1];
   local_70 = param_14[2];
   local_9c = param_15;
@@ -16495,7 +15836,7 @@ void Tiziano_Awb_Ct_Detect
   memset(local_118,0,0x50);
   local_98 = *param_6;
   local_94 = param_6[1];
-  local_4c = (undefined4 *)*param_18;
+  local_4c = (int *)*param_18;
   local_48 = param_18[1];
   local_44 = (uint *)param_18[2];
   local_64 = param_18[3];
@@ -16506,10 +15847,10 @@ void Tiziano_Awb_Ct_Detect
     iVar11 = local_b0[1];
     iVar13 = 0x100 - (int)local_94 << (uVar35 & 0x1f);
     local_a4 = (code *)fix_point_div_32(uVar35,iVar13,local_b0[3] - local_b0[2] << (uVar35 & 0x1f));
-    local_a0 = (undefined4 *)fix_point_div_32(uVar35,iVar13,iVar10 - iVar11 << (uVar35 & 0x1f));
+    local_a0 = (int *)fix_point_div_32(uVar35,iVar13,iVar10 - iVar11 << (uVar35 & 0x1f));
   }
   else {
-    local_a0 = (undefined4 *)0x0;
+    local_a0 = (int *)0x0;
     local_a4 = (code *)0x0;
   }
   piVar27 = param_3 + (int)local_6c * 2;
@@ -16545,7 +15886,7 @@ void Tiziano_Awb_Ct_Detect
       local_a8 = puVar18;
       uVar3 = (*(code *)((int)local_ac + 0xe94))
                         (uVar35,param_2[(int)puVar26] << (uVar35 & 0x1f),puVar18);
-      *(undefined4 *)((int)&zone_pix_wgh + (int)puVar26 * 4 + local_90) = uVar3;
+      *(int *)((int)&zone_pix_wgh + (int)puVar26 * 4 + local_90) = uVar3;
       puVar18 = local_a8;
     }
     param_2 = (uint *)((int)param_2 + local_b4);
@@ -16629,13 +15970,13 @@ LAB_0002a2b8:
               piVar29 = param_10 + iVar13 + 0x3fffffff;
               piVar32 = param_10 + iVar13 + 0x40000000;
               local_58 = (uint *)(*local_ac)(uVar35,*puVar18,*piVar29,*piVar32,
-                                             *(undefined4 *)(local_b8 + iVar11),
-                                             *(undefined4 *)(local_b8 + local_2c));
+                                             *(int *)(local_b8 + iVar11),
+                                             *(int *)(local_b8 + local_2c));
               local_3c = iVar11 + 0x3c;
               local_38 = iVar11 + 0x40;
               uVar8 = (*local_ac)(uVar35,*puVar18,*piVar29,*piVar32,
-                                  *(undefined4 *)(local_b8 + iVar11 + 0x3c),
-                                  *(undefined4 *)(local_b8 + iVar11 + 0x40));
+                                  *(int *)(local_b8 + iVar11 + 0x3c),
+                                  *(int *)(local_b8 + iVar11 + 0x40));
               uVar3 = local_58;
               piVar33 = local_c8 + iVar10 + 0x3fffffff;
               piVar14 = local_c8 + iVar10 + 0x40000000;
@@ -16644,11 +15985,11 @@ LAB_0002a2b8:
               *piVar27 = iVar13;
               if (local_98 == (uint *)0x1) {
                 local_2c = (*local_ac)(uVar35,*puVar18,*piVar29,*piVar32,
-                                       *(undefined4 *)(local_bc + iVar11),
-                                       *(undefined4 *)(local_bc + local_2c));
+                                       *(int *)(local_bc + iVar11),
+                                       *(int *)(local_bc + local_2c));
                 uVar3 = (*local_ac)(uVar35,*puVar18,*piVar29,*piVar32,
-                                    *(undefined4 *)(local_bc + local_3c),
-                                    *(undefined4 *)(local_bc + local_38));
+                                    *(int *)(local_bc + local_3c),
+                                    *(int *)(local_bc + local_38));
                 iVar11 = *piVar14;
                 uVar28 = *local_a8;
                 iVar10 = *piVar33;
@@ -16663,14 +16004,14 @@ LAB_0002a2b8:
             iVar25 = iVar10 * 0x3c + -4;
             iVar17 = iVar10 * 0x3c + 0x38;
             iVar13 = (*local_ac)(uVar35,*local_a8,*piVar14,*piVar32,
-                                 *(undefined4 *)(local_b8 + iVar25),
-                                 *(undefined4 *)(local_b8 + iVar17));
+                                 *(int *)(local_b8 + iVar25),
+                                 *(int *)(local_b8 + iVar17));
             *piVar27 = iVar13;
             if (local_98 != (uint *)0x1) goto LAB_0002a634;
             iVar11 = *piVar32;
             uVar28 = *local_a8;
             iVar10 = *piVar14;
-            uVar3 = *(undefined4 *)(local_bc + iVar17);
+            uVar3 = *(int *)(local_bc + iVar17);
             iVar13 = *(int *)(local_bc + iVar25);
             puVar2 = (uint *)local_ac;
             goto LAB_0002a5e0;
@@ -16724,12 +16065,12 @@ LAB_0002a608:
           iVar25 = iVar13 * 4 + 0x344;
           iVar17 = iVar13 * 4 + 0x348;
           iVar10 = (*local_ac)(uVar35,*puVar18,param_10[iVar13 + -1],param_10[iVar13],
-                               *(undefined4 *)(local_b8 + iVar25),*(undefined4 *)(local_b8 + iVar17)
+                               *(int *)(local_b8 + iVar25),*(int *)(local_b8 + iVar17)
                               );
           *piVar27 = iVar10;
           if (local_98 == (uint *)0x1) {
             iVar11 = param_10[iVar13];
-            uVar3 = *(undefined4 *)(local_bc + iVar17);
+            uVar3 = *(int *)(local_bc + iVar17);
             iVar10 = param_10[iVar13 + -1];
             iVar13 = *(int *)(local_bc + iVar25);
             uVar28 = *puVar18;
@@ -16785,7 +16126,7 @@ LAB_0002a634:
     }
     local_8c = local_8c + 2;
   }
-  if (local_4c == (undefined4 *)0x1) {
+  if (local_4c == (int *)0x1) {
     piVar14 = &Cluster_rgbg_index_max;
     piVar27 = piVar14;
     do {
@@ -17121,7 +16462,7 @@ LAB_0002b120:
   puVar2 = (uint *)0x0;
   puVar15 = &zone_pix_wgh;
   puVar24 = &rgbg_wght;
-  puVar16 = (undefined4 *)0x20000;
+  puVar16 = (int *)0x20000;
   puVar26 = param_1;
   for (puVar18 = (uint *)0x0; puVar18 != local_c0; puVar18 = (uint *)((int)puVar18 + 1)) {
     local_b0 = (uint *)((int)local_84 + (int)puVar26);
@@ -17139,13 +16480,13 @@ LAB_0002b120:
       local_78 = (code *)puVar19;
       local_6c = (code *)puVar20;
       iVar13 = (*(code *)(puVar16 + 0x39a))
-                         (uVar35,*(undefined4 *)((int)puVar24 + (int)puVar5),
-                          *(undefined4 *)((int)puVar15 + (int)puVar5),
+                         (uVar35,*(int *)((int)puVar24 + (int)puVar5),
+                          *(int *)((int)puVar15 + (int)puVar5),
                           *(int *)(local_74 + (int)puVar5) << (uVar35 & 0x1f));
       local_a4 = fix_point_mult2_32;
       iVar10 = fix_point_mult2_32(uVar35,*puVar26,iVar13);
       local_a8 = (uint *)((int)local_a8 + iVar10);
-      iVar10 = (*local_a4)(uVar35,*(undefined4 *)((int)local_ac + (int)puVar26 + (int)local_b0),
+      iVar10 = (*local_a4)(uVar35,*(int *)((int)local_ac + (int)puVar26 + (int)local_b0),
                            iVar13);
       puVar20 = (uint *)((uint)(uVar22 + iVar10 < uVar22) + (int)local_6c);
       uVar23 = (uVar28 + iVar13 < uVar28) + uVar23;
@@ -17170,7 +16511,7 @@ LAB_0002b120:
   uVar22 = uVar28;
   uVar6 = fix_point_div_64(uVar35);
   local_78 = fix_point_div_64;
-  if (local_54 == (undefined4 *)0x1) {
+  if (local_54 == (int *)0x1) {
     local_a8 = (uint *)0x20000;
     local_a4 = (code *)rgbg_dis;
     puVar18 = (uint *)(local_5c * -4);
@@ -17227,7 +16568,7 @@ LAB_0002b120:
     local_64 = 1 << (uVar35 & 0x1f);
     local_50 = rgbg_d_wght;
     local_4c = &rgbg_wght;
-    local_a0 = (undefined4 *)0x0;
+    local_a0 = (int *)0x0;
     uVar28 = 0;
     uVar22 = 0;
     local_a4 = (code *)0x0;
@@ -17247,7 +16588,7 @@ LAB_0002b120:
       for (local_ac = (code *)0x0; (uint *)local_ac != local_c4;
           local_ac = (code *)((int)local_ac + 1)) {
         local_44 = local_98 + (int)local_ac;
-        uVar23 = (*local_6c)(uVar35,*(undefined4 *)(local_5c + (int)local_44),local_7c);
+        uVar23 = (*local_6c)(uVar35,*(int *)(local_5c + (int)local_44),local_7c);
         local_88 = local_58 + 0x389;
         puVar2 = local_44;
         if (local_68 < uVar23) {
@@ -17265,13 +16606,13 @@ LAB_0002b120:
           puVar2 = local_40;
         }
         local_44 = (uint *)fix_point_mult3_32(uVar35,*ppuVar31,
-                                              *(undefined4 *)((int)local_54 + (int)puVar2),
+                                              *(int *)((int)local_54 + (int)puVar2),
                                               *(int *)(local_74 + (int)puVar2) << (uVar35 & 0x1f));
         iVar13 = (*(code *)local_88)(uVar35,*puVar18,local_44);
         ppuVar31 = ppuVar31 + 1;
         local_90 = (uint)((uint *)((int)local_a8 + iVar13) < local_a8) + local_90;
         local_a8 = (uint *)((int)local_a8 + iVar13);
-        iVar13 = (*(code *)local_88)(uVar35,*(undefined4 *)((int)puVar18 + local_60 + (int)local_a0)
+        iVar13 = (*(code *)local_88)(uVar35,*(int *)((int)puVar18 + local_60 + (int)local_a0)
                                      ,local_44);
         puVar18 = puVar18 + 1;
         local_8c = (uint *)((uint)(local_a4 + iVar13 < local_a4) + (int)local_8c);
@@ -17281,7 +16622,7 @@ LAB_0002b120:
         local_a4 = local_a4 + iVar13;
       }
       local_80 = (uint *)((int)local_80 + local_b4);
-      local_a0 = (undefined4 *)((int)local_a0 + (int)local_94);
+      local_a0 = (int *)((int)local_a0 + (int)local_94);
     }
     if ((uVar28 | uVar22) != 0) {
       uVar4 = (*local_78)(uVar35);
@@ -17314,8 +16655,8 @@ LAB_0002b750:
     iVar17 = (local_c8 + iVar10 + -1)[1];
     iVar11 = local_c8[iVar10 + -1];
     iVar13 = iVar10 * 0x3c + local_bc;
-    uVar8 = *(undefined4 *)(iVar13 + 0x38);
-    uVar3 = *(undefined4 *)(iVar13 + -4);
+    uVar8 = *(int *)(iVar13 + 0x38);
+    uVar3 = *(int *)(iVar13 + -4);
   }
   else {
     piVar27 = param_10;
@@ -17344,7 +16685,7 @@ LAB_0002b6e4:
       } while (iVar11 != 0xe);
       if (iVar13 == 0xf) goto LAB_0002b750;
       if (iVar10 != 0xf) {
-        puVar16 = (undefined4 *)(local_bc + (iVar10 * 0xf + iVar13 + 0x3ffffff0) * 4);
+        puVar16 = (int *)(local_bc + (iVar10 * 0xf + iVar13 + 0x3ffffff0) * 4);
         uVar3 = ISPAWBInterpolation1
                           (uVar35,uVar28,param_10[iVar13 + 0x3fffffff],param_10[iVar13 + 0x40000000]
                            ,*puVar16,puVar16[1]);
@@ -17360,8 +16701,8 @@ LAB_0002b6e4:
     iVar17 = (param_10 + iVar13 + -1)[1];
     iVar11 = param_10[iVar13 + -1];
     iVar13 = local_bc + iVar13 * 4 + -4;
-    uVar8 = *(undefined4 *)(iVar13 + 0x34c);
-    uVar3 = *(undefined4 *)(iVar13 + 0x348);
+    uVar8 = *(int *)(iVar13 + 0x34c);
+    uVar3 = *(int *)(iVar13 + 0x348);
     uVar6 = uVar28;
   }
   pcVar9 = ISPAWBInterpolation1;
@@ -17388,7 +16729,7 @@ int subsection_map(int param_1,int param_2,int param_3,short *param_4,int param_
 
 {
   int iVar1;
-  undefined4 uVar2;
+  int uVar2;
   int iVar3;
   int iVar4;
   int iVar5;
@@ -17462,14 +16803,14 @@ LAB_0002bb30:
 
 
 
-void subsection(undefined4 *param_1,undefined4 param_2,int param_3,short *param_4,int param_5,
-               int param_6,uint param_7,undefined4 param_8,undefined4 param_9)
+void subsection(int *param_1,int param_2,int param_3,short *param_4,int param_5,
+               int param_6,uint param_7,int param_8,int param_9)
 
 {
   int iVar1;
   int iVar2;
   int iVar3;
-  undefined4 uVar4;
+  int uVar4;
   int iVar5;
   int iVar6;
   int iVar7;
@@ -17595,7 +16936,7 @@ LAB_0002c0e8:
 
 
 
-void subsection_up(undefined4 *param_1,int param_2,int *param_3,int param_4)
+void subsection_up(int *param_1,int param_2,int *param_3,int param_4)
 
 {
   int iVar1;
@@ -17706,8 +17047,8 @@ int interpolate_adr_x8_y12(int param_1,int param_2,int param_3,int param_4,int p
 
 
 void Tiziano_adr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,int **param_6
-                     ,int *param_7,int *param_8,int param_9,int *param_10,undefined4 param_11,
-                     undefined4 param_12,int *param_13,int *param_14,int *param_15,int *param_16)
+                     ,int *param_7,int *param_8,int param_9,int *param_10,int param_11,
+                     int param_12,int *param_13,int *param_14,int *param_15,int *param_16)
 
 {
   int iVar1;
@@ -17716,16 +17057,16 @@ void Tiziano_adr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
   int iVar4;
   int **ppiVar5;
   int iVar6;
-  undefined4 uVar7;
+  int uVar7;
   int *piVar8;
-  undefined4 *puVar9;
+  int *puVar9;
   int iVar10;
-  undefined4 *puVar11;
+  int *puVar11;
   int iVar12;
   int iVar13;
   int *piVar14;
   int iVar15;
-  undefined4 uVar16;
+  int uVar16;
   undefined *puVar17;
   code *pcVar18;
   int *piVar19;
@@ -17744,23 +17085,23 @@ void Tiziano_adr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
   undefined local_28c [36];
   undefined local_268 [36];
   undefined auStack_244 [36];
-  undefined4 local_220 [9];
-  undefined4 local_1fc;
-  undefined4 local_1f8;
-  undefined4 local_1f4;
-  undefined4 local_1f0;
-  undefined4 local_1ec;
-  undefined4 local_1e8;
-  undefined4 local_1e4;
-  undefined4 local_1e0;
-  undefined4 local_1dc;
+  int local_220 [9];
+  int local_1fc;
+  int local_1f8;
+  int local_1f4;
+  int local_1f0;
+  int local_1ec;
+  int local_1e8;
+  int local_1e4;
+  int local_1e0;
+  int local_1dc;
   int *local_1d8 [2];
   int local_1d0;
   int *local_1cc;
   int local_1c8;
-  undefined4 local_1c4;
-  undefined4 local_1c0;
-  undefined4 local_1bc;
+  int local_1c4;
+  int local_1c0;
+  int local_1bc;
   int *local_1b8;
   int *local_1b4;
   int local_1b0;
@@ -17775,9 +17116,9 @@ void Tiziano_adr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
   int local_188;
   int *local_184;
   int local_180;
-  undefined4 local_17c;
-  undefined4 local_178;
-  undefined4 local_174;
+  int local_17c;
+  int local_178;
+  int local_174;
   int *local_170;
   int *local_16c [4];
   int local_15c;
@@ -17812,7 +17153,7 @@ void Tiziano_adr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
   int local_c0;
   int *local_bc;
   int *local_b8;
-  undefined4 local_b4;
+  int local_b4;
   int local_b0;
   int local_ac;
   int local_a8;
@@ -17919,11 +17260,11 @@ void Tiziano_adr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
   iVar6 = 0;
   local_104 = local_118;
   do {
-    uVar7 = *(undefined4 *)((int)local_120 + iVar6);
-    *(undefined4 *)((int)local_220 + iVar6) = uVar7;
-    *(undefined4 *)((int)local_16c + iVar6) = uVar7;
-    *(undefined4 *)((int)local_190 + iVar6) = uVar7;
-    puVar9 = (undefined4 *)((int)local_1d8 + iVar6);
+    uVar7 = *(int *)((int)local_120 + iVar6);
+    *(int *)((int)local_220 + iVar6) = uVar7;
+    *(int *)((int)local_16c + iVar6) = uVar7;
+    *(int *)((int)local_190 + iVar6) = uVar7;
+    puVar9 = (int *)((int)local_1d8 + iVar6);
     iVar6 = iVar6 + 4;
     *puVar9 = uVar7;
   } while (iVar6 != 0x24);
@@ -17966,14 +17307,14 @@ void Tiziano_adr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
     param_9 = param_9 + 0x78;
     iVar12 = 1;
     iVar10 = param_9;
-    puVar11 = (undefined4 *)((int)&adr_block_hist_120 + iVar6);
+    puVar11 = (int *)((int)&adr_block_hist_120 + iVar6);
     do {
       iVar12 = iVar12 + 1;
-      *puVar11 = *(undefined4 *)(iVar10 + 0x14);
-      puVar11[1] = *(undefined4 *)(iVar10 + 0x18);
-      puVar11[2] = *(undefined4 *)(iVar10 + 0x1c);
-      puVar11[3] = *(undefined4 *)(iVar10 + 0x20);
-      puVar11[4] = *(undefined4 *)(iVar10 + 0x24);
+      *puVar11 = *(int *)(iVar10 + 0x14);
+      puVar11[1] = *(int *)(iVar10 + 0x18);
+      puVar11[2] = *(int *)(iVar10 + 0x1c);
+      puVar11[3] = *(int *)(iVar10 + 0x20);
+      puVar11[4] = *(int *)(iVar10 + 0x24);
       iVar10 = iVar10 + 0x14;
       puVar11 = puVar11 + 5;
     } while (iVar12 != 5);
@@ -17989,7 +17330,7 @@ void Tiziano_adr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
       iVar12 = iVar10 + 4;
       iVar2 = iVar6 + iVar10;
       iVar10 = iVar10 + 4;
-      *(undefined4 *)((int)&adr_block_y_24 + iVar2) = *(undefined4 *)((int)piVar8 + iVar12);
+      *(int *)((int)&adr_block_y_24 + iVar2) = *(int *)((int)piVar8 + iVar12);
     } while (iVar10 != 0x10);
     iVar6 = iVar6 + 0x10;
   } while (iVar6 != 0x60);
@@ -18047,7 +17388,7 @@ void Tiziano_adr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
     local_ec = (int *)uVar16;
     local_e8 = (int *)iVar13;
     (*(code *)(iVar1 + -0x442c))
-              (&local_1fc,*(undefined4 *)((int)local_148 + iVar6),param_11,param_12,puVar9,8,uVar7,
+              (&local_1fc,*(int *)((int)local_148 + iVar6),param_11,param_12,puVar9,8,uVar7,
                uVar16,iVar13);
     iVar6 = iVar6 + 4;
     *puVar11 = local_1fc;
@@ -18076,10 +17417,10 @@ LAB_0002d3d8:
     if (piVar19 == piVar8) {
       iVar1 = 0;
       do {
-        puVar9 = (undefined4 *)((int)local_16c + iVar1);
+        puVar9 = (int *)((int)local_16c + iVar1);
         iVar6 = iVar13 * 0x24 + iVar1;
         iVar1 = iVar1 + 4;
-        *puVar9 = *(undefined4 *)((int)&stack0xfffffbe0 + iVar6);
+        *puVar9 = *(int *)((int)&stack0xfffffbe0 + iVar6);
       } while (iVar1 != 0x24);
     }
     else {
@@ -18087,8 +17428,8 @@ LAB_0002d3d8:
       if (iVar13 == 0) {
         iVar13 = 0;
         do {
-          puVar11 = (undefined4 *)((int)local_16c + iVar13);
-          puVar9 = (undefined4 *)((int)&stack0xfffffbe0 + iVar13);
+          puVar11 = (int *)((int)local_16c + iVar13);
+          puVar9 = (int *)((int)&stack0xfffffbe0 + iVar13);
           iVar13 = iVar13 + 4;
           *puVar11 = *puVar9;
         } while (iVar13 != 0x24);
@@ -18098,20 +17439,20 @@ LAB_0002d3d8:
         pcVar18 = interpolate_adr_x8_y12;
         local_16c[1] = (int *)interpolate_adr_x8_y12
                                         (iVar13,piVar8,
-                                         *(undefined4 *)((int)&stack0xfffffbe0 + (iVar1 + -8) * 4),
-                                         *(undefined4 *)((int)&stack0xfffffbe0 + (iVar1 + 1) * 4),
+                                         *(int *)((int)&stack0xfffffbe0 + (iVar1 + -8) * 4),
+                                         *(int *)((int)&stack0xfffffbe0 + (iVar1 + 1) * 4),
                                          piVar19);
         local_16c[2] = (int *)(*pcVar18)(iVar13,piVar8,
-                                         *(undefined4 *)((int)&stack0xfffffbe0 + (iVar1 + -7) * 4),
-                                         *(undefined4 *)((int)&stack0xfffffbe0 + (iVar1 + 2) * 4),
+                                         *(int *)((int)&stack0xfffffbe0 + (iVar1 + -7) * 4),
+                                         *(int *)((int)&stack0xfffffbe0 + (iVar1 + 2) * 4),
                                          piVar19);
         local_16c[3] = (int *)(*pcVar18)(iVar13,piVar8,
-                                         *(undefined4 *)((int)&stack0xfffffbe0 + (iVar1 + -6) * 4),
-                                         *(undefined4 *)((int)&stack0xfffffbe0 + (iVar1 + 3) * 4),
+                                         *(int *)((int)&stack0xfffffbe0 + (iVar1 + -6) * 4),
+                                         *(int *)((int)&stack0xfffffbe0 + (iVar1 + 3) * 4),
                                          piVar19);
         local_15c = (*pcVar18)(iVar13,piVar8,
-                               *(undefined4 *)((int)&stack0xfffffbe0 + (iVar1 + -5) * 4),
-                               *(undefined4 *)((int)&stack0xfffffbe0 + (iVar1 + 4) * 4),piVar19);
+                               *(int *)((int)&stack0xfffffbe0 + (iVar1 + -5) * 4),
+                               *(int *)((int)&stack0xfffffbe0 + (iVar1 + 4) * 4),piVar19);
       }
     }
     goto LAB_0002e338;
@@ -18123,8 +17464,8 @@ LAB_0002d3d8:
   local_34 = pcVar18;
   iVar13 = 0;
   do {
-    puVar11 = (undefined4 *)(puVar17 + iVar13);
-    puVar9 = (undefined4 *)((int)local_16c + iVar13);
+    puVar11 = (int *)(puVar17 + iVar13);
+    puVar9 = (int *)((int)local_16c + iVar13);
     iVar13 = iVar13 + 4;
     *puVar9 = *puVar11;
   } while (iVar13 != 0x24);
@@ -18239,9 +17580,9 @@ LAB_0002ce64:
   (*local_34)(auStack_244,auStack_2d4,0,puVar17);
   iVar13 = 0;
   do {
-    uVar7 = *(undefined4 *)(puVar17 + iVar13);
-    *(undefined4 *)((int)local_190 + iVar13) = uVar7;
-    puVar9 = (undefined4 *)((int)&local_1b4 + iVar13);
+    uVar7 = *(int *)(puVar17 + iVar13);
+    *(int *)((int)local_190 + iVar13) = uVar7;
+    puVar9 = (int *)((int)&local_1b4 + iVar13);
     iVar13 = iVar13 + 4;
     *puVar9 = uVar7;
   } while (iVar13 != 0x24);
@@ -18570,9 +17911,9 @@ LAB_0002d83c:
         local_1d0 = *(int *)((int)&stack0xfffffbe0 + (iVar13 + 2) * 4);
         local_1cc = *(int **)((int)&stack0xfffffbe0 + (iVar13 + 3) * 4);
         local_1c8 = *(int *)((int)&stack0xfffffbe0 + (iVar13 + 4) * 4);
-        local_1c4 = *(undefined4 *)((int)&stack0xfffffbe0 + (iVar13 + 5) * 4);
-        local_1c0 = *(undefined4 *)((int)&stack0xfffffbe0 + (iVar13 + 6) * 4);
-        local_1bc = *(undefined4 *)((int)&stack0xfffffbe0 + (iVar13 + 7) * 4);
+        local_1c4 = *(int *)((int)&stack0xfffffbe0 + (iVar13 + 5) * 4);
+        local_1c0 = *(int *)((int)&stack0xfffffbe0 + (iVar13 + 6) * 4);
+        local_1bc = *(int *)((int)&stack0xfffffbe0 + (iVar13 + 7) * 4);
         local_1b8 = *(int **)((int)&stack0xfffffbe0 + (iVar13 + 8) * 4);
 LAB_0002db94:
         break;
@@ -18792,8 +18133,8 @@ LAB_0002e150:
           iVar13 = 0;
           while( true ) {
             do {
-              puVar9 = (undefined4 *)((int)local_100 + iVar13);
-              puVar11 = (undefined4 *)((int)ppiVar5 + iVar13);
+              puVar9 = (int *)((int)local_100 + iVar13);
+              puVar11 = (int *)((int)ppiVar5 + iVar13);
               iVar13 = iVar13 + 4;
               *puVar11 = *puVar9;
             } while (iVar13 != 0x2c);
@@ -18831,8 +18172,8 @@ code_r0x0002d424:
 code_r0x0002d568:
   iVar13 = 0;
   do {
-    puVar9 = (undefined4 *)((int)local_300 + iVar13);
-    puVar11 = (undefined4 *)((int)local_16c + iVar13);
+    puVar9 = (int *)((int)local_300 + iVar13);
+    puVar11 = (int *)((int)local_16c + iVar13);
     iVar13 = iVar13 + 4;
     *puVar11 = *puVar9;
   } while (iVar13 != 0x24);
@@ -18953,9 +18294,9 @@ LAB_0002e70c:
       local_188 = *(int *)((int)&stack0xfffffbe0 + (iVar1 + 2) * 4);
       local_184 = *(int **)((int)&stack0xfffffbe0 + (iVar1 + 3) * 4);
       local_180 = *(int *)((int)&stack0xfffffbe0 + (iVar1 + 4) * 4);
-      local_17c = *(undefined4 *)((int)&stack0xfffffbe0 + (iVar1 + 5) * 4);
-      local_178 = *(undefined4 *)((int)&stack0xfffffbe0 + (iVar1 + 6) * 4);
-      local_174 = *(undefined4 *)((int)&stack0xfffffbe0 + (iVar1 + 7) * 4);
+      local_17c = *(int *)((int)&stack0xfffffbe0 + (iVar1 + 5) * 4);
+      local_178 = *(int *)((int)&stack0xfffffbe0 + (iVar1 + 6) * 4);
+      local_174 = *(int *)((int)&stack0xfffffbe0 + (iVar1 + 7) * 4);
       local_170 = *(int **)((int)&stack0xfffffbe0 + (iVar1 + 8) * 4);
 LAB_0002e85c:
       break;
@@ -19232,7 +18573,7 @@ void cm_control(int *param_1,int param_2,int *param_3)
 
 {
   int *piVar1;
-  undefined4 *puVar2;
+  int *puVar2;
   int iVar3;
   int iVar4;
   int iVar5;
@@ -19516,18 +18857,18 @@ void wdr_detail_para_rgb(int *param_1,int *param_2,int *param_3)
 
 void Tiziano_wdr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,int *param_6,
                      int *param_7,int *param_8,int *param_9,int *param_10,int *param_11,
-                     int *param_12,int *param_13,int *param_14,int *param_15,undefined4 *param_16,
-                     undefined4 *param_17,undefined4 *param_18,undefined4 *param_19,int *param_20,
-                     undefined4 *param_21,int *param_22,int *param_23,int *param_24,int param_25,
-                     undefined4 *param_26,int *param_27,int *param_28,undefined4 param_29,
-                     undefined4 *param_30)
+                     int *param_12,int *param_13,int *param_14,int *param_15,int *param_16,
+                     int *param_17,int *param_18,int *param_19,int *param_20,
+                     int *param_21,int *param_22,int *param_23,int *param_24,int param_25,
+                     int *param_26,int *param_27,int *param_28,int param_29,
+                     int *param_30)
 
 {
   bool bVar1;
   int *piVar2;
   int iVar3;
   int iVar4;
-  undefined4 uVar5;
+  int uVar5;
   int *piVar6;
   int iVar7;
   int iVar8;
@@ -19539,8 +18880,8 @@ void Tiziano_wdr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
   int iVar14;
   int iVar15;
   int *piVar16;
-  undefined4 *puVar17;
-  undefined4 *puVar18;
+  int *puVar17;
+  int *puVar18;
   int iVar19;
   int *piVar20;
   int *piVar21;
@@ -19554,15 +18895,15 @@ void Tiziano_wdr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
   int iVar29;
   int iVar30;
   int local_1d8 [26];
-  undefined4 local_170;
-  undefined4 local_16c;
-  undefined4 local_168;
-  undefined4 local_164;
-  undefined4 local_160;
-  undefined4 local_15c;
-  undefined4 local_158;
-  undefined4 local_154;
-  undefined4 local_150;
+  int local_170;
+  int local_16c;
+  int local_168;
+  int local_164;
+  int local_160;
+  int local_15c;
+  int local_158;
+  int local_154;
+  int local_150;
   int *local_148;
   int local_144;
   int *local_140;
@@ -19576,17 +18917,17 @@ void Tiziano_wdr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
   int local_120;
   int local_11c;
   int *local_118;
-  undefined4 *local_114;
+  int *local_114;
   int local_110;
   int *local_10c;
   int *local_108;
   int local_104;
   int *local_100;
-  undefined4 *local_fc;
+  int *local_fc;
   int local_f8;
   int local_f4;
   int local_f0;
-  undefined4 *local_ec;
+  int *local_ec;
   int local_e8;
   int local_e4;
   int local_e0;
@@ -19604,8 +18945,8 @@ void Tiziano_wdr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
   int local_b0;
   int *local_ac;
   int *local_a8;
-  undefined4 *local_a4;
-  undefined4 *local_a0;
+  int *local_a4;
+  int *local_a0;
   int local_9c;
   int local_98;
   int local_94;
@@ -19633,7 +18974,7 @@ void Tiziano_wdr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
   int local_3c;
   int local_38;
   int local_34;
-  undefined4 *local_30;
+  int *local_30;
   
   local_13c = param_9;
   local_118 = param_12;
@@ -19647,8 +18988,8 @@ void Tiziano_wdr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
   local_12c = param_25;
   local_a4 = param_26;
   local_148 = param_28;
-  local_fc = (undefined4 *)param_29;
-  local_a0 = (undefined4 *)*param_1;
+  local_fc = (int *)param_29;
+  local_a0 = (int *)*param_1;
   local_e0 = param_1[1];
   local_124 = *param_2;
   local_f8 = param_2[1];
@@ -19741,7 +19082,7 @@ void Tiziano_wdr_fpga(int *param_1,int *param_2,int *param_3,int *param_4,int *p
   local_ec = &tmpMapR_8bit;
   local_30 = &tmpMapR;
   piVar21 = &tmpMapR_8bit;
-  if (local_a0 == (undefined4 *)0x0) {
+  if (local_a0 == (int *)0x0) {
     piVar21 = &tmpMapR_8bit;
     piVar20 = &tmpMapR;
     iVar10 = 0;
@@ -19947,9 +19288,9 @@ LAB_0002fc5c:
   }
   local_10c = param_4;
   wdr_detail_para_rgb(&local_158,param_29,&tmpMapR);
-  local_a0 = (undefined4 *)0xc0000;
+  local_a0 = (int *)0xc0000;
   wdr_detail_para_rgb(&local_164,local_fc,&tmpMapG);
-  local_114 = (undefined4 *)0xc0000;
+  local_114 = (int *)0xc0000;
   wdr_detail_para_rgb(&local_170,local_fc,&tmpMapB);
   iVar14 = (int)local_a0;
   iVar10 = (int)local_114;
@@ -19965,10 +19306,10 @@ LAB_0002fc5c:
   param_30[8] = local_168;
   do {
     local_114 = &mapR_before;
-    *(undefined4 *)((int)&mapR_before + iVar24) = *(undefined4 *)((int)local_138 + iVar24);
-    *(undefined4 *)((int)&mapG_before + iVar24) = *(undefined4 *)((int)param_24 + iVar24);
-    puVar17 = (undefined4 *)((int)param_23 + iVar24);
-    puVar18 = (undefined4 *)((int)&mapB_before + iVar24);
+    *(int *)((int)&mapR_before + iVar24) = *(int *)((int)local_138 + iVar24);
+    *(int *)((int)&mapG_before + iVar24) = *(int *)((int)param_24 + iVar24);
+    puVar17 = (int *)((int)param_23 + iVar24);
+    puVar18 = (int *)((int)&mapB_before + iVar24);
     iVar24 = iVar24 + 4;
     *puVar18 = *puVar17;
     local_fc = &mapG_before;
@@ -20214,11 +19555,11 @@ LAB_00030734:
     iVar3 = 0;
     if (local_b4 == 1) {
       do {
-        uVar5 = *(undefined4 *)((int)local_1d8 + iVar3);
-        *(undefined4 *)((int)local_13c + iVar3) = uVar5;
-        *(undefined4 *)((int)local_118 + iVar3) = uVar5;
-        *(undefined4 *)((int)local_108 + iVar3) = uVar5;
-        puVar17 = (undefined4 *)((int)local_140 + iVar3);
+        uVar5 = *(int *)((int)local_1d8 + iVar3);
+        *(int *)((int)local_13c + iVar3) = uVar5;
+        *(int *)((int)local_118 + iVar3) = uVar5;
+        *(int *)((int)local_108 + iVar3) = uVar5;
+        puVar17 = (int *)((int)local_140 + iVar3);
         iVar3 = iVar3 + 4;
         *puVar17 = uVar5;
       } while (iVar3 != 0x68);
@@ -20561,7 +19902,7 @@ LAB_00030734:
 
 
 
-undefined4 tiziano_gamma_lut_parameter(void)
+int tiziano_gamma_lut_parameter(void)
 
 {
   ushort *puVar1;
@@ -20589,7 +19930,7 @@ undefined4 tiziano_gamma_lut_parameter(void)
 
 
 
-undefined4 tiziano_gamma_params_refresh(void)
+int tiziano_gamma_params_refresh(void)
 
 {
   memcpy(&tiziano_gamma_lut,&DAT_00096c44,0x102);
@@ -20599,7 +19940,7 @@ undefined4 tiziano_gamma_params_refresh(void)
 
 
 
-undefined4 tisp_gamma_wdr_en(int param_1)
+int tisp_gamma_wdr_en(int param_1)
 
 {
   undefined1 *puVar1;
@@ -20617,7 +19958,7 @@ undefined4 tisp_gamma_wdr_en(int param_1)
 
 
 
-undefined4 tiziano_gamma_dn_params_refresh(void)
+int tiziano_gamma_dn_params_refresh(void)
 
 {
   tiziano_gamma_params_refresh();
@@ -20627,7 +19968,7 @@ undefined4 tiziano_gamma_dn_params_refresh(void)
 
 
 
-undefined4 tiziano_gamma_init(void)
+int tiziano_gamma_init(void)
 
 {
   undefined1 *puVar1;
@@ -20646,7 +19987,7 @@ undefined4 tiziano_gamma_init(void)
 
 
 
-undefined4 tisp_gamma_param_array_get(int param_1,void *param_2,undefined4 *param_3)
+int tisp_gamma_param_array_get(int param_1,void *param_2,int *param_3)
 
 {
   undefined1 *__src;
@@ -20669,7 +20010,7 @@ undefined4 tisp_gamma_param_array_get(int param_1,void *param_2,undefined4 *para
 
 
 
-undefined4 tisp_gamma_param_array_set(int param_1,void *param_2,undefined4 *param_3)
+int tisp_gamma_param_array_set(int param_1,void *param_2,int *param_3)
 
 {
   undefined1 *__dest;
@@ -20695,7 +20036,7 @@ undefined4 tisp_gamma_param_array_set(int param_1,void *param_2,undefined4 *para
 
 
 
-void system_reg_write_gib(int param_1,undefined4 param_2,undefined4 param_3)
+void system_reg_write_gib(int param_1,int param_2,int param_3)
 
 {
   if (param_1 == 1) {
@@ -20707,7 +20048,7 @@ void system_reg_write_gib(int param_1,undefined4 param_2,undefined4 param_3)
 
 
 
-undefined4 tisp_gib_gain_interpolation(uint param_1)
+int tisp_gib_gain_interpolation(uint param_1)
 
 {
   uint uVar1;
@@ -20873,7 +20214,7 @@ undefined4 tisp_gib_gain_interpolation(uint param_1)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_gib_lut_parameter(void)
+int tiziano_gib_lut_parameter(void)
 
 {
   system_reg_write(0x1038,_DAT_000a9bfc << 0x10 | _DAT_000a9bf8);
@@ -20892,7 +20233,7 @@ undefined4 tiziano_gib_lut_parameter(void)
 
 
 
-undefined4 tiziano_gib_params_refresh(void)
+int tiziano_gib_params_refresh(void)
 
 {
   memcpy(&tiziano_gib_config_line,&DAT_00096e48,0x30);
@@ -20922,7 +20263,7 @@ undefined4 tiziano_gib_params_refresh(void)
 
 
 
-undefined4 tiziano_gib_dn_params_refresh(void)
+int tiziano_gib_dn_params_refresh(void)
 
 {
   tiziano_gib_params_refresh();
@@ -21094,7 +20435,7 @@ void tiziano_gib_deir_ir_interpolation(uint param_1)
 
 
 
-undefined4 tisp_gib_deir_ir_update(uint param_1)
+int tisp_gib_deir_ir_update(uint param_1)
 
 {
   uint uVar1;
@@ -21116,7 +20457,7 @@ undefined4 tisp_gib_deir_ir_update(uint param_1)
 
 
 
-undefined4 tiziano_gib_init(void)
+int tiziano_gib_init(void)
 
 {
   tiziano_gib_params_refresh();
@@ -21138,7 +20479,7 @@ undefined4 tiziano_gib_init(void)
 
 
 
-undefined4 tisp_gib_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_gib_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -21232,12 +20573,12 @@ LAB_00032208:
 
 
 
-undefined4 tisp_gib_param_array_set(undefined4 param_1,void *param_2,undefined4 *param_3)
+int tisp_gib_param_array_set(int param_1,void *param_2,int *param_3)
 
 {
-  undefined4 *__dest;
+  int *__dest;
   undefined1 *puVar1;
-  undefined4 uVar2;
+  int uVar2;
   
   switch(param_1) {
   case 0x3e:
@@ -21332,7 +20673,7 @@ LAB_0003244c:
 
 
 
-void system_reg_write_gb(int param_1,undefined4 param_2,undefined4 param_3)
+void system_reg_write_gb(int param_1,int param_2,int param_3)
 
 {
   if (param_1 == 1) {
@@ -21344,7 +20685,7 @@ void system_reg_write_gb(int param_1,undefined4 param_2,undefined4 param_3)
 
 
 
-undefined4 tisp_gb_blc_again_interp(uint param_1,int param_2)
+int tisp_gb_blc_again_interp(uint param_1,int param_2)
 
 {
   uint uVar1;
@@ -21358,9 +20699,9 @@ undefined4 tisp_gb_blc_again_interp(uint param_1,int param_2)
   uint uVar9;
   uint uVar10;
   uint uVar11;
-  undefined4 uVar12;
-  undefined4 uVar13;
-  undefined4 uVar14;
+  int uVar12;
+  int uVar13;
+  int uVar14;
   
   uVar11 = param_1 & 0xffff;
   uVar9 = param_1 >> 0x10;
@@ -21528,7 +20869,7 @@ undefined4 tisp_gb_blc_again_interp(uint param_1,int param_2)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_gb_init_reg(void)
+int tisp_gb_init_reg(void)
 
 {
   system_reg_write_gb(1,0x1008,_DAT_000bbcd8 << 2 | tisp_gb_dgain_shift);
@@ -21546,7 +20887,7 @@ undefined4 tisp_gb_init_reg(void)
 
 
 
-undefined4 tisp_gb_params_refresh(void)
+int tisp_gb_params_refresh(void)
 
 {
   memcpy(&tisp_gb_dgain_shift,&DAT_000a6bfc,8);
@@ -21564,7 +20905,7 @@ undefined4 tisp_gb_params_refresh(void)
 
 
 
-undefined4 tisp_gb_dn_params_refresh(void)
+int tisp_gb_dn_params_refresh(void)
 
 {
   tisp_gb_params_refresh();
@@ -21574,7 +20915,7 @@ undefined4 tisp_gb_dn_params_refresh(void)
 
 
 
-undefined4 tisp_gb_init(void)
+int tisp_gb_init(void)
 
 {
   tisp_gb_params_refresh();
@@ -21584,7 +20925,7 @@ undefined4 tisp_gb_init(void)
 
 
 
-undefined4 tisp_gb_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_gb_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -21638,12 +20979,12 @@ LAB_00032c04:
 
 
 
-undefined4 tisp_gb_param_array_set(undefined4 param_1,void *param_2,undefined4 *param_3)
+int tisp_gb_param_array_set(int param_1,void *param_2,int *param_3)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   undefined1 *__dest;
-  undefined4 *puVar2;
+  int *puVar2;
   
   switch(param_1) {
   case 0x3f5:
@@ -21716,7 +21057,7 @@ void tisp_lsc_wdr_en(int param_1)
 
 
 
-undefined4 tisp_lsc_ct_update(undefined4 param_1)
+int tisp_lsc_ct_update(int param_1)
 
 {
   lsc_ct_curr = param_1;
@@ -21725,7 +21066,7 @@ undefined4 tisp_lsc_ct_update(undefined4 param_1)
 
 
 
-undefined4 tisp_lsc_gain_update(undefined4 param_1)
+int tisp_lsc_gain_update(int param_1)
 
 {
   lsc_gain_curr = param_1;
@@ -21734,7 +21075,7 @@ undefined4 tisp_lsc_gain_update(undefined4 param_1)
 
 
 
-undefined4 tiziano_lsc_params_refresh(void)
+int tiziano_lsc_params_refresh(void)
 
 {
   memcpy(&lsc_lut_num,&DAT_000974e0,4);
@@ -21753,7 +21094,7 @@ undefined4 tiziano_lsc_params_refresh(void)
 
 
 
-undefined4 tiziano_lsc_dn_params_refresh(void)
+int tiziano_lsc_dn_params_refresh(void)
 
 {
   tiziano_lsc_params_refresh();
@@ -21763,7 +21104,7 @@ undefined4 tiziano_lsc_dn_params_refresh(void)
 
 
 
-undefined4 tisp_lsc_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_lsc_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -21822,7 +21163,7 @@ LAB_00033050:
 
 
 
-undefined4 tisp_lsc_judge_ct_update_flag(void)
+int tisp_lsc_judge_ct_update_flag(void)
 
 {
   bool bVar1;
@@ -21895,12 +21236,12 @@ bool tisp_lsc_judge_gain_update_flag(void)
 
 // WARNING: Restarted to delay deadcode elimination for space: ram
 
-undefined4 tisp_lsc_write_lut_datas(void)
+int tisp_lsc_write_lut_datas(void)
 
 {
   int iVar1;
   int iVar2;
-  undefined4 *__src;
+  int *__src;
   uint uVar3;
   int iVar4;
   uint uVar5;
@@ -22055,7 +21396,7 @@ LAB_00033480:
 
 
 
-undefined4 tiziano_lsc_init(void)
+int tiziano_lsc_init(void)
 
 {
   undefined1 *puVar1;
@@ -22079,7 +21420,7 @@ undefined4 tiziano_lsc_init(void)
 
 
 
-undefined4 tisp_lsc_param_array_set(int param_1,void *param_2,size_t *param_3)
+int tisp_lsc_param_array_set(int param_1,void *param_2,size_t *param_3)
 
 {
   size_t __n;
@@ -22144,7 +21485,7 @@ LAB_000338d8:
 
 
 
-undefined4 tisp_lsc_upside_down_lut(void *param_1,int param_2,int param_3)
+int tisp_lsc_upside_down_lut(void *param_1,int param_2,int param_3)
 
 {
   void *__s;
@@ -22194,7 +21535,7 @@ void tisp_lsc_lut_mirror_exchange(int param_1,int param_2,int param_3,int param_
 
 
 
-undefined4 tisp_lsc_mirror_flip(int param_1,int param_2,int param_3,int param_4)
+int tisp_lsc_mirror_flip(int param_1,int param_2,int param_3,int param_4)
 
 {
   uint uVar1;
@@ -22264,7 +21605,7 @@ undefined4 tisp_lsc_mirror_flip(int param_1,int param_2,int param_3,int param_4)
 
 
 
-undefined4 tisp_dmsc_out_opt_cfg(void)
+int tisp_dmsc_out_opt_cfg(void)
 
 {
   system_reg_write(0x4800,dmsc_out_opt);
@@ -22273,7 +21614,7 @@ undefined4 tisp_dmsc_out_opt_cfg(void)
 
 
 
-undefined4 tisp_dmsc_uu_par_cfg(void)
+int tisp_dmsc_uu_par_cfg(void)
 
 {
   system_reg_write(0x4808,dmsc_uu_thres_intp << 0x10 | dmsc_uu_stren_intp);
@@ -22286,7 +21627,7 @@ undefined4 tisp_dmsc_uu_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dmsc_alias_par_cfg(void)
+int tisp_dmsc_alias_par_cfg(void)
 
 {
   system_reg_write(0x480c,(dmsc_alias_dir_thres_intp - _DAT_000c4464) * 0x10000 |
@@ -22301,7 +21642,7 @@ undefined4 tisp_dmsc_alias_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dmsc_uu_np_cfg(void)
+int tisp_dmsc_uu_np_cfg(void)
 
 {
   system_reg_write(0x48c8,_DAT_000c4854 << 0x10 | dmsc_uu_np_array);
@@ -22319,7 +21660,7 @@ undefined4 tisp_dmsc_uu_np_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dmsc_sp_d_sigma_3_np_cfg(void)
+int tisp_dmsc_sp_d_sigma_3_np_cfg(void)
 
 {
   system_reg_write(0x48e8,_DAT_000c47c4 << 0x19 | DAT_000c47c0 << 0x14 | dmsc_sp_d_sigma_3_np_array
@@ -22335,7 +21676,7 @@ undefined4 tisp_dmsc_sp_d_sigma_3_np_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dmsc_sp_d_w_wei_np_cfg(void)
+int tisp_dmsc_sp_d_w_wei_np_cfg(void)
 
 {
   system_reg_write(0x48f4,_DAT_000c4768 << 0x18 | DAT_000c4764 << 0x12 | dmsc_sp_d_w_wei_np_array |
@@ -22354,7 +21695,7 @@ undefined4 tisp_dmsc_sp_d_w_wei_np_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dmsc_sp_d_b_wei_np_cfg(void)
+int tisp_dmsc_sp_d_b_wei_np_cfg(void)
 
 {
   system_reg_write(0x4908,_DAT_000c4710 << 0x18 | DAT_000c470c << 0x12 | dmsc_sp_d_b_wei_np_array |
@@ -22373,7 +21714,7 @@ undefined4 tisp_dmsc_sp_d_b_wei_np_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dmsc_sp_ud_w_wei_np_cfg(void)
+int tisp_dmsc_sp_ud_w_wei_np_cfg(void)
 
 {
   system_reg_write(0x491c,_DAT_000c46b8 << 0x18 | DAT_000c46b4 << 0x12 | dmsc_sp_ud_w_wei_np_array |
@@ -22392,7 +21733,7 @@ undefined4 tisp_dmsc_sp_ud_w_wei_np_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dmsc_sp_ud_b_wei_np_cfg(void)
+int tisp_dmsc_sp_ud_b_wei_np_cfg(void)
 
 {
   system_reg_write(0x4930,_DAT_000c4660 << 0x18 | DAT_000c465c << 0x12 | dmsc_sp_ud_b_wei_np_array |
@@ -22409,7 +21750,7 @@ undefined4 tisp_dmsc_sp_ud_b_wei_np_cfg(void)
 
 
 
-undefined4 tisp_dmsc_dir_par_cfg(void)
+int tisp_dmsc_dir_par_cfg(void)
 
 {
   system_reg_write(0x4810,(dmsc_dir_par_array - (dmsc_dir_par_array >> 3)) * 0x10000 |
@@ -22425,7 +21766,7 @@ undefined4 tisp_dmsc_dir_par_cfg(void)
 
 
 
-undefined4 tisp_dmsc_nor_par_cfg(void)
+int tisp_dmsc_nor_par_cfg(void)
 
 {
   system_reg_write(0x483c,dmsc_nor_par_array << 0x10 | dmsc_nor_alias_thres_intp);
@@ -22435,7 +21776,7 @@ undefined4 tisp_dmsc_nor_par_cfg(void)
 
 
 
-undefined4 tisp_dmsc_sp_d_par_cfg(void)
+int tisp_dmsc_sp_d_par_cfg(void)
 
 {
   system_reg_write(0x4844,dmsc_sp_d_par_array << 0x11 | DAT_000c42dc << 7 | DAT_000c42e4 |
@@ -22454,7 +21795,7 @@ undefined4 tisp_dmsc_sp_d_par_cfg(void)
 
 
 
-undefined4 tisp_dmsc_sp_ud_par_cfg(void)
+int tisp_dmsc_sp_ud_par_cfg(void)
 
 {
   system_reg_write(0x485c,dmsc_sp_ud_par_array << 0x10 | DAT_000c4164 << 0xc | DAT_000c4170 |
@@ -22478,7 +21819,7 @@ undefined4 tisp_dmsc_sp_ud_par_cfg(void)
 
 
 
-undefined4 tisp_dmsc_sp_alias_par_cfg(void)
+int tisp_dmsc_sp_alias_par_cfg(void)
 
 {
   system_reg_write(0x4874,dmsc_sp_alias_thres_intp << 0x10 | dmsc_sp_alias_par_array);
@@ -22487,7 +21828,7 @@ undefined4 tisp_dmsc_sp_alias_par_cfg(void)
 
 
 
-undefined4 tisp_dmsc_rgb_alias_par_cfg(void)
+int tisp_dmsc_rgb_alias_par_cfg(void)
 
 {
   system_reg_write(0x4878,dmsc_rgb_alias_par_array << 0x10 | dmsc_rgb_dir_thres_intp);
@@ -22499,7 +21840,7 @@ undefined4 tisp_dmsc_rgb_alias_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dmsc_fc_par_cfg(void)
+int tisp_dmsc_fc_par_cfg(void)
 
 {
   int iVar1;
@@ -22529,7 +21870,7 @@ undefined4 tisp_dmsc_fc_par_cfg(void)
 
 
 
-undefined4 tisp_dmsc_deir_par_cfg(void)
+int tisp_dmsc_deir_par_cfg(void)
 
 {
   system_reg_write(0x4944,dmsc_deir_oe_en << 8 | DAT_000c3f94);
@@ -22544,7 +21885,7 @@ undefined4 tisp_dmsc_deir_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dmsc_awb_gain_par_cfg(void)
+int tisp_dmsc_awb_gain_par_cfg(void)
 
 {
   system_reg_write(0x4984,_DAT_000c3ee0 << 0x1c | _DAT_000c3edc << 0x10 | dmsc_awb_gain);
@@ -22553,7 +21894,7 @@ undefined4 tisp_dmsc_awb_gain_par_cfg(void)
 
 
 
-undefined4 tisp_dmsc_deir_rgb_par_cfg(void)
+int tisp_dmsc_deir_rgb_par_cfg(void)
 
 {
   system_reg_write(0x4950,dmsc_r_deir_array << 0x10 | DAT_000c4834);
@@ -22573,7 +21914,7 @@ undefined4 tisp_dmsc_deir_rgb_par_cfg(void)
 
 
 
-undefined4 tisp_dmsc_d_ud_ns_par_cfg(void)
+int tisp_dmsc_d_ud_ns_par_cfg(void)
 
 {
   system_reg_write(0x49a0,dmsc_sp_d_ud_ns_opt << 0x10 | dmsc_sp_d_ns_thres_intp);
@@ -22583,7 +21924,7 @@ undefined4 tisp_dmsc_d_ud_ns_par_cfg(void)
 
 
 
-undefined4 tisp_dmsc_intp(uint param_1)
+int tisp_dmsc_intp(uint param_1)
 
 {
   int iVar1;
@@ -22667,7 +22008,7 @@ void tisp_dmsc_wdr_en(int param_1)
 
 
 
-undefined4 tisp_dmsc_all_reg_refresh(void)
+int tisp_dmsc_all_reg_refresh(void)
 
 {
   tisp_dmsc_intp();
@@ -22697,7 +22038,7 @@ undefined4 tisp_dmsc_all_reg_refresh(void)
 
 
 
-undefined4 tisp_dmsc_intp_reg_refresh(void)
+int tisp_dmsc_intp_reg_refresh(void)
 
 {
   tisp_dmsc_intp();
@@ -22717,7 +22058,7 @@ undefined4 tisp_dmsc_intp_reg_refresh(void)
 
 
 
-undefined4 tisp_dmsc_par_refresh(uint param_1,uint param_2,int param_3)
+int tisp_dmsc_par_refresh(uint param_1,uint param_2,int param_3)
 
 {
   code *pcVar1;
@@ -22745,7 +22086,7 @@ LAB_0003593c:
 
 
 
-undefined4 tisp_dmsc_refresh(undefined4 param_1)
+int tisp_dmsc_refresh(int param_1)
 
 {
   tisp_dmsc_par_refresh(param_1,0x100,1);
@@ -22754,7 +22095,7 @@ undefined4 tisp_dmsc_refresh(undefined4 param_1)
 
 
 
-undefined4 tisp_dmsc_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_dmsc_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -23013,7 +22354,7 @@ LAB_00035da8:
 
 
 
-undefined4 tisp_dmsc_param_array_set(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_dmsc_param_array_set(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__dest;
@@ -23273,7 +22614,7 @@ LAB_000361e0:
 
 
 
-undefined4 tisp_dmsc_sharpness_set(byte param_1)
+int tisp_dmsc_sharpness_set(byte param_1)
 
 {
   int *piVar1;
@@ -23351,7 +22692,7 @@ undefined4 tisp_dmsc_sharpness_set(byte param_1)
 
 
 
-undefined4 tiziano_dmsc_params_refresh(void)
+int tiziano_dmsc_params_refresh(void)
 
 {
   memcpy(&dmsc_uu_np_array,&DAT_0009d544,0x40);
@@ -23436,7 +22777,7 @@ undefined4 tiziano_dmsc_params_refresh(void)
 
 
 
-undefined4 tiziano_dmsc_dn_params_refresh(void)
+int tiziano_dmsc_dn_params_refresh(void)
 
 {
   gain_old = gain_old + 0x200;
@@ -23447,7 +22788,7 @@ undefined4 tiziano_dmsc_dn_params_refresh(void)
 
 
 
-undefined4 tiziano_dmsc_init(void)
+int tiziano_dmsc_init(void)
 
 {
   undefined1 *puVar1;
@@ -23485,7 +22826,7 @@ undefined tisp_dmsc_sharpness_get(void)
 
 
 
-undefined4 tiziano_ccm_lut_parameter(int param_1)
+int tiziano_ccm_lut_parameter(int param_1)
 
 {
   int iVar1;
@@ -23597,7 +22938,7 @@ void tiziano_ct_ccm_interpolation(uint param_1,int param_2)
   uint uVar4;
   int iVar5;
   int *piVar6;
-  undefined4 *__src;
+  int *__src;
   uint uVar7;
   int iVar8;
   uint uVar9;
@@ -23702,7 +23043,7 @@ switchD_00036ee0_caseD_5:
 
 
 
-undefined4 jz_isp_ccm(void)
+int jz_isp_ccm(void)
 
 {
   uint uVar1;
@@ -23796,7 +23137,7 @@ LAB_00037238:
 
 
 
-undefined4 tisp_ccm_ev_update(uint param_1)
+int tisp_ccm_ev_update(uint param_1)
 
 {
   uint uVar1;
@@ -23817,7 +23158,7 @@ undefined4 tisp_ccm_ev_update(uint param_1)
 
 
 
-undefined4 tisp_ccm_ct_update(uint param_1)
+int tisp_ccm_ct_update(uint param_1)
 
 {
   uint uVar1;
@@ -23836,7 +23177,7 @@ undefined4 tisp_ccm_ct_update(uint param_1)
 
 
 
-undefined4 tiziano_ccm_params_refresh(void)
+int tiziano_ccm_params_refresh(void)
 
 {
   if (ccm_ctrl == '\0') {
@@ -23858,7 +23199,7 @@ undefined4 tiziano_ccm_params_refresh(void)
 
 
 
-undefined4 tisp_ccm_wdr_en(int param_1)
+int tisp_ccm_wdr_en(int param_1)
 
 {
   ccm_wdr_en = param_1;
@@ -23881,7 +23222,7 @@ undefined4 tisp_ccm_wdr_en(int param_1)
 
 
 
-undefined4 tiziano_ccm_dn_params_refresh(void)
+int tiziano_ccm_dn_params_refresh(void)
 
 {
   tiziano_ccm_params_refresh();
@@ -23892,7 +23233,7 @@ undefined4 tiziano_ccm_dn_params_refresh(void)
 
 
 
-undefined4 tiziano_ccm_init(void)
+int tiziano_ccm_init(void)
 
 {
   if (ccm_wdr_en == 1) {
@@ -23938,7 +23279,7 @@ void tisp_ccm_get_attr(void *param_1)
 // WARNING: Removing unreachable block (ram,0x000370e8)
 // WARNING: Removing unreachable block (ram,0x000370ec)
 
-undefined4 tisp_ccm_set_attr(void *param_1)
+int tisp_ccm_set_attr(void *param_1)
 
 {
   uint uVar1;
@@ -23947,7 +23288,7 @@ undefined4 tisp_ccm_set_attr(void *param_1)
   uint *puVar4;
   uint uVar5;
   int iVar6;
-  undefined4 *puVar7;
+  int *puVar7;
   uint uVar8;
   uint uVar9;
   undefined auStack_58 [36];
@@ -23964,8 +23305,8 @@ undefined4 tisp_ccm_set_attr(void *param_1)
     iVar2 = 0;
     if (DAT_000c4ac5 == '\0') {
       do {
-        *(undefined4 *)((int)&cm_sat_list_wdr + iVar2) = 0x100;
-        puVar7 = (undefined4 *)((int)&cm_sat_list + iVar2);
+        *(int *)((int)&cm_sat_list_wdr + iVar2) = 0x100;
+        puVar7 = (int *)((int)&cm_sat_list + iVar2);
         iVar2 = iVar2 + 4;
         *puVar7 = 0x100;
       } while (iVar2 != 0x24);
@@ -24052,7 +23393,7 @@ LAB_00037238:
 
 
 
-undefined4 tisp_ccm_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_ccm_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -24110,7 +23451,7 @@ LAB_00037a3c:
 
 
 
-undefined4 tisp_ccm_param_array_set(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_ccm_param_array_set(int param_1,void *param_2,size_t *param_3)
 
 {
   size_t __n;
@@ -24194,13 +23535,13 @@ uint tiziano_bcsh_StrenCal_part_0(uint param_1,uint param_2,uint param_3,uint pa
 
 
 
-void tiziano_bcsh_dump2(undefined4 *param_1,undefined4 *param_2,undefined4 *param_3,
-                       undefined4 *param_4,undefined4 *param_5,undefined4 *param_6,
-                       undefined4 *param_7,undefined4 *param_8,undefined4 *param_9,
-                       undefined4 *param_10,undefined4 *param_11,undefined4 *param_12,
-                       undefined4 *param_13,undefined4 *param_14,undefined4 *param_15,
-                       undefined4 *param_16,undefined4 *param_17,undefined4 *param_18,
-                       undefined4 *param_19)
+void tiziano_bcsh_dump2(int *param_1,int *param_2,int *param_3,
+                       int *param_4,int *param_5,int *param_6,
+                       int *param_7,int *param_8,int *param_9,
+                       int *param_10,int *param_11,int *param_12,
+                       int *param_13,int *param_14,int *param_15,
+                       int *param_16,int *param_17,int *param_18,
+                       int *param_19)
 
 {
   isp_printf(2,"-----BCSH regs dump-----\n");
@@ -24238,7 +23579,7 @@ void tiziano_bcsh_dump2(undefined4 *param_1,undefined4 *param_2,undefined4 *para
 
 
 
-undefined4
+int
 tiziano_bcsh_lut_parameter
           (int *param_1,int *param_2,int *param_3,uint *param_4,int *param_5,uint *param_6,
           int *param_7,uint *param_8,int *param_9,uint *param_10,int *param_11,int *param_12,
@@ -24532,7 +23873,7 @@ void tiziano_ct_bcsh_interpolation(uint param_1)
   int iVar3;
   int *piVar4;
   int iVar5;
-  undefined4 *__src;
+  int *__src;
   uint uVar6;
   
   if (param_1 < 0x1357) {
@@ -24634,8 +23975,8 @@ switchD_000386b8_caseD_5:
 void tiziano_bcsh_Tccm_RGBYUV(int *param_1,int *param_2,int *param_3,int *param_4)
 
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  int uVar1;
+  int uVar2;
   int iVar3;
   int *piVar4;
   uint uVar5;
@@ -24651,7 +23992,7 @@ void tiziano_bcsh_Tccm_RGBYUV(int *param_1,int *param_2,int *param_3,int *param_
   uint uVar15;
   int local_190 [6];
   int local_178 [77];
-  undefined4 local_44;
+  int local_44;
   int *local_40;
   int local_3c;
   int local_38;
@@ -24956,7 +24297,7 @@ LAB_00038f84:
 
 
 
-void tiziano_bcsh_Tccm_RGB2YUV(undefined4 param_1,undefined4 param_2)
+void tiziano_bcsh_Tccm_RGB2YUV(int param_1,int param_2)
 
 {
   undefined auStack_38 [44];
@@ -25119,12 +24460,12 @@ void tiziano_bcsh_TransitParam(void)
   uint uVar1;
   char cVar2;
   int iVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  int uVar4;
+  int uVar5;
+  int uVar6;
   uint uVar7;
   uint uVar8;
-  undefined4 uVar9;
+  int uVar9;
   
   cVar2 = bcsh_saturation;
   tisp_BCSH = tisp_BCSH_au32clip;
@@ -25312,7 +24653,7 @@ void tiziano_bcsh_TransitParam(void)
 
 
 
-undefined4 tiziano_bcsh_update(void)
+int tiziano_bcsh_update(void)
 
 {
   undefined *puVar1;
@@ -25323,7 +24664,7 @@ undefined4 tiziano_bcsh_update(void)
   uint uVar6;
   uint *puVar7;
   int iVar8;
-  undefined4 uVar9;
+  int uVar9;
   uint *puVar10;
   uint uVar11;
   int iVar12;
@@ -25605,7 +24946,7 @@ undefined4 tiziano_bcsh_update(void)
 
 
 
-undefined4 tisp_bcsh_ev_update(uint param_1)
+int tisp_bcsh_ev_update(uint param_1)
 
 {
   uint uVar1;
@@ -25630,7 +24971,7 @@ undefined4 tisp_bcsh_ev_update(uint param_1)
 
 
 
-undefined4 tisp_bcsh_ct_update(uint param_1)
+int tisp_bcsh_ct_update(uint param_1)
 
 {
   uint uVar1;
@@ -25656,7 +24997,7 @@ undefined4 tisp_bcsh_ct_update(uint param_1)
 
 
 
-undefined4 tisp_bcsh_wdr_en(int param_1)
+int tisp_bcsh_wdr_en(int param_1)
 
 {
   undefined1 *puVar1;
@@ -25703,7 +25044,7 @@ undefined4 tisp_bcsh_wdr_en(int param_1)
 void tiziano_bcsh_dump(void)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   isp_printf(2,"-----BCSH regs dump-----\n");
   uVar1 = system_reg_read(0x8000);
@@ -25769,7 +25110,7 @@ void tiziano_bcsh_dump(void)
 
 
 
-undefined4 tiziano_bcsh_params_refresh(void)
+int tiziano_bcsh_params_refresh(void)
 
 {
   if (bcsh_ctrl == '\0') {
@@ -25817,7 +25158,7 @@ undefined4 tiziano_bcsh_params_refresh(void)
 
 
 
-undefined4 tiziano_bcsh_dn_params_refresh(void)
+int tiziano_bcsh_dn_params_refresh(void)
 
 {
   tiziano_bcsh_params_refresh();
@@ -25828,7 +25169,7 @@ undefined4 tiziano_bcsh_dn_params_refresh(void)
 
 
 
-undefined4 tiziano_bcsh_init(void)
+int tiziano_bcsh_init(void)
 
 {
   undefined1 *puVar1;
@@ -25879,7 +25220,7 @@ undefined4 tiziano_bcsh_init(void)
 
 
 
-undefined4 tisp_bcsh_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_bcsh_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -26020,7 +25361,7 @@ LAB_0003b344:
 
 
 
-undefined4 tisp_bcsh_param_array_set(undefined4 param_1,undefined4 *param_2,size_t *param_3)
+int tisp_bcsh_param_array_set(int param_1,int *param_2,size_t *param_3)
 
 {
   undefined1 *__dest;
@@ -26164,7 +25505,7 @@ LAB_0003b5a4:
 
 
 
-undefined4 tisp_bcsh_set_mjpeg_contrast(undefined param_1,undefined param_2,undefined param_3)
+int tisp_bcsh_set_mjpeg_contrast(undefined param_1,undefined param_2,undefined param_3)
 
 {
   undefined *puVar1;
@@ -26175,7 +25516,7 @@ undefined4 tisp_bcsh_set_mjpeg_contrast(undefined param_1,undefined param_2,unde
   uint uVar6;
   uint *puVar7;
   int iVar8;
-  undefined4 uVar9;
+  int uVar9;
   uint *puVar10;
   uint uVar11;
   int iVar12;
@@ -26460,7 +25801,7 @@ undefined4 tisp_bcsh_set_mjpeg_contrast(undefined param_1,undefined param_2,unde
 
 
 
-undefined4 tisp_bcsh_contrast(undefined param_1)
+int tisp_bcsh_contrast(undefined param_1)
 
 {
   bcsh_contrast = param_1;
@@ -26470,7 +25811,7 @@ undefined4 tisp_bcsh_contrast(undefined param_1)
 
 
 
-undefined4 tisp_bcsh_saturation(undefined param_1)
+int tisp_bcsh_saturation(undefined param_1)
 
 {
   bcsh_saturation = param_1;
@@ -26480,7 +25821,7 @@ undefined4 tisp_bcsh_saturation(undefined param_1)
 
 
 
-undefined4 tisp_bcsh_brightness(undefined param_1)
+int tisp_bcsh_brightness(undefined param_1)
 
 {
   bcsh_brightness = param_1;
@@ -26490,7 +25831,7 @@ undefined4 tisp_bcsh_brightness(undefined param_1)
 
 
 
-undefined4 tisp_bcsh_s_hue(byte param_1)
+int tisp_bcsh_s_hue(byte param_1)
 
 {
   bcsh_hue = (char)((int)((uint)param_1 * 0x78 + -1) / 0x100) + '\x01';
@@ -26543,7 +25884,7 @@ void tisp_bcsh_get_attr(void *param_1)
 
 
 
-undefined4 tisp_bcsh_set_attr(void *param_1)
+int tisp_bcsh_set_attr(void *param_1)
 
 {
   uint *puVar1;
@@ -26555,7 +25896,7 @@ undefined4 tisp_bcsh_set_attr(void *param_1)
   uint uVar7;
   uint *puVar8;
   int iVar9;
-  undefined4 uVar10;
+  int uVar10;
   uint uVar11;
   int iVar12;
   int iVar13;
@@ -26860,7 +26201,7 @@ undefined4 tisp_bcsh_set_attr(void *param_1)
 
 
 
-undefined4 tisp_bcsh_s_rgb_coefft(ushort *param_1)
+int tisp_bcsh_s_rgb_coefft(ushort *param_1)
 
 {
   uint *puVar1;
@@ -26872,7 +26213,7 @@ undefined4 tisp_bcsh_s_rgb_coefft(ushort *param_1)
   uint uVar7;
   uint *puVar8;
   int iVar9;
-  undefined4 uVar10;
+  int uVar10;
   uint uVar11;
   int iVar12;
   int iVar13;
@@ -27160,15 +26501,15 @@ undefined4 tisp_bcsh_s_rgb_coefft(ushort *param_1)
 void tisp_bcsh_g_rgb_coefft(undefined2 *param_1)
 
 {
-  *param_1 = (short)*(undefined4 *)tisp_BCSH_au32OffsetRGB_now;
-  param_1[1] = (short)*(undefined4 *)(tisp_BCSH_au32OffsetRGB_now + 4);
-  param_1[2] = (short)*(undefined4 *)(tisp_BCSH_au32OffsetRGB_now + 8);
+  *param_1 = (short)*(int *)tisp_BCSH_au32OffsetRGB_now;
+  param_1[1] = (short)*(int *)(tisp_BCSH_au32OffsetRGB_now + 4);
+  param_1[2] = (short)*(int *)(tisp_BCSH_au32OffsetRGB_now + 8);
   return;
 }
 
 
 
-undefined4 tisp_sharpen_intp(uint param_1)
+int tisp_sharpen_intp(uint param_1)
 
 {
   int iVar1;
@@ -27211,7 +26552,7 @@ undefined4 tisp_sharpen_intp(uint param_1)
 
 
 
-undefined4 tisp_y_sp_sl_exp_cfg(void)
+int tisp_y_sp_sl_exp_cfg(void)
 
 {
   system_reg_write(0x7000,y_sp_sl_exp_num_intp << 0x10 | y_sp_sl_exp_thres_intp);
@@ -27220,7 +26561,7 @@ undefined4 tisp_y_sp_sl_exp_cfg(void)
 
 
 
-undefined4 tisp_y_sp_std_scope_cfg(void)
+int tisp_y_sp_std_scope_cfg(void)
 
 {
   system_reg_write(0x7004,y_sp_std_cfg_array << 0x10 | DAT_000c5384);
@@ -27229,7 +26570,7 @@ undefined4 tisp_y_sp_std_scope_cfg(void)
 
 
 
-undefined4 tisp_y_sp_uu_cfg(void)
+int tisp_y_sp_uu_cfg(void)
 
 {
   system_reg_write(0x7008,y_sp_uu_min_stren_intp << 0x10 | y_sp_uu_par_cfg_array | DAT_000c529c << 8
@@ -27243,7 +26584,7 @@ undefined4 tisp_y_sp_uu_cfg(void)
 
 
 
-undefined4 tisp_y_sp_fl_thres_cfg(void)
+int tisp_y_sp_fl_thres_cfg(void)
 
 {
   system_reg_write(0x7014,y_sp_mv_fl_std_thres_intp << 8 | y_sp_fl_std_thres_intp);
@@ -27256,7 +26597,7 @@ undefined4 tisp_y_sp_fl_thres_cfg(void)
 
 
 
-undefined4 tisp_y_sp_v1_v2_coef_cfg(void)
+int tisp_y_sp_v1_v2_coef_cfg(void)
 
 {
   system_reg_write(0x7020,y_sp_v2_win5_thres_intp << 8 | y_sp_v1_v2_coef_par_cfg_array |
@@ -27272,7 +26613,7 @@ undefined4 tisp_y_sp_v1_v2_coef_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_y_sp_w_b_ll_cfg(void)
+int tisp_y_sp_w_b_ll_cfg(void)
 
 {
   system_reg_write(0x702c,_DAT_000c5144 << 8 | DAT_000c5148 << 0x10 | y_sp_w_b_ll_par_cfg_array |
@@ -27286,7 +26627,7 @@ undefined4 tisp_y_sp_w_b_ll_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_y_sp_uu_w_b_wei_cfg(void)
+int tisp_y_sp_uu_w_b_wei_cfg(void)
 
 {
   system_reg_write(0x7038,_DAT_000c5104 << 8 | DAT_000c5108 << 0x10 | y_sp_uu_np_array |
@@ -27318,7 +26659,7 @@ undefined4 tisp_y_sp_uu_w_b_wei_cfg(void)
 
 
 
-undefined4 tisp_y_sp_w_b_sl_cfg(void)
+int tisp_y_sp_w_b_sl_cfg(void)
 
 {
   system_reg_write(0x7068,y_sp_w_sl_stren_1_intp << 0x10 | y_sp_w_sl_stren_0_intp);
@@ -27330,7 +26671,7 @@ undefined4 tisp_y_sp_w_b_sl_cfg(void)
 
 
 
-undefined4 tisp_y_sp_uu_fl_sl_cfg(void)
+int tisp_y_sp_uu_fl_sl_cfg(void)
 
 {
   system_reg_write(0x7078,y_sp_uu_sl_1_array_intp << 8 | y_sp_uu_sl_2_array_intp << 0x10 |
@@ -27376,7 +26717,7 @@ void tisp_sharpen_wdr_en(int param_1)
 
 
 
-undefined4 tisp_sharpen_all_reg_refresh(void)
+int tisp_sharpen_all_reg_refresh(void)
 
 {
   tisp_sharpen_intp();
@@ -27395,7 +26736,7 @@ undefined4 tisp_sharpen_all_reg_refresh(void)
 
 
 
-undefined4 tisp_sharpen_intp_reg_refresh(void)
+int tisp_sharpen_intp_reg_refresh(void)
 
 {
   tisp_sharpen_intp();
@@ -27409,7 +26750,7 @@ undefined4 tisp_sharpen_intp_reg_refresh(void)
 
 
 
-undefined4 tisp_sharpen_par_refresh(uint param_1,uint param_2,int param_3)
+int tisp_sharpen_par_refresh(uint param_1,uint param_2,int param_3)
 
 {
   code *pcVar1;
@@ -27437,7 +26778,7 @@ LAB_0003c754:
 
 
 
-undefined4 tiziano_sharpen_params_refresh(void)
+int tiziano_sharpen_params_refresh(void)
 
 {
   memcpy(&y_sp_out_opt_array,&DAT_0009e158,4);
@@ -27494,7 +26835,7 @@ undefined4 tiziano_sharpen_params_refresh(void)
 
 
 
-undefined4 tiziano_sharpen_init(void)
+int tiziano_sharpen_init(void)
 
 {
   undefined1 *puVar1;
@@ -27530,7 +26871,7 @@ undefined4 tiziano_sharpen_init(void)
 
 
 
-undefined4 tisp_sharpen_refresh(undefined4 param_1)
+int tisp_sharpen_refresh(int param_1)
 
 {
   tisp_sharpen_par_refresh(param_1,0x100,1);
@@ -27539,7 +26880,7 @@ undefined4 tisp_sharpen_refresh(undefined4 param_1)
 
 
 
-undefined4 tiziano_sharpen_dn_params_refresh(void)
+int tiziano_sharpen_dn_params_refresh(void)
 
 {
   tiziano_sharpen_params_refresh();
@@ -27549,7 +26890,7 @@ undefined4 tiziano_sharpen_dn_params_refresh(void)
 
 
 
-undefined4 tisp_sharpen_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_sharpen_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -27724,11 +27065,11 @@ LAB_0003d0d0:
 
 
 
-undefined4 tisp_sharpen_param_array_set(undefined4 param_1,void *param_2,undefined4 *param_3)
+int tisp_sharpen_param_array_set(int param_1,void *param_2,int *param_3)
 
 {
-  undefined4 uVar1;
-  undefined4 *puVar2;
+  int uVar1;
+  int *puVar2;
   undefined1 *__dest;
   
   switch(param_1) {
@@ -27905,7 +27246,7 @@ LAB_0003d4b8:
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_grad_thres_opt_cfg(void)
+int tisp_sdns_grad_thres_opt_cfg(void)
 
 {
   system_reg_write(0x8800,_DAT_000c679c << 4 | sdns_aa_mv_det_opt);
@@ -27916,7 +27257,7 @@ undefined4 tisp_sdns_grad_thres_opt_cfg(void)
 
 
 
-undefined4 tisp_sdns_h_mv_wei_opt_cfg(void)
+int tisp_sdns_h_mv_wei_opt_cfg(void)
 
 {
   system_reg_write(0x880c,*(int *)(sdns_h_mv_wei_now + 4) << 4 |
@@ -27927,7 +27268,7 @@ undefined4 tisp_sdns_h_mv_wei_opt_cfg(void)
 
 
 
-undefined4 tisp_sdns_mv_seg_number_num_thres_cfg(void)
+int tisp_sdns_mv_seg_number_num_thres_cfg(void)
 
 {
   system_reg_write(0x8810,DAT_000c67a8 << 8 | DAT_000c67a4);
@@ -27938,7 +27279,7 @@ undefined4 tisp_sdns_mv_seg_number_num_thres_cfg(void)
 
 
 
-undefined4 tisp_sdns_g_det_val_div_cfg(void)
+int tisp_sdns_g_det_val_div_cfg(void)
 
 {
   system_reg_write(0x8818,DAT_000c67b0 << 0x18 | DAT_000c67ac);
@@ -27949,7 +27290,7 @@ undefined4 tisp_sdns_g_det_val_div_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_r_s_mv_cfg(void)
+int tisp_sdns_r_s_mv_cfg(void)
 
 {
   system_reg_write(0x881c,_DAT_000c6630 << 0x10 | sdns_r_s);
@@ -27973,7 +27314,7 @@ undefined4 tisp_sdns_r_s_mv_cfg(void)
 
 
 
-undefined4 tisp_sdns_h_s_cfg(void)
+int tisp_sdns_h_s_cfg(void)
 
 {
   system_reg_write(0x885c,sdns_h_s_2_intp << 8 | sdns_h_s_3_intp << 0x10 | sdns_h_s_1_intp |
@@ -27989,7 +27330,7 @@ undefined4 tisp_sdns_h_s_cfg(void)
 
 
 
-undefined4 tisp_sdns_h_mv_cfg(void)
+int tisp_sdns_h_mv_cfg(void)
 
 {
   system_reg_write(0x886c,sdns_h_mv_2_intp << 8 | sdns_h_mv_3_intp << 0x10 | sdns_h_mv_1_intp |
@@ -28005,7 +27346,7 @@ undefined4 tisp_sdns_h_mv_cfg(void)
 
 
 
-undefined4 tisp_sdns_dark_light_tt_opt_cfg(void)
+int tisp_sdns_dark_light_tt_opt_cfg(void)
 
 {
   system_reg_write(0x887c,sdns_light_thres_intp << 8 | sdns_h_val_max << 0x10 | sdns_dark_thres_intp
@@ -28017,7 +27358,7 @@ undefined4 tisp_sdns_dark_light_tt_opt_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_d_s1_thres_cfg(void)
+int tisp_sdns_d_s1_thres_cfg(void)
 
 {
   system_reg_write(0x8880,_DAT_000c60c8 << 0x10 | sdns_d_s1_thr);
@@ -28035,7 +27376,7 @@ undefined4 tisp_sdns_d_s1_thres_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_w_thres_cfg(void)
+int tisp_sdns_w_thres_cfg(void)
 
 {
   system_reg_write(0x88a0,_DAT_000c6088 << 8 | sdns_w_thr);
@@ -28051,7 +27392,7 @@ undefined4 tisp_sdns_w_thres_cfg(void)
 
 
 
-undefined4 tisp_sdns_hls_en_ave_filter_cfg(void)
+int tisp_sdns_hls_en_ave_filter_cfg(void)
 
 {
   system_reg_write(0x88c0,sdns_ave_thres_intp << 4 | *(uint *)sdns_ave_fliter_now |
@@ -28062,7 +27403,7 @@ undefined4 tisp_sdns_hls_en_ave_filter_cfg(void)
 
 
 
-undefined4 tisp_sdns_gaussian_y_cfg(void)
+int tisp_sdns_gaussian_y_cfg(void)
 
 {
   system_reg_write(0x88c4,0x2999a);
@@ -28073,7 +27414,7 @@ undefined4 tisp_sdns_gaussian_y_cfg(void)
 
 
 
-undefined4 tisp_sdns_gaussian_x_cfg(void)
+int tisp_sdns_gaussian_x_cfg(void)
 
 {
   system_reg_write(0x88d0,0xf0007);
@@ -28113,7 +27454,7 @@ undefined4 tisp_sdns_gaussian_x_cfg(void)
 
 
 
-undefined4 tisp_sdns_gaussian_k_cfg(void)
+int tisp_sdns_gaussian_k_cfg(void)
 
 {
   system_reg_write(0x8950,0x3333);
@@ -28185,7 +27526,7 @@ undefined4 tisp_sdns_gaussian_k_cfg(void)
 
 
 
-undefined4 tisp_sdns_h_line_cfg(void)
+int tisp_sdns_h_line_cfg(void)
 
 {
   system_reg_write(0x8a50,0x4030201);
@@ -28199,7 +27540,7 @@ undefined4 tisp_sdns_h_line_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_sp_std_en_seg_opt_cfg(void)
+int tisp_sdns_sp_std_en_seg_opt_cfg(void)
 
 {
   system_reg_write(0x8a60,_DAT_000c5ee8 << 4 | sdns_sharpen_g_std);
@@ -28210,7 +27551,7 @@ undefined4 tisp_sdns_sp_std_en_seg_opt_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_sp_uu_cfg(void)
+int tisp_sdns_sp_uu_cfg(void)
 
 {
   system_reg_write(0x8a64,sdns_sp_uu_thres_intp << 8 | sdns_sp_uu_par);
@@ -28225,7 +27566,7 @@ undefined4 tisp_sdns_sp_uu_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_sp_v2_d_w_b_ll_hl_flat_cfg(void)
+int tisp_sdns_sp_v2_d_w_b_ll_hl_flat_cfg(void)
 
 {
   system_reg_write(0x8a74,sdns_sp_d_v2_win5_thres_intp << 8 | _DAT_000c5e34 << 0x10 |
@@ -28246,7 +27587,7 @@ undefined4 tisp_sdns_sp_v2_d_w_b_ll_hl_flat_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_sp_ud_v2_v1_coef_w_wei_opt_cfg(void)
+int tisp_sdns_sp_ud_v2_v1_coef_w_wei_opt_cfg(void)
 
 {
   system_reg_write(0x8a9c,_DAT_000c5c64 << 4 | DAT_000c5c68 << 8 | sdns_sp_ud_v2_1_coef |
@@ -28258,7 +27599,7 @@ undefined4 tisp_sdns_sp_ud_v2_v1_coef_w_wei_opt_cfg(void)
 
 
 
-undefined4 tisp_sdns_sp_ud_w_stren_cfg(void)
+int tisp_sdns_sp_ud_w_stren_cfg(void)
 
 {
   system_reg_write(0x8aa4,sdns_sp_ud_w_sp_stren_1_intp << 0x10 | sdns_sp_ud_w_sp_stren_0_intp);
@@ -28268,7 +27609,7 @@ undefined4 tisp_sdns_sp_ud_w_stren_cfg(void)
 
 
 
-undefined4 tisp_sdns_sp_ud_w_limit_b_wei_opt_cfg(void)
+int tisp_sdns_sp_ud_w_limit_b_wei_opt_cfg(void)
 
 {
   system_reg_write(0x8aac,DAT_000c5ad4 << 0x10 | DAT_000c5ad0);
@@ -28277,7 +27618,7 @@ undefined4 tisp_sdns_sp_ud_w_limit_b_wei_opt_cfg(void)
 
 
 
-undefined4 tisp_sdns_sp_ud_b_stren_cfg(void)
+int tisp_sdns_sp_ud_b_stren_cfg(void)
 
 {
   system_reg_write(0x8ab0,sdns_sp_ud_b_sp_stren_1_intp << 0x10 | sdns_sp_ud_b_sp_stren_0_intp);
@@ -28287,7 +27628,7 @@ undefined4 tisp_sdns_sp_ud_b_stren_cfg(void)
 
 
 
-undefined4 tisp_sdns_sp_ud_b_limit_srd_ll_hl_flat_cfg(void)
+int tisp_sdns_sp_ud_b_limit_srd_ll_hl_flat_cfg(void)
 
 {
   system_reg_write(0x8ab8,sdns_sp_ud_std_thres_intp << 0x10 | sdns_sp_ud_std_stren_intp << 0x18 |
@@ -28302,7 +27643,7 @@ undefined4 tisp_sdns_sp_ud_b_limit_srd_ll_hl_flat_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_sp_ud_stren_shift_opt_cfg(void)
+int tisp_sdns_sp_ud_stren_shift_opt_cfg(void)
 
 {
   system_reg_write(0x8ac8,_DAT_000c5af4);
@@ -28313,7 +27654,7 @@ undefined4 tisp_sdns_sp_ud_stren_shift_opt_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_sp_uu_np_array_cfg(void)
+int tisp_sdns_sp_uu_np_array_cfg(void)
 
 {
   system_reg_write(0x8acc,_DAT_000c5a48 << 8 | DAT_000c5a4c << 0x10 | sdns_sp_uu_np_array |
@@ -28331,7 +27672,7 @@ undefined4 tisp_sdns_sp_uu_np_array_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_sp_d_w_wei_np_array_cfg(void)
+int tisp_sdns_sp_d_w_wei_np_array_cfg(void)
 
 {
   system_reg_write(0x8adc,_DAT_000c59f0 << 8 | DAT_000c59f4 << 0x10 | sdns_sp_d_w_wei_np_array |
@@ -28352,7 +27693,7 @@ undefined4 tisp_sdns_sp_d_w_wei_np_array_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_sp_d_b_wei_np_array_cfg(void)
+int tisp_sdns_sp_d_b_wei_np_array_cfg(void)
 
 {
   system_reg_write(0x8af4,_DAT_000c5998 << 8 | DAT_000c599c << 0x10 | sdns_sp_d_b_wei_np_array |
@@ -28373,7 +27714,7 @@ undefined4 tisp_sdns_sp_d_b_wei_np_array_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_sp_ud_w_wei_np_array_cfg(void)
+int tisp_sdns_sp_ud_w_wei_np_array_cfg(void)
 
 {
   system_reg_write(0x8b0c,_DAT_000c5940 << 8 | DAT_000c5944 << 0x10 | sdns_sp_ud_w_wei_np_array |
@@ -28394,7 +27735,7 @@ undefined4 tisp_sdns_sp_ud_w_wei_np_array_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_sdns_sp_ud_b_wei_np_array_cfg(void)
+int tisp_sdns_sp_ud_b_wei_np_array_cfg(void)
 
 {
   system_reg_write(0x8b24,_DAT_000c58c4 << 8 | DAT_000c58c8 << 0x10 | sdns_sp_ud_b_wei_np_array |
@@ -28413,7 +27754,7 @@ undefined4 tisp_sdns_sp_ud_b_wei_np_array_cfg(void)
 
 
 
-undefined4 tisp_sdns_intp(uint param_1)
+int tisp_sdns_intp(uint param_1)
 
 {
   int iVar1;
@@ -28496,7 +27837,7 @@ undefined4 tisp_sdns_intp(uint param_1)
 
 
 
-undefined4 tisp_sdns_all_reg_refresh(void)
+int tisp_sdns_all_reg_refresh(void)
 
 {
   tisp_sdns_intp();
@@ -28535,7 +27876,7 @@ undefined4 tisp_sdns_all_reg_refresh(void)
 
 
 
-undefined4 tisp_sdns_intp_reg_refresh(void)
+int tisp_sdns_intp_reg_refresh(void)
 
 {
   tisp_sdns_intp();
@@ -28554,7 +27895,7 @@ undefined4 tisp_sdns_intp_reg_refresh(void)
 
 
 
-undefined4 tisp_sdns_par_refresh(uint param_1,uint param_2,int param_3)
+int tisp_sdns_par_refresh(uint param_1,uint param_2,int param_3)
 
 {
   code *pcVar1;
@@ -28582,7 +27923,7 @@ LAB_0003f9c4:
 
 
 
-undefined4 tisp_sdns_refresh(undefined4 param_1)
+int tisp_sdns_refresh(int param_1)
 
 {
   tisp_sdns_par_refresh(param_1,0x100,1);
@@ -28591,7 +27932,7 @@ undefined4 tisp_sdns_refresh(undefined4 param_1)
 
 
 
-undefined4 tisp_sdns_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_sdns_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -29101,7 +28442,7 @@ undefined4 tisp_sdns_param_array_get(undefined4 param_1,void *param_2,size_t *pa
 
 
 
-undefined4 tisp_sdns_param_array_set(int param_1,void *param_2,size_t *param_3)
+int tisp_sdns_param_array_set(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__dest;
@@ -29614,7 +28955,7 @@ undefined4 tisp_sdns_param_array_set(int param_1,void *param_2,size_t *param_3)
 
 
 
-undefined4 tisp_s_sdns_ratio(uint param_1)
+int tisp_s_sdns_ratio(uint param_1)
 
 {
   bool bVar1;
@@ -30075,7 +29416,7 @@ undefined4 tisp_s_sdns_ratio(uint param_1)
 
 // WARNING: Restarted to delay deadcode elimination for space: ram
 
-undefined4 tisp_sdns_wdr_en(int param_1)
+int tisp_sdns_wdr_en(int param_1)
 
 {
   bool bVar1;
@@ -30596,7 +29937,7 @@ undefined4 tisp_sdns_wdr_en(int param_1)
 
 
 
-undefined4 tiziano_sdns_params_refresh(void)
+int tiziano_sdns_params_refresh(void)
 
 {
   memcpy(&sdns_aa_mv_det_opt,&DAT_0009ec78,0x1c);
@@ -30730,7 +30071,7 @@ undefined4 tiziano_sdns_params_refresh(void)
 
 
 
-undefined4 tiziano_sdns_init(void)
+int tiziano_sdns_init(void)
 
 {
   undefined1 *puVar1;
@@ -30804,7 +30145,7 @@ undefined4 tiziano_sdns_init(void)
 
 
 
-undefined4 tiziano_sdns_dn_params_refresh(void)
+int tiziano_sdns_dn_params_refresh(void)
 
 {
   tiziano_sdns_params_refresh();
@@ -30814,7 +30155,7 @@ undefined4 tiziano_sdns_dn_params_refresh(void)
 
 
 
-undefined4 tisp_mdns_top_func_cfg(int param_1)
+int tisp_mdns_top_func_cfg(int param_1)
 
 {
   uint uVar1;
@@ -30837,7 +30178,7 @@ undefined4 tisp_mdns_top_func_cfg(int param_1)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_mdns_y_3d_param_cfg(void)
+int tisp_mdns_y_3d_param_cfg(void)
 
 {
   int iVar1;
@@ -31049,7 +30390,7 @@ undefined4 tisp_mdns_y_3d_param_cfg(void)
 
 
 
-undefined4 tisp_mdns_y_2d_param_cfg(void)
+int tisp_mdns_y_2d_param_cfg(void)
 
 {
   uint uVar1;
@@ -31121,7 +30462,7 @@ undefined4 tisp_mdns_y_2d_param_cfg(void)
 
 
 
-undefined4 tisp_mdns_c_3d_param_cfg(void)
+int tisp_mdns_c_3d_param_cfg(void)
 
 {
   system_reg_write(0x7a64,mdns_c_sad_ave_thres_intp << 3 | mdns_c_sad_ave_slope_intp << 0xc |
@@ -31197,7 +30538,7 @@ undefined4 tisp_mdns_c_3d_param_cfg(void)
 
 
 
-undefined4 tisp_mdns_c_2d_param_cfg(void)
+int tisp_mdns_c_2d_param_cfg(void)
 
 {
   int iVar1;
@@ -31291,7 +30632,7 @@ undefined4 tisp_mdns_c_2d_param_cfg(void)
 
 
 
-undefined4 tisp_mdns_intp(uint param_1)
+int tisp_mdns_intp(uint param_1)
 
 {
   int iVar1;
@@ -31808,7 +31149,7 @@ undefined4 tisp_mdns_intp(uint param_1)
 
 
 
-undefined4 tisp_mdns_all_reg_refresh(void)
+int tisp_mdns_all_reg_refresh(void)
 
 {
   tisp_mdns_intp();
@@ -31823,7 +31164,7 @@ undefined4 tisp_mdns_all_reg_refresh(void)
 
 
 
-undefined4 tisp_mdns_top_func_refresh(void)
+int tisp_mdns_top_func_refresh(void)
 
 {
   system_reg_write(0x7818,1);
@@ -31832,7 +31173,7 @@ undefined4 tisp_mdns_top_func_refresh(void)
 
 
 
-undefined4 tisp_mdns_reg_trigger(void)
+int tisp_mdns_reg_trigger(void)
 
 {
   system_reg_write(0x7804,0x111);
@@ -31841,7 +31182,7 @@ undefined4 tisp_mdns_reg_trigger(void)
 
 
 
-undefined4 tisp_mdns_intp_reg_refresh(void)
+int tisp_mdns_intp_reg_refresh(void)
 
 {
   tisp_mdns_intp();
@@ -31855,7 +31196,7 @@ undefined4 tisp_mdns_intp_reg_refresh(void)
 
 
 
-undefined4 tisp_mdns_par_refresh(uint param_1,uint param_2)
+int tisp_mdns_par_refresh(uint param_1,uint param_2)
 
 {
   uint uVar1;
@@ -31882,7 +31223,7 @@ undefined4 tisp_mdns_par_refresh(uint param_1,uint param_2)
 
 
 
-undefined4 tisp_mdns_bypass(int param_1)
+int tisp_mdns_bypass(int param_1)
 
 {
   tisp_mdns_top_func_cfg(param_1 == 0);
@@ -31893,7 +31234,7 @@ undefined4 tisp_mdns_bypass(int param_1)
 
 
 
-undefined4 tisp_mdns_refresh(undefined4 param_1)
+int tisp_mdns_refresh(int param_1)
 
 {
   tisp_mdns_par_refresh(param_1,0x100,vin_width,vin_height);
@@ -31902,7 +31243,7 @@ undefined4 tisp_mdns_refresh(undefined4 param_1)
 
 
 
-undefined4 tisp_mdns_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_mdns_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -33805,10 +33146,10 @@ undefined4 tisp_mdns_param_array_get(undefined4 param_1,void *param_2,size_t *pa
 
 
 
-undefined4 tisp_mdns_param_array_set(undefined4 param_1,void *param_2,undefined4 *param_3)
+int tisp_mdns_param_array_set(int param_1,void *param_2,int *param_3)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   switch(param_1) {
   case 0x180:
@@ -35717,7 +35058,7 @@ undefined4 tisp_mdns_param_array_set(undefined4 param_1,void *param_2,undefined4
 
 
 
-undefined4 tisp_s_mdns_ratio(uint param_1)
+int tisp_s_mdns_ratio(uint param_1)
 
 {
   bool bVar1;
@@ -35860,7 +35201,7 @@ undefined4 tisp_s_mdns_ratio(uint param_1)
 
 
 
-undefined4 tisp_mdns_wdr_en(int param_1)
+int tisp_mdns_wdr_en(int param_1)
 
 {
   bool bVar1;
@@ -36159,7 +35500,7 @@ undefined4 tisp_mdns_wdr_en(int param_1)
 
 
 
-undefined4 tiziano_mdns_params_refresh(void)
+int tiziano_mdns_params_refresh(void)
 
 {
   memcpy(&mdns_y_filter_en_array,&DAT_0009ff30,4);
@@ -36641,7 +35982,7 @@ undefined4 tiziano_mdns_params_refresh(void)
 
 
 
-undefined4 tiziano_mdns_dn_params_refresh(void)
+int tiziano_mdns_dn_params_refresh(void)
 
 {
   gain_old = gain_old + 0x200;
@@ -36654,12 +35995,12 @@ undefined4 tiziano_mdns_dn_params_refresh(void)
 
 
 
-undefined4 tiziano_mdns_init(undefined4 param_1,undefined4 param_2)
+int tiziano_mdns_init(int param_1,int param_2)
 
 {
   undefined1 *puVar1;
   int iVar2;
-  undefined4 uVar3;
+  int uVar3;
   
   uVar3 = 0xb0000;
   if (mdns_wdr_en == 0) {
@@ -36831,7 +36172,7 @@ undefined4 tiziano_mdns_init(undefined4 param_1,undefined4 param_2)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_ctr_md_np_cfg(void)
+int tisp_ctr_md_np_cfg(void)
 
 {
   system_reg_write(0x2864,_DAT_000cb258 << 8 | DAT_000cb25c << 0x10 | ctr_md_np_array |
@@ -36849,7 +36190,7 @@ undefined4 tisp_ctr_md_np_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_ctr_std_np_cfg(void)
+int tisp_ctr_std_np_cfg(void)
 
 {
   system_reg_write(0x2874,_DAT_000cb218 << 8 | DAT_000cb21c << 0x10 | ctr_std_np_array |
@@ -36867,7 +36208,7 @@ undefined4 tisp_ctr_std_np_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dpc_s_par_cfg(void)
+int tisp_dpc_s_par_cfg(void)
 
 {
   system_reg_write(0x2800,_DAT_000cb208 << 8 | DAT_000cb20c << 0xc | dpc_s_con_par_array |
@@ -36879,7 +36220,7 @@ undefined4 tisp_dpc_s_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dpc_d_m1_par_cfg(void)
+int tisp_dpc_d_m1_par_cfg(void)
 
 {
   system_reg_write(0x2838,dpc_d_m1_dthres_intp << 0x10 | dpc_d_m1_fthres_intp);
@@ -36892,7 +36233,7 @@ undefined4 tisp_dpc_d_m1_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dpc_d_m2_par_cfg(void)
+int tisp_dpc_d_m2_par_cfg(void)
 
 {
   uint uVar1;
@@ -36989,7 +36330,7 @@ undefined4 tisp_dpc_d_m2_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dpc_d_m3_par_cfg(void)
+int tisp_dpc_d_m3_par_cfg(void)
 
 {
   int iVar1;
@@ -37013,7 +36354,7 @@ undefined4 tisp_dpc_d_m3_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_dpc_cor_par_cfg(void)
+int tisp_dpc_cor_par_cfg(void)
 
 {
   system_reg_write(0x2810,_DAT_000caf8c << 8 | DAT_000caf90 << 0x10 | dpc_d_cor_par_array |
@@ -37026,7 +36367,7 @@ undefined4 tisp_dpc_cor_par_cfg(void)
 
 
 
-undefined4 tisp_ctr_par_cfg(void)
+int tisp_ctr_par_cfg(void)
 
 {
   system_reg_write(0x2854,ctr_stren_intp << 0x10 | ctr_con_par_array);
@@ -37038,7 +36379,7 @@ undefined4 tisp_ctr_par_cfg(void)
 
 
 
-undefined4 tisp_dpc_intp(uint param_1)
+int tisp_dpc_intp(uint param_1)
 
 {
   int iVar1;
@@ -37093,7 +36434,7 @@ void tisp_dpc_wdr_en(int param_1)
 
 
 
-undefined4 tisp_dpc_all_reg_refresh(void)
+int tisp_dpc_all_reg_refresh(void)
 
 {
   tisp_dpc_intp();
@@ -37111,7 +36452,7 @@ undefined4 tisp_dpc_all_reg_refresh(void)
 
 
 
-undefined4 tisp_dpc_intp_reg_refresh(void)
+int tisp_dpc_intp_reg_refresh(void)
 
 {
   tisp_dpc_intp();
@@ -37124,7 +36465,7 @@ undefined4 tisp_dpc_intp_reg_refresh(void)
 
 
 
-undefined4 tisp_dpc_par_refresh(uint param_1,uint param_2,int param_3)
+int tisp_dpc_par_refresh(uint param_1,uint param_2,int param_3)
 
 {
   code *pcVar1;
@@ -37152,7 +36493,7 @@ LAB_00050f38:
 
 
 
-undefined4 tisp_dpc_refresh(undefined4 param_1)
+int tisp_dpc_refresh(int param_1)
 
 {
   tisp_dpc_par_refresh(param_1,0x100,1);
@@ -37161,7 +36502,7 @@ undefined4 tisp_dpc_refresh(undefined4 param_1)
 
 
 
-undefined4 tisp_dpc_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_dpc_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -37283,7 +36624,7 @@ LAB_0005118c:
 
 
 
-undefined4 tisp_dpc_param_array_set(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_dpc_param_array_set(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__dest;
@@ -37406,7 +36747,7 @@ LAB_000513ac:
 
 
 
-undefined4 tisp_s_dpc_str_internal(uint param_1)
+int tisp_s_dpc_str_internal(uint param_1)
 
 {
   int *piVar1;
@@ -37473,7 +36814,7 @@ undefined4 tisp_s_dpc_str_internal(uint param_1)
 
 
 
-undefined4 tiziano_dpc_params_refresh(void)
+int tiziano_dpc_params_refresh(void)
 
 {
   memcpy(&ctr_md_np_array,&DAT_0009e830,0x40);
@@ -37515,7 +36856,7 @@ undefined4 tiziano_dpc_params_refresh(void)
 
 
 
-undefined4 tiziano_dpc_dn_params_refresh(void)
+int tiziano_dpc_dn_params_refresh(void)
 
 {
   gain_old = gain_old + 0x200;
@@ -37526,7 +36867,7 @@ undefined4 tiziano_dpc_dn_params_refresh(void)
 
 
 
-undefined4 tiziano_dpc_init(void)
+int tiziano_dpc_init(void)
 
 {
   undefined1 *puVar1;
@@ -37552,7 +36893,7 @@ undefined4 tiziano_dpc_init(void)
 
 
 
-void tisp_g_dpc_str_internal(undefined4 *param_1)
+void tisp_g_dpc_str_internal(int *param_1)
 
 {
   *param_1 = dpc_ratio;
@@ -37561,7 +36902,7 @@ void tisp_g_dpc_str_internal(undefined4 *param_1)
 
 
 
-void system_reg_write_clm(int param_1,undefined4 param_2,undefined4 param_3)
+void system_reg_write_clm(int param_1,int param_2,int param_3)
 
 {
   if (param_1 == 1) {
@@ -37611,7 +36952,7 @@ void clm_lut2reg(ushort *param_1,byte *param_2,int param_3,int param_4)
 
 
 
-undefined4 tiziano_set_parameter_clm(void)
+int tiziano_set_parameter_clm(void)
 
 {
   int iVar1;
@@ -37623,25 +36964,25 @@ undefined4 tiziano_set_parameter_clm(void)
   iVar3 = 0x60000;
   do {
     iVar2 = iVar3;
-    system_reg_write(iVar2,*(undefined4 *)(iVar2 + 0x6b2a4));
+    system_reg_write(iVar2,*(int *)(iVar2 + 0x6b2a4));
     iVar3 = iVar2 + 4;
   } while (iVar2 + 4 != 0x60690);
   iVar3 = iVar2 + 0x7974;
   do {
     iVar1 = iVar3 + 4;
-    system_reg_write(iVar3,*(undefined4 *)(iVar3 + 0x632a4));
+    system_reg_write(iVar3,*(int *)(iVar3 + 0x632a4));
     iVar3 = iVar1;
   } while (iVar1 != iVar2 + 0x8004);
   iVar3 = 0x70000;
   do {
     iVar2 = iVar3;
-    system_reg_write(iVar2,*(undefined4 *)(iVar2 + 0x5b934));
+    system_reg_write(iVar2,*(int *)(iVar2 + 0x5b934));
     iVar3 = iVar2 + 4;
   } while (iVar2 + 4 != 0x70690);
   iVar3 = iVar2 + 0x7974;
   do {
     iVar1 = iVar3 + 4;
-    system_reg_write(iVar3,*(undefined4 *)(iVar3 + 0x53934));
+    system_reg_write(iVar3,*(int *)(iVar3 + 0x53934));
     iVar3 = iVar1;
   } while (iVar1 != iVar2 + 0x8004);
   return 0;
@@ -37649,7 +36990,7 @@ undefined4 tiziano_set_parameter_clm(void)
 
 
 
-undefined4 tiziano_clm_params_refresh(void)
+int tiziano_clm_params_refresh(void)
 
 {
   memcpy(tiziano_clm_h_lut,&DAT_000a3f84,0x41a);
@@ -37660,7 +37001,7 @@ undefined4 tiziano_clm_params_refresh(void)
 
 
 
-undefined4 tiziano_clm_dn_params_refresh(void)
+int tiziano_clm_dn_params_refresh(void)
 
 {
   tiziano_clm_params_refresh();
@@ -37670,7 +37011,7 @@ undefined4 tiziano_clm_dn_params_refresh(void)
 
 
 
-undefined4 tiziano_clm_init(void)
+int tiziano_clm_init(void)
 
 {
   tiziano_clm_params_refresh();
@@ -37680,7 +37021,7 @@ undefined4 tiziano_clm_init(void)
 
 
 
-undefined4 tisp_clm_param_array_get(int param_1,void *param_2,size_t *param_3)
+int tisp_clm_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -37709,10 +37050,10 @@ undefined4 tisp_clm_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 
 
-undefined4 tisp_clm_param_array_set(int param_1,void *param_2,undefined4 *param_3)
+int tisp_clm_param_array_set(int param_1,void *param_2,int *param_3)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   if (param_1 == 0x358) {
     memcpy(tiziano_clm_s_lut,param_2,0x834);
@@ -37739,7 +37080,7 @@ undefined4 tisp_clm_param_array_set(int param_1,void *param_2,undefined4 *param_
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_set_csc_version(undefined param_1)
+int tisp_set_csc_version(undefined param_1)
 
 {
   switch(param_1) {
@@ -37798,7 +37139,7 @@ undefined4 tisp_set_csc_version(undefined param_1)
 // WARNING: Removing unreachable block (ram,0x00051fa8)
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_set_user_csc(void *param_1)
+int tisp_set_user_csc(void *param_1)
 
 {
   memcpy(csc_manual,param_1,0x3c);
@@ -37832,7 +37173,7 @@ undefined4 tisp_set_user_csc(void *param_1)
 
 
 
-void tisp_get_current_csc(undefined4 *param_1,void *param_2)
+void tisp_get_current_csc(int *param_1,void *param_2)
 
 {
   *param_1 = csc_version_now;
@@ -37842,7 +37183,7 @@ void tisp_get_current_csc(undefined4 *param_1,void *param_2)
 
 
 
-undefined4 tisp_defog_ev_update(uint param_1,int param_2)
+int tisp_defog_ev_update(uint param_1,int param_2)
 
 {
   ev_now = param_2 << 0x16 | param_1 >> 10;
@@ -37914,12 +37255,12 @@ void tiziano_defog_set_reg_params(void)
 
 
 
-undefined4 tiziano_defog_interrupt_static(void)
+int tiziano_defog_interrupt_static(void)
 
 {
   int iVar1;
   undefined auStack_40 [8];
-  undefined4 local_38;
+  int local_38;
   
   tiziano_defog_set_reg_params();
   iVar1 = system_reg_read(0x5ba4);
@@ -38777,7 +38118,7 @@ LAB_00053854:
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_defog_algorithm(void)
+int tiziano_defog_algorithm(void)
 
 {
   uint uVar1;
@@ -38839,7 +38180,7 @@ undefined4 tiziano_defog_algorithm(void)
 
 
 
-undefined4 tisp_defog_process(void)
+int tisp_defog_process(void)
 
 {
   tiziano_defog_algorithm();
@@ -38850,7 +38191,7 @@ undefined4 tisp_defog_process(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_defog_params_init(void)
+int tiziano_defog_params_init(void)
 
 {
   system_reg_write(0x5850,(_DAT_000ac12c & 0x7fff) << 0x10 | param_defog_cent3_w_dis_array & 0x7fff)
@@ -39023,10 +38364,10 @@ undefined4 tiziano_defog_params_init(void)
 
 
 
-undefined4 tiziano_defog_params_refresh(void)
+int tiziano_defog_params_refresh(void)
 
 {
-  undefined4 *__src;
+  int *__src;
   
   memcpy(&defog_rgbra_list,&DAT_000a5044,0x24);
   if (defog_rgbra_list == 1) {
@@ -39036,7 +38377,7 @@ undefined4 tiziano_defog_params_refresh(void)
     memcpy(&param_defog_weightlut22,&DAT_000a4d58,0x80);
     memcpy(&param_defog_weightlut21,&DAT_000a4dd8,0x80);
     memcpy(&param_defog_cent3_w_dis_array,&DAT_000a4e90,0x60);
-    __src = (undefined4 *)&DAT_000a4ef0;
+    __src = (int *)&DAT_000a4ef0;
   }
   else {
     if (defog_rgbra_list != 0) {
@@ -39140,7 +38481,7 @@ void tisp_defog_wdr_en(int param_1)
 
 
 
-undefined4 tiziano_defog_dn_params_refresh(void)
+int tiziano_defog_dn_params_refresh(void)
 
 {
   tiziano_defog_params_refresh();
@@ -39212,32 +38553,32 @@ void defog_wei_interpcot(int param_1,int param_2,int param_3,int param_4,uint *p
 
 
 
-undefined4 defog_3x3_5x5_params_init(int param_1,int param_2)
+int defog_3x3_5x5_params_init(int param_1,int param_2)
 
 {
   bool bVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
+  int *puVar2;
+  int *puVar3;
+  int *puVar4;
   int iVar5;
   int *piVar6;
-  undefined4 *puVar7;
+  int *puVar7;
   int iVar8;
   int iVar9;
   int iVar10;
   int iVar11;
-  undefined4 *puVar12;
+  int *puVar12;
   int iVar13;
-  undefined4 *puVar14;
+  int *puVar14;
   uint *puVar15;
-  undefined4 *puVar16;
+  int *puVar16;
   uint *puVar17;
-  undefined4 *puVar18;
+  int *puVar18;
   int iVar19;
-  undefined4 *puVar20;
+  int *puVar20;
   int iVar21;
-  undefined4 *puVar22;
-  undefined4 *puVar23;
+  int *puVar22;
+  int *puVar23;
   uint *puVar24;
   int iVar25;
   int iVar26;
@@ -39250,11 +38591,11 @@ undefined4 defog_3x3_5x5_params_init(int param_1,int param_2)
   uint local_2b0 [63];
   int local_1b4 [63];
   int local_b8 [24];
-  undefined4 *local_58;
-  undefined4 *local_54;
-  undefined4 *local_50;
-  undefined4 *local_4c;
-  undefined4 *local_48;
+  int *local_58;
+  int *local_54;
+  int *local_50;
+  int *local_4c;
+  int *local_48;
   int local_44;
   uint local_40;
   uint local_3c;
@@ -39296,14 +38637,14 @@ undefined4 defog_3x3_5x5_params_init(int param_1,int param_2)
   } while (iVar11 != 0x7c);
   iVar27 = local_40 * uVar31;
   iVar25 = iVar27 * 4;
-  puVar2 = (undefined4 *)private_vmalloc(iVar25);
-  puVar3 = (undefined4 *)private_vmalloc(iVar25);
-  puVar4 = (undefined4 *)private_vmalloc(iVar25);
-  local_58 = (undefined4 *)private_vmalloc(iVar25);
-  local_54 = (undefined4 *)private_vmalloc(iVar25);
-  local_50 = (undefined4 *)private_vmalloc(iVar25);
-  local_4c = (undefined4 *)private_vmalloc(iVar25);
-  local_48 = (undefined4 *)private_vmalloc(iVar25);
+  puVar2 = (int *)private_vmalloc(iVar25);
+  puVar3 = (int *)private_vmalloc(iVar25);
+  puVar4 = (int *)private_vmalloc(iVar25);
+  local_58 = (int *)private_vmalloc(iVar25);
+  local_54 = (int *)private_vmalloc(iVar25);
+  local_50 = (int *)private_vmalloc(iVar25);
+  local_4c = (int *)private_vmalloc(iVar25);
+  local_48 = (int *)private_vmalloc(iVar25);
   iVar11 = local_3c;
   uVar32 = local_40;
   iVar5 = 0;
@@ -39492,7 +38833,7 @@ undefined4 defog_3x3_5x5_params_init(int param_1,int param_2)
 
 
 
-undefined4 tiziano_defog_init(uint param_1,uint param_2)
+int tiziano_defog_init(uint param_1,uint param_2)
 
 {
   undefined1 *puVar1;
@@ -39736,7 +39077,7 @@ LAB_00056120:
 
 
 
-undefined4 tisp_defog_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_defog_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -39888,12 +39229,12 @@ LAB_00056cf0:
 
 
 
-undefined4 tisp_defog_param_array_set(undefined4 param_1,void *param_2,undefined4 *param_3)
+int tisp_defog_param_array_set(int param_1,void *param_2,int *param_3)
 
 {
-  undefined4 *puVar1;
+  int *puVar1;
   undefined1 *puVar2;
-  undefined4 uVar3;
+  int uVar3;
   
   switch(param_1) {
   case 0x35a:
@@ -40083,14 +39424,14 @@ void tisp_s_defog_str_internal(byte *param_1)
 
 {
   int iVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  int uVar2;
+  int uVar3;
+  int uVar4;
+  int uVar5;
+  int uVar6;
   int iVar7;
-  undefined4 *puVar8;
-  undefined4 *puVar9;
+  int *puVar8;
+  int *puVar9;
   uint uVar10;
   code *pcVar11;
   int iVar12;
@@ -40105,7 +39446,7 @@ void tisp_s_defog_str_internal(byte *param_1)
   if (0x1e < *(int *)param_defog_main_para_array_now) {
     iVar7 = *(int *)param_defog_main_para_array_now;
   }
-  puVar9 = (undefined4 *)&DAT_000a4f90;
+  puVar9 = (int *)&DAT_000a4f90;
   iVar12 = 0;
   iVar16 = 0xb0000;
   iVar15 = 0xb0000;
@@ -40129,11 +39470,11 @@ void tisp_s_defog_str_internal(byte *param_1)
       uVar2 = uVar6;
     }
     puVar9 = puVar9 + 1;
-    *(undefined4 *)(defog_trsy0_list_now + iVar12) = uVar2;
-    *(undefined4 *)(defog_trsy1_list_now + iVar12) = uVar3;
-    *(undefined4 *)(*(int *)(iVar16 + -0x5aac) + iVar12) = uVar4;
-    *(undefined4 *)(*(int *)(iVar15 + -0x5ab0) + iVar12) = uVar5;
-    puVar8 = (undefined4 *)(*(int *)(iVar14 + -0x5ab4) + iVar12);
+    *(int *)(defog_trsy0_list_now + iVar12) = uVar2;
+    *(int *)(defog_trsy1_list_now + iVar12) = uVar3;
+    *(int *)(*(int *)(iVar16 + -0x5aac) + iVar12) = uVar4;
+    *(int *)(*(int *)(iVar15 + -0x5ab0) + iVar12) = uVar5;
+    puVar8 = (int *)(*(int *)(iVar14 + -0x5ab4) + iVar12);
     iVar12 = iVar12 + 4;
     *puVar8 = uVar6;
   } while (iVar12 != iVar13);
@@ -40142,7 +39483,7 @@ void tisp_s_defog_str_internal(byte *param_1)
 
 
 
-undefined4 tisp_adr_ev_update(uint param_1,int param_2)
+int tisp_adr_ev_update(uint param_1,int param_2)
 
 {
   ev_changed = 1;
@@ -40205,7 +39546,7 @@ void tiziano_adr_get_data(uint *param_1)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_adr_algorithm(void)
+int tiziano_adr_algorithm(void)
 
 {
   ushort uVar1;
@@ -40217,7 +39558,7 @@ undefined4 tiziano_adr_algorithm(void)
   int iVar7;
   uint *puVar8;
   uint *puVar9;
-  undefined4 uVar10;
+  int uVar10;
   int iVar11;
   uint uVar12;
   uint uVar13;
@@ -40241,31 +39582,31 @@ undefined4 tiziano_adr_algorithm(void)
     iVar7 = iVar14 * 4;
     if (ev_now <= uVar21) {
       if (iVar14 == 0) {
-        *(undefined4 *)adr_map_mode_now = DAT_000af08c;
+        *(int *)adr_map_mode_now = DAT_000af08c;
         puVar6 = adr_map_mode_now;
-        *(undefined4 *)(adr_map_mode_now + 8) = DAT_000af0c0;
-        *(undefined4 *)(puVar6 + 0x14) = *(undefined4 *)adr_blp2_list_now;
-        *(undefined4 *)(adr_light_end_now + 0x70) = *(undefined4 *)adr_ligb_list_now;
+        *(int *)(adr_map_mode_now + 8) = DAT_000af0c0;
+        *(int *)(puVar6 + 0x14) = *(int *)adr_blp2_list_now;
+        *(int *)(adr_light_end_now + 0x70) = *(int *)adr_ligb_list_now;
         puVar6 = adr_block_light_now;
-        *(undefined4 *)(adr_block_light_now + 0x28) = *(undefined4 *)adr_mapb1_list_now;
-        *(undefined4 *)(puVar6 + 0x2c) = *(undefined4 *)adr_mapb2_list_now;
-        *(undefined4 *)(puVar6 + 0x30) = *(undefined4 *)adr_mapb3_list_now;
-        uVar10 = *(undefined4 *)adr_mapb4_list_now;
+        *(int *)(adr_block_light_now + 0x28) = *(int *)adr_mapb1_list_now;
+        *(int *)(puVar6 + 0x2c) = *(int *)adr_mapb2_list_now;
+        *(int *)(puVar6 + 0x30) = *(int *)adr_mapb3_list_now;
+        uVar10 = *(int *)adr_mapb4_list_now;
         goto LAB_00057ca4;
       }
       iVar11 = iVar14 * 4 + -4;
       uVar18 = *(uint *)(adr_ev_list_now + iVar11);
       if (uVar21 == uVar18) {
-        *(undefined4 *)adr_map_mode_now = (&param_adr_min_kneepoint_array)[iVar14 + 1];
+        *(int *)adr_map_mode_now = (&param_adr_min_kneepoint_array)[iVar14 + 1];
         puVar6 = adr_map_mode_now;
-        *(undefined4 *)(adr_map_mode_now + 8) = (&param_adr_min_kneepoint_array)[iVar14 + 0xe];
-        *(undefined4 *)(puVar6 + 0x14) = *(undefined4 *)(adr_blp2_list_now + iVar7);
-        *(undefined4 *)(adr_light_end_now + 0x70) = *(undefined4 *)(adr_ligb_list_now + iVar7);
+        *(int *)(adr_map_mode_now + 8) = (&param_adr_min_kneepoint_array)[iVar14 + 0xe];
+        *(int *)(puVar6 + 0x14) = *(int *)(adr_blp2_list_now + iVar7);
+        *(int *)(adr_light_end_now + 0x70) = *(int *)(adr_ligb_list_now + iVar7);
         puVar6 = adr_block_light_now;
-        *(undefined4 *)(adr_block_light_now + 0x28) = *(undefined4 *)(adr_mapb1_list_now + iVar7);
-        *(undefined4 *)(puVar6 + 0x2c) = *(undefined4 *)(adr_mapb2_list_now + iVar7);
-        *(undefined4 *)(puVar6 + 0x30) = *(undefined4 *)(adr_mapb3_list_now + iVar7);
-        *(undefined4 *)(puVar6 + 0x34) = *(undefined4 *)(adr_mapb4_list_now + iVar7);
+        *(int *)(adr_block_light_now + 0x28) = *(int *)(adr_mapb1_list_now + iVar7);
+        *(int *)(puVar6 + 0x2c) = *(int *)(adr_mapb2_list_now + iVar7);
+        *(int *)(puVar6 + 0x30) = *(int *)(adr_mapb3_list_now + iVar7);
+        *(int *)(puVar6 + 0x34) = *(int *)(adr_mapb4_list_now + iVar7);
       }
       else {
         uVar19 = (&param_adr_min_kneepoint_array)[iVar14];
@@ -40510,18 +39851,18 @@ undefined4 tiziano_adr_algorithm(void)
     iVar14 = iVar14 + 1;
     puVar9 = puVar9 + 1;
   } while (iVar14 != 9);
-  *(undefined4 *)adr_map_mode_now = DAT_000af0ac;
+  *(int *)adr_map_mode_now = DAT_000af0ac;
   puVar6 = adr_map_mode_now;
-  *(undefined4 *)(adr_map_mode_now + 8) = DAT_000af0e0;
-  *(undefined4 *)(puVar6 + 0x14) = *(undefined4 *)(adr_blp2_list_now + 0x20);
-  *(undefined4 *)(adr_light_end_now + 0x70) = *(undefined4 *)(adr_ligb_list_now + 0x20);
+  *(int *)(adr_map_mode_now + 8) = DAT_000af0e0;
+  *(int *)(puVar6 + 0x14) = *(int *)(adr_blp2_list_now + 0x20);
+  *(int *)(adr_light_end_now + 0x70) = *(int *)(adr_ligb_list_now + 0x20);
   puVar6 = adr_block_light_now;
-  *(undefined4 *)(adr_block_light_now + 0x28) = *(undefined4 *)(adr_mapb1_list_now + 0x20);
-  *(undefined4 *)(puVar6 + 0x2c) = *(undefined4 *)(adr_mapb2_list_now + 0x20);
-  *(undefined4 *)(puVar6 + 0x30) = *(undefined4 *)(adr_mapb3_list_now + 0x20);
-  uVar10 = *(undefined4 *)(adr_mapb4_list_now + 0x20);
+  *(int *)(adr_block_light_now + 0x28) = *(int *)(adr_mapb1_list_now + 0x20);
+  *(int *)(puVar6 + 0x2c) = *(int *)(adr_mapb2_list_now + 0x20);
+  *(int *)(puVar6 + 0x30) = *(int *)(adr_mapb3_list_now + 0x20);
+  uVar10 = *(int *)(adr_mapb4_list_now + 0x20);
 LAB_00057ca4:
-  *(undefined4 *)(puVar6 + 0x34) = uVar10;
+  *(int *)(puVar6 + 0x34) = uVar10;
 LAB_00057ca8:
   if (_DAT_000ac73c != 1) goto LAB_0005a4b8;
   uVar21 = *(uint *)adr_ev_list_now;
@@ -42526,13 +41867,13 @@ LAB_0005a4b8:
   iVar14 = 0;
   iVar7 = 0;
   do {
-    *(undefined4 *)((int)&min_kneepoint_x + iVar14) =
-         *(undefined4 *)((int)&param_adr_min_kneepoint_array_def + iVar14);
-    *(undefined4 *)((int)&map_kneepoint_x + iVar14) =
-         *(undefined4 *)((int)&param_adr_map_kneepoint_array + iVar14);
+    *(int *)((int)&min_kneepoint_x + iVar14) =
+         *(int *)((int)&param_adr_min_kneepoint_array_def + iVar14);
+    *(int *)((int)&map_kneepoint_x + iVar14) =
+         *(int *)((int)&param_adr_map_kneepoint_array + iVar14);
     if (iVar7 < 9) {
-      *(undefined4 *)((int)&ctc_kneepoint_x + iVar14) =
-           *(undefined4 *)((int)&param_adr_ctc_kneepoint_array + iVar14);
+      *(int *)((int)&ctc_kneepoint_x + iVar14) =
+           *(int *)((int)&param_adr_ctc_kneepoint_array + iVar14);
     }
     iVar7 = iVar7 + 1;
     iVar14 = iVar14 + 4;
@@ -42643,7 +41984,7 @@ LAB_0005a6f0:
 
 
 
-undefined4 tisp_adr_process(void)
+int tisp_adr_process(void)
 
 {
   tiziano_adr_algorithm();
@@ -42690,12 +42031,12 @@ void tisp_adr_set_params(void)
 
 
 
-undefined4 tiziano_adr_interrupt_static(void)
+int tiziano_adr_interrupt_static(void)
 
 {
   int iVar1;
   undefined auStack_40 [8];
-  undefined4 local_38;
+  int local_38;
   
   tisp_adr_set_params();
   iVar1 = system_reg_read(0x44b0);
@@ -42754,7 +42095,7 @@ int tiziano_adr_5x5_param_distance(int param_1,int param_2,int param_3,int param
 
 
 
-undefined4 tiziano_adr_5x5_param(void)
+int tiziano_adr_5x5_param(void)
 
 {
   longlong lVar1;
@@ -42770,7 +42111,7 @@ undefined4 tiziano_adr_5x5_param(void)
   uint *puVar11;
   int iVar12;
   int *piVar13;
-  undefined4 *puVar14;
+  int *puVar14;
   code *pcVar15;
   int iVar16;
   int iVar17;
@@ -42780,21 +42121,21 @@ undefined4 tiziano_adr_5x5_param(void)
   uint uVar21;
   int local_c0 [32];
   undefined8 local_40;
-  undefined4 *local_38;
+  int *local_38;
   int local_34;
   int local_30;
   
   memcpy(local_c0,&DAT_0007cfd0,0x7c);
   iVar2 = 0;
   do {
-    *(undefined4 *)((int)&adr_lut7_counter + iVar2) = 0;
-    *(undefined4 *)((int)&adr_lut8_counter + iVar2) = 0;
-    *(undefined4 *)((int)&adr_lut12_counter + iVar2) = 0;
-    *(undefined4 *)((int)&adr_lut1_value_sum + iVar2) = 0;
-    *(undefined4 *)((int)&adr_lut2_value_sum + iVar2) = 0;
-    *(undefined4 *)((int)&adr_lut3_value_sum + iVar2) = 0;
-    *(undefined4 *)((int)&adr_lut6_value_sum + iVar2) = 0;
-    puVar14 = (undefined4 *)((int)&adr_lut11_value_sum + iVar2);
+    *(int *)((int)&adr_lut7_counter + iVar2) = 0;
+    *(int *)((int)&adr_lut8_counter + iVar2) = 0;
+    *(int *)((int)&adr_lut12_counter + iVar2) = 0;
+    *(int *)((int)&adr_lut1_value_sum + iVar2) = 0;
+    *(int *)((int)&adr_lut2_value_sum + iVar2) = 0;
+    *(int *)((int)&adr_lut3_value_sum + iVar2) = 0;
+    *(int *)((int)&adr_lut6_value_sum + iVar2) = 0;
+    puVar14 = (int *)((int)&adr_lut11_value_sum + iVar2);
     iVar2 = iVar2 + 4;
     *puVar14 = 0;
     local_38 = &adr_lut7_counter;
@@ -42917,7 +42258,7 @@ undefined4 tiziano_adr_5x5_param(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_adr_params_init(void)
+int tiziano_adr_params_init(void)
 
 {
   undefined1 *puVar1;
@@ -43133,14 +42474,14 @@ undefined4 tiziano_adr_params_init(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_adr_gamma_refresh(void)
+int tiziano_adr_gamma_refresh(void)
 
 {
   uint uVar1;
   uint *puVar2;
   int iVar3;
   uint uVar4;
-  undefined4 uVar5;
+  int uVar5;
   uint uVar6;
   uint uVar7;
   ushort *puVar8;
@@ -43234,7 +42575,7 @@ LAB_0005c408:
 
 
 
-undefined4 tisp_adr_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_adr_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -43407,15 +42748,15 @@ LAB_0005c714:
 
 
 
-undefined4 tisp_adr_param_array_set(undefined4 param_1,undefined4 *param_2,undefined4 *param_3)
+int tisp_adr_param_array_set(int param_1,int *param_2,int *param_3)
 
 {
   bool bVar1;
   int iVar2;
   undefined2 *__dest;
-  undefined4 *puVar3;
+  int *puVar3;
   undefined1 *puVar4;
-  undefined4 uVar5;
+  int uVar5;
   
   switch(param_1) {
   case 0x380:
@@ -43615,7 +42956,7 @@ LAB_0005cb54:
 
 
 
-void tisp_g_adr_str_internal(undefined4 *param_1)
+void tisp_g_adr_str_internal(int *param_1)
 
 {
   *param_1 = adr_ratio;
@@ -43739,14 +43080,14 @@ LAB_0005cde0:
 
 
 
-undefined4 tiziano_adr_params_refresh(void)
+int tiziano_adr_params_refresh(void)
 
 {
   bool bVar1;
   int iVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
-  undefined4 local_40 [14];
+  int *puVar3;
+  int *puVar4;
+  int local_40 [14];
   
   memcpy(&param_adr_para_array,&DAT_000a542c,0x20);
   memcpy(&param_adr_ctc_kneepoint_array,&DAT_000a56cc,0x44);
@@ -43804,7 +43145,7 @@ undefined4 tiziano_adr_params_refresh(void)
     memcpy(&param_adr_weight_12_lut_array,&DAT_000a554c,0x80);
     memcpy(&param_adr_weight_22_lut_array,&DAT_000a55cc,0x80);
     memcpy(&param_adr_weight_21_lut_array,&DAT_000a564c,0x80);
-    puVar4 = (undefined4 *)&DAT_000a58f0;
+    puVar4 = (int *)&DAT_000a58f0;
   }
   else {
     if (param_adr_tool_control_array != 0) {
@@ -43829,7 +43170,7 @@ undefined4 tiziano_adr_params_refresh(void)
 
 
 
-undefined4 tiziano_adr_dn_params_refresh(void)
+int tiziano_adr_dn_params_refresh(void)
 
 {
   tiziano_adr_params_refresh();
@@ -43841,7 +43182,7 @@ undefined4 tiziano_adr_dn_params_refresh(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_adr_wdr_en(int param_1)
+int tisp_adr_wdr_en(int param_1)
 
 {
   undefined1 *puVar1;
@@ -44084,12 +43425,12 @@ undefined4 tisp_adr_wdr_en(int param_1)
 
 
 
-undefined4 tiziano_adr_init(uint param_1,uint param_2)
+int tiziano_adr_init(uint param_1,uint param_2)
 
 {
   undefined1 *__src;
-  undefined4 *puVar1;
-  undefined4 *puVar2;
+  int *puVar1;
+  int *puVar2;
   uint uVar3;
   int iVar4;
   uint uVar5;
@@ -44135,23 +43476,23 @@ undefined4 tiziano_adr_init(uint param_1,uint param_2)
     if (height_def == 0x438) {
       iVar4 = 0;
       do {
-        puVar2 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp_1080P + iVar4);
-        puVar1 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
+        puVar2 = (int *)((int)&param_adr_centre_w_dis_array_tmp_1080P + iVar4);
+        puVar1 = (int *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
         iVar4 = iVar4 + 4;
         *puVar1 = *puVar2;
       } while (iVar4 != 0x7c);
       iVar4 = 0;
       do {
-        *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp_1080P + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp_1080P + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp_1080P + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp_1080P + iVar4);
-        puVar2 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp_1080P + iVar4);
-        puVar1 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
+        *(int *)((int)&param_adr_weight_20_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_20_lut_array_tmp_1080P + iVar4);
+        *(int *)((int)&param_adr_weight_02_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_02_lut_array_tmp_1080P + iVar4);
+        *(int *)((int)&param_adr_weight_12_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_12_lut_array_tmp_1080P + iVar4);
+        *(int *)((int)&param_adr_weight_22_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_22_lut_array_tmp_1080P + iVar4);
+        puVar2 = (int *)((int)&param_adr_weight_21_lut_array_tmp_1080P + iVar4);
+        puVar1 = (int *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
         iVar4 = iVar4 + 4;
         *puVar1 = *puVar2;
       } while (iVar4 != 0x80);
@@ -44162,23 +43503,23 @@ undefined4 tiziano_adr_init(uint param_1,uint param_2)
     if (height_def == 0x510) {
       iVar4 = 0;
       do {
-        puVar2 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp_3M + iVar4);
-        puVar1 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
+        puVar2 = (int *)((int)&param_adr_centre_w_dis_array_tmp_3M + iVar4);
+        puVar1 = (int *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
         iVar4 = iVar4 + 4;
         *puVar1 = *puVar2;
       } while (iVar4 != 0x7c);
       iVar4 = 0;
       do {
-        *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp_3M + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp_3M + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp_3M + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp_3M + iVar4);
-        puVar2 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp_3M + iVar4);
-        puVar1 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
+        *(int *)((int)&param_adr_weight_20_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_20_lut_array_tmp_3M + iVar4);
+        *(int *)((int)&param_adr_weight_02_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_02_lut_array_tmp_3M + iVar4);
+        *(int *)((int)&param_adr_weight_12_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_12_lut_array_tmp_3M + iVar4);
+        *(int *)((int)&param_adr_weight_22_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_22_lut_array_tmp_3M + iVar4);
+        puVar2 = (int *)((int)&param_adr_weight_21_lut_array_tmp_3M + iVar4);
+        puVar1 = (int *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
         iVar4 = iVar4 + 4;
         *puVar1 = *puVar2;
       } while (iVar4 != 0x80);
@@ -44189,23 +43530,23 @@ undefined4 tiziano_adr_init(uint param_1,uint param_2)
     if (height_def == 0x798) {
       iVar4 = 0;
       do {
-        puVar2 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp_5M + iVar4);
-        puVar1 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
+        puVar2 = (int *)((int)&param_adr_centre_w_dis_array_tmp_5M + iVar4);
+        puVar1 = (int *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
         iVar4 = iVar4 + 4;
         *puVar1 = *puVar2;
       } while (iVar4 != 0x7c);
       iVar4 = 0;
       do {
-        *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp_5M + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp_5M + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp_5M + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp_5M + iVar4);
-        puVar2 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp_5M + iVar4);
-        puVar1 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
+        *(int *)((int)&param_adr_weight_20_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_20_lut_array_tmp_5M + iVar4);
+        *(int *)((int)&param_adr_weight_02_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_02_lut_array_tmp_5M + iVar4);
+        *(int *)((int)&param_adr_weight_12_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_12_lut_array_tmp_5M + iVar4);
+        *(int *)((int)&param_adr_weight_22_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_22_lut_array_tmp_5M + iVar4);
+        puVar2 = (int *)((int)&param_adr_weight_21_lut_array_tmp_5M + iVar4);
+        puVar1 = (int *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
         iVar4 = iVar4 + 4;
         *puVar1 = *puVar2;
       } while (iVar4 != 0x80);
@@ -44216,23 +43557,23 @@ undefined4 tiziano_adr_init(uint param_1,uint param_2)
     if (height_def == 0x5a0) {
       iVar4 = 0;
       do {
-        puVar2 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp_4M + iVar4);
-        puVar1 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
+        puVar2 = (int *)((int)&param_adr_centre_w_dis_array_tmp_4M + iVar4);
+        puVar1 = (int *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
         iVar4 = iVar4 + 4;
         *puVar1 = *puVar2;
       } while (iVar4 != 0x7c);
       iVar4 = 0;
       do {
-        *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp_4M + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp_4M + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp_4M + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp_4M + iVar4);
-        puVar2 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp_4M + iVar4);
-        puVar1 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
+        *(int *)((int)&param_adr_weight_20_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_20_lut_array_tmp_4M + iVar4);
+        *(int *)((int)&param_adr_weight_02_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_02_lut_array_tmp_4M + iVar4);
+        *(int *)((int)&param_adr_weight_12_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_12_lut_array_tmp_4M + iVar4);
+        *(int *)((int)&param_adr_weight_22_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_22_lut_array_tmp_4M + iVar4);
+        puVar2 = (int *)((int)&param_adr_weight_21_lut_array_tmp_4M + iVar4);
+        puVar1 = (int *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
         iVar4 = iVar4 + 4;
         *puVar1 = *puVar2;
       } while (iVar4 != 0x80);
@@ -44241,23 +43582,23 @@ undefined4 tiziano_adr_init(uint param_1,uint param_2)
     if (height_def == 0x780) {
       iVar4 = 0;
       do {
-        puVar2 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp_5MA + iVar4);
-        puVar1 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
+        puVar2 = (int *)((int)&param_adr_centre_w_dis_array_tmp_5MA + iVar4);
+        puVar1 = (int *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
         iVar4 = iVar4 + 4;
         *puVar1 = *puVar2;
       } while (iVar4 != 0x7c);
       iVar4 = 0;
       do {
-        *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp_5MA + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp_5MA + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp_5MA + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp_5MA + iVar4);
-        puVar2 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp_5MA + iVar4);
-        puVar1 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
+        *(int *)((int)&param_adr_weight_20_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_20_lut_array_tmp_5MA + iVar4);
+        *(int *)((int)&param_adr_weight_02_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_02_lut_array_tmp_5MA + iVar4);
+        *(int *)((int)&param_adr_weight_12_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_12_lut_array_tmp_5MA + iVar4);
+        *(int *)((int)&param_adr_weight_22_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_22_lut_array_tmp_5MA + iVar4);
+        puVar2 = (int *)((int)&param_adr_weight_21_lut_array_tmp_5MA + iVar4);
+        puVar1 = (int *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
         iVar4 = iVar4 + 4;
         *puVar1 = *puVar2;
       } while (iVar4 != 0x80);
@@ -44268,23 +43609,23 @@ undefined4 tiziano_adr_init(uint param_1,uint param_2)
     if (height_def == 0x2d0) {
       iVar4 = 0;
       do {
-        puVar2 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp_720P + iVar4);
-        puVar1 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
+        puVar2 = (int *)((int)&param_adr_centre_w_dis_array_tmp_720P + iVar4);
+        puVar1 = (int *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
         iVar4 = iVar4 + 4;
         *puVar1 = *puVar2;
       } while (iVar4 != 0x7c);
       iVar4 = 0;
       do {
-        *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp_720P + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp_720P + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp_720P + iVar4);
-        *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp + iVar4) =
-             *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp_720P + iVar4);
-        puVar2 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp_720P + iVar4);
-        puVar1 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
+        *(int *)((int)&param_adr_weight_20_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_20_lut_array_tmp_720P + iVar4);
+        *(int *)((int)&param_adr_weight_02_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_02_lut_array_tmp_720P + iVar4);
+        *(int *)((int)&param_adr_weight_12_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_12_lut_array_tmp_720P + iVar4);
+        *(int *)((int)&param_adr_weight_22_lut_array_tmp + iVar4) =
+             *(int *)((int)&param_adr_weight_22_lut_array_tmp_720P + iVar4);
+        puVar2 = (int *)((int)&param_adr_weight_21_lut_array_tmp_720P + iVar4);
+        puVar1 = (int *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
         iVar4 = iVar4 + 4;
         *puVar1 = *puVar2;
       } while (iVar4 != 0x80);
@@ -44329,23 +43670,23 @@ LAB_0005dffc:
   iVar4 = 0;
   if (param_adr_tool_control_array == 0) {
     do {
-      puVar2 = (undefined4 *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
-      puVar1 = (undefined4 *)((int)&param_adr_centre_w_dis_array + iVar4);
+      puVar2 = (int *)((int)&param_adr_centre_w_dis_array_tmp + iVar4);
+      puVar1 = (int *)((int)&param_adr_centre_w_dis_array + iVar4);
       iVar4 = iVar4 + 4;
       *puVar1 = *puVar2;
     } while (iVar4 != 0x7c);
     iVar4 = 0;
     do {
-      *(undefined4 *)((int)&param_adr_weight_20_lut_array + iVar4) =
-           *(undefined4 *)((int)&param_adr_weight_20_lut_array_tmp + iVar4);
-      *(undefined4 *)((int)&param_adr_weight_02_lut_array + iVar4) =
-           *(undefined4 *)((int)&param_adr_weight_02_lut_array_tmp + iVar4);
-      *(undefined4 *)((int)&param_adr_weight_12_lut_array + iVar4) =
-           *(undefined4 *)((int)&param_adr_weight_12_lut_array_tmp + iVar4);
-      *(undefined4 *)((int)&param_adr_weight_22_lut_array + iVar4) =
-           *(undefined4 *)((int)&param_adr_weight_22_lut_array_tmp + iVar4);
-      puVar2 = (undefined4 *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
-      puVar1 = (undefined4 *)((int)&param_adr_weight_21_lut_array + iVar4);
+      *(int *)((int)&param_adr_weight_20_lut_array + iVar4) =
+           *(int *)((int)&param_adr_weight_20_lut_array_tmp + iVar4);
+      *(int *)((int)&param_adr_weight_02_lut_array + iVar4) =
+           *(int *)((int)&param_adr_weight_02_lut_array_tmp + iVar4);
+      *(int *)((int)&param_adr_weight_12_lut_array + iVar4) =
+           *(int *)((int)&param_adr_weight_12_lut_array_tmp + iVar4);
+      *(int *)((int)&param_adr_weight_22_lut_array + iVar4) =
+           *(int *)((int)&param_adr_weight_22_lut_array_tmp + iVar4);
+      puVar2 = (int *)((int)&param_adr_weight_21_lut_array_tmp + iVar4);
+      puVar1 = (int *)((int)&param_adr_weight_21_lut_array + iVar4);
       iVar4 = iVar4 + 4;
       *puVar1 = *puVar2;
     } while (iVar4 != 0x80);
@@ -44358,7 +43699,7 @@ LAB_0005dffc:
 
 
 
-undefined4 tisp_hldc_con_par_cfg(void)
+int tisp_hldc_con_par_cfg(void)
 
 {
   system_reg_write(0x9000,hldc_con_par_array._12_4_ << 0x10 | hldc_con_par_array._8_4_);
@@ -44377,7 +43718,7 @@ undefined4 tisp_hldc_con_par_cfg(void)
 
 
 
-undefined4 tisp_hldc_par_refresh(int param_1)
+int tisp_hldc_par_refresh(int param_1)
 
 {
   tisp_hldc_con_par_cfg();
@@ -44389,7 +43730,7 @@ undefined4 tisp_hldc_par_refresh(int param_1)
 
 
 
-undefined4 tiziano_hldc_params_refresh(void)
+int tiziano_hldc_params_refresh(void)
 
 {
   memcpy(hldc_con_par_array,&DAT_000a5ff4,0x48);
@@ -44398,7 +43739,7 @@ undefined4 tiziano_hldc_params_refresh(void)
 
 
 
-undefined4 tiziano_hldc_init(void)
+int tiziano_hldc_init(void)
 
 {
   tiziano_hldc_params_refresh();
@@ -44409,10 +43750,10 @@ undefined4 tiziano_hldc_init(void)
 
 
 
-undefined4 tisp_hldc_param_array_get(int param_1,void *param_2,undefined4 *param_3)
+int tisp_hldc_param_array_get(int param_1,void *param_2,int *param_3)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   if (param_1 == 0x3ac) {
     memcpy(param_2,hldc_con_par_array,0x48);
@@ -44428,10 +43769,10 @@ undefined4 tisp_hldc_param_array_get(int param_1,void *param_2,undefined4 *param
 
 
 
-undefined4 tisp_hldc_param_array_set(int param_1,void *param_2,undefined4 *param_3)
+int tisp_hldc_param_array_set(int param_1,void *param_2,int *param_3)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   if (param_1 == 0x3ac) {
     memcpy(hldc_con_par_array,param_2,0x48);
@@ -44449,11 +43790,11 @@ undefined4 tisp_hldc_param_array_set(int param_1,void *param_2,undefined4 *param
 
 
 
-undefined4 tisp_set_sensor_integration_time(int param_1)
+int tisp_set_sensor_integration_time(int param_1)
 
 {
   int iVar1;
-  undefined4 uVar2;
+  int uVar2;
   undefined auStack_38 [16];
   undefined2 local_28;
   
@@ -44477,11 +43818,11 @@ undefined4 tisp_set_sensor_integration_time(int param_1)
 
 
 
-undefined4 tisp_set_sensor_integration_time_short(int param_1)
+int tisp_set_sensor_integration_time_short(int param_1)
 
 {
   int iVar1;
-  undefined4 uVar2;
+  int uVar2;
   undefined auStack_38 [18];
   undefined2 local_26;
   
@@ -44508,7 +43849,7 @@ undefined4 tisp_set_sensor_integration_time_short(int param_1)
 uint tisp_set_sensor_analog_gain(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   uint uVar2;
   undefined2 local_28 [14];
   
@@ -44524,7 +43865,7 @@ uint tisp_set_sensor_analog_gain(int param_1)
 uint tisp_set_sensor_analog_gain_short(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   uint uVar2;
   undefined auStack_28 [14];
   undefined2 local_1a;
@@ -44541,7 +43882,7 @@ uint tisp_set_sensor_analog_gain_short(int param_1)
 uint tisp_set_sensor_digital_gain_short(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   uint uVar2;
   undefined auStack_28 [2];
   undefined2 local_26;
@@ -44621,7 +43962,7 @@ void JZ_Isp_Ae_Reg2par(uint *param_1,uint *param_2)
 
 
 
-void JZ_Isp_Ae_Dg2reg(undefined4 param_1,uint *param_2,uint param_3,undefined4 *param_4)
+void JZ_Isp_Ae_Dg2reg(int param_1,uint *param_2,uint param_3,int *param_4)
 
 {
   uint uVar1;
@@ -44641,9 +43982,9 @@ void printf_func0(uint param_1,uint param_2)
 {
   bool bVar1;
   int iVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
-  undefined4 *local_38;
+  int *puVar3;
+  int *puVar4;
+  int *local_38;
   
   iVar2 = IntNum_32264 + 1;
   bVar1 = IntNum_32264 < 35000;
@@ -44690,7 +44031,7 @@ void printf_func0(uint param_1,uint param_2)
       do {
         iVar2 = 0;
         do {
-          isp_printf(1,&_LC9,*(undefined4 *)((int)puVar3 + iVar2));
+          isp_printf(1,&_LC9,*(int *)((int)puVar3 + iVar2));
           iVar2 = iVar2 + 4;
         } while (iVar2 != 0x3c);
         puVar3 = puVar3 + 0xf;
@@ -44709,9 +44050,9 @@ void printf_func1(uint param_1,uint param_2)
 {
   bool bVar1;
   int iVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
-  undefined4 *local_38;
+  int *puVar3;
+  int *puVar4;
+  int *local_38;
   
   iVar2 = IntNum_32292 + 1;
   bVar1 = IntNum_32292 < 35000;
@@ -44750,7 +44091,7 @@ void printf_func1(uint param_1,uint param_2)
       do {
         iVar2 = 0;
         do {
-          isp_printf(1,&_LC9,*(undefined4 *)((int)puVar3 + iVar2));
+          isp_printf(1,&_LC9,*(int *)((int)puVar3 + iVar2));
           iVar2 = iVar2 + 4;
         } while (iVar2 != 0x3c);
         puVar3 = puVar3 + 0xf;
@@ -44794,7 +44135,7 @@ void tisp_ae0_get_statistics(uint *param_1,uint param_2)
 
 
 
-undefined4 ae0_interrupt_static(void)
+int ae0_interrupt_static(void)
 
 {
   uint uVar1;
@@ -44806,7 +44147,7 @@ undefined4 ae0_interrupt_static(void)
   tisp_ae0_get_statistics(iVar2 + DAT_000b26fc,0xf001f001);
   if (DAT_000b06e0 == 1) {
     DAT_000b06e0 = 0;
-    *(undefined4 *)(DAT_000d3d8c + 4) = 0;
+    *(int *)(DAT_000d3d8c + 4) = 0;
   }
   return 1;
 }
@@ -44817,7 +44158,7 @@ void tisp_ae1_get_statistics(uint *param_1,uint param_2)
 
 {
   uint *puVar1;
-  undefined4 *puVar2;
+  int *puVar2;
   uint uVar3;
   uint uVar4;
   
@@ -44842,7 +44183,7 @@ void tisp_ae1_get_statistics(uint *param_1,uint param_2)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 ae1_interrupt_static(void)
+int ae1_interrupt_static(void)
 
 {
   uint uVar1;
@@ -44861,7 +44202,7 @@ undefined4 ae1_interrupt_static(void)
 void tisp_ae1_get_hist(uint *param_1)
 
 {
-  undefined4 *puVar1;
+  int *puVar1;
   uint *puVar2;
   uint *puVar3;
   
@@ -44879,13 +44220,13 @@ void tisp_ae1_get_hist(uint *param_1)
 
 
 
-undefined4 ae1_interrupt_hist(void)
+int ae1_interrupt_hist(void)
 
 {
   uint uVar1;
   int iVar2;
   undefined auStack_40 [8];
-  undefined4 local_38;
+  int local_38;
   
   uVar1 = system_reg_read(0xa850);
   iVar2 = (uVar1 & 3) * 0x800;
@@ -44904,17 +44245,17 @@ void tisp_ae0_get_hist(uint *param_1,int param_2,int param_3)
 
 {
   bool bVar1;
-  undefined4 *puVar2;
+  int *puVar2;
   int iVar3;
-  undefined4 uVar4;
+  int uVar4;
   uint uVar5;
   uint *puVar6;
-  undefined4 *puVar7;
-  undefined4 local_40 [2];
+  int *puVar7;
+  int local_40 [2];
   int local_38;
-  undefined4 *local_34;
-  undefined4 local_30;
-  undefined4 local_2c;
+  int *local_34;
+  int local_30;
+  int local_2c;
   
   puVar6 = param_1 + 0x100;
   puVar2 = &IspAeStatic;
@@ -45002,7 +44343,7 @@ LAB_0005f240:
         _DAT_000d4778 = 0;
       }
       else {
-        local_34 = (undefined4 *)&DAT_000d4378;
+        local_34 = (int *)&DAT_000d4378;
         local_30 = 0xffff;
         local_2c = 0;
         local_38 = 0x20000;
@@ -45025,13 +44366,13 @@ LAB_0005f240:
 
 
 
-undefined4 ae0_interrupt_hist(void)
+int ae0_interrupt_hist(void)
 
 {
   uint uVar1;
   int iVar2;
   undefined auStack_40 [8];
-  undefined4 local_38;
+  int local_38;
   
   uVar1 = system_reg_read(0xa050);
   iVar2 = (uVar1 & 3) * 0x800;
@@ -45044,10 +44385,10 @@ undefined4 ae0_interrupt_hist(void)
 
 
 
-undefined4 tisp_ae_get_hist_custome(void *param_1)
+int tisp_ae_get_hist_custome(void *param_1)
 
 {
-  undefined4 local_18 [3];
+  int local_18 [3];
   
   __private_spin_lock_irqsave(0x10000,local_18);
   memcpy(param_1,tisp_ae_hist_last,0x42c);
@@ -45057,10 +44398,10 @@ undefined4 tisp_ae_get_hist_custome(void *param_1)
 
 
 
-undefined4 tisp_ae_set_hist_custome(void)
+int tisp_ae_set_hist_custome(void)
 
 {
-  undefined4 local_10 [2];
+  int local_10 [2];
   
   __private_spin_lock_irqsave(0x10000,local_10);
   memcpy(tisp_ae_hist_last + 0x414,&stack0x00000414,0x10);
@@ -45070,10 +44411,10 @@ undefined4 tisp_ae_set_hist_custome(void)
 
 
 
-undefined4 AePweightCalculate(uint param_1,int param_2,int param_3,int param_4)
+int AePweightCalculate(uint param_1,int param_2,int param_3,int param_4)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   if (param_2 != 0) {
     param_2 = param_2 << (param_1 & 0x1f);
@@ -45088,16 +44429,16 @@ undefined4 AePweightCalculate(uint param_1,int param_2,int param_3,int param_4)
 
 
 
-void ae0_weight_mean2(int param_1,int param_2,int param_3,undefined4 param_4,int param_5,int param_6
-                     ,undefined4 param_7,void *param_8,void *param_9,int param_10,int param_11,
-                     int param_12,int param_13,int param_14,int param_15,undefined4 param_16,
-                     undefined4 param_17,uint *param_18,int param_19,int param_20,uint *param_21,
-                     undefined4 *param_22,int *param_23,uint *param_24,uint *param_25)
+void ae0_weight_mean2(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6
+                     ,int param_7,void *param_8,void *param_9,int param_10,int param_11,
+                     int param_12,int param_13,int param_14,int param_15,int param_16,
+                     int param_17,uint *param_18,int param_19,int param_20,uint *param_21,
+                     int *param_22,int *param_23,uint *param_24,uint *param_25)
 
 {
   uint uVar1;
   int iVar2;
-  undefined4 uVar3;
+  int uVar3;
   int *piVar4;
   uint uVar5;
   int iVar6;
@@ -45118,7 +44459,7 @@ void ae0_weight_mean2(int param_1,int param_2,int param_3,undefined4 param_4,int
   int iVar21;
   int iVar22;
   int *piVar23;
-  undefined4 local_e0 [2];
+  int local_e0 [2];
   int local_d8;
   int local_d4;
   int local_d0;
@@ -45128,8 +44469,8 @@ void ae0_weight_mean2(int param_1,int param_2,int param_3,undefined4 param_4,int
   uint local_c0;
   uint local_bc;
   uint local_b8;
-  undefined4 local_b4;
-  undefined4 local_b0;
+  int local_b4;
+  int local_b0;
   void *local_ac;
   int local_a8;
   int local_a4;
@@ -45295,7 +44636,7 @@ void ae0_weight_mean2(int param_1,int param_2,int param_3,undefined4 param_4,int
 void tisp_ae_tune(int *param_1,int *param_2,int *param_3,int param_4,uint param_5,uint param_6)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   int iVar3;
   int iVar4;
@@ -45387,26 +44728,26 @@ LAB_0005fe68:
 
 
 
-void ae0_tune2(int *param_1,undefined4 param_2,code *param_3,undefined4 param_4,uint param_5,
+void ae0_tune2(int *param_1,int param_2,code *param_3,int param_4,uint param_5,
               uint *param_6,uint *param_7,uint *param_8,int param_9,int *param_10,int *param_11,
-              undefined4 *param_12,undefined4 param_13_00,undefined4 *param_13,uint *param_14,
+              int *param_12,int param_13_00,int *param_13,uint *param_14,
               uint *param_15,int *param_16,uint *param_17,int *param_18,uint *param_19,
-              uint *param_20,int *param_21,undefined4 param_23_00,uint *param_22,uint *param_23,
-              undefined4 param_26_00,uint *param_24,uint *param_25,uint *param_26,
-              undefined4 param_30_00,uint *param_27)
+              uint *param_20,int *param_21,int param_23_00,uint *param_22,uint *param_23,
+              int param_26_00,uint *param_24,uint *param_25,uint *param_26,
+              int param_30_00,uint *param_27)
 
 {
   bool bVar1;
   longlong lVar2;
   int iVar3;
   int iVar4;
-  undefined4 uVar5;
+  int uVar5;
   uint uVar6;
   uint uVar7;
   uint uVar8;
   uint *puVar9;
-  undefined4 *puVar10;
-  undefined4 *puVar11;
+  int *puVar10;
+  int *puVar11;
   uint *puVar12;
   uint uVar13;
   uint uVar14;
@@ -45420,7 +44761,7 @@ void ae0_tune2(int *param_1,undefined4 param_2,code *param_3,undefined4 param_4,
   undefined8 uVar22;
   longlong lVar23;
   uint param_28;
-  undefined4 param_29;
+  int param_29;
   uint param_30;
   uint param_31;
   uint param_32;
@@ -45428,13 +44769,13 @@ void ae0_tune2(int *param_1,undefined4 param_2,code *param_3,undefined4 param_4,
   uint param_34;
   uint param_35;
   undefined auStack_160 [8];
-  undefined4 local_158;
+  int local_158;
   uint local_150;
-  undefined4 local_14c;
+  int local_14c;
   uint local_130 [10];
   uint local_108 [10];
   uint local_e0;
-  undefined4 local_dc;
+  int local_dc;
   uint *local_d8;
   uint local_d4;
   uint local_d0;
@@ -45458,12 +44799,12 @@ void ae0_tune2(int *param_1,undefined4 param_2,code *param_3,undefined4 param_4,
   uint local_88;
   code *local_84;
   int local_80;
-  undefined4 local_7c;
+  int local_7c;
   undefined8 local_78;
   undefined8 local_70;
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined4 local_60;
+  int local_68;
+  int local_64;
+  int local_60;
   uint local_5c;
   uint local_58;
   uint local_54;
@@ -45524,9 +44865,9 @@ void ae0_tune2(int *param_1,undefined4 param_2,code *param_3,undefined4 param_4,
   local_38 = param_1[1];
   iVar3 = 0;
   do {
-    *(undefined4 *)((int)local_108 + iVar3) = *(undefined4 *)(local_34 + iVar3);
-    puVar11 = (undefined4 *)(local_cc + iVar3);
-    puVar10 = (undefined4 *)((int)local_130 + iVar3);
+    *(int *)((int)local_108 + iVar3) = *(int *)(local_34 + iVar3);
+    puVar11 = (int *)(local_cc + iVar3);
+    puVar10 = (int *)((int)local_130 + iVar3);
     iVar3 = iVar3 + 4;
     *puVar10 = *puVar11;
   } while (iVar3 != 0x28);
@@ -45603,19 +44944,19 @@ void ae0_tune2(int *param_1,undefined4 param_2,code *param_3,undefined4 param_4,
   }
   else {
     do {
-      *(undefined4 *)((int)param_19 + iVar4) = *(undefined4 *)((int)local_108 + iVar4);
-      puVar11 = (undefined4 *)((int)local_130 + iVar4);
-      puVar10 = (undefined4 *)((int)local_94 + iVar4);
+      *(int *)((int)param_19 + iVar4) = *(int *)((int)local_108 + iVar4);
+      puVar11 = (int *)((int)local_130 + iVar4);
+      puVar10 = (int *)((int)local_94 + iVar4);
       iVar4 = iVar4 + 4;
       *puVar10 = *puVar11;
     } while (iVar4 != 0x28);
   }
-  puVar10 = (undefined4 *)(param_9 + 4);
+  puVar10 = (int *)(param_9 + 4);
   do {
     puVar11 = puVar10 + 1;
     puVar10[-1] = *puVar10;
     puVar10 = puVar11;
-  } while (puVar11 != (undefined4 *)(param_9 + 0x3c));
+  } while (puVar11 != (int *)(param_9 + 0x3c));
   *(uint *)(param_9 + 0x38) = param_28;
   uVar8 = param_28;
   if (IspAeFlag == 1) {
@@ -46034,7 +45375,7 @@ LAB_00061038:
 
 
 
-undefined4 tisp_ae_g_min(undefined4 *param_1)
+int tisp_ae_g_min(int *param_1)
 
 {
   *param_1 = *DAT_000cfc84;
@@ -46046,7 +45387,7 @@ undefined4 tisp_ae_g_min(undefined4 *param_1)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_ae_s_min(uint param_1,uint param_2,uint param_3,uint param_4)
+int tisp_ae_s_min(uint param_1,uint param_2,uint param_3,uint param_4)
 
 {
   uint uVar1;
@@ -46090,14 +45431,14 @@ undefined4 tisp_ae_s_min(uint param_1,uint param_2,uint param_3,uint param_4)
 
 
 
-void Tiziano_ae0_fpga(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                     undefined4 param_5,undefined4 param_6,int *param_7,undefined4 param_8,
-                     undefined4 param_9,int param_10)
+void Tiziano_ae0_fpga(int param_1,int param_2,int param_3,int param_4,
+                     int param_5,int param_6,int *param_7,int param_8,
+                     int param_9,int param_10)
 
 {
   bool bVar1;
   uint uVar2;
-  undefined4 uVar3;
+  int uVar3;
   int *piVar4;
   int iVar5;
   uint uVar6;
@@ -46108,32 +45449,32 @@ void Tiziano_ae0_fpga(undefined4 param_1,undefined4 param_2,undefined4 param_3,u
   int iVar11;
   int iVar12;
   int iVar13;
-  undefined4 param_11;
-  undefined4 param_12;
-  undefined4 param_13;
-  undefined4 param_14;
+  int param_11;
+  int param_12;
+  int param_13;
+  int param_14;
   int param_16;
   int *param_17;
   undefined local_118 [56];
   int local_e0;
   uint local_dc;
   uint *local_d8;
-  undefined4 *local_d4;
-  undefined4 *local_d0;
-  undefined4 *local_cc;
+  int *local_d4;
+  int *local_d0;
+  int *local_cc;
   undefined *local_c8;
   uint local_8c;
-  undefined4 *local_88;
+  int *local_88;
   int local_84;
   int local_80;
   int local_7c;
   int local_78;
-  undefined4 local_74;
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined4 local_60;
+  int local_74;
+  int local_68;
+  int local_64;
+  int local_60;
   undefined local_5c [4];
-  undefined4 local_58;
+  int local_58;
   uint local_54;
   int local_50;
   int local_4c;
@@ -46260,14 +45601,14 @@ void tisp_set_ae0_ag(void)
 
 {
   int iVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  int uVar2;
+  int uVar3;
+  int uVar4;
   int iVar5;
   int iVar6;
   int param_6;
   int param_7;
-  undefined4 *param_11;
+  int *param_11;
   uint *param_12;
   
   iVar1 = DAT_000d3e70;
@@ -46304,14 +45645,14 @@ void tisp_set_ae1_ag(void)
 
 {
   int iVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  int uVar2;
+  int uVar3;
   int iVar4;
-  undefined4 uVar5;
+  int uVar5;
   int iVar6;
   int param_6;
   int param_7;
-  undefined4 *param_11;
+  int *param_11;
   uint *param_12;
   
   iVar1 = DAT_000d3eb4;
@@ -46344,15 +45685,15 @@ void tisp_set_ae1_ag(void)
 
 
 
-undefined4 tisp_ae1_expt(void)
+int tisp_ae1_expt(void)
 
 {
   uint uVar1;
   uint uVar2;
   uint uVar3;
-  undefined4 uVar4;
+  int uVar4;
   int iVar5;
-  undefined4 uVar6;
+  int uVar6;
   uint uVar7;
   uint *puVar8;
   uint uVar9;
@@ -46611,9 +45952,9 @@ void ae1_weight_mean2(int param_1,int param_2,int param_3)
 
 
 
-undefined4
-Tiziano_ae1_fpga(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                undefined4 param_5,undefined4 param_6,void *param_7,void *param_8)
+int
+Tiziano_ae1_fpga(int param_1,int param_2,int param_3,int param_4,
+                int param_5,int param_6,void *param_7,void *param_8)
 
 {
   void *__src;
@@ -46634,7 +45975,7 @@ Tiziano_ae1_fpga(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefi
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_ae0_ctrls_update(void)
+int tisp_ae0_ctrls_update(void)
 
 {
   uint uVar1;
@@ -46690,7 +46031,7 @@ undefined4 tisp_ae0_ctrls_update(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_ae1_ctrls_update(void)
+int tisp_ae1_ctrls_update(void)
 
 {
   uint uVar1;
@@ -46749,7 +46090,7 @@ undefined4 tisp_ae1_ctrls_update(void)
 void tiziano_ae_dump(void)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   if (DumpNum_32866 == 0) {
     DumpNum_32866 = 1;
@@ -46850,7 +46191,7 @@ void tiziano_ae_dump(void)
 
 
 
-undefined4 tiziano_ae_params_refresh(void)
+int tiziano_ae_params_refresh(void)
 
 {
   undefined1 *puVar1;
@@ -46917,10 +46258,10 @@ undefined4 tiziano_ae_params_refresh(void)
 
 
 
-undefined4 tiziano_ae_s_max_again(uint param_1)
+int tiziano_ae_s_max_again(uint param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   if ((uint)(sensor_ctrl._32_4_ << 0xb) < param_1) {
     isp_printf(1,"%d not in range, max_again must between 0~%d\n",param_1);
@@ -46936,7 +46277,7 @@ undefined4 tiziano_ae_s_max_again(uint param_1)
 
 
 
-undefined4 tiziano_ae_s_max_isp_dgain(undefined4 param_1)
+int tiziano_ae_s_max_isp_dgain(int param_1)
 
 {
   DAT_000d3e8c = tisp_math_exp2(param_1,5,10);
@@ -46946,14 +46287,14 @@ undefined4 tiziano_ae_s_max_isp_dgain(undefined4 param_1)
 
 
 
-undefined4
-tisp_ae_s_at_list(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+int
+tisp_ae_s_at_list(int param_1,int param_2,int param_3,int param_4)
 
 {
   int iVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
-  undefined4 local_res0 [4];
+  int *puVar2;
+  int *puVar3;
+  int local_res0 [4];
   
   local_res0[0] = param_1;
   local_res0[1] = param_2;
@@ -46961,8 +46302,8 @@ tisp_ae_s_at_list(undefined4 param_1,undefined4 param_2,undefined4 param_3,undef
   local_res0[3] = param_4;
   iVar1 = 0;
   do {
-    puVar3 = (undefined4 *)((int)local_res0 + iVar1);
-    puVar2 = (undefined4 *)((int)&_at_list + iVar1);
+    puVar3 = (int *)((int)local_res0 + iVar1);
+    puVar2 = (int *)((int)&_at_list + iVar1);
     iVar1 = iVar1 + 4;
     *puVar2 = *puVar3;
   } while (iVar1 != 0x28);
@@ -46974,12 +46315,12 @@ tisp_ae_s_at_list(undefined4 param_1,undefined4 param_2,undefined4 param_3,undef
 
 
 
-undefined4 tisp_ae_g_at_list(undefined4 *param_1)
+int tisp_ae_g_at_list(int *param_1)
 
 {
-  undefined4 *puVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  int *puVar1;
+  int *puVar2;
+  int *puVar3;
   
   puVar1 = &_at_list;
   puVar2 = param_1;
@@ -46995,12 +46336,12 @@ undefined4 tisp_ae_g_at_list(undefined4 *param_1)
 
 
 void tiziano_deflicker_expt
-               (int param_1,uint param_2,int param_3,undefined4 param_4,uint *param_5,uint *param_6)
+               (int param_1,uint param_2,int param_3,int param_4,uint *param_5,uint *param_6)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   uint uVar2;
-  undefined4 uVar3;
+  int uVar3;
   int iVar4;
   uint uVar5;
   uint *puVar6;
@@ -47049,10 +46390,10 @@ void tiziano_deflicker_expt_tune(void)
 
 
 
-void system_reg_write_ae(int param_1,undefined4 param_2,undefined4 param_3)
+void system_reg_write_ae(int param_1,int param_2,int param_3)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   if (param_1 == 1) {
     uVar1 = 0xa000;
@@ -47074,29 +46415,29 @@ LAB_00063114:
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_ae1_process_impl(void)
+int tisp_ae1_process_impl(void)
 
 {
   bool bVar1;
   bool bVar2;
-  undefined4 uVar3;
+  int uVar3;
   uint uVar4;
   int iVar5;
   uint uVar6;
-  undefined4 *puVar7;
-  undefined4 *puVar8;
+  int *puVar7;
+  int *puVar8;
   int iVar9;
   int iVar10;
   int iVar11;
-  undefined4 *puVar12;
+  int *puVar12;
   int iVar13;
   int iVar14;
-  undefined4 *puVar15;
+  int *puVar15;
   undefined local_c8 [144];
   int local_38;
   int local_34;
-  undefined4 local_30;
-  undefined4 local_2c;
+  int local_30;
+  int local_2c;
   
   uVar4 = _AePointPos;
   local_30 = 0x4000400;
@@ -47182,15 +46523,15 @@ undefined4 tisp_ae1_process_impl(void)
     iVar14 = 0;
     for (iVar13 = iVar5 + 1; iVar14 = iVar14 + -4, 0 < iVar13; iVar13 = iVar13 + -1) {
       iVar11 = iVar14 + iVar10;
-      *(undefined4 *)(iVar11 + 0xaf494) = ev1_cache;
-      *(undefined4 *)(iVar11 + 0xaf46c) = ad1_cache;
+      *(int *)(iVar11 + 0xaf494) = ev1_cache;
+      *(int *)(iVar11 + 0xaf46c) = ad1_cache;
     }
     EffectCount1 = iVar5;
     iVar13 = 0;
     bVar2 = false;
     for (iVar10 = iVar5; 0 < iVar10; iVar10 = iVar10 + -1) {
-      *(undefined4 *)((int)puVar12 + iVar13) = ag1_cache;
-      *(undefined4 *)((int)puVar15 + iVar13) = dg1_cache;
+      *(int *)((int)puVar12 + iVar13) = ag1_cache;
+      *(int *)((int)puVar15 + iVar13) = dg1_cache;
       iVar13 = iVar13 + -4;
       bVar2 = true;
     }
@@ -47207,7 +46548,7 @@ LAB_00063464:
 
 
 
-undefined4 tisp_ae1_process(void)
+int tisp_ae1_process(void)
 
 {
   tisp_ae1_ctrls_update();
@@ -47217,12 +46558,12 @@ undefined4 tisp_ae1_process(void)
 
 
 
-undefined4 tiziano_ae_set_hardware_param(int param_1,uint *param_2,int param_3)
+int tiziano_ae_set_hardware_param(int param_1,uint *param_2,int param_3)
 
 {
   uint uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  int uVar2;
+  int uVar3;
   uint uVar4;
   uint uVar5;
   uint uVar6;
@@ -47374,11 +46715,11 @@ void tiziano_ae_para_addr(void)
 void tiziano_ae_init_exp_th(void)
 
 {
-  undefined4 *puVar1;
+  int *puVar1;
   uint *puVar2;
   uint uVar3;
   uint uVar4;
-  undefined4 uVar5;
+  int uVar5;
   
   uVar4 = DAT_000b05dc;
   DAT_000cfc78 = &DAT_000b05dc;
@@ -47467,7 +46808,7 @@ void tiziano_ae_init_exp_th(void)
 
 
 
-undefined4 tisp_ae_wdr_en(undefined4 param_1)
+int tisp_ae_wdr_en(int param_1)
 
 {
   IspAeFlag = 1;
@@ -47495,11 +46836,11 @@ undefined4 tisp_ae_wdr_en(undefined4 param_1)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_ae_init(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+int tiziano_ae_init(int param_1,int param_2,int param_3)
 
 {
   int iVar1;
-  undefined4 uVar2;
+  int uVar2;
   uint uVar3;
   
   memset(&tisp_ae_hist,0,0x42c);
@@ -47569,25 +46910,25 @@ LAB_000642b8:
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_ae_min_max_set(void)
+int tisp_ae_min_max_set(void)
 
 {
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_11;
-  undefined4 param_12;
-  undefined4 param_13;
-  undefined4 param_14;
-  undefined4 param_15;
-  undefined4 param_16;
-  undefined4 param_17;
-  undefined4 param_18;
-  undefined4 param_19;
-  undefined4 param_20;
-  undefined4 param_21;
-  undefined4 param_22;
+  int param_6;
+  int param_7;
+  int param_8;
+  int param_9;
+  int param_11;
+  int param_12;
+  int param_13;
+  int param_14;
+  int param_15;
+  int param_16;
+  int param_17;
+  int param_18;
+  int param_19;
+  int param_20;
+  int param_21;
+  int param_22;
   
   DAT_000d3e80 = param_6;
   DAT_000d3e84 = param_7;
@@ -47611,7 +46952,7 @@ undefined4 tisp_ae_min_max_set(void)
 
 
 
-void tiziano_ae_s_ev_start(undefined4 param_1)
+void tiziano_ae_s_ev_start(int param_1)
 
 {
   ae_ev_init_strict = param_1;
@@ -47621,18 +46962,18 @@ void tiziano_ae_s_ev_start(undefined4 param_1)
 
 
 
-undefined4 tisp_ae_state_get(int param_1)
+int tisp_ae_state_get(int param_1)
 
 {
-  *(undefined4 *)(param_1 + 4) = _ae_stat;
+  *(int *)(param_1 + 4) = _ae_stat;
   *(bool *)param_1 = DAT_000af59c != 0;
-  *(undefined4 *)(param_1 + 8) = DAT_000af5a0;
+  *(int *)(param_1 + 8) = DAT_000af5a0;
   return 0;
 }
 
 
 
-undefined4 tisp_ae_manual_get(void *param_1)
+int tisp_ae_manual_get(void *param_1)
 
 {
   memcpy(param_1,&tisp_ae_ctrls,0x98);
@@ -47641,7 +46982,7 @@ undefined4 tisp_ae_manual_get(void *param_1)
 
 
 
-undefined4 tisp_ae_manual_set(int param_1,uint param_2,uint param_3,undefined4 param_4,uint param_5)
+int tisp_ae_manual_set(int param_1,uint param_2,uint param_3,int param_4,uint param_5)
 
 {
   int param_11;
@@ -47765,10 +47106,10 @@ undefined4 tisp_ae_manual_set(int param_1,uint param_2,uint param_3,undefined4 p
 
 
 
-undefined4 tisp_ae_get_y_zone(void *param_1)
+int tisp_ae_get_y_zone(void *param_1)
 
 {
-  undefined4 local_18 [3];
+  int local_18 [3];
   
   local_18[0] = 0;
   __private_spin_lock_irqsave(0x10000,local_18);
@@ -47784,7 +47125,7 @@ undefined4 tisp_ae_get_y_zone(void *param_1)
 // WARNING: Removing unreachable block (ram,0x00063778)
 // WARNING: Removing unreachable block (ram,0x000637f4)
 
-undefined4 tisp_ae_s_comp(uint param_1)
+int tisp_ae_s_comp(uint param_1)
 
 {
   uint uVar1;
@@ -47815,7 +47156,7 @@ undefined4 tisp_ae_s_comp(uint param_1)
 
 
 
-undefined4 tiziano_ae_dn_params_refresh(void)
+int tiziano_ae_dn_params_refresh(void)
 
 {
   IspAeFlag = 1;
@@ -47879,7 +47220,7 @@ void tisp_ae_g_luma(undefined *param_1)
 void tisp_ae_g_scene_luma(uint *param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   uint uVar3;
   uint uVar4;
@@ -47935,7 +47276,7 @@ void tisp_ae_g_scene_luma(uint *param_1)
 
 
 
-undefined4 tisp_ae0_process_impl(void)
+int tisp_ae0_process_impl(void)
 
 {
   bool bVar1;
@@ -47943,27 +47284,27 @@ undefined4 tisp_ae0_process_impl(void)
   uint uVar3;
   uint uVar4;
   int iVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 *puVar8;
+  int uVar6;
+  int uVar7;
+  int *puVar8;
   int iVar9;
-  undefined4 *puVar10;
+  int *puVar10;
   int iVar11;
   int iVar12;
   int iVar13;
-  undefined4 *puVar14;
-  undefined4 *puVar15;
+  int *puVar14;
+  int *puVar15;
   int iVar16;
   undefined local_148 [216];
   undefined auStack_70 [8];
-  undefined4 local_68;
-  undefined4 local_60;
-  undefined4 local_5c;
+  int local_68;
+  int local_60;
+  int local_5c;
   int local_40;
   int local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 *local_30;
+  int local_38;
+  int local_34;
+  int *local_30;
   int local_2c;
   
   uVar3 = _AePointPos;
@@ -48018,12 +47359,12 @@ undefined4 tisp_ae0_process_impl(void)
     EffectCount0 = uVar7 - iVar12;
   }
   local_2c = 0xb0000;
-  local_30 = (undefined4 *)0xb0000;
+  local_30 = (int *)0xb0000;
   uVar6 = fix_point_mult3_32(uVar3,_ae_reg << (uVar3 & 0x1f),DAT_000cfc60,DAT_000cfc64);
   uVar7 = DAT_000cfc64;
-  *(undefined4 *)((int)local_30 + -0xadc) = uVar6;
+  *(int *)((int)local_30 + -0xadc) = uVar6;
   uVar7 = fix_point_mult2_32(uVar3,DAT_000cfc60,uVar7);
-  *(undefined4 *)(local_2c + -0xb04) = uVar7;
+  *(int *)(local_2c + -0xb04) = uVar7;
   iVar5 = EffectFrame;
   iVar16 = EffectFrame * 4;
   puVar14 = &ag0_cache + EffectFrame;
@@ -48057,15 +47398,15 @@ undefined4 tisp_ae0_process_impl(void)
     iVar13 = 0;
     for (iVar11 = iVar5 + 1; iVar13 = iVar13 + -4, 0 < iVar11; iVar11 = iVar11 + -1) {
       iVar9 = iVar13 + iVar16;
-      *(undefined4 *)(iVar9 + 0xaf52c) = *(undefined4 *)((int)local_30 + -0xadc);
-      *(undefined4 *)(iVar9 + 0xaf504) = *(undefined4 *)(local_2c + -0xb04);
+      *(int *)(iVar9 + 0xaf52c) = *(int *)((int)local_30 + -0xadc);
+      *(int *)(iVar9 + 0xaf504) = *(int *)(local_2c + -0xb04);
     }
     EffectCount0 = iVar5;
     iVar16 = 0;
     bVar2 = false;
     for (; 0 < iVar5; iVar5 = iVar5 + -1) {
-      *(undefined4 *)((int)puVar14 + iVar16) = ag0_cache;
-      *(undefined4 *)((int)puVar15 + iVar16) = dg0_cache;
+      *(int *)((int)puVar14 + iVar16) = ag0_cache;
+      *(int *)((int)puVar15 + iVar16) = dg0_cache;
       iVar16 = iVar16 + -4;
       bVar2 = true;
     }
@@ -48121,7 +47462,7 @@ LAB_0006515c:
 
 
 
-undefined4 tisp_ae0_process(void)
+int tisp_ae0_process(void)
 
 {
   if (ta_custom_en == 0) {
@@ -48136,7 +47477,7 @@ undefined4 tisp_ae0_process(void)
 
 
 
-undefined4 tisp_ae_get_antiflicker_step(void *param_1,undefined4 *param_2)
+int tisp_ae_get_antiflicker_step(void *param_1,int *param_2)
 
 {
   if (_deflicker_para == 1) {
@@ -48149,7 +47490,7 @@ undefined4 tisp_ae_get_antiflicker_step(void *param_1,undefined4 *param_2)
 
 
 
-undefined4 tisp_ae_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_ae_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -48287,10 +47628,10 @@ LAB_000655bc:
 
 
 
-undefined4 tisp_ae_param_array_set(undefined4 param_1,void *param_2,undefined4 *param_3)
+int tisp_ae_param_array_set(int param_1,void *param_2,int *param_3)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   undefined1 *puVar2;
   
   switch(param_1) {
@@ -48437,7 +47778,7 @@ switchD_00065624_caseD_17:
 // WARNING: Removing unreachable block (ram,0x00063778)
 // WARNING: Removing unreachable block (ram,0x000637f4)
 
-undefined4 tisp_ae_trig(void)
+int tisp_ae_trig(void)
 
 {
   uint uVar1;
@@ -48478,55 +47819,55 @@ void tisp_ae_deinit(void)
 void tisp_ae_algo_init(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   
   iVar2 = private_kmalloc(0x42c,0xd0);
   ta_custom_en = param_1;
   if (param_1 == 1) {
-    *(undefined4 *)(param_2 + 8) = 0;
-    *(undefined4 *)(param_2 + 0xc) = DAT_000d3e78;
-    *(undefined4 *)(param_2 + 0x10) = DAT_000d3e70;
+    *(int *)(param_2 + 8) = 0;
+    *(int *)(param_2 + 0xc) = DAT_000d3e78;
+    *(int *)(param_2 + 0x10) = DAT_000d3e70;
     uVar1 = DAT_000d3e7c;
-    *(undefined4 *)(param_2 + 0x14) = 0x400;
-    *(undefined4 *)(param_2 + 0x18) = uVar1;
-    *(undefined4 *)(param_2 + 0x3c) = DAT_000d3eb8;
+    *(int *)(param_2 + 0x14) = 0x400;
+    *(int *)(param_2 + 0x18) = uVar1;
+    *(int *)(param_2 + 0x3c) = DAT_000d3eb8;
     uVar1 = DAT_000d3eb4;
-    *(undefined4 *)(param_2 + 0x44) = 0x400;
-    *(undefined4 *)(param_2 + 0x40) = uVar1;
+    *(int *)(param_2 + 0x44) = 0x400;
+    *(int *)(param_2 + 0x40) = uVar1;
     uVar1 = DAT_000d3ed8;
-    *(undefined4 *)(param_2 + 0x34) = 0x400;
-    *(undefined4 *)(param_2 + 0x48) = uVar1;
+    *(int *)(param_2 + 0x34) = 0x400;
+    *(int *)(param_2 + 0x48) = uVar1;
     uVar1 = DAT_000d3e80;
-    *(undefined4 *)(param_2 + 100) = 0x400;
-    *(undefined4 *)(param_2 + 0x30) = uVar1;
-    *(undefined4 *)(param_2 + 0x2c) = DAT_000d3e88;
-    *(undefined4 *)(param_2 + 0x38) = DAT_000d3e8c;
-    *(undefined4 *)(param_2 + 0x60) = _DAT_000d3ebc;
-    *(undefined4 *)(param_2 + 0x5c) = _DAT_000d3ec0;
-    *(undefined4 *)(param_2 + 0x68) = _DAT_000d3ec8;
+    *(int *)(param_2 + 100) = 0x400;
+    *(int *)(param_2 + 0x30) = uVar1;
+    *(int *)(param_2 + 0x2c) = DAT_000d3e88;
+    *(int *)(param_2 + 0x38) = DAT_000d3e8c;
+    *(int *)(param_2 + 0x60) = _DAT_000d3ebc;
+    *(int *)(param_2 + 0x5c) = _DAT_000d3ec0;
+    *(int *)(param_2 + 0x68) = _DAT_000d3ec8;
     uVar1 = _DAT_000d3edc;
-    *(undefined4 *)(param_2 + 0x24) = 0x400;
-    *(undefined4 *)(param_2 + 0x20) = uVar1;
-    *(undefined4 *)(param_2 + 0x1c) = DAT_000d3ee4;
-    *(undefined4 *)(param_2 + 0x28) = _DAT_000d3ee8;
-    *(undefined4 *)(param_2 + 0x50) = _DAT_000d3eec;
+    *(int *)(param_2 + 0x24) = 0x400;
+    *(int *)(param_2 + 0x20) = uVar1;
+    *(int *)(param_2 + 0x1c) = DAT_000d3ee4;
+    *(int *)(param_2 + 0x28) = _DAT_000d3ee8;
+    *(int *)(param_2 + 0x50) = _DAT_000d3eec;
     uVar1 = _DAT_000d3ef0;
-    *(undefined4 *)(param_2 + 0x54) = 0x400;
-    *(undefined4 *)(param_2 + 0x4c) = uVar1;
-    *(undefined4 *)(param_2 + 0x58) = _DAT_000d3ef8;
+    *(int *)(param_2 + 0x54) = 0x400;
+    *(int *)(param_2 + 0x4c) = uVar1;
+    *(int *)(param_2 + 0x58) = _DAT_000d3ef8;
     tisp_ae_get_hist_custome(iVar2);
-    *(char *)(param_2 + 0x70) = (char)*(undefined4 *)(iVar2 + 0x414);
-    *(char *)(param_2 + 0x71) = (char)*(undefined4 *)(iVar2 + 0x418);
-    *(char *)(param_2 + 0x72) = (char)*(undefined4 *)(iVar2 + 0x41c);
-    *(char *)(param_2 + 0x73) = (char)*(undefined4 *)(iVar2 + 0x420);
-    *(short *)(param_2 + 0x74) = (short)*(undefined4 *)(iVar2 + 0x400);
-    *(short *)(param_2 + 0x76) = (short)*(undefined4 *)(iVar2 + 0x404);
-    *(short *)(param_2 + 0x78) = (short)*(undefined4 *)(iVar2 + 0x408);
-    *(short *)(param_2 + 0x7a) = (short)*(undefined4 *)(iVar2 + 0x40c);
-    *(short *)(param_2 + 0x7c) = (short)*(undefined4 *)(iVar2 + 0x410);
-    *(char *)(param_2 + 0x7e) = (char)*(undefined4 *)(iVar2 + 0x424);
-    *(char *)(param_2 + 0x7f) = (char)*(undefined4 *)(iVar2 + 0x428);
+    *(char *)(param_2 + 0x70) = (char)*(int *)(iVar2 + 0x414);
+    *(char *)(param_2 + 0x71) = (char)*(int *)(iVar2 + 0x418);
+    *(char *)(param_2 + 0x72) = (char)*(int *)(iVar2 + 0x41c);
+    *(char *)(param_2 + 0x73) = (char)*(int *)(iVar2 + 0x420);
+    *(short *)(param_2 + 0x74) = (short)*(int *)(iVar2 + 0x400);
+    *(short *)(param_2 + 0x76) = (short)*(int *)(iVar2 + 0x404);
+    *(short *)(param_2 + 0x78) = (short)*(int *)(iVar2 + 0x408);
+    *(short *)(param_2 + 0x7a) = (short)*(int *)(iVar2 + 0x40c);
+    *(short *)(param_2 + 0x7c) = (short)*(int *)(iVar2 + 0x410);
+    *(char *)(param_2 + 0x7e) = (char)*(int *)(iVar2 + 0x424);
+    *(char *)(param_2 + 0x7f) = (char)*(int *)(iVar2 + 0x428);
   }
   private_kfree(iVar2);
   return;
@@ -48539,10 +47880,10 @@ void tisp_ae_algo_handle(int param_1)
 {
   int *piVar1;
   int iVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  int uVar3;
+  int uVar4;
   uint uVar5;
-  undefined4 uVar6;
+  int uVar6;
   uint uVar7;
   uint uVar8;
   code *pcVar9;
@@ -48555,17 +47896,17 @@ void tisp_ae_algo_handle(int param_1)
   undefined2 local_13e;
   undefined2 local_13c;
   undefined auStack_f8 [8];
-  undefined4 local_f0;
-  undefined4 local_e8;
-  undefined4 local_e4;
+  int local_f0;
+  int local_e8;
+  int local_e4;
   undefined auStack_c8 [8];
-  undefined4 local_c0;
-  undefined4 local_b8;
-  undefined4 local_b4;
+  int local_c0;
+  int local_b8;
+  int local_b4;
   undefined auStack_98 [8];
-  undefined4 local_90;
+  int local_90;
   int local_88;
-  undefined4 local_84;
+  int local_84;
   undefined2 local_68 [7];
   undefined2 local_5a;
   code *local_50;
@@ -48574,7 +47915,7 @@ void tisp_ae_algo_handle(int param_1)
   code *local_44;
   code *local_40;
   code *local_3c;
-  undefined4 local_38;
+  int local_38;
   code *local_34;
   code *local_30;
   code *local_2c;
@@ -48591,7 +47932,7 @@ void tisp_ae_algo_handle(int param_1)
   local_34 = (code *)sensor_ctrl._140_4_;
   local_48 = *(code **)(param_1 + 0x1c);
   local_50 = *(code **)(param_1 + 0x20);
-  local_38 = *(undefined4 *)(param_1 + 0x2c);
+  local_38 = *(int *)(param_1 + 0x2c);
   iVar2 = (*(code *)sensor_ctrl._112_4_)(local_30,auStack_14e);
   if (local_30 != (code *)iVar2) {
     uVar3 = fix_point_mult2_32(10,iVar10,(int)local_30 << 10);
@@ -48607,7 +47948,7 @@ void tisp_ae_algo_handle(int param_1)
   uVar11 = uVar5 >> 6;
   (*(code *)uVar6)(local_68[0],local_68);
   DAT_000d3e74 = 0x400;
-  uVar4 = fix_point_mult2_32(10,*(undefined4 *)(param_1 + 0x14),*(undefined4 *)(param_1 + 0x18));
+  uVar4 = fix_point_mult2_32(10,*(int *)(param_1 + 0x14),*(int *)(param_1 + 0x18));
   uVar6 = fix_point_mult2_32(10,uVar11,0x400);
   uVar4 = fix_point_div_32(10,uVar4,uVar6);
   uVar7 = fix_point_mult2_32(10,local_48,uVar4);
@@ -48649,7 +47990,7 @@ void tisp_ae_algo_handle(int param_1)
     uVar7 = uVar7 >> 6;
     (*local_34)(local_5a,local_68);
     DAT_000d3ed0 = 0x400;
-    uVar4 = fix_point_mult2_32(10,*(undefined4 *)(param_1 + 0x24),*(undefined4 *)(param_1 + 0x28));
+    uVar4 = fix_point_mult2_32(10,*(int *)(param_1 + 0x24),*(int *)(param_1 + 0x28));
     uVar6 = fix_point_mult2_32(10,uVar7,0x400);
     uVar4 = fix_point_div_32(10,uVar4,uVar6);
     uVar8 = fix_point_mult2_32(10,local_38,uVar4);
@@ -48727,12 +48068,12 @@ void tisp_af_get_statistics(uint *param_1,int param_2,int param_3)
 
 
 
-void Tiziano_af_fpga(int param_1,int param_2,int param_3,int param_4,int param_5,undefined4 param_6,
-                    undefined4 param_7,int param_8,int *param_9,int param_10,int *param_11)
+void Tiziano_af_fpga(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,
+                    int param_7,int param_8,int *param_9,int param_10,int *param_11)
 
 {
-  undefined4 *puVar1;
-  undefined4 *puVar2;
+  int *puVar1;
+  int *puVar2;
   uint uVar3;
   int iVar4;
   int iVar5;
@@ -48747,7 +48088,7 @@ void Tiziano_af_fpga(int param_1,int param_2,int param_3,int param_4,int param_5
   int iVar14;
   uint uVar15;
   uint uVar16;
-  undefined4 local_88 [2];
+  int local_88 [2];
   int local_80;
   int local_7c;
   uint local_78;
@@ -48839,12 +48180,12 @@ void Tiziano_af_fpga(int param_1,int param_2,int param_3,int param_4,int param_5
   uVar3 = (uint)(iVar5 + iVar6) >> (uVar9 & 0x1f);
   iVar5 = fix_point_mult2_32(uVar9,(uVar8 >> 3) << (uVar9 & 0x1f),iVar13);
   iVar6 = fix_point_mult2_32(uVar9,(uVar7 >> 3) << (uVar9 & 0x1f),iVar12);
-  puVar1 = (undefined4 *)(local_70 + 4);
+  puVar1 = (int *)(local_70 + 4);
   do {
     puVar2 = puVar1 + 1;
     puVar1[-1] = *puVar1;
     puVar1 = puVar2;
-  } while ((undefined4 *)(local_70 + 0x3c) != puVar2);
+  } while ((int *)(local_70 + 0x3c) != puVar2);
   *(uint *)(local_70 + 0x38) = uVar3;
   local_80 = local_80 * local_7c;
   *local_74 = uVar15 * local_80;
@@ -48858,7 +48199,7 @@ void Tiziano_af_fpga(int param_1,int param_2,int param_3,int param_4,int param_5
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_af_process_impl(void)
+int tisp_af_process_impl(void)
 
 {
   uint uVar1;
@@ -48885,7 +48226,7 @@ undefined4 tisp_af_process_impl(void)
 
 
 
-undefined4 af_interrupt_static(void)
+int af_interrupt_static(void)
 
 {
   int iVar1;
@@ -48899,7 +48240,7 @@ undefined4 af_interrupt_static(void)
 
 
 
-undefined4 tiziano_af_params_refresh(void)
+int tiziano_af_params_refresh(void)
 
 {
   memcpy(&stAFParam_Zone,&DAT_000a603c,0x90);
@@ -48929,7 +48270,7 @@ undefined4 tiziano_af_params_refresh(void)
 void tiziano_af_dump(void)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   isp_printf(2,"-----af regs dump-----\n");
   uVar1 = system_reg_read(0xb804);
@@ -49019,7 +48360,7 @@ void tiziano_af_dump(void)
 
 
 
-void system_reg_write_af(int param_1,undefined4 param_2,undefined4 param_3)
+void system_reg_write_af(int param_1,int param_2,int param_3)
 
 {
   if (param_1 == 1) {
@@ -49033,11 +48374,11 @@ void system_reg_write_af(int param_1,undefined4 param_2,undefined4 param_3)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_af_set_hardware_param(void)
+int tiziano_af_set_hardware_param(void)
 
 {
   uint uVar1;
-  undefined4 *puVar2;
+  int *puVar2;
   
   DAT_000b0c68 = (DAT_000d5cec - 0xfU) / DAT_000b0c64;
   if ((DAT_000b0c68 & 1) != 0) {
@@ -49128,7 +48469,7 @@ undefined4 tiziano_af_set_hardware_param(void)
 
 
 
-undefined4 tiziano_af_init(undefined4 param_1,undefined4 param_2)
+int tiziano_af_init(int param_1,int param_2)
 
 {
   af_first = 0;
@@ -49156,7 +48497,7 @@ undefined4 tiziano_af_init(undefined4 param_1,undefined4 param_2)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_af_get_metric(uint *param_1)
+int tisp_af_get_metric(uint *param_1)
 
 {
   *param_1 = _DAT_000d5d00 >> (af_attr[17] & 0x1f);
@@ -49167,10 +48508,10 @@ undefined4 tisp_af_get_metric(uint *param_1)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_af_get_attr(uint *param_1)
+int tisp_af_get_attr(uint *param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   byte bVar2;
   
   *param_1 = _DAT_000d5d00 >> (af_attr[17] & 0x1f);
@@ -49236,11 +48577,11 @@ undefined4 tisp_af_get_attr(uint *param_1)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_af_set_attr_refresh(void)
+int tisp_af_set_attr_refresh(void)
 
 {
   uint uVar1;
-  undefined4 *puVar2;
+  int *puVar2;
   
   AF_Enable = af_attr[16];
   DAT_000b0c38 = (uint)af_attr[33];
@@ -49374,14 +48715,14 @@ undefined4 tisp_af_set_attr_refresh(void)
 
 
 
-undefined4
-tisp_af_set_attr(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+int
+tisp_af_set_attr(int param_1,int param_2,int param_3,int param_4)
 
 {
-  undefined4 local_res0;
-  undefined4 local_res4;
-  undefined4 local_res8;
-  undefined4 local_resc;
+  int local_res0;
+  int local_res4;
+  int local_res8;
+  int local_resc;
   
   af_first = 0;
   local_res0 = param_1;
@@ -49398,11 +48739,11 @@ tisp_af_set_attr(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefi
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_af_dn_params_refresh(void)
+int tiziano_af_dn_params_refresh(void)
 
 {
   uint uVar1;
-  undefined4 *puVar2;
+  int *puVar2;
   
   af_first = 0;
   tiziano_af_params_refresh();
@@ -49495,7 +48836,7 @@ undefined4 tiziano_af_dn_params_refresh(void)
 
 
 
-undefined4 tisp_af_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_af_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -49584,7 +48925,7 @@ LAB_00067cd4:
 
 
 
-undefined4 tisp_af_param_array_set(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_af_param_array_set(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__dest;
@@ -49683,7 +49024,7 @@ void tisp_af_get_zone(void *param_1)
 
 
 
-undefined4 tisp_ydns_param_cfg(void)
+int tisp_ydns_param_cfg(void)
 
 {
   system_reg_write(0x7af0,ydns_mv_thres1_intp << 8 | ydns_mv_thres2_intp << 0x10 |
@@ -49699,7 +49040,7 @@ undefined4 tisp_ydns_param_cfg(void)
 
 
 
-undefined4 tisp_ydns_intp(uint param_1)
+int tisp_ydns_intp(uint param_1)
 
 {
   int iVar1;
@@ -49725,7 +49066,7 @@ undefined4 tisp_ydns_intp(uint param_1)
 
 
 
-undefined4 tisp_ydns_all_reg_refresh(void)
+int tisp_ydns_all_reg_refresh(void)
 
 {
   tisp_ydns_intp();
@@ -49735,7 +49076,7 @@ undefined4 tisp_ydns_all_reg_refresh(void)
 
 
 
-undefined4 tisp_ydns_intp_reg_refresh(void)
+int tisp_ydns_intp_reg_refresh(void)
 
 {
   tisp_ydns_intp();
@@ -49745,7 +49086,7 @@ undefined4 tisp_ydns_intp_reg_refresh(void)
 
 
 
-undefined4 tisp_ydns_par_refresh(uint param_1)
+int tisp_ydns_par_refresh(uint param_1)
 
 {
   uint uVar1;
@@ -49766,7 +49107,7 @@ undefined4 tisp_ydns_par_refresh(uint param_1)
 
 
 
-undefined4 tisp_ydns_gain_update(undefined4 param_1)
+int tisp_ydns_gain_update(int param_1)
 
 {
   tisp_ydns_par_refresh(param_1,0x100);
@@ -49775,7 +49116,7 @@ undefined4 tisp_ydns_gain_update(undefined4 param_1)
 
 
 
-undefined4 tiziano_ydns_params_refresh(void)
+int tiziano_ydns_params_refresh(void)
 
 {
   memcpy(&ydns_edge_out_array,&DAT_000a6a00,4);
@@ -49798,7 +49139,7 @@ undefined4 tiziano_ydns_params_refresh(void)
 
 
 
-undefined4 tiziano_ydns_dn_params_refresh(void)
+int tiziano_ydns_dn_params_refresh(void)
 
 {
   ydns_gain_old = ydns_gain_old + 0x200;
@@ -49809,7 +49150,7 @@ undefined4 tiziano_ydns_dn_params_refresh(void)
 
 
 
-undefined4 tiziano_ydns_init(void)
+int tiziano_ydns_init(void)
 
 {
   ydns_gain_old = 0xffffffff;
@@ -49820,7 +49161,7 @@ undefined4 tiziano_ydns_init(void)
 
 
 
-undefined4 tisp_ydns_refresh(undefined4 param_1)
+int tisp_ydns_refresh(int param_1)
 
 {
   tisp_ydns_par_refresh(param_1,0x100);
@@ -49829,7 +49170,7 @@ undefined4 tisp_ydns_refresh(undefined4 param_1)
 
 
 
-undefined4 tisp_ydns_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_ydns_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -49895,10 +49236,10 @@ LAB_00068620:
 
 
 
-undefined4 tisp_ydns_param_array_set(undefined4 param_1,void *param_2,undefined4 *param_3)
+int tisp_ydns_param_array_set(int param_1,void *param_2,int *param_3)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   undefined1 *__dest;
   
   switch(param_1) {
@@ -49963,7 +49304,7 @@ LAB_000687dc:
 
 
 
-undefined4 tisp_rdns_intp(uint param_1)
+int tisp_rdns_intp(uint param_1)
 
 {
   int iVar1;
@@ -49988,7 +49329,7 @@ undefined4 tisp_rdns_intp(uint param_1)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_rdns_awb_gain_par_cfg(void)
+int tisp_rdns_awb_gain_par_cfg(void)
 
 {
   system_reg_write(0x3000,_DAT_000d69a4 << 0x10 | rdns_awb_gain_par_cfg_array);
@@ -50000,7 +49341,7 @@ undefined4 tisp_rdns_awb_gain_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_rdns_opt_cfg(void)
+int tisp_rdns_opt_cfg(void)
 
 {
   system_reg_write(0x3008,_DAT_000d696c << 2 | DAT_000d6970 << 4 | rdns_opt_cfg_array |
@@ -50012,7 +49353,7 @@ undefined4 tisp_rdns_opt_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_rdns_slope_cfg(void)
+int tisp_rdns_slope_cfg(void)
 
 {
   system_reg_write(0x300c,rdns_out_opt_array << 0x10 | rdns_gray_stren_intp);
@@ -50022,7 +49363,7 @@ undefined4 tisp_rdns_slope_cfg(void)
 
 
 
-undefined4 tisp_rdns_thres_par_cfg(void)
+int tisp_rdns_thres_par_cfg(void)
 
 {
   system_reg_write(0x3014,rdns_gray_std_thres_intp);
@@ -50037,7 +49378,7 @@ undefined4 tisp_rdns_thres_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_rdns_gray_np_par_cfg(void)
+int tisp_rdns_gray_np_par_cfg(void)
 
 {
   system_reg_write(0x3028,_DAT_000d67dc << 0x10 | rdns_gray_np_array);
@@ -50051,7 +49392,7 @@ undefined4 tisp_rdns_gray_np_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_rdns_text_np_par_cfg(void)
+int tisp_rdns_text_np_par_cfg(void)
 
 {
   system_reg_write(0x3038,_DAT_000d679c << 0x10 | rdns_text_np_array);
@@ -50069,7 +49410,7 @@ undefined4 tisp_rdns_text_np_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_rdns_lum_np_par_cfg(void)
+int tisp_rdns_lum_np_par_cfg(void)
 
 {
   system_reg_write(0x3058,_DAT_000d675c << 0x10 | rdns_lum_np_array);
@@ -50087,7 +49428,7 @@ undefined4 tisp_rdns_lum_np_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_rdns_std_np_par_cfg(void)
+int tisp_rdns_std_np_par_cfg(void)
 
 {
   system_reg_write(0x3078,_DAT_000d671c << 0x10 | rdns_std_np_array);
@@ -50105,7 +49446,7 @@ undefined4 tisp_rdns_std_np_par_cfg(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_rdns_sl_par_cfg(void)
+int tisp_rdns_sl_par_cfg(void)
 
 {
   system_reg_write(0x30a8,_DAT_000d66f0 << 6 | rdns_sl_par_cfg | rdns_mv_text_thres_intp << 0x10);
@@ -50114,7 +49455,7 @@ undefined4 tisp_rdns_sl_par_cfg(void)
 
 
 
-undefined4 tisp_rdns_awb_gain_updata(uint param_1,uint param_2)
+int tisp_rdns_awb_gain_updata(uint param_1,uint param_2)
 
 {
   uint uVar1;
@@ -50124,7 +49465,7 @@ undefined4 tisp_rdns_awb_gain_updata(uint param_1,uint param_2)
   uVar1 = fix_point_div_32(6,1,param_1 >> 4);
   iVar2 = fix_point_div_32(6,1,param_2 >> 4);
   system_reg_write(0x3004,iVar2 << 0x10 | uVar1);
-  *(undefined4 *)(*(int *)(ispcore_sd + 0xb8) + 0x30ac) = 1;
+  *(int *)(*(int *)(ispcore_sd + 0xb8) + 0x30ac) = 1;
   return 0;
 }
 
@@ -50148,7 +49489,7 @@ void tisp_rdns_wdr_en(int param_1)
 
 
 
-undefined4 tisp_rdns_all_reg_refresh(void)
+int tisp_rdns_all_reg_refresh(void)
 
 {
   tisp_rdns_intp();
@@ -50167,7 +49508,7 @@ undefined4 tisp_rdns_all_reg_refresh(void)
 
 
 
-undefined4 tisp_rdns_intp_reg_refresh(void)
+int tisp_rdns_intp_reg_refresh(void)
 
 {
   tisp_rdns_intp();
@@ -50180,7 +49521,7 @@ undefined4 tisp_rdns_intp_reg_refresh(void)
 
 
 
-undefined4 tisp_rdns_par_refresh(uint param_1,undefined4 param_2,int param_3)
+int tisp_rdns_par_refresh(uint param_1,int param_2,int param_3)
 
 {
   code *pcVar1;
@@ -50208,7 +49549,7 @@ LAB_00069190:
 
 
 
-undefined4 tisp_rdns_gain_update(undefined4 param_1)
+int tisp_rdns_gain_update(int param_1)
 
 {
   tisp_rdns_par_refresh(param_1,0x100,1);
@@ -50217,7 +49558,7 @@ undefined4 tisp_rdns_gain_update(undefined4 param_1)
 
 
 
-undefined4 tiziano_rdns_params_refresh(void)
+int tiziano_rdns_params_refresh(void)
 
 {
   memcpy(&rdns_out_opt_array,&DAT_000a7928,4);
@@ -50246,7 +49587,7 @@ undefined4 tiziano_rdns_params_refresh(void)
 
 
 
-undefined4 tiziano_rdns_init(void)
+int tiziano_rdns_init(void)
 
 {
   undefined1 *puVar1;
@@ -50266,7 +49607,7 @@ undefined4 tiziano_rdns_init(void)
 
 
 
-undefined4 tisp_rdns_refresh(undefined4 param_1)
+int tisp_rdns_refresh(int param_1)
 
 {
   tisp_rdns_par_refresh(param_1,0x100,1);
@@ -50275,7 +49616,7 @@ undefined4 tisp_rdns_refresh(undefined4 param_1)
 
 
 
-undefined4 tiziano_rdns_dn_params_refresh(void)
+int tiziano_rdns_dn_params_refresh(void)
 
 {
   tiziano_rdns_params_refresh();
@@ -50285,7 +49626,7 @@ undefined4 tiziano_rdns_dn_params_refresh(void)
 
 
 
-undefined4 tisp_rdns_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_rdns_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -50376,12 +49717,12 @@ LAB_0006966c:
 
 
 
-undefined4 tisp_rdns_param_array_set(undefined4 param_1,void *param_2,undefined4 *param_3)
+int tisp_rdns_param_array_set(int param_1,void *param_2,int *param_3)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   undefined1 *__dest;
-  undefined4 *puVar2;
+  int *puVar2;
   
   switch(param_1) {
   case 0x432:
@@ -50471,7 +49812,7 @@ LAB_000698c0:
 
 
 
-undefined4 tiziano_wdr_fusion1_curve(void)
+int tiziano_wdr_fusion1_curve(void)
 
 {
   bool bVar1;
@@ -51713,7 +51054,7 @@ LAB_0006b00c:
 
 
 
-undefined4 tiziano_wdr_fusion1_curve_block_mean1(void)
+int tiziano_wdr_fusion1_curve_block_mean1(void)
 
 {
   bool bVar1;
@@ -52869,7 +52210,7 @@ LAB_0006c5ac:
 
 
 
-undefined4 tisp_wdr_rx_ae0_infm(void *param_1,void *param_2)
+int tisp_wdr_rx_ae0_infm(void *param_1,void *param_2)
 
 {
   memcpy(wdr_hist_Y0,param_1,4);
@@ -52879,7 +52220,7 @@ undefined4 tisp_wdr_rx_ae0_infm(void *param_1,void *param_2)
 
 
 
-undefined4 tisp_wdr_rx_ae1_infm(void *param_1,void *param_2)
+int tisp_wdr_rx_ae1_infm(void *param_1,void *param_2)
 
 {
   memcpy(wdr_hist_Y1,param_1,0x400);
@@ -52889,7 +52230,7 @@ undefined4 tisp_wdr_rx_ae1_infm(void *param_1,void *param_2)
 
 
 
-undefined4 tisp_wdr_rx_ae0_dms(int *param_1,int *param_2,int *param_3,int param_4)
+int tisp_wdr_rx_ae0_dms(int *param_1,int *param_2,int *param_3,int param_4)
 
 {
   int *piVar1;
@@ -52927,7 +52268,7 @@ undefined4 tisp_wdr_rx_ae0_dms(int *param_1,int *param_2,int *param_3,int param_
 
 
 
-undefined4 tisp_wdr_rx_ae1_dms(void)
+int tisp_wdr_rx_ae1_dms(void)
 
 {
   return 0;
@@ -52935,7 +52276,7 @@ undefined4 tisp_wdr_rx_ae1_dms(void)
 
 
 
-undefined4 tisp_wdr_expTime_updata(void)
+int tisp_wdr_expTime_updata(void)
 
 {
   param_ratioPara_software_in_array = DAT_000d3eb8 * DAT_000d3eb4 + 0x200U >> 10;
@@ -52945,7 +52286,7 @@ undefined4 tisp_wdr_expTime_updata(void)
 
 
 
-undefined4 tisp_wdr_ev_update(uint param_1,int param_2)
+int tisp_wdr_ev_update(uint param_1,int param_2)
 
 {
   wdr_ev_now = param_2 << 0x16 | param_1 >> 10;
@@ -52962,7 +52303,7 @@ undefined4 tisp_wdr_ev_update(uint param_1,int param_2)
 
 
 
-undefined4 tisp_wdr_ev_calculate(void)
+int tisp_wdr_ev_calculate(void)
 
 {
   bool bVar1;
@@ -53329,7 +52670,7 @@ void tiziano_wdr_get_data(uint *param_1)
 
 
 
-undefined4 tiziano_wdr_interrupt_static(void)
+int tiziano_wdr_interrupt_static(void)
 
 {
   int iVar1;
@@ -53341,7 +52682,7 @@ undefined4 tiziano_wdr_interrupt_static(void)
   undefined2 *puVar7;
   int iVar8;
   undefined auStack_58 [8];
-  undefined4 local_50;
+  int local_50;
   
   iVar1 = system_reg_read(0x2680);
   iVar8 = 0;
@@ -53375,13 +52716,13 @@ undefined4 tiziano_wdr_interrupt_static(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_wdr_algorithm(void)
+int tiziano_wdr_algorithm(void)
 
 {
   bool bVar1;
   bool bVar2;
   bool bVar3;
-  undefined4 *puVar4;
+  int *puVar4;
   uint uVar5;
   uint *puVar6;
   uint uVar7;
@@ -53521,7 +52862,7 @@ undefined4 tiziano_wdr_algorithm(void)
   DAT_000b0ea4 = DAT_000b0e98;
   DAT_000b0eb0 = DAT_000b0e98;
   do {
-    puVar4 = (undefined4 *)((int)&wdr_block_mean1_max + iVar14);
+    puVar4 = (int *)((int)&wdr_block_mean1_max + iVar14);
     iVar14 = iVar14 + 4;
     *puVar4 = 0;
     uVar17 = _DAT_000d8ce8;
@@ -53537,8 +52878,8 @@ undefined4 tiziano_wdr_algorithm(void)
       iVar15 = 0;
       do {
         iVar16 = iVar15 + 4;
-        *(undefined4 *)((int)&DAT_000d69d0 + iVar15) =
-             *(undefined4 *)((int)&wdr_block_mean1 + iVar15);
+        *(int *)((int)&DAT_000d69d0 + iVar15) =
+             *(int *)((int)&wdr_block_mean1 + iVar15);
         iVar15 = iVar16;
         wdr_block_mean1_max = uVar7;
       } while (iVar16 != 0x1c);
@@ -53547,7 +52888,7 @@ undefined4 tiziano_wdr_algorithm(void)
       iVar15 = 0;
       do {
         iVar16 = iVar15 + 4;
-        *(undefined4 *)((int)&DAT_000d69d4 + iVar15) = *(undefined4 *)((int)&DAT_000d8cd4 + iVar15);
+        *(int *)((int)&DAT_000d69d4 + iVar15) = *(int *)((int)&DAT_000d8cd4 + iVar15);
         iVar15 = iVar16;
         DAT_000d69d0 = uVar7;
       } while (iVar16 != 0x18);
@@ -53556,7 +52897,7 @@ undefined4 tiziano_wdr_algorithm(void)
       iVar15 = 0;
       do {
         iVar16 = iVar15 + 4;
-        *(undefined4 *)((int)&DAT_000d69d8 + iVar15) = *(undefined4 *)((int)&DAT_000d8cd8 + iVar15);
+        *(int *)((int)&DAT_000d69d8 + iVar15) = *(int *)((int)&DAT_000d8cd8 + iVar15);
         iVar15 = iVar16;
         DAT_000d69d4 = uVar7;
       } while (iVar16 != 0x14);
@@ -53633,7 +52974,7 @@ LAB_0006d878:
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_wdr_soft_para_out(void)
+int tiziano_wdr_soft_para_out(void)
 
 {
   system_reg_write(0x2604,(wdr_para_array5 & 0x1fff) << 0x10 | wdr_para_array4 & 0x1fff);
@@ -53848,7 +53189,7 @@ undefined4 tiziano_wdr_soft_para_out(void)
 
 
 
-undefined4 tisp_wdr_process(void)
+int tisp_wdr_process(void)
 
 {
   tiziano_wdr_algorithm();
@@ -53896,7 +53237,7 @@ int tiziano_wdr_5x5_param_distance(int param_1,int param_2,int param_3,int param
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_wdr_5x5_param(void)
+int tiziano_wdr_5x5_param(void)
 
 {
   longlong lVar1;
@@ -53912,7 +53253,7 @@ undefined4 tiziano_wdr_5x5_param(void)
   uint *puVar11;
   int iVar12;
   int *piVar13;
-  undefined4 *puVar14;
+  int *puVar14;
   code *pcVar15;
   int iVar16;
   int iVar17;
@@ -53922,21 +53263,21 @@ undefined4 tiziano_wdr_5x5_param(void)
   uint uVar21;
   int local_c0 [32];
   undefined8 local_40;
-  undefined4 *local_38;
+  int *local_38;
   int local_34;
   int local_30;
   
   memcpy(local_c0,&DAT_0007d610,0x7c);
   iVar2 = 0;
   do {
-    *(undefined4 *)((int)&wdr_lut7_counter + iVar2) = 0;
-    *(undefined4 *)((int)&wdr_lut8_counter + iVar2) = 0;
-    *(undefined4 *)((int)&wdr_lut12_counter + iVar2) = 0;
-    *(undefined4 *)((int)&wdr_lut1_value_sum + iVar2) = 0;
-    *(undefined4 *)((int)&wdr_lut2_value_sum + iVar2) = 0;
-    *(undefined4 *)((int)&wdr_lut3_value_sum + iVar2) = 0;
-    *(undefined4 *)((int)&wdr_lut6_value_sum + iVar2) = 0;
-    puVar14 = (undefined4 *)((int)&wdr_lut11_value_sum + iVar2);
+    *(int *)((int)&wdr_lut7_counter + iVar2) = 0;
+    *(int *)((int)&wdr_lut8_counter + iVar2) = 0;
+    *(int *)((int)&wdr_lut12_counter + iVar2) = 0;
+    *(int *)((int)&wdr_lut1_value_sum + iVar2) = 0;
+    *(int *)((int)&wdr_lut2_value_sum + iVar2) = 0;
+    *(int *)((int)&wdr_lut3_value_sum + iVar2) = 0;
+    *(int *)((int)&wdr_lut6_value_sum + iVar2) = 0;
+    puVar14 = (int *)((int)&wdr_lut11_value_sum + iVar2);
     iVar2 = iVar2 + 4;
     *puVar14 = 0;
     local_38 = &wdr_lut7_counter;
@@ -54059,14 +53400,14 @@ undefined4 tiziano_wdr_5x5_param(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_wdr_params_init(void)
+int tiziano_wdr_params_init(void)
 
 {
   int iVar1;
   int iVar2;
   int iVar3;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
+  int *puVar4;
+  int *puVar5;
   int *piVar6;
   
   if (param_wdr_tool_control_array == 1) {
@@ -54075,7 +53416,7 @@ undefined4 tiziano_wdr_params_init(void)
     DAT_000b1c30 = 0;
     iVar1 = 0;
     do {
-      puVar4 = (undefined4 *)((int)&param_fusion1_cure_y_array + iVar1);
+      puVar4 = (int *)((int)&param_fusion1_cure_y_array + iVar1);
       iVar1 = iVar1 + 4;
       *puVar4 = 0x100;
     } while (iVar1 != 0x84);
@@ -54088,7 +53429,7 @@ undefined4 tiziano_wdr_params_init(void)
       DAT_000b1c30 = 0;
       iVar1 = 0;
       do {
-        puVar4 = (undefined4 *)((int)&param_fusion1_cure_y_array + iVar1);
+        puVar4 = (int *)((int)&param_fusion1_cure_y_array + iVar1);
         iVar1 = iVar1 + 4;
         *puVar4 = 0x100;
       } while (iVar1 != 0x84);
@@ -54100,7 +53441,7 @@ undefined4 tiziano_wdr_params_init(void)
       DAT_000b1c30 = 0;
       iVar1 = 0;
       do {
-        puVar4 = (undefined4 *)((int)&param_fusion1_cure_y_array + iVar1);
+        puVar4 = (int *)((int)&param_fusion1_cure_y_array + iVar1);
         iVar1 = iVar1 + 4;
         *puVar4 = 0x100;
       } while (iVar1 != 0x84);
@@ -54113,8 +53454,8 @@ undefined4 tiziano_wdr_params_init(void)
         DAT_000b1c30 = 0;
         iVar1 = 0;
         do {
-          puVar5 = (undefined4 *)((int)&fusion1_cure_y_tmp + iVar1);
-          puVar4 = (undefined4 *)((int)&param_fusion1_cure_y_array + iVar1);
+          puVar5 = (int *)((int)&fusion1_cure_y_tmp + iVar1);
+          puVar4 = (int *)((int)&param_fusion1_cure_y_array + iVar1);
           iVar1 = iVar1 + 4;
           *puVar4 = *puVar5;
         } while (iVar1 != 0x84);
@@ -54145,8 +53486,8 @@ LAB_0006f8f0:
   else if (DAT_000b0e68 == 9) {
     iVar1 = 0;
     do {
-      puVar5 = (undefined4 *)((int)&fusion1_cure_y_tmp + iVar1);
-      puVar4 = (undefined4 *)((int)&param_fusion1_cure_y_array + iVar1);
+      puVar5 = (int *)((int)&fusion1_cure_y_tmp + iVar1);
+      puVar4 = (int *)((int)&param_fusion1_cure_y_array + iVar1);
       iVar1 = iVar1 + 4;
       *puVar4 = *puVar5;
     } while (iVar1 != 0x84);
@@ -54155,8 +53496,8 @@ LAB_0006f8f0:
   if (DAT_000b0e74 == 0) {
     iVar1 = 0;
     do {
-      puVar5 = (undefined4 *)((int)&wdr_gam_y33_array + iVar1);
-      puVar4 = (undefined4 *)((int)&param_wdr_gam_y_array_def + iVar1);
+      puVar5 = (int *)((int)&wdr_gam_y33_array + iVar1);
+      puVar4 = (int *)((int)&param_wdr_gam_y_array_def + iVar1);
       iVar1 = iVar1 + 4;
       *puVar4 = *puVar5;
     } while (iVar1 != 0x84);
@@ -54244,16 +53585,16 @@ LAB_0006f8f0:
 
 
 
-undefined4 tiziano_wdr_gamma_refresh(void)
+int tiziano_wdr_gamma_refresh(void)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   ushort *puVar2;
   int *piVar3;
   int iVar4;
-  undefined4 *puVar5;
+  int *puVar5;
   uint *puVar6;
-  undefined4 *puVar7;
+  int *puVar7;
   int local_10 [2];
   
   local_10[0] = 0;
@@ -54270,8 +53611,8 @@ undefined4 tiziano_wdr_gamma_refresh(void)
     if (DAT_000b0e74 == 0) {
       iVar4 = 0;
       do {
-        puVar7 = (undefined4 *)((int)&wdr_gam_y33_array + iVar4);
-        puVar5 = (undefined4 *)((int)&param_wdr_gam_y_array_def + iVar4);
+        puVar7 = (int *)((int)&wdr_gam_y33_array + iVar4);
+        puVar5 = (int *)((int)&param_wdr_gam_y_array_def + iVar4);
         iVar4 = iVar4 + 4;
         *puVar5 = *puVar7;
       } while (iVar4 != 0x84);
@@ -54301,14 +53642,14 @@ undefined4 tiziano_wdr_gamma_refresh(void)
 
 
 
-undefined4 tiziano_wdr_params_refresh(void)
+int tiziano_wdr_params_refresh(void)
 
 {
   bool bVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  int *puVar2;
+  int *puVar3;
   int iVar4;
-  undefined4 local_40 [14];
+  int local_40 [14];
   
   memcpy(&param_wdr_para_array,&DAT_000a6d04,0x28);
   memcpy(&param_wdr_gam_y_array,&DAT_000a6fac,0x84);
@@ -54379,7 +53720,7 @@ undefined4 tiziano_wdr_params_refresh(void)
 
 
 
-undefined4 tiziano_wdr_dn_params_refresh(void)
+int tiziano_wdr_dn_params_refresh(void)
 
 {
   tiziano_wdr_params_refresh();
@@ -54390,7 +53731,7 @@ undefined4 tiziano_wdr_dn_params_refresh(void)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tiziano_wdr_init(uint param_1,uint param_2)
+int tiziano_wdr_init(uint param_1,uint param_2)
 
 {
   int iVar1;
@@ -54614,7 +53955,7 @@ LAB_000709b4:
 
 
 
-undefined4 tisp_wdr_param_array_get(undefined4 param_1,void *param_2,size_t *param_3)
+int tisp_wdr_param_array_get(int param_1,void *param_2,size_t *param_3)
 
 {
   undefined1 *__src;
@@ -54812,12 +54153,12 @@ LAB_00071b34:
 
 
 
-undefined4 tisp_wdr_param_array_set(undefined4 param_1,undefined4 *param_2,undefined4 *param_3)
+int tisp_wdr_param_array_set(int param_1,int *param_2,int *param_3)
 
 {
   bool bVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
+  int *puVar2;
+  int uVar3;
   int iVar4;
   undefined1 *puVar5;
   
@@ -55032,7 +54373,7 @@ LAB_00072034:
 
 
 
-undefined4 system_yvu_or_yuv(int param_1,int param_2,uint param_3)
+int system_yvu_or_yuv(int param_1,int param_2,uint param_3)
 
 {
   uint uVar1;
@@ -55054,7 +54395,7 @@ undefined4 system_yvu_or_yuv(int param_1,int param_2,uint param_3)
 
 
 
-undefined4 tisp_day_or_night_s_ctrl(int param_1)
+int tisp_day_or_night_s_ctrl(int param_1)
 
 {
   uint uVar1;
@@ -55121,7 +54462,7 @@ undefined4 tisp_day_or_night_s_ctrl(int param_1)
 
 
 
-undefined4 tisp_cust_mode_s_ctrl(int param_1)
+int tisp_cust_mode_s_ctrl(int param_1)
 
 {
   uint uVar1;
@@ -55203,10 +54544,10 @@ LAB_0007256c:
 
 
 
-undefined4 tisp_cust_mode_g_ctrl(void)
+int tisp_cust_mode_g_ctrl(void)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   uVar1 = 0xffffffff;
   if (tparams_cust != 0) {
@@ -55217,10 +54558,10 @@ undefined4 tisp_cust_mode_g_ctrl(void)
 
 
 
-undefined4 tisp_day_or_night_g_ctrl(void)
+int tisp_day_or_night_g_ctrl(void)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   uVar1 = 0;
   if (((day_night & 0xfffffffd) != 0) && (uVar1 = 0xffffffff, (day_night & 0xfffffffd) == 1)) {
@@ -55231,7 +54572,7 @@ undefined4 tisp_day_or_night_g_ctrl(void)
 
 
 
-undefined4 tisp_mirror_enable(int param_1)
+int tisp_mirror_enable(int param_1)
 
 {
   if (msca_dmaout_arb == 0xffffffff) {
@@ -55249,7 +54590,7 @@ undefined4 tisp_mirror_enable(int param_1)
 
 
 
-undefined4 tisp_hv_flip_enable(uint param_1)
+int tisp_hv_flip_enable(uint param_1)
 
 {
   uint uVar1;
@@ -55292,7 +54633,7 @@ void tisp_hv_flip_get(byte *param_1)
 
 
 
-undefined4 tisp_flip_enable(int param_1)
+int tisp_flip_enable(int param_1)
 
 {
   if (msca_dmaout_arb == 0xffffffff) {
@@ -55375,7 +54716,7 @@ void tisp_set_brightness(undefined param_1)
 // WARNING: Removing unreachable block (ram,0x00063778)
 // WARNING: Removing unreachable block (ram,0x000637f4)
 
-undefined4 tisp_set_ae_comp(uint param_1)
+int tisp_set_ae_comp(uint param_1)
 
 {
   uint uVar1;
@@ -55508,7 +54849,7 @@ void tisp_get_bcsh_hue(void)
 
 
 
-undefined4 tisp_top_sel(void)
+int tisp_top_sel(void)
 
 {
   uint uVar1;
@@ -55520,15 +54861,15 @@ undefined4 tisp_top_sel(void)
 
 
 
-undefined4 tisp_top_read(void)
+int tisp_top_read(void)
 
 {
-  return *(undefined4 *)(*(int *)(ispcore_sd + 0xb8) + 0xc);
+  return *(int *)(*(int *)(ispcore_sd + 0xb8) + 0xc);
 }
 
 
 
-undefined4 tisp_g_ncuinfo(int param_1)
+int tisp_g_ncuinfo(int param_1)
 
 {
   if (param_1 == 0) {
@@ -55540,14 +54881,14 @@ undefined4 tisp_g_ncuinfo(int param_1)
 
 
 
-undefined4 tisp_s_antiflick(int param_1)
+int tisp_s_antiflick(int param_1)
 
 {
   int local_50;
-  undefined4 local_4c;
+  int local_4c;
   uint local_48;
   uint local_44;
-  undefined4 local_38 [3];
+  int local_38 [3];
   size_t local_2c;
   size_t local_28 [2];
   
@@ -55589,11 +54930,11 @@ undefined4 tisp_s_antiflick(int param_1)
 
 
 
-undefined4 tisp_s_Hilightdepress(int param_1)
+int tisp_s_Hilightdepress(int param_1)
 
 {
-  undefined4 local_40 [5];
-  undefined4 local_2c;
+  int local_40 [5];
+  int local_2c;
   int local_28;
   size_t local_14;
   
@@ -55610,10 +54951,10 @@ undefined4 tisp_s_Hilightdepress(int param_1)
 
 
 
-undefined4 tisp_g_Hilightdepress(int *param_1)
+int tisp_g_Hilightdepress(int *param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int local_38 [6];
   int local_20;
   int local_c;
@@ -55638,12 +54979,12 @@ undefined4 tisp_g_Hilightdepress(int *param_1)
 
 
 
-undefined4 tisp_s_BacklightComp(int param_1)
+int tisp_s_BacklightComp(int param_1)
 
 {
-  undefined4 local_40 [5];
+  int local_40 [5];
   int local_2c;
-  undefined4 local_28;
+  int local_28;
   size_t local_14;
   
   local_14 = 0x2c;
@@ -55659,10 +55000,10 @@ undefined4 tisp_s_BacklightComp(int param_1)
 
 
 
-undefined4 tisp_g_BacklightComp(int *param_1)
+int tisp_g_BacklightComp(int *param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int local_38 [5];
   int local_24;
   int local_c;
@@ -55687,7 +55028,7 @@ undefined4 tisp_g_BacklightComp(int *param_1)
 
 
 
-undefined4 tisp_s_Gamma(void *param_1)
+int tisp_s_Gamma(void *param_1)
 
 {
   size_t local_18 [3];
@@ -55702,10 +55043,10 @@ undefined4 tisp_s_Gamma(void *param_1)
 
 
 
-undefined4 tisp_g_Gamma(undefined4 param_1)
+int tisp_g_Gamma(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int local_10 [3];
   
   local_10[0] = 0;
@@ -55720,7 +55061,7 @@ undefined4 tisp_g_Gamma(undefined4 param_1)
 
 
 
-undefined4 tisp_s_aeroi_weight(int *param_1)
+int tisp_s_aeroi_weight(int *param_1)
 
 {
   int *piVar1;
@@ -55752,10 +55093,10 @@ undefined4 tisp_s_aeroi_weight(int *param_1)
 
 
 
-undefined4 tisp_g_aeroi_weight(undefined4 param_1)
+int tisp_g_aeroi_weight(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int local_10 [3];
   
   local_10[0] = 0;
@@ -55770,7 +55111,7 @@ undefined4 tisp_g_aeroi_weight(undefined4 param_1)
 
 
 
-undefined4 tisp_s_aezone_weight(void *param_1)
+int tisp_s_aezone_weight(void *param_1)
 
 {
   size_t local_18 [3];
@@ -55786,10 +55127,10 @@ undefined4 tisp_s_aezone_weight(void *param_1)
 
 
 
-undefined4 tisp_g_aezone_weight(undefined4 param_1)
+int tisp_g_aezone_weight(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int local_10 [3];
   
   local_10[0] = 0;
@@ -55804,7 +55145,7 @@ undefined4 tisp_g_aezone_weight(undefined4 param_1)
 
 
 
-undefined4 tisp_s_af_weight(void *param_1)
+int tisp_s_af_weight(void *param_1)
 
 {
   size_t local_18 [2];
@@ -55819,10 +55160,10 @@ undefined4 tisp_s_af_weight(void *param_1)
 
 
 
-undefined4 tisp_g_af_weight(undefined4 param_1)
+int tisp_g_af_weight(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int local_10 [3];
   
   local_10[0] = 0;
@@ -55837,12 +55178,12 @@ undefined4 tisp_g_af_weight(undefined4 param_1)
 
 
 
-undefined4 tisp_g_ev_attr(undefined4 *param_1)
+int tisp_g_ev_attr(int *param_1)
 
 {
   int iVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  int uVar2;
+  int uVar3;
   uint uVar4;
   
   *param_1 = DAT_000d3e78;
@@ -55882,7 +55223,7 @@ undefined4 tisp_g_ev_attr(undefined4 *param_1)
 
 
 
-undefined4 tisp_g_wb_attr(void)
+int tisp_g_wb_attr(void)
 
 {
   tisp_g_wb_mode();
@@ -55891,7 +55232,7 @@ undefined4 tisp_g_wb_attr(void)
 
 
 
-undefined4 tisp_s_wb_attr(void)
+int tisp_s_wb_attr(void)
 
 {
   tisp_s_wb_mode();
@@ -55900,7 +55241,7 @@ undefined4 tisp_s_wb_attr(void)
 
 
 
-undefined4 tisp_g_wb_zone(void)
+int tisp_g_wb_zone(void)
 
 {
   tisp_awb_get_zone();
@@ -55909,7 +55250,7 @@ undefined4 tisp_g_wb_zone(void)
 
 
 
-undefined4 tisp_g_wb_ct(void)
+int tisp_g_wb_ct(void)
 
 {
   tisp_awb_get_ct();
@@ -55918,7 +55259,7 @@ undefined4 tisp_g_wb_ct(void)
 
 
 
-undefined4 tisp_s_wb_ct(void)
+int tisp_s_wb_ct(void)
 
 {
   tisp_awb_set_ct();
@@ -55927,8 +55268,8 @@ undefined4 tisp_s_wb_ct(void)
 
 
 
-undefined4
-tisp_s_awb_cluster(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+int
+tisp_s_awb_cluster(int param_1,int param_2,int param_3,int param_4)
 
 {
   uint uVar1;
@@ -55943,7 +55284,7 @@ tisp_s_awb_cluster(undefined4 param_1,undefined4 param_2,undefined4 param_3,unde
 
 
 
-undefined4 tisp_g_awb_cluster(void)
+int tisp_g_awb_cluster(void)
 
 {
   tisp_awb_get_cluster_awb_params();
@@ -55952,7 +55293,7 @@ undefined4 tisp_g_awb_cluster(void)
 
 
 
-undefined4 tisp_s_awb_ct_trend(void)
+int tisp_s_awb_ct_trend(void)
 
 {
   tisp_awb_set_ct_trend();
@@ -55961,7 +55302,7 @@ undefined4 tisp_s_awb_ct_trend(void)
 
 
 
-undefined4 tisp_g_awb_ct_trend(void)
+int tisp_g_awb_ct_trend(void)
 
 {
   tisp_awb_get_ct_trend();
@@ -55970,7 +55311,7 @@ undefined4 tisp_g_awb_ct_trend(void)
 
 
 
-undefined4 tisp_g_ccm_attr(int param_1)
+int tisp_g_ccm_attr(int param_1)
 
 {
   uint uVar1;
@@ -55998,7 +55339,7 @@ undefined4 tisp_g_ccm_attr(int param_1)
 
 
 
-undefined4 tisp_s_ccm_attr(undefined *param_1)
+int tisp_s_ccm_attr(undefined *param_1)
 
 {
   uint uVar1;
@@ -56030,7 +55371,7 @@ undefined4 tisp_s_ccm_attr(undefined *param_1)
 
 
 
-undefined4 tisp_g_ae_hist(void)
+int tisp_g_ae_hist(void)
 
 {
   tisp_ae_get_hist_custome();
@@ -56039,8 +55380,8 @@ undefined4 tisp_g_ae_hist(void)
 
 
 
-undefined4
-tisp_s_ae_hist(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+int
+tisp_s_ae_hist(int param_1,int param_2,int param_3,int param_4)
 
 {
   uint uVar1;
@@ -56055,8 +55396,8 @@ tisp_s_ae_hist(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefine
 
 
 
-undefined4
-tisp_s_ae_at_list(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+int
+tisp_s_ae_at_list(int param_1,int param_2,int param_3,int param_4)
 
 {
   uint uVar1;
@@ -56071,7 +55412,7 @@ tisp_s_ae_at_list(undefined4 param_1,undefined4 param_2,undefined4 param_3,undef
 
 
 
-undefined4 tisp_g_ae_at_list(void)
+int tisp_g_ae_at_list(void)
 
 {
   tisp_ae_g_at_list();
@@ -56080,7 +55421,7 @@ undefined4 tisp_g_ae_at_list(void)
 
 
 
-undefined4 tisp_s_3dns_ratio(void)
+int tisp_s_3dns_ratio(void)
 
 {
   tisp_s_mdns_ratio();
@@ -56089,7 +55430,7 @@ undefined4 tisp_s_3dns_ratio(void)
 
 
 
-undefined4 tisp_s_2dns_ratio(void)
+int tisp_s_2dns_ratio(void)
 
 {
   tisp_s_sdns_ratio();
@@ -56098,18 +55439,18 @@ undefined4 tisp_s_2dns_ratio(void)
 
 
 
-undefined4 tisp_s_ae_attr(undefined4 param_1)
+int tisp_s_ae_attr(int param_1)
 
 {
   uint uVar1;
-  undefined4 param_11;
+  int param_11;
   undefined local_128 [136];
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
+  int local_a0;
+  int local_9c;
+  int local_98;
+  int local_94;
   undefined local_90 [36];
-  undefined4 local_6c;
+  int local_6c;
   
   memset(&local_a0,0,0x98);
   memcpy(&local_a0,&tisp_ae_ctrls,0x98);
@@ -56124,12 +55465,12 @@ undefined4 tisp_s_ae_attr(undefined4 param_1)
 
 
 
-undefined4 tisp_g_ae_attr(undefined4 *param_1)
+int tisp_g_ae_attr(int *param_1)
 
 {
   undefined auStack_a0 [12];
-  undefined4 local_94;
-  undefined4 local_6c;
+  int local_94;
+  int local_6c;
   
   tisp_ae_manual_get(auStack_a0);
   *param_1 = local_94;
@@ -56139,11 +55480,11 @@ undefined4 tisp_g_ae_attr(undefined4 *param_1)
 
 
 
-undefined4 tisp_g_ae_min(undefined4 *param_1)
+int tisp_g_ae_min(int *param_1)
 
 {
-  undefined4 local_18;
-  undefined4 local_14;
+  int local_18;
+  int local_14;
   
   tisp_ae_g_min(&local_18);
   *param_1 = local_18;
@@ -56164,7 +55505,7 @@ int tisp_s_ae_min(void)
 
 
 
-undefined4 tisp_g_ae_zone(void)
+int tisp_g_ae_zone(void)
 
 {
   tisp_ae_get_y_zone();
@@ -56173,7 +55514,7 @@ undefined4 tisp_g_ae_zone(void)
 
 
 
-undefined4 tisp_g_af_zone(void)
+int tisp_g_af_zone(void)
 
 {
   tisp_af_get_zone();
@@ -56182,7 +55523,7 @@ undefined4 tisp_g_af_zone(void)
 
 
 
-undefined4 tisp_g_af_metric(void)
+int tisp_g_af_metric(void)
 
 {
   tisp_af_get_metric();
@@ -56191,7 +55532,7 @@ undefined4 tisp_g_af_metric(void)
 
 
 
-undefined4 tisp_g_af_attr(void)
+int tisp_g_af_attr(void)
 
 {
   tisp_af_get_attr();
@@ -56200,8 +55541,8 @@ undefined4 tisp_g_af_attr(void)
 
 
 
-undefined4
-tisp_s_af_attr(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+int
+tisp_s_af_attr(int param_1,int param_2,int param_3,int param_4)
 
 {
   uint uVar1;
@@ -56238,7 +55579,7 @@ void tisp_s_module_control(uint param_1)
 
 {
   uint uVar1;
-  undefined4 local_18;
+  int local_18;
   uint local_14 [2];
   
   uVar1 = system_reg_read(0xc);
@@ -56271,13 +55612,13 @@ void tisp_g_module_control(uint *param_1)
 
 
 void tisp_s_autozoom_control
-               (int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-               undefined4 param_9)
+               (int param_1,int param_2,int param_3,int param_4,
+               int param_5,int param_6,int param_7,int param_8,
+               int param_9)
 
 {
-  undefined4 uVar1;
-  undefined4 *puVar2;
+  int uVar1;
+  int *puVar2;
   char *pcVar3;
   code *UNRECOVERED_JUMPTABLE;
   
@@ -56334,7 +55675,7 @@ void tisp_g_autozoom_control(void)
 
 
 
-undefined4 tisp_s_scaler_level_control(uint param_1,int param_2,uint param_3)
+int tisp_s_scaler_level_control(uint param_1,int param_2,uint param_3)
 
 {
   uint uVar1;
@@ -56342,7 +55683,7 @@ undefined4 tisp_s_scaler_level_control(uint param_1,int param_2,uint param_3)
   uint uVar3;
   uint uVar4;
   uint uVar5;
-  undefined4 uVar6;
+  int uVar6;
   uint uVar7;
   int iVar8;
   int iVar9;
@@ -56412,7 +55753,7 @@ undefined4 tisp_s_scaler_level_control(uint param_1,int param_2,uint param_3)
 
 
 
-undefined4 tisp_s_fcrop_control(char param_1,uint param_2,int param_3,int param_4,uint param_5)
+int tisp_s_fcrop_control(char param_1,uint param_2,int param_3,int param_4,uint param_5)
 
 {
   if (msca_ch_en == 0xffffffff) {
@@ -56452,25 +55793,25 @@ undefined4 tisp_s_fcrop_control(char param_1,uint param_2,int param_3,int param_
 void tisp_g_fcrop_control(undefined *param_1)
 
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  int uVar1;
+  int uVar2;
   
   if (DAT_000b25c4 == 1) {
     *param_1 = 1;
-    *(undefined4 *)(param_1 + 4) = DAT_000b25cc;
-    *(undefined4 *)(param_1 + 8) = DAT_000b25c8;
-    *(undefined4 *)(param_1 + 0xc) = DAT_000b25d0;
+    *(int *)(param_1 + 4) = DAT_000b25cc;
+    *(int *)(param_1 + 8) = DAT_000b25c8;
+    *(int *)(param_1 + 0xc) = DAT_000b25d0;
     uVar2 = DAT_000b25d4;
   }
   else {
     *param_1 = 0;
     uVar1 = tispinfo;
-    *(undefined4 *)(param_1 + 4) = 0;
+    *(int *)(param_1 + 4) = 0;
     uVar2 = DAT_000b26f4;
-    *(undefined4 *)(param_1 + 8) = 0;
-    *(undefined4 *)(param_1 + 0xc) = uVar1;
+    *(int *)(param_1 + 8) = 0;
+    *(int *)(param_1 + 0xc) = uVar1;
   }
-  *(undefined4 *)(param_1 + 0x10) = uVar2;
+  *(int *)(param_1 + 0x10) = uVar2;
   return;
 }
 
@@ -56478,11 +55819,11 @@ void tisp_g_fcrop_control(undefined *param_1)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-undefined4 tisp_s_wdr_en(int param_1)
+int tisp_s_wdr_en(int param_1)
 
 {
   uint uVar1;
-  undefined4 uVar2;
+  int uVar2;
   
   uVar1 = system_reg_read(0x24);
   system_reg_write(0x24,uVar1 | 1);
@@ -56528,12 +55869,12 @@ undefined4 tisp_s_wdr_en(int param_1)
 
 
 
-undefined4 tisp_s_wdr_init_en(int param_1)
+int tisp_s_wdr_init_en(int param_1)
 
 {
   int iVar1;
-  undefined4 local_58 [14];
-  undefined4 local_20 [2];
+  int local_58 [14];
+  int local_20 [2];
   
   local_20[0] = 0;
   if (param_1 == 1) {
@@ -56541,16 +55882,16 @@ undefined4 tisp_s_wdr_init_en(int param_1)
     local_58[0] = 0;
     tisp_wdr_param_array_set(0x431,local_58,local_20);
     iVar1 = tparams_night;
-    *(undefined4 *)(tparams_day + 0x134f0) = 0;
-    *(undefined4 *)(iVar1 + 0x134f0) = 0;
+    *(int *)(tparams_day + 0x134f0) = 0;
+    *(int *)(iVar1 + 0x134f0) = 0;
   }
   else {
     tisp_wdr_param_array_get(0x431,local_58,local_20);
     local_58[0] = 2;
     tisp_wdr_param_array_set(0x431,local_58,local_20);
     iVar1 = tparams_night;
-    *(undefined4 *)(tparams_day + 0x134f0) = 2;
-    *(undefined4 *)(iVar1 + 0x134f0) = 2;
+    *(int *)(tparams_day + 0x134f0) = 2;
+    *(int *)(iVar1 + 0x134f0) = 2;
   }
   tisp_ae_wdr_en(param_1);
   tisp_dpc_wdr_en(param_1);
@@ -56570,7 +55911,7 @@ undefined4 tisp_s_wdr_init_en(int param_1)
 
 
 
-undefined4 tisp_g_wdr_en(undefined4 *param_1)
+int tisp_g_wdr_en(int *param_1)
 
 {
   *param_1 = DAT_000b2634;
@@ -56597,7 +55938,7 @@ void tisp_s_max_isp_dgain(void)
 
 
 
-undefined4 tisp_g_dpc_strength(void)
+int tisp_g_dpc_strength(void)
 
 {
   tisp_g_dpc_str_internal();
@@ -56606,7 +55947,7 @@ undefined4 tisp_g_dpc_strength(void)
 
 
 
-undefined4 tisp_s_dpc_strength(void)
+int tisp_s_dpc_strength(void)
 
 {
   tisp_s_dpc_str_internal();
@@ -56615,7 +55956,7 @@ undefined4 tisp_s_dpc_strength(void)
 
 
 
-undefined4 tisp_g_drc_strength(void)
+int tisp_g_drc_strength(void)
 
 {
   tisp_g_adr_str_internal();
@@ -56624,7 +55965,7 @@ undefined4 tisp_g_drc_strength(void)
 
 
 
-undefined4 tisp_s_drc_strength(void)
+int tisp_s_drc_strength(void)
 
 {
   tisp_s_adr_str_internal();
@@ -56797,16 +56138,16 @@ LAB_00074cf8:
 
 
 
-undefined4
+int
 tisp_mscaler_mask_setreg
-          (uint param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-          undefined4 param_6,undefined4 param_7,undefined8 param_8,undefined8 param_10,
-          undefined4 param_12,undefined4 param_13,undefined4 param_14,undefined8 param_15,
-          undefined8 param_17,undefined4 param_19,undefined4 param_20,undefined4 param_21,
-          undefined8 param_22,undefined8 param_24,undefined4 param_26,undefined4 param_27,
-          undefined4 param_28,undefined8 param_29,undefined8 param_31,undefined4 param_33,
-          undefined4 param_34,undefined4 param_35,undefined8 param_36,undefined8 param_38,
-          undefined4 param_40,undefined4 param_41,undefined4 param_42)
+          (uint param_1,uint param_2,int param_3,int param_4,int param_5,
+          int param_6,int param_7,undefined8 param_8,undefined8 param_10,
+          int param_12,int param_13,int param_14,undefined8 param_15,
+          undefined8 param_17,int param_19,int param_20,int param_21,
+          undefined8 param_22,undefined8 param_24,int param_26,int param_27,
+          int param_28,undefined8 param_29,undefined8 param_31,int param_33,
+          int param_34,int param_35,undefined8 param_36,undefined8 param_38,
+          int param_40,int param_41,int param_42)
 
 {
   bool bVar1;
@@ -56994,24 +56335,24 @@ tisp_mscaler_mask_setreg
 
 
 
-undefined4
+int
 tisp_s_mscaler_mask_attr
-          (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+          (int param_1,int param_2,int param_3,int param_4)
 
 {
   uint uVar1;
-  undefined4 local_res0;
-  undefined4 local_res4;
-  undefined4 local_res8;
-  undefined4 local_resc;
+  int local_res0;
+  int local_res4;
+  int local_res8;
+  int local_resc;
   undefined local_b0 [160];
   
   local_res0 = param_1;
   local_res4 = param_2;
   local_res8 = param_3;
   local_resc = param_4;
-  if (mask_attr_global == (undefined4 *)0x0) {
-    mask_attr_global = (undefined4 *)private_kmalloc(0xac,0xd0);
+  if (mask_attr_global == (int *)0x0) {
+    mask_attr_global = (int *)private_kmalloc(0xac,0xd0);
   }
   if (mask_attr_global_bak == (void *)0x0) {
     mask_attr_global_bak = (void *)private_kmalloc(0xac,0xd0);
@@ -57033,7 +56374,7 @@ tisp_s_mscaler_mask_attr
 
 
 
-undefined4 tisp_g_mscaler_mask_attr(undefined4 param_1)
+int tisp_g_mscaler_mask_attr(int param_1)
 
 {
   code *pcVar1;
@@ -57056,7 +56397,7 @@ void tisp_s_mscaler_hvflip_mask(uint param_1)
   uint uVar1;
   undefined local_b0 [160];
   
-  if (mask_attr_global != (undefined4 *)0x0) {
+  if (mask_attr_global != (int *)0x0) {
     tisp_mscaler_mask_change(param_1 & 0xff ^ hvflip_last);
     for (uVar1 = 0; uVar1 < 0x9c; uVar1 = uVar1 + 1) {
       local_b0[uVar1] = *(undefined *)((int)mask_attr_global + uVar1 + 0x10);
@@ -57097,7 +56438,7 @@ void tisp_g_awb_start(void)
 
 
 
-undefined4 tisp_s_awb_algo(void)
+int tisp_s_awb_algo(void)
 
 {
   tiziano_s_wb_algo();
@@ -57122,17 +56463,17 @@ void tisp_deinit_free(void)
 
 
 
-undefined4 tisp_s_ae_it_max(undefined4 param_1)
+int tisp_s_ae_it_max(int param_1)
 
 {
   uint uVar1;
   undefined local_128 [136];
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
+  int local_a0;
+  int local_9c;
+  int local_98;
+  int local_94;
   undefined local_90 [12];
-  undefined4 local_84;
+  int local_84;
   
   memcpy(&local_a0,&tisp_ae_ctrls,0x98);
   local_84 = param_1;
@@ -57145,7 +56486,7 @@ undefined4 tisp_s_ae_it_max(undefined4 param_1)
 
 
 
-undefined4 tisp_g_ae_it_max(undefined4 *param_1)
+int tisp_g_ae_it_max(int *param_1)
 
 {
   *param_1 = DAT_000d3e88;
@@ -57154,7 +56495,7 @@ undefined4 tisp_g_ae_it_max(undefined4 *param_1)
 
 
 
-undefined4 tisp_s_adr_enable(int param_1)
+int tisp_s_adr_enable(int param_1)
 
 {
   uint uVar1;
@@ -57177,12 +56518,12 @@ undefined4 tisp_s_adr_enable(int param_1)
 
 
 
-undefined4 tisp_s_defog_enable(uint param_1)
+int tisp_s_defog_enable(uint param_1)
 
 {
   uint uVar1;
   code *pcVar2;
-  undefined4 uVar3;
+  int uVar3;
   
   uVar1 = system_reg_read(0xc);
   if (((uVar1 >> 0xb ^ 1) & 1) != param_1) {
@@ -57208,15 +56549,15 @@ undefined4 tisp_s_defog_enable(uint param_1)
 
 
 
-undefined4 tisp_set_ae_freeze(int param_1)
+int tisp_set_ae_freeze(int param_1)
 
 {
   uint uVar1;
   undefined local_128 [136];
   int local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
+  int local_9c;
+  int local_98;
+  int local_94;
   undefined local_90 [80];
   int local_40;
   
@@ -57251,7 +56592,7 @@ void tisp_get_antiflicker_step(void)
 
 
 
-void tisp_set_ae_attr(undefined4 *param_1)
+void tisp_set_ae_attr(int *param_1)
 
 {
   uint uVar1;
@@ -57284,7 +56625,7 @@ void tisp_get_ae_state(void)
 
 
 
-undefined4 tisp_get_blc_attr(uint *param_1)
+int tisp_get_blc_attr(uint *param_1)
 
 {
   ushort uVar1;
@@ -57337,7 +56678,7 @@ undefined4 tisp_get_blc_attr(uint *param_1)
 
 
 
-undefined4 tisp_set_defog_strength(void)
+int tisp_set_defog_strength(void)
 
 {
   tisp_s_defog_str_internal();
@@ -57346,7 +56687,7 @@ undefined4 tisp_set_defog_strength(void)
 
 
 
-undefined4 tisp_get_defog_strength(void)
+int tisp_get_defog_strength(void)
 
 {
   tisp_g_defog_str_internal();
@@ -57355,7 +56696,7 @@ undefined4 tisp_get_defog_strength(void)
 
 
 
-undefined4 tisp_set_csc_attr(uint *param_1)
+int tisp_set_csc_attr(uint *param_1)
 
 {
   uint uVar1;
@@ -57372,7 +56713,7 @@ undefined4 tisp_set_csc_attr(uint *param_1)
 
 
 
-undefined4 tisp_get_csc_attr(int param_1)
+int tisp_get_csc_attr(int param_1)
 
 {
   tisp_get_current_csc(param_1,param_1 + 4);
@@ -57399,12 +56740,12 @@ void tisp_awb_algo_deinit(void)
 
 
 
-undefined4 tisp_set_wdr_output_mode(int *param_1)
+int tisp_set_wdr_output_mode(int *param_1)
 
 {
   int iVar1;
   int local_48 [14];
-  undefined4 local_10 [2];
+  int local_10 [2];
   
   local_10[0] = 0x38;
   tisp_wdr_param_array_get(0x431,local_48,local_10);
@@ -57426,11 +56767,11 @@ undefined4 tisp_set_wdr_output_mode(int *param_1)
 
 
 
-undefined4 tisp_get_wdr_output_mode(int *param_1)
+int tisp_get_wdr_output_mode(int *param_1)
 
 {
   int local_48 [14];
-  undefined4 local_10 [2];
+  int local_10 [2];
   
   local_10[0] = 0x38;
   tisp_wdr_param_array_get(0x431,local_48,local_10);
@@ -57450,7 +56791,7 @@ undefined4 tisp_get_wdr_output_mode(int *param_1)
 
 
 
-undefined4 tisp_set_bcsh_fixed_contrast(undefined *param_1)
+int tisp_set_bcsh_fixed_contrast(undefined *param_1)
 
 {
   tisp_bcsh_set_mjpeg_contrast(*param_1,param_1[1],param_1[2]);
@@ -57459,12 +56800,12 @@ undefined4 tisp_set_bcsh_fixed_contrast(undefined *param_1)
 
 
 
-undefined4 tisp_set_frame_drop(int param_1,int *param_2)
+int tisp_set_frame_drop(int param_1,int *param_2)
 
 {
   int iVar1;
   int iVar2;
-  undefined4 uVar3;
+  int uVar3;
   
   if (*(byte *)(param_2 + 1) < 0x20) {
     iVar1 = (param_1 + 0x98) * 0x100;
@@ -57489,11 +56830,11 @@ undefined4 tisp_set_frame_drop(int param_1,int *param_2)
 
 
 
-undefined4 tisp_get_frame_drop(int param_1,undefined4 *param_2)
+int tisp_get_frame_drop(int param_1,int *param_2)
 
 {
   undefined uVar1;
-  undefined4 uVar2;
+  int uVar2;
   int iVar3;
   
   iVar3 = (param_1 + 0x98) * 0x100;
@@ -57572,7 +56913,7 @@ LAB_00076334:
 
 
 
-int ispcore_sensor_ops_ioctl(int param_1,undefined4 param_2,undefined4 param_3)
+int ispcore_sensor_ops_ioctl(int param_1,int param_2,int param_3)
 
 {
   int iVar1;
@@ -57612,7 +56953,7 @@ LAB_000763e4:
 void ispcore_irq_fs_work(void)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   int *piVar3;
   int iVar4;
@@ -57665,7 +57006,7 @@ LAB_0007651c:
 
 
 
-undefined4 ispcore_link_setup(void)
+int ispcore_link_setup(void)
 
 {
   return 0;
@@ -57678,10 +57019,10 @@ void isp_pre_frame_dequeue(void)
 {
   int iVar1;
   undefined auStack_38 [8];
-  undefined4 local_30;
-  undefined4 local_2c;
-  undefined4 local_28;
-  undefined4 local_24;
+  int local_30;
+  int local_2c;
+  int local_28;
+  int local_24;
   uint local_20;
   undefined auStack_18 [12];
   
@@ -57696,7 +57037,7 @@ void isp_pre_frame_dequeue(void)
   local_30 = 0;
   local_2c = 0;
   local_28 = 0;
-  tx_isp_send_event_to_remote(*(undefined4 *)(*(int *)(iVar1 + 0x150) + 0x78),0x3000006,auStack_38);
+  tx_isp_send_event_to_remote(*(int *)(*(int *)(iVar1 + 0x150) + 0x78),0x3000006,auStack_38);
   return;
 }
 
@@ -57713,13 +57054,13 @@ void isp_ch1_frame_dequeue_delay(void)
                     isp_ch1_dequeue_delay_time * 1000000);
   private_set_current_state(2);
   private_schedule_hrtimeout(auStack_10,1);
-  tx_isp_send_event_to_remote(*(undefined4 *)(*(int *)(iVar1 + 0x150) + 0x13c),0x3000006,ch1_buf);
+  tx_isp_send_event_to_remote(*(int *)(*(int *)(iVar1 + 0x150) + 0x13c),0x3000006,ch1_buf);
   return;
 }
 
 
 
-undefined4 ispcore_frame_channel_dqbuf(int param_1,undefined4 param_2)
+int ispcore_frame_channel_dqbuf(int param_1,int param_2)
 
 {
   if (param_1 != 0) {
@@ -57731,12 +57072,12 @@ undefined4 ispcore_frame_channel_dqbuf(int param_1,undefined4 param_2)
 
 
 
-int ispcore_core_ops_ioctl(int param_1,int param_2,undefined4 *param_3)
+int ispcore_core_ops_ioctl(int param_1,int param_2,int *param_3)
 
 {
   code *pcVar1;
   int iVar2;
-  undefined4 *puVar3;
+  int *puVar3;
   int iVar4;
   int *piVar5;
   
@@ -57750,7 +57091,7 @@ LAB_000767f4:
     if ((**(int **)(param_1 + 0xc4) == 0) ||
        (pcVar1 = *(code **)(**(int **)(param_1 + 0xc4) + 4), pcVar1 == (code *)0x0))
     goto LAB_000767e0;
-    puVar3 = (undefined4 *)*param_3;
+    puVar3 = (int *)*param_3;
   }
   else {
     if (param_2 != 0x1000001) {
@@ -57789,7 +57130,7 @@ LAB_000767e0:
         if (**(int **)(iVar2 + 0xc4) != 0) {
           pcVar1 = *(code **)(**(int **)(iVar2 + 0xc4) + 4);
           if (pcVar1 != (code *)0x0) {
-            puVar3 = (undefined4 *)*param_3;
+            puVar3 = (int *)*param_3;
 LAB_00076880:
             iVar4 = (*pcVar1)(iVar2,puVar3);
             goto LAB_0007688c;
@@ -57826,7 +57167,7 @@ LAB_000768a8:
 
 
 
-undefined4 isp_fw_process(void)
+int isp_fw_process(void)
 
 {
   int iVar1;
@@ -57839,13 +57180,13 @@ undefined4 isp_fw_process(void)
 
 
 
-undefined4 ispcore_irq_thread_handle(uint param_1)
+int ispcore_irq_thread_handle(uint param_1)
 
 {
   int iVar1;
   code *pcVar2;
   int iVar3;
-  undefined4 uVar4;
+  int uVar4;
   int iVar5;
   int *piVar6;
   int local_30 [3];
@@ -57880,19 +57221,19 @@ undefined4 ispcore_irq_thread_handle(uint param_1)
           break;
         case 5:
           if (param_1 == 0) {
-            *(undefined4 *)(iVar5 + 0x1a8) = 0;
+            *(int *)(iVar5 + 0x1a8) = 0;
           }
           else {
             iVar3 = *(int *)(*(int *)(param_1 + 0xc4) + 0xc);
             if (iVar3 == 0) {
-              *(undefined4 *)(iVar5 + 0x1a8) = 0;
+              *(int *)(iVar5 + 0x1a8) = 0;
             }
             else {
               pcVar2 = *(code **)(iVar3 + 8);
               if (pcVar2 != (code *)0x0) {
                 (*pcVar2)(param_1,0x2000010,iVar5 + 0x1ac);
               }
-              *(undefined4 *)(iVar5 + 0x1a8) = 0;
+              *(int *)(iVar5 + 0x1a8) = 0;
             }
           }
           break;
@@ -57917,14 +57258,14 @@ undefined4 ispcore_irq_thread_handle(uint param_1)
 
 
 
-undefined4 ispcore_frame_channel_streamoff(uint *param_1)
+int ispcore_frame_channel_streamoff(uint *param_1)
 
 {
   uint uVar1;
   int iVar2;
   void *__s;
   int iVar3;
-  undefined4 local_28 [3];
+  int local_28 [3];
   
   uVar1 = *param_1;
   iVar2 = 0;
@@ -57936,7 +57277,7 @@ undefined4 ispcore_frame_channel_streamoff(uint *param_1)
   local_28[0] = 0;
   if (*(int *)(iVar2 + 0x15c) == 1) {
     if (*(code **)(iVar2 + 0x1cc) != (code *)0x0) {
-      (**(code **)(iVar2 + 0x1cc))(*(undefined4 *)(iVar2 + 0x1d0),0);
+      (**(code **)(iVar2 + 0x1cc))(*(int *)(iVar2 + 0x1d0),0);
     }
   }
   else if (*(char *)((int)param_1 + 7) == '\x04') {
@@ -57944,12 +57285,12 @@ undefined4 ispcore_frame_channel_streamoff(uint *param_1)
     if (*(int *)((int)__s + 0x74) == 4) {
       private_spin_unlock_irqrestore((int)__s + 0x9c,local_28[0]);
       tisp_channel_stop(*(undefined *)(param_1 + 1));
-      *(undefined4 *)((int)__s + 0x74) = 3;
+      *(int *)((int)__s + 0x74) = 3;
       *(undefined *)((int)param_1 + 7) = 3;
       memset(__s,0,0x70);
-      *(undefined4 *)(iVar3 + 0x9c) = 0;
-      *(undefined4 *)(iVar3 + 0xac) = 0;
-      *(undefined4 *)(iVar2 + 0x17c) = 0;
+      *(int *)(iVar3 + 0x9c) = 0;
+      *(int *)(iVar3 + 0xac) = 0;
+      *(int *)(iVar2 + 0x17c) = 0;
     }
     else {
       private_spin_unlock_irqrestore();
@@ -57960,10 +57301,10 @@ undefined4 ispcore_frame_channel_streamoff(uint *param_1)
 
 
 
-void dump_isp_info_open(undefined4 param_1,undefined4 param_2)
+void dump_isp_info_open(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   uVar1 = PDE_DATA();
   private_single_open_size(param_2,isp_core_debug_show,uVar1,0x2000);
@@ -57972,7 +57313,7 @@ void dump_isp_info_open(undefined4 param_1,undefined4 param_2)
 
 
 
-int isp_core_cmd_set(undefined4 param_1,undefined4 param_2,int param_3)
+int isp_core_cmd_set(int param_1,int param_2,int param_3)
 
 {
   char cVar1;
@@ -58073,15 +57414,15 @@ int isp_core_cmd_set(undefined4 param_1,undefined4 param_2,int param_3)
 
 
 
-undefined4 ispcore_sync_sensor_attr(uint param_1,void *param_2)
+int ispcore_sync_sensor_attr(uint param_1,void *param_2)
 
 {
   int iVar1;
   uint uVar2;
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined4 local_4c;
-  undefined4 local_48;
+  int local_68;
+  int local_64;
+  int local_4c;
+  int local_48;
   uint local_3c;
   undefined2 local_38;
   undefined2 local_36;
@@ -58096,19 +57437,19 @@ undefined4 ispcore_sync_sensor_attr(uint param_1,void *param_2)
   undefined2 local_20;
   undefined2 local_1e;
   undefined2 local_1c;
-  undefined4 local_14;
+  int local_14;
   
   if ((param_1 != 0) && (param_1 < 0xfffff001)) {
     uVar2 = *(uint *)(param_1 + 0xd4);
     if ((uVar2 != 0) && (uVar2 < 0xfffff001)) {
       if (param_2 != (void *)0x0) {
         memcpy((void *)(uVar2 + 0xec),param_2,0x4c);
-        local_68 = *(undefined4 *)(uVar2 + 0x124);
+        local_68 = *(int *)(uVar2 + 0x124);
         local_3c = *(uint *)(uVar2 + 300);
-        local_64 = *(undefined4 *)(uVar2 + 0x128);
+        local_64 = *(int *)(uVar2 + 0x128);
         iVar1 = *(int *)(uVar2 + 0x120);
-        local_4c = *(undefined4 *)(iVar1 + 0x94);
-        local_48 = *(undefined4 *)(iVar1 + 0x98);
+        local_4c = *(int *)(iVar1 + 0x94);
+        local_48 = *(int *)(iVar1 + 0x98);
         local_2a = *(ushort *)(iVar1 + 0xb2);
         local_38 = *(undefined2 *)(iVar1 + 0xa4);
         local_36 = *(undefined2 *)(iVar1 + 0xa6);
@@ -58125,7 +57466,7 @@ undefined4 ispcore_sync_sensor_attr(uint param_1,void *param_2)
         local_20 = *(undefined2 *)(iVar1 + 0xbc);
         local_1e = *(undefined2 *)(iVar1 + 0xd8);
         local_1c = *(undefined2 *)(iVar1 + 0xda);
-        local_14 = *(undefined4 *)(iVar1 + 0xe0);
+        local_14 = *(int *)(iVar1 + 0xe0);
         tiziano_sync_sensor_attr(&local_68);
         return 0;
       }
@@ -58145,14 +57486,14 @@ int isp_info_show_isra_0(int param_1)
   bool bVar1;
   uint uVar2;
   int iVar3;
-  undefined4 *__s;
+  int *__s;
   int iVar4;
   int iVar5;
   int iVar6;
   int iVar7;
   int iVar8;
   int iVar9;
-  undefined4 uVar10;
+  int uVar10;
   int iVar11;
   int iVar12;
   int iVar13;
@@ -58184,30 +57525,30 @@ int isp_info_show_isra_0(int param_1)
   char *pcVar39;
   int iVar40;
   int iVar41;
-  undefined4 *puVar42;
+  int *puVar42;
   int iVar43;
   char *pcVar44;
-  undefined4 local_e8;
-  undefined4 local_e4;
-  undefined4 local_e0;
-  undefined4 local_dc;
-  undefined4 local_d8;
-  undefined4 local_d4;
-  undefined4 local_d0;
-  undefined4 local_c8;
-  undefined4 local_c4;
-  undefined4 local_c0;
-  undefined4 local_bc;
+  int local_e8;
+  int local_e4;
+  int local_e0;
+  int local_dc;
+  int local_d8;
+  int local_d4;
+  int local_d0;
+  int local_c8;
+  int local_c4;
+  int local_c0;
+  int local_bc;
   undefined2 local_7a;
   undefined auStack_68 [20];
   uint local_54;
   uint local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_3c;
-  undefined4 local_38;
+  int local_4c;
+  int local_48;
+  int local_3c;
+  int local_38;
   uint local_34;
-  undefined4 local_30 [3];
+  int local_30 [3];
   
   uVar2 = *(uint *)(param_1 + 0x3c);
   iVar41 = 0;
@@ -58223,10 +57564,10 @@ int isp_info_show_isra_0(int param_1)
     iVar41 = private_seq_printf(param_1,"sensor doesn\'t work, please enable sensor\n");
     return iVar3 + iVar41;
   }
-  __s = (undefined4 *)private_kmalloc(0x1e0,0xd0);
+  __s = (int *)private_kmalloc(0x1e0,0xd0);
   memset(__s,0,0x1e0);
   iVar40 = -1;
-  if (__s != (undefined4 *)0x0) {
+  if (__s != (int *)0x0) {
     iVar40 = tisp_get_antiflicker_step(__s,&local_34);
   }
   tisp_g_ev_attr(&local_e8);
@@ -58408,9 +57749,9 @@ LAB_00077404:
   pcVar44 = "RGGB";
 LAB_000774b8:
   iVar4 = private_seq_printf(param_1,"Software Version : %s\n","H20221206a");
-  iVar5 = private_seq_printf(param_1,"SENSOR NAME : %s\n",**(undefined4 **)(iVar41 + 0x120));
-  iVar6 = private_seq_printf(param_1,"SENSOR OUTPUT WIDTH : %d\n",*(undefined4 *)(iVar41 + 0xec));
-  iVar7 = private_seq_printf(param_1,"SENSOR OUTPUT HEIGHT : %d\n",*(undefined4 *)(iVar41 + 0xf0));
+  iVar5 = private_seq_printf(param_1,"SENSOR NAME : %s\n",**(int **)(iVar41 + 0x120));
+  iVar6 = private_seq_printf(param_1,"SENSOR OUTPUT WIDTH : %d\n",*(int *)(iVar41 + 0xec));
+  iVar7 = private_seq_printf(param_1,"SENSOR OUTPUT HEIGHT : %d\n",*(int *)(iVar41 + 0xf0));
   iVar8 = private_seq_printf(param_1,"ISP OUTPUT FPS : %d / %d\n",*(uint *)(iVar41 + 300) >> 0x10,
                              *(uint *)(iVar41 + 300) & 0xffff);
   iVar9 = private_seq_printf(param_1,"SENSOR OUTPUT RAW PATTERN : %s\n",pcVar44);
@@ -58457,7 +57798,7 @@ LAB_000774b8:
   iVar30 = private_seq_printf(param_1,"ISP WB weighted bgain: %d\n",0x10000 / local_50);
   iVar31 = private_seq_printf(param_1,"ISP WB color temperature: %d\n",local_30[0]);
   iVar32 = private_seq_printf(param_1,"ISP AWB Start rgain %d: bgain %d\n",local_3c,local_38);
-  iVar33 = private_seq_printf(param_1,"Saturation : %d\n",*(undefined4 *)(iVar43 + 0x4090));
+  iVar33 = private_seq_printf(param_1,"Saturation : %d\n",*(int *)(iVar43 + 0x4090));
   uVar10 = tisp_get_saturation();
   iVar34 = private_seq_printf(param_1,"Saturation : %d\n",uVar10);
   uVar10 = tisp_get_sharpness();
@@ -58466,7 +57807,7 @@ LAB_000774b8:
   iVar36 = private_seq_printf(param_1,"Contrast : %d\n",uVar10);
   uVar10 = tisp_get_brightness();
   iVar37 = private_seq_printf(param_1,"Brightness : %d\n",uVar10);
-  iVar43 = private_seq_printf(param_1,"Antiflicker : %d\n",*(undefined4 *)(iVar43 + 0xefc));
+  iVar43 = private_seq_printf(param_1,"Antiflicker : %d\n",*(int *)(iVar43 + 0xefc));
   if (*(int *)(iVar41 + 0x170) == 1) {
     pcVar44 = "Enable";
   }
@@ -58514,14 +57855,14 @@ int isp_core_debug_show(int param_1)
   bool bVar1;
   uint uVar2;
   int iVar3;
-  undefined4 *__s;
+  int *__s;
   int iVar4;
   int iVar5;
   int iVar6;
   int iVar7;
   int iVar8;
   int iVar9;
-  undefined4 uVar10;
+  int uVar10;
   int iVar11;
   int iVar12;
   int iVar13;
@@ -58553,30 +57894,30 @@ int isp_core_debug_show(int param_1)
   int iVar39;
   char *pcVar40;
   int iVar41;
-  undefined4 *puVar42;
+  int *puVar42;
   int iVar43;
   char *pcVar44;
-  undefined4 uStack_e8;
-  undefined4 uStack_e4;
-  undefined4 uStack_e0;
-  undefined4 uStack_dc;
-  undefined4 uStack_d8;
-  undefined4 uStack_d4;
-  undefined4 uStack_d0;
-  undefined4 uStack_c8;
-  undefined4 uStack_c4;
-  undefined4 uStack_c0;
-  undefined4 uStack_bc;
+  int uStack_e8;
+  int uStack_e4;
+  int uStack_e0;
+  int uStack_dc;
+  int uStack_d8;
+  int uStack_d4;
+  int uStack_d0;
+  int uStack_c8;
+  int uStack_c4;
+  int uStack_c0;
+  int uStack_bc;
   undefined2 uStack_7a;
   undefined auStack_68 [20];
   uint uStack_54;
   uint uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined4 uStack_3c;
-  undefined4 uStack_38;
+  int uStack_4c;
+  int uStack_48;
+  int uStack_3c;
+  int uStack_38;
   uint uStack_34;
-  undefined4 auStack_30 [3];
+  int auStack_30 [3];
   
   if (isp_core_debug_type == '\x01') {
     isp_core_debug_type = 0;
@@ -58604,10 +57945,10 @@ int isp_core_debug_show(int param_1)
     iVar39 = private_seq_printf(param_1,"sensor doesn\'t work, please enable sensor\n");
     return iVar3 + iVar39;
   }
-  __s = (undefined4 *)private_kmalloc(0x1e0,0xd0);
+  __s = (int *)private_kmalloc(0x1e0,0xd0);
   memset(__s,0,0x1e0);
   iVar41 = -1;
-  if (__s != (undefined4 *)0x0) {
+  if (__s != (int *)0x0) {
     iVar41 = tisp_get_antiflicker_step(__s,&uStack_34);
   }
   tisp_g_ev_attr(&uStack_e8);
@@ -58789,9 +58130,9 @@ LAB_00077404:
   pcVar44 = "RGGB";
 LAB_000774b8:
   iVar4 = private_seq_printf(param_1,"Software Version : %s\n","H20221206a");
-  iVar5 = private_seq_printf(param_1,"SENSOR NAME : %s\n",**(undefined4 **)(iVar39 + 0x120));
-  iVar6 = private_seq_printf(param_1,"SENSOR OUTPUT WIDTH : %d\n",*(undefined4 *)(iVar39 + 0xec));
-  iVar7 = private_seq_printf(param_1,"SENSOR OUTPUT HEIGHT : %d\n",*(undefined4 *)(iVar39 + 0xf0));
+  iVar5 = private_seq_printf(param_1,"SENSOR NAME : %s\n",**(int **)(iVar39 + 0x120));
+  iVar6 = private_seq_printf(param_1,"SENSOR OUTPUT WIDTH : %d\n",*(int *)(iVar39 + 0xec));
+  iVar7 = private_seq_printf(param_1,"SENSOR OUTPUT HEIGHT : %d\n",*(int *)(iVar39 + 0xf0));
   iVar8 = private_seq_printf(param_1,"ISP OUTPUT FPS : %d / %d\n",*(uint *)(iVar39 + 300) >> 0x10,
                              *(uint *)(iVar39 + 300) & 0xffff);
   iVar9 = private_seq_printf(param_1,"SENSOR OUTPUT RAW PATTERN : %s\n",pcVar44);
@@ -58838,7 +58179,7 @@ LAB_000774b8:
   iVar30 = private_seq_printf(param_1,"ISP WB weighted bgain: %d\n",0x10000 / uStack_50);
   iVar31 = private_seq_printf(param_1,"ISP WB color temperature: %d\n",auStack_30[0]);
   iVar32 = private_seq_printf(param_1,"ISP AWB Start rgain %d: bgain %d\n",uStack_3c,uStack_38);
-  iVar33 = private_seq_printf(param_1,"Saturation : %d\n",*(undefined4 *)(iVar43 + 0x4090));
+  iVar33 = private_seq_printf(param_1,"Saturation : %d\n",*(int *)(iVar43 + 0x4090));
   uVar10 = tisp_get_saturation();
   iVar34 = private_seq_printf(param_1,"Saturation : %d\n",uVar10);
   uVar10 = tisp_get_sharpness();
@@ -58847,7 +58188,7 @@ LAB_000774b8:
   iVar36 = private_seq_printf(param_1,"Contrast : %d\n",uVar10);
   uVar10 = tisp_get_brightness();
   iVar37 = private_seq_printf(param_1,"Brightness : %d\n",uVar10);
-  iVar43 = private_seq_printf(param_1,"Antiflicker : %d\n",*(undefined4 *)(iVar43 + 0xefc));
+  iVar43 = private_seq_printf(param_1,"Antiflicker : %d\n",*(int *)(iVar43 + 0xefc));
   if (*(int *)(iVar39 + 0x170) == 1) {
     pcVar44 = "Enable";
   }
@@ -58889,10 +58230,10 @@ LAB_000774b8:
 
 
 
-undefined4 ispcore_pad_event_handle(uint *param_1,undefined4 param_2,void *param_3)
+int ispcore_pad_event_handle(uint *param_1,int param_2,void *param_3)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   uint uVar3;
   code *pcVar4;
@@ -58903,18 +58244,18 @@ undefined4 ispcore_pad_event_handle(uint *param_1,undefined4 param_2,void *param
   void *pvVar9;
   int unaff_gp;
   uint local_58;
-  undefined4 local_54;
-  undefined4 local_50;
+  int local_54;
+  int local_50;
   uint local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
+  int local_48;
+  int local_44;
+  int local_40;
+  int local_3c;
   uint local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  undefined4 local_2c;
-  undefined4 local_28;
+  int local_34;
+  int local_30;
+  int local_2c;
+  int local_28;
   
   if (*(char *)((int)param_1 + 5) == '\0') {
     return 0;
@@ -58930,9 +58271,9 @@ undefined4 ispcore_pad_event_handle(uint *param_1,undefined4 param_2,void *param
         memcpy(param_3,pvVar9,0x70);
         return 0;
       }
-      *(undefined4 *)((int)param_3 + 4) = *(undefined4 *)((int)pvVar9 + 4);
-      *(undefined4 *)((int)param_3 + 8) = *(undefined4 *)((int)pvVar9 + 8);
-      *(undefined4 *)((int)param_3 + 0xc) = 0x32314752;
+      *(int *)((int)param_3 + 4) = *(int *)((int)pvVar9 + 4);
+      *(int *)((int)param_3 + 8) = *(int *)((int)pvVar9 + 8);
+      *(int *)((int)param_3 + 0xc) = 0x32314752;
       iVar2 = *(int *)((int)pvVar9 + 4);
       iVar6 = *(int *)((int)pvVar9 + 8);
       *(undefined *)((int)param_3 + 0x34) = 0;
@@ -59012,18 +58353,18 @@ LAB_0007805c:
 LAB_000780fc:
       memset(&local_58,0,0x34);
       local_38 = (uint)*(byte *)((int)param_3 + 0x5c);
-      local_34 = *(undefined4 *)((int)param_3 + 100);
-      local_30 = *(undefined4 *)((int)param_3 + 0x60);
-      local_2c = *(undefined4 *)((int)param_3 + 0x68);
-      local_28 = *(undefined4 *)((int)param_3 + 0x6c);
+      local_34 = *(int *)((int)param_3 + 100);
+      local_30 = *(int *)((int)param_3 + 0x60);
+      local_2c = *(int *)((int)param_3 + 0x68);
+      local_28 = *(int *)((int)param_3 + 0x6c);
       local_58 = (uint)*(byte *)((int)param_3 + 0x48);
-      local_54 = *(undefined4 *)((int)param_3 + 0x4c);
-      local_50 = *(undefined4 *)((int)param_3 + 0x50);
+      local_54 = *(int *)((int)param_3 + 0x4c);
+      local_50 = *(int *)((int)param_3 + 0x50);
       local_4c = (uint)*(byte *)((int)param_3 + 0x34);
-      local_48 = *(undefined4 *)((int)param_3 + 0x3c);
-      local_44 = *(undefined4 *)((int)param_3 + 0x38);
-      local_40 = *(undefined4 *)((int)param_3 + 0x40);
-      local_3c = *(undefined4 *)((int)param_3 + 0x44);
+      local_48 = *(int *)((int)param_3 + 0x3c);
+      local_44 = *(int *)((int)param_3 + 0x38);
+      local_40 = *(int *)((int)param_3 + 0x40);
+      local_3c = *(int *)((int)param_3 + 0x44);
       iVar2 = tisp_channel_attr_set(*(undefined *)(param_1 + 1),&local_58);
       if (iVar2 == 0) {
         memcpy(pvVar9,param_3,0x70);
@@ -59060,7 +58401,7 @@ LAB_000780fc:
         return 0;
       }
       tisp_channel_start(*(undefined *)(param_1 + 1));
-      *(undefined4 *)(uVar3 + 0x74) = 4;
+      *(int *)(uVar3 + 0x74) = 4;
       *(undefined *)((int)param_1 + 7) = 4;
 LAB_00077fac:
       private_spin_unlock_irqrestore(iVar2,local_58);
@@ -59087,7 +58428,7 @@ LAB_00077fac:
     local_58 = 0;
     if (*(int *)(iVar2 + 0x15c) == 1) {
       if (*(code **)(iVar2 + 0x1c0) != (code *)0x0) {
-        (**(code **)(iVar2 + 0x1c0))(*(undefined4 *)(iVar2 + 0x1d0),param_3);
+        (**(code **)(iVar2 + 0x1c0))(*(int *)(iVar2 + 0x1d0),param_3);
         return 0;
       }
       return 0;
@@ -59108,8 +58449,8 @@ LAB_00077fac:
              (iVar2 + 0xfU & 0xfffffff0) * iVar6 + *(int *)((int)param_3 + 8);
         *(int *)(*(int *)(uVar3 + 0xb8) + *(int *)(uVar7 + 0x70) * 0x100 + 0x996c) =
              *(int *)((int)param_3 + 8);
-        *(undefined4 *)(*(int *)(uVar3 + 0xb8) + *(int *)(uVar7 + 0x70) * 0x100 + 0x9984) =
-             *(undefined4 *)((int)param_3 + 0xc);
+        *(int *)(*(int *)(uVar3 + 0xb8) + *(int *)(uVar7 + 0x70) * 0x100 + 0x9984) =
+             *(int *)((int)param_3 + 0xc);
         private_spin_unlock_irqrestore(uVar7 + 0x9c,local_58);
         return 0;
       }
@@ -59144,7 +58485,7 @@ LAB_00077fac:
 joined_r0x00077f50:
     if (pcVar4 != (code *)0x0) {
       local_58 = 0;
-      (*pcVar4)(*(undefined4 *)(iVar2 + 0x1d0),param_3);
+      (*pcVar4)(*(int *)(iVar2 + 0x1d0),param_3);
     }
   }
   return 0;
@@ -59152,15 +58493,15 @@ joined_r0x00077f50:
 
 
 
-undefined4 ispcore_activate_module(uint param_1)
+int ispcore_activate_module(uint param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   code **ppcVar3;
   code *pcVar4;
   uint uVar5;
-  undefined4 *puVar6;
+  int *puVar6;
   uint *puVar7;
   uint uVar8;
   
@@ -59172,7 +58513,7 @@ undefined4 ispcore_activate_module(uint param_1)
     uVar5 = *(uint *)(param_1 + 0xd4);
     uVar1 = 0xffffffea;
     if (((uVar5 != 0) && (uVar5 < 0xfffff001)) && (uVar1 = 0, *(int *)(uVar5 + 0xe8) == 1)) {
-      puVar6 = *(undefined4 **)(param_1 + 0xbc);
+      puVar6 = *(int **)(param_1 + 0xbc);
       for (uVar8 = 0; uVar8 < *(uint *)(param_1 + 0xc0); uVar8 = uVar8 + 1) {
         iVar2 = private_clk_get_rate(*puVar6);
         if (iVar2 != 0xffff) {
@@ -59187,7 +58528,7 @@ undefined4 ispcore_activate_module(uint param_1)
           isp_printf(2,"The state of channel%d is invalid when be activated!\n");
           return 0xffffffff;
         }
-        *(undefined4 *)(iVar2 + 0x74) = 2;
+        *(int *)(iVar2 + 0x74) = 2;
       }
       (**(code **)(*(int *)(uVar5 + 0x1bc) + 0x40cc))(*(int *)(uVar5 + 0x1bc),0x4000000,0);
       puVar7 = (uint *)(uVar5 + 0x38);
@@ -59200,9 +58541,9 @@ undefined4 ispcore_activate_module(uint param_1)
         if (puVar7 == (uint *)(uVar5 + 0x78)) goto LAB_00078440;
         uVar8 = *puVar7;
       }
-      isp_printf(2,"Failed to activate %s\n",*(undefined4 *)(uVar8 + 8));
+      isp_printf(2,"Failed to activate %s\n",*(int *)(uVar8 + 8));
 LAB_00078440:
-      *(undefined4 *)(uVar5 + 0xe8) = 2;
+      *(int *)(uVar5 + 0xe8) = 2;
       uVar1 = 0;
     }
   }
@@ -59219,19 +58560,19 @@ void dump_msca_regs(void)
 
 
 
-undefined4 system_reg_write(int param_1,undefined4 param_2)
+int system_reg_write(int param_1,int param_2)
 
 {
-  *(undefined4 *)(*(int *)(ispcore_sd + 0xb8) + param_1) = param_2;
+  *(int *)(*(int *)(ispcore_sd + 0xb8) + param_1) = param_2;
   return 0;
 }
 
 
 
-undefined4 system_reg_read(int param_1)
+int system_reg_read(int param_1)
 
 {
-  return *(undefined4 *)(*(int *)(ispcore_sd + 0xb8) + param_1);
+  return *(int *)(*(int *)(ispcore_sd + 0xb8) + param_1);
 }
 
 
@@ -59271,7 +58612,7 @@ void tx_isp_enable_irq(int param_1)
 
 {
   int iVar1;
-  undefined4 local_18 [3];
+  int local_18 [3];
   
   iVar1 = param_1 + 0x80;
   local_18[0] = 0;
@@ -59289,7 +58630,7 @@ void tx_isp_disable_irq(int param_1)
 
 {
   int iVar1;
-  undefined4 local_18 [3];
+  int local_18 [3];
   
   iVar1 = param_1 + 0x80;
   local_18[0] = 0;
@@ -59306,14 +58647,14 @@ void tx_isp_disable_irq(int param_1)
 int ispcore_video_s_stream(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   code **ppcVar2;
   code *pcVar3;
   int iVar4;
   int iVar5;
   int iVar6;
   int *piVar7;
-  undefined4 local_28 [2];
+  int local_28 [2];
   
   iVar5 = *(int *)(param_1 + 0xd4);
   iVar6 = iVar5 + 0xdc;
@@ -59325,10 +58666,10 @@ int ispcore_video_s_stream(int param_1,int param_2)
     return -1;
   }
   private_spin_unlock_irqrestore(iVar6,local_28[0]);
-  *(undefined4 *)(iVar5 + 0x164) = 0;
-  *(undefined4 *)(iVar5 + 0x168) = 0;
-  *(undefined4 *)(iVar5 + 0x170) = 0;
-  *(undefined4 *)(iVar5 + 0x160) = 0;
+  *(int *)(iVar5 + 0x164) = 0;
+  *(int *)(iVar5 + 0x168) = 0;
+  *(int *)(iVar5 + 0x170) = 0;
+  *(int *)(iVar5 + 0x160) = 0;
   if (param_2 == 0) {
     if (*(int *)(iVar5 + 0xe8) != 4) goto LAB_00078700;
     iVar4 = 0;
@@ -59337,7 +58678,7 @@ int ispcore_video_s_stream(int param_1,int param_2)
       iVar6 = iVar6 + iVar4;
       iVar4 = iVar4 + 0xc4;
       if (*(int *)(iVar6 + 0x74) == 4) {
-        ispcore_frame_channel_streamoff(*(undefined4 *)(iVar6 + 0x78));
+        ispcore_frame_channel_streamoff(*(int *)(iVar6 + 0x78));
       }
       if (iVar4 == 0x24c) break;
       iVar6 = *(int *)(iVar5 + 0x150);
@@ -59348,7 +58689,7 @@ int ispcore_video_s_stream(int param_1,int param_2)
     if (*(int *)(iVar5 + 0xe8) != 3) goto LAB_00078700;
     uVar1 = 4;
   }
-  *(undefined4 *)(iVar5 + 0xe8) = uVar1;
+  *(int *)(iVar5 + 0xe8) = uVar1;
 LAB_00078700:
   piVar7 = (int *)(param_1 + 0x38);
   iVar6 = 0;
@@ -59381,11 +58722,11 @@ LAB_00078700:
   iVar5 = *(int *)(iVar5 + 0x15c);
 LAB_000787b4:
   if ((iVar5 == 1) || (param_2 == 0)) {
-    *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0xb0) = 0;
+    *(int *)(*(int *)(param_1 + 0xb8) + 0xb0) = 0;
     pcVar3 = tx_isp_disable_irq;
   }
   else {
-    *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0xb0) = 0xffffffff;
+    *(int *)(*(int *)(param_1 + 0xb8) + 0xb0) = 0xffffffff;
     pcVar3 = tx_isp_enable_irq;
   }
   (*pcVar3)(param_1);
@@ -59397,7 +58738,7 @@ LAB_000787b4:
 
 
 
-undefined4 ispcore_core_ops_init(uint param_1,int param_2)
+int ispcore_core_ops_init(uint param_1,int param_2)
 
 {
   char cVar1;
@@ -59411,21 +58752,21 @@ undefined4 ispcore_core_ops_init(uint param_1,int param_2)
   char *pcVar9;
   uint uVar10;
   uint uVar11;
-  undefined4 uVar12;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
+  int uVar12;
+  int local_78;
+  int local_74;
+  int local_70;
   char local_6c [16];
-  undefined4 local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
+  int local_5c;
+  int local_58;
+  int local_54;
+  int local_50;
   uint local_4c;
   undefined2 local_48;
   undefined2 local_46;
   undefined2 local_44;
   undefined2 local_42;
-  undefined4 local_40;
+  int local_40;
   undefined2 local_3c;
   ushort local_3a;
   undefined2 local_38;
@@ -59435,11 +58776,11 @@ undefined4 ispcore_core_ops_init(uint param_1,int param_2)
   undefined2 local_30;
   undefined2 local_2e;
   undefined2 local_2c;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
-  undefined4 local_18 [2];
+  int local_28;
+  int local_24;
+  int local_20;
+  int local_1c;
+  int local_18 [2];
   
   uVar11 = 0;
   if ((param_1 != 0) && (param_1 < 0xfffff001)) {
@@ -59464,8 +58805,8 @@ undefined4 ispcore_core_ops_init(uint param_1,int param_2)
       iVar5 = *(int *)(uVar11 + 0xe8);
     }
     if (iVar5 == 3) {
-      private_kthread_stop(*(undefined4 *)(uVar11 + 0x1b8));
-      *(undefined4 *)(uVar11 + 0xe8) = 2;
+      private_kthread_stop(*(int *)(uVar11 + 0x1b8));
+      *(int *)(uVar11 + 0xe8) = 2;
     }
     tisp_deinit();
     memset((void *)(*(int *)(uVar11 + 0x1bc) + 4),0,0x40a4);
@@ -59475,14 +58816,14 @@ undefined4 ispcore_core_ops_init(uint param_1,int param_2)
   memset(&local_78,0,0x60);
   iVar5 = private_reset_tx_isp_module(0);
   if (iVar5 != 0) {
-    isp_printf(2,"Failed to reset %s\n",*(undefined4 *)(param_1 + 8));
+    isp_printf(2,"Failed to reset %s\n",*(int *)(param_1 + 8));
     return 0xffffffea;
   }
   iVar5 = uVar11 + 0xdc;
   __private_spin_lock_irqsave(iVar5,local_18);
   if (*(int *)(uVar11 + 0xe8) != 2) {
     private_spin_unlock_irqrestore(iVar5);
-    isp_printf(2,"Can\'t init ispcore when its state is %d \n!",*(undefined4 *)(uVar11 + 0xe8));
+    isp_printf(2,"Can\'t init ispcore when its state is %d \n!",*(int *)(uVar11 + 0xe8));
     return 0xffffffff;
   }
   private_spin_unlock_irqrestore(iVar5,local_18[0]);
@@ -59500,7 +58841,7 @@ undefined4 ispcore_core_ops_init(uint param_1,int param_2)
           *(uint *)(iVar6 + 4) = (uint)uVar2;
           uVar3 = *(ushort *)(uVar11 + 0x142);
           *(uint *)(iVar6 + 8) = (uint)uVar3;
-          *(undefined4 *)(iVar6 + 0xc) = *(undefined4 *)(&DAT_000b1f1c + iVar5);
+          *(int *)(iVar6 + 0xc) = *(int *)(&DAT_000b1f1c + iVar5);
           uVar8 = (uint)uVar2 * *(int *)(&DAT_000b1f20 + iVar5) >> 3;
           *(uint *)(iVar6 + 0x14) = uVar8;
           *(uint *)(iVar6 + 0x18) = uVar3 * uVar8;
@@ -59748,9 +59089,9 @@ LAB_00078d60:
                "ispcore_core_ops_init",0x56e,uVar10);
   }
 LAB_00078d84:
-  local_78 = *(undefined4 *)(uVar11 + 0x124);
+  local_78 = *(int *)(uVar11 + 0x124);
   pcVar9 = local_6c;
-  local_74 = *(undefined4 *)(uVar11 + 0x128);
+  local_74 = *(int *)(uVar11 + 0x128);
   pcVar7 = **(char ***)(uVar11 + 0x120);
   do {
     cVar1 = *pcVar7;
@@ -59760,30 +59101,30 @@ LAB_00078d84:
   } while (cVar1 != '\0');
   iVar5 = *(int *)(uVar11 + 0x120);
   local_4c = *(uint *)(uVar11 + 300);
-  local_5c = *(undefined4 *)(iVar5 + 0x94);
+  local_5c = *(int *)(iVar5 + 0x94);
   local_3a = *(ushort *)(iVar5 + 0xb2);
-  local_58 = *(undefined4 *)(iVar5 + 0x98);
-  local_54 = *(undefined4 *)(iVar5 + 0x9c);
-  local_20 = *(undefined4 *)(iVar5 + 0xe4);
-  local_50 = *(undefined4 *)(iVar5 + 0xa0);
+  local_58 = *(int *)(iVar5 + 0x98);
+  local_54 = *(int *)(iVar5 + 0x9c);
+  local_20 = *(int *)(iVar5 + 0xe4);
+  local_50 = *(int *)(iVar5 + 0xa0);
   local_48 = *(undefined2 *)(iVar5 + 0xa4);
   local_2e = *(undefined2 *)(iVar5 + 0xd8);
   local_2c = *(undefined2 *)(iVar5 + 0xda);
   local_46 = *(undefined2 *)(iVar5 + 0xa6);
   local_44 = *(undefined2 *)(iVar5 + 0xa8);
   local_42 = *(undefined2 *)(iVar5 + 0xaa);
-  local_40 = *(undefined4 *)(iVar5 + 0xac);
-  local_28 = *(undefined4 *)(iVar5 + 0xdc);
+  local_40 = *(int *)(iVar5 + 0xac);
+  local_28 = *(int *)(iVar5 + 0xdc);
   local_3c = *(undefined2 *)(iVar5 + 0xb0);
   local_38 = *(undefined2 *)(iVar5 + 0xb4);
   local_36 = *(undefined2 *)(iVar5 + 0xb6);
   local_34 = *(undefined2 *)(iVar5 + 0xb8);
   local_32 = *(undefined2 *)(iVar5 + 0xba);
-  local_24 = *(undefined4 *)(iVar5 + 0xe0);
+  local_24 = *(int *)(iVar5 + 0xe0);
   *(short *)(iVar5 + 0xbc) =
        (short)((((local_4c & 0xffff) * 1000000) / (local_4c >> 0x10)) / (uint)local_3a);
   local_30 = *(undefined2 *)(*(int *)(uVar11 + 0x120) + 0xbc);
-  local_1c = *(undefined4 *)(uVar11 + 0x17c);
+  local_1c = *(int *)(uVar11 + 0x17c);
   tisp_init(&local_78,uVar11 + 0x1d8);
   uVar10 = private_kthread_run(isp_fw_process,0,"isp_fw_process");
   *(uint *)(uVar11 + 0x1b8) = uVar10;
@@ -59792,7 +59133,7 @@ LAB_00078d84:
     uVar12 = 0xffffffea;
   }
   else {
-    *(undefined4 *)(uVar11 + 0xe8) = 3;
+    *(int *)(uVar11 + 0xe8) = 3;
     uVar12 = 0;
   }
   return uVar12;
@@ -59800,15 +59141,15 @@ LAB_00078d84:
 
 
 
-undefined4 ispcore_slake_module(uint param_1)
+int ispcore_slake_module(uint param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   uint uVar2;
   code *pcVar3;
   uint uVar4;
   int iVar5;
-  undefined4 *puVar6;
+  int *puVar6;
   uint *puVar7;
   
   uVar1 = 0xffffffea;
@@ -59825,10 +59166,10 @@ undefined4 ispcore_slake_module(uint param_1)
           ispcore_core_ops_init(param_1,0);
         }
         for (uVar2 = 0; uVar2 < *(uint *)(uVar4 + 0x154); uVar2 = uVar2 + 1) {
-          *(undefined4 *)(uVar2 * 0xc4 + *(int *)(uVar4 + 0x150) + 0x74) = 1;
+          *(int *)(uVar2 * 0xc4 + *(int *)(uVar4 + 0x150) + 0x74) = 1;
         }
         (**(code **)(*(int *)(uVar4 + 0x1bc) + 0x40cc))(*(int *)(uVar4 + 0x1bc),0x4000001,0);
-        *(undefined4 *)(uVar4 + 0xe8) = 1;
+        *(int *)(uVar4 + 0xe8) = 1;
         puVar7 = (uint *)(uVar4 + 0x38);
         uVar2 = *puVar7;
         while( true ) {
@@ -59836,7 +59177,7 @@ undefined4 ispcore_slake_module(uint param_1)
               (iVar5 = *(int *)(*(int *)(uVar2 + 0xc4) + 0x10), iVar5 != 0)) &&
              (((pcVar3 = *(code **)(iVar5 + 4), pcVar3 != (code *)0x0 &&
                (iVar5 = (*pcVar3)(uVar2), iVar5 != 0)) && (iVar5 != -0x203)))) {
-            isp_printf(2,"Failed to slake %s\n",*(undefined4 *)(uVar2 + 8));
+            isp_printf(2,"Failed to slake %s\n",*(int *)(uVar2 + 8));
             iVar5 = *(int *)(param_1 + 0xc0);
             goto LAB_00079128;
           }
@@ -59846,7 +59187,7 @@ undefined4 ispcore_slake_module(uint param_1)
         }
         iVar5 = *(int *)(param_1 + 0xc0);
 LAB_00079128:
-        puVar6 = (undefined4 *)(*(int *)(param_1 + 0xbc) + iVar5 * 4);
+        puVar6 = (int *)(*(int *)(param_1 + 0xbc) + iVar5 * 4);
         while( true ) {
           iVar5 = iVar5 + -1;
           puVar6 = puVar6 + -1;
@@ -59862,11 +59203,11 @@ LAB_00079128:
 
 
 
-undefined4 tx_isp_core_probe(int param_1)
+int tx_isp_core_probe(int param_1)
 
 {
   void *__s;
-  undefined4 uVar1;
+  int uVar1;
   int iVar2;
   void *__s_00;
   void *pvVar3;
@@ -59885,9 +59226,9 @@ undefined4 tx_isp_core_probe(int param_1)
     if (iVar2 == 0) {
       private_spin_lock_init((int)__s + 0xdc);
       private_raw_mutex_init((int)__s + 0xdc,"&core_dev->mlock",0x10000);
-      uVar1 = *(undefined4 *)(param_1 + 0x58);
+      uVar1 = *(int *)(param_1 + 0x58);
       *(uint *)((int)__s + 0x154) = (uint)*(ushort *)((int)__s + 200);
-      *(undefined4 *)((int)__s + 0x138) = uVar1;
+      *(int *)((int)__s + 0x138) = uVar1;
       __s_00 = (void *)private_kmalloc((uint)*(ushort *)((int)__s + 200) * 0xc4,0xd0);
       if (__s_00 == (void *)0x0) {
         isp_printf(2,"Failed to allocate sensor device\n");
@@ -59901,29 +59242,29 @@ undefined4 tx_isp_core_probe(int param_1)
           *(uint *)((int)pvVar3 + 0x70) = uVar5;
           *(int *)((int)pvVar3 + 0x78) = *(int *)((int)__s + 0xcc) + iVar2;
           if (*(char *)(*(int *)((int)__s + 0xcc) + iVar2 + 5) == '\0') {
-            *(undefined4 *)((int)pvVar3 + 0x74) = 0;
+            *(int *)((int)pvVar3 + 0x74) = 0;
           }
           else {
             if (uVar5 == 0) {
-              *(undefined4 *)((int)pvVar3 + 0x80) = 0xa40;
-              *(undefined4 *)((int)pvVar3 + 0x84) = 0x800;
+              *(int *)((int)pvVar3 + 0x80) = 0xa40;
+              *(int *)((int)pvVar3 + 0x84) = 0x800;
               *(undefined *)((int)pvVar3 + 0x90) = 1;
               *(undefined *)((int)pvVar3 + 0x91) = 0;
 LAB_00079390:
-              *(undefined4 *)((int)pvVar3 + 0x88) = 0x80;
+              *(int *)((int)pvVar3 + 0x88) = 0x80;
             }
             else {
               if (uVar5 == 1) {
-                *(undefined4 *)((int)pvVar3 + 0x80) = 0x780;
-                *(undefined4 *)((int)pvVar3 + 0x84) = 0x438;
+                *(int *)((int)pvVar3 + 0x80) = 0x780;
+                *(int *)((int)pvVar3 + 0x84) = 0x438;
                 *(undefined *)((int)pvVar3 + 0x90) = 1;
                 *(undefined *)((int)pvVar3 + 0x91) = 1;
                 goto LAB_00079390;
               }
-              *(undefined4 *)((int)pvVar3 + 0x88) = 0x80;
+              *(int *)((int)pvVar3 + 0x88) = 0x80;
             }
-            *(undefined4 *)((int)pvVar3 + 0x8c) = 0x80;
-            *(undefined4 *)((int)pvVar3 + 0x74) = 1;
+            *(int *)((int)pvVar3 + 0x8c) = 0x80;
+            *(int *)((int)pvVar3 + 0x74) = 1;
             private_spin_lock_init((int)pvVar3 + 0x9c);
             *(void **)((int)pvVar3 + 0x7c) = __s;
             *(code **)(*(int *)((int)__s + 0xcc) + iVar2 + 0x1c) = ispcore_pad_event_handle;
@@ -59935,10 +59276,10 @@ LAB_00079390:
         iVar2 = isp_core_tuning_init(__s);
         *(int *)((int)__s + 0x1bc) = iVar2;
         if (iVar2 != 0) {
-          *(undefined4 *)((int)__s + 0xe8) = 1;
+          *(int *)((int)__s + 0xe8) = 1;
           private_platform_set_drvdata(param_1,__s);
           *(void **)((int)__s + 0xd4) = __s;
-          *(undefined4 *)((int)__s + 0x30) = *(undefined4 *)(*(int *)((int)__s + 0x1bc) + 0x40c8);
+          *(int *)((int)__s + 0x30) = *(int *)(*(int *)((int)__s + 0x1bc) + 0x40c8);
           *(undefined1 **)((int)__s + 0x34) = isp_info_proc_fops;
           ispcore_sd = __s;
           sensor_early_init(__s);
@@ -59953,9 +59294,9 @@ LAB_00079390:
         if (1 < *(int *)((int)__s + 0xe8)) {
           ispcore_slake_module(__s);
         }
-        private_kfree(*(undefined4 *)((int)__s + 0x150));
-        *(undefined4 *)((int)__s + 0x158) = 1;
-        *(undefined4 *)((int)__s + 0x150) = 0;
+        private_kfree(*(int *)((int)__s + 0x150));
+        *(int *)((int)__s + 0x158) = 1;
+        *(int *)((int)__s + 0x150) = 0;
       }
       tx_isp_subdev_deinit(__s);
       uVar1 = 0xffffffea;
@@ -59972,7 +59313,7 @@ LAB_00079390:
 
 
 
-undefined4 system_irq_func_set(int param_1,undefined4 param_2)
+int system_irq_func_set(int param_1,int param_2)
 
 {
   (&irq_func_cb)[param_1] = param_2;
@@ -59981,10 +59322,10 @@ undefined4 system_irq_func_set(int param_1,undefined4 param_2)
 
 
 
-undefined4 mbus_to_bayer_write(undefined4 param_1)
+int mbus_to_bayer_write(int param_1)
 
 {
-  undefined4 uVar1;
+  int uVar1;
   
   switch(param_1) {
   case 0x3001:
@@ -60032,16 +59373,16 @@ int ispcore_interrupt_service_routine(int param_1)
   uint uVar1;
   int iVar2;
   int iVar3;
-  undefined4 uVar4;
+  int uVar4;
   int iVar5;
   uint uVar6;
   code **ppcVar7;
   uint uVar8;
   undefined auStack_40 [8];
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  undefined4 local_2c;
+  int local_38;
+  int local_34;
+  int local_30;
+  int local_2c;
   uint local_28;
   
   iVar5 = *(int *)(param_1 + 0xd4);
@@ -60052,7 +59393,7 @@ int ispcore_interrupt_service_routine(int param_1)
   }
   else {
     isp_printf(1,"ispcore: irq-status 0x%08x, err is 0x%x,0x%x,084c is 0x%x\n",uVar6,uVar6 & 0x3f8,
-               0x3f8,*(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x84c));
+               0x3f8,*(int *)(*(int *)(param_1 + 0xb8) + 0x84c));
     isp_err = isp_err + 1;
     iVar3 = *(int *)(iVar5 + 0x15c);
   }
@@ -60099,13 +59440,13 @@ int ispcore_interrupt_service_routine(int param_1)
   }
   iVar2 = *(int *)(param_1 + 0xb8);
   while ((*(uint *)(iVar2 + 0x997c) & 1) == 0) {
-    local_38 = *(undefined4 *)(iVar2 + 0x9974);
-    local_34 = *(undefined4 *)(iVar2 + 0x998c);
-    local_30 = *(undefined4 *)(iVar2 + 0x9990);
+    local_38 = *(int *)(iVar2 + 0x9974);
+    local_34 = *(int *)(iVar2 + 0x998c);
+    local_30 = *(int *)(iVar2 + 0x9990);
     local_2c = 0;
     local_28 = *(int *)(iVar5 + 0x128) << 0x10 |
                *(uint *)(*(int *)(ispcore_sd + 0xb8) + 0x9888) >> 0x10;
-    tx_isp_send_event_to_remote(*(undefined4 *)(iVar3 + 0x78),0x3000006,auStack_40);
+    tx_isp_send_event_to_remote(*(int *)(iVar3 + 0x78),0x3000006,auStack_40);
     iVar2 = *(int *)(param_1 + 0xb8);
   }
   iVar3 = *(int *)(iVar5 + 0x1bc);
@@ -60137,7 +59478,7 @@ int ispcore_interrupt_service_routine(int param_1)
     if (iVar3 != 0) {
       (**(code **)(iVar3 + 0x40cc))(iVar3,0x4000003,0);
     }
-    *(undefined4 *)(iVar5 + 0x178) = 0;
+    *(int *)(iVar5 + 0x178) = 0;
     csc_switch = 1;
 LAB_00079988:
     iVar3 = *(int *)(iVar5 + 0x134);
@@ -60147,7 +59488,7 @@ LAB_00079988:
       uVar4 = 0xff00ff00;
 LAB_00079974:
       system_reg_write(0x6030,uVar4);
-      *(undefined4 *)(iVar5 + 0x178) = 0;
+      *(int *)(iVar5 + 0x178) = 0;
       goto LAB_00079988;
     }
     if (iVar3 == 3) {
@@ -60157,8 +59498,8 @@ LAB_00079974:
     iVar3 = *(int *)(iVar5 + 0x134);
   }
   if ((iVar3 == 1) && (*(int *)(iVar5 + 0x11c) == 1)) {
-    mbus_to_bayer_write(*(undefined4 *)(iVar5 + 0xf4));
-    *(undefined4 *)(iVar5 + 0x11c) = 0;
+    mbus_to_bayer_write(*(int *)(iVar5 + 0xf4));
+    *(int *)(iVar5 + 0x11c) = 0;
   }
   if (first_into == 1) {
     tisp_top_sel(1);
@@ -60169,13 +59510,13 @@ LAB_000799e4:
     iVar2 = *(int *)(iVar5 + 0x150);
     iVar3 = *(int *)(param_1 + 0xb8);
     while ((*(uint *)(iVar3 + 0x9a7c) & 1) == 0) {
-      local_38 = *(undefined4 *)(iVar3 + 0x9a74);
-      local_34 = *(undefined4 *)(iVar3 + 0x9a8c);
-      local_30 = *(undefined4 *)(iVar3 + 0x9a90);
+      local_38 = *(int *)(iVar3 + 0x9a74);
+      local_34 = *(int *)(iVar3 + 0x9a8c);
+      local_30 = *(int *)(iVar3 + 0x9a90);
       local_28 = 0;
       local_2c = 0;
       if (isp_ch1_dequeue_delay_time == 0) {
-        tx_isp_send_event_to_remote(*(undefined4 *)(iVar2 + 0x13c),0x3000006,auStack_40);
+        tx_isp_send_event_to_remote(*(int *)(iVar2 + 0x13c),0x3000006,auStack_40);
         iVar3 = *(int *)(param_1 + 0xb8);
       }
       else {
@@ -60189,12 +59530,12 @@ LAB_000799e4:
     iVar3 = *(int *)(iVar5 + 0x150);
     iVar5 = *(int *)(param_1 + 0xb8);
     while ((*(uint *)(iVar5 + 0x9b7c) & 1) == 0) {
-      local_38 = *(undefined4 *)(iVar5 + 0x9b74);
-      local_34 = *(undefined4 *)(iVar5 + 0x9b8c);
-      local_30 = *(undefined4 *)(iVar5 + 0x9b90);
+      local_38 = *(int *)(iVar5 + 0x9b74);
+      local_34 = *(int *)(iVar5 + 0x9b8c);
+      local_30 = *(int *)(iVar5 + 0x9b90);
       local_28 = 0;
       local_2c = 0;
-      tx_isp_send_event_to_remote(*(undefined4 *)(iVar3 + 0x200),0x3000006,auStack_40);
+      tx_isp_send_event_to_remote(*(int *)(iVar3 + 0x200),0x3000006,auStack_40);
       iVar5 = *(int *)(param_1 + 0xb8);
     }
   }
@@ -60215,17 +59556,17 @@ LAB_000799e4:
 
 
 
-undefined4 tx_isp_vic_remove(undefined4 param_1)
+int tx_isp_vic_remove(int param_1)
 
 {
   uint uVar1;
-  undefined4 uVar2;
+  int uVar2;
   
   uVar1 = private_platform_get_drvdata();
   uVar2 = 0;
   if (uVar1 != 0) {
     if (uVar1 < 0xfffff001) {
-      uVar2 = *(undefined4 *)(uVar1 + 0xd4);
+      uVar2 = *(int *)(uVar1 + 0xd4);
     }
     else {
       uVar1 = 0;
@@ -60239,7 +59580,7 @@ undefined4 tx_isp_vic_remove(undefined4 param_1)
 
 
 
-undefined4 tx_isp_vin_remove(undefined4 param_1)
+int tx_isp_vin_remove(int param_1)
 
 {
   uint uVar1;
@@ -60259,7 +59600,7 @@ undefined4 tx_isp_vin_remove(undefined4 param_1)
 
 
 
-undefined4 tx_isp_csi_remove(undefined4 param_1)
+int tx_isp_csi_remove(int param_1)
 
 {
   uint uVar1;
@@ -60277,7 +59618,7 @@ undefined4 tx_isp_csi_remove(undefined4 param_1)
   *(uint *)(*(int *)(uVar2 + 0xb8) + 0x10) = *(uint *)(*(int *)(uVar2 + 0xb8) + 0x10) & 0xfffffffe;
   *(uint *)(*(int *)(uVar2 + 0xb8) + 0x10) = *(uint *)(*(int *)(uVar2 + 0xb8) + 0x10) | 1;
   private_platform_set_drvdata(param_1,0);
-  private_iounmap(*(undefined4 *)(uVar2 + 0x13c));
+  private_iounmap(*(int *)(uVar2 + 0x13c));
   iVar3 = *piVar4;
   private_release_mem_region(iVar3,(piVar4[1] + 1) - iVar3);
   tx_isp_subdev_deinit(uVar1);
@@ -60287,7 +59628,7 @@ undefined4 tx_isp_csi_remove(undefined4 param_1)
 
 
 
-undefined4 tx_isp_fs_remove(void)
+int tx_isp_fs_remove(void)
 
 {
   int iVar1;
@@ -60312,14 +59653,14 @@ undefined4 tx_isp_fs_remove(void)
 
 
 
-undefined4 tx_isp_remove(undefined4 param_1)
+int tx_isp_remove(int param_1)
 
 {
   int iVar1;
   
   iVar1 = private_platform_get_drvdata();
   private_misc_deregister(iVar1 + 0xc);
-  private_proc_remove(*(undefined4 *)(iVar1 + 0x11c));
+  private_proc_remove(*(int *)(iVar1 + 0x11c));
   tx_isp_unregister_platforms(iVar1 + 0x84);
   private_platform_set_drvdata(param_1,0);
   private_kfree(iVar1);
@@ -60328,7 +59669,7 @@ undefined4 tx_isp_remove(undefined4 param_1)
 
 
 
-undefined4 tx_isp_core_remove(void)
+int tx_isp_core_remove(void)
 
 {
   int iVar1;
@@ -60338,14 +59679,14 @@ undefined4 tx_isp_core_remove(void)
   iVar2 = *(int *)(iVar1 + 0xd4);
   if (*(int *)(iVar2 + 0x1bc) != 0) {
     isp_core_tuning_deinit();
-    *(undefined4 *)(iVar2 + 0x1bc) = 0;
+    *(int *)(iVar2 + 0x1bc) = 0;
   }
   if (1 < *(int *)(iVar2 + 0xe8)) {
     ispcore_slake_module(iVar2);
   }
-  private_kfree(*(undefined4 *)(iVar2 + 0x150));
-  *(undefined4 *)(iVar2 + 0x158) = 1;
-  *(undefined4 *)(iVar2 + 0x150) = 0;
+  private_kfree(*(int *)(iVar2 + 0x150));
+  *(int *)(iVar2 + 0x158) = 1;
+  *(int *)(iVar2 + 0x150) = 0;
   tx_isp_subdev_deinit(iVar1);
   tisp_deinit();
   private_kfree(iVar2);
