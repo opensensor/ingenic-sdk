@@ -31,7 +31,7 @@
 #include <linux/resource.h>
 #include <linux/i2c-gpio.h>
 #include <linux/of_platform.h>
-
+#include <linux/ioport.h>
 #include <linux/gpio.h>
 
 #include <soc/gpio.h>
@@ -145,52 +145,120 @@ void *private_platform_get_drvdata(struct platform_device *pdev)
 }
 EXPORT_SYMBOL(private_platform_get_drvdata);
 
+// Define the fixed resources for each device based on 4.4 kernel insights
+static struct resource fixed_isp_m0_resources[] = {
+		{
+				.start = 0x2b7000003f1,
+				.end   = 0xffff00fe10001c00,
+				.flags = IORESOURCE_MEM,
+				.name  = "isp-device",
+		},
+		{
+				.start = 0x2b7000003f6,
+				.end   = 0x2b7000003f7,
+				.flags = IORESOURCE_IRQ,
+				.name  = "isp-irq-id",
+		},
+};
+
+static struct resource fixed_isp_w02_resources[] = {
+		{
+				.start = 0x2b700000420,
+				.end   = 0x2b700000421,
+				.flags = IORESOURCE_MEM,
+				.name  = "isp-device",
+		},
+		{
+				.start = 0x2b700000425,
+				.end   = 0x2b700000426,
+				.flags = IORESOURCE_IRQ,
+				.name  = "isp-irq-id",
+		},
+};
+
+static struct resource fixed_isp_w01_resources[] = {
+		{
+				.start = 0x2b700000a43,
+				.end   = 0x2b700000a44,
+				.flags = IORESOURCE_MEM,
+				.name  = "isp-device",
+		},
+};
+
+
+// Define the fixed ISP resources correctly
+static struct resource fixed_isp_resources[] = {
+		{
+				.start = 0x13300000,
+				.end   = 0x133FFFFF,
+				.flags = IORESOURCE_MEM,
+		},
+		{
+				.start = IRQ_ISP,
+				.end   = IRQ_ISP,
+				.flags = IORESOURCE_IRQ,
+		},
+};
+
+
+// Define a placeholder for the correct platform device initialization
+static struct platform_device fixed_isp_device = {
+		.name = "tx-isp",
+		.id = -1,
+		.num_resources = ARRAY_SIZE(fixed_isp_resources),
+		.resource = fixed_isp_resources,
+};
+
+// Define the release function for each device
+static void isp_device_release(struct device *dev)
+{
+	printk(KERN_INFO "%s device released\n", dev_name(dev));
+}
+
+// External declaration of the init function
+extern int tx_isp_init(void);
+
+// Shim function to register the device
 int private_platform_device_register(struct platform_device *pdev)
 {
-	struct resource res[] = {
-			{
-					.start = 0x13300000,
-					.end = 0x1330ffff,
-					.flags = IORESOURCE_MEM,
-					.name = "isp_mem",
-			},
-			{
-					.start = IRQ_ISP,
-					.end = IRQ_ISP,
-					.flags = IORESOURCE_IRQ,
-					.name = "isp_irq",
-			},
-	};
+	int ret;
+//	int i;
+//
+	printk(KERN_INFO "private_platform_device_register: called for device '%s'\n", pdev->name);
+//
+//	// Correct resources for each device based on name
+//	if (strcmp(pdev->name, "tx-isp") == 0) {
+//		pdev->resource = NULL;
+//		pdev->num_resources = 0;
+//	}
+//	else if (strcmp(pdev->name, "isp-m0") == 0) {
+//		printk(KERN_ERR "private_platform_device_register: Detected corrupted resources for isp-m0\n");
+//		pdev->resource = fixed_isp_m0_resources;
+//		pdev->num_resources = ARRAY_SIZE(fixed_isp_m0_resources);
+//	} else if (strcmp(pdev->name, "isp-w02") == 0) {
+//		printk(KERN_ERR "private_platform_device_register: Detected corrupted resources for isp-w02\n");
+//		pdev->resource = fixed_isp_w02_resources;
+//		pdev->num_resources = ARRAY_SIZE(fixed_isp_w02_resources);
+//	} else if (strcmp(pdev->name, "isp-w01") == 0) {
+//		printk(KERN_ERR "private_platform_device_register: Detected corrupted resources for isp-w01\n");
+//		pdev->resource = fixed_isp_w01_resources;
+//		pdev->num_resources = ARRAY_SIZE(fixed_isp_w01_resources);
+//	} else if (strcmp(pdev->name, "isp-w00") == 0 || strcmp(pdev->name, "isp-fs") == 0) {
+//		printk(KERN_ERR "private_platform_device_register: Detected corrupted resources for %s\n", pdev->name);
+//		pdev->resource = NULL;
+//		pdev->num_resources = 0;
+//	}
+//
+//	printk(KERN_INFO "  device ID: %d\n", pdev->id);
+//	printk(KERN_INFO "  number of resources: %d\n", pdev->num_resources);
+//
+//	// Ensure release function is set
+//	pdev->dev.release = isp_device_release;
 
-	struct platform_device *new_pdev;
+	ret = platform_device_register(pdev);
+	printk(KERN_INFO "private_platform_device_register: platform_device_register returned %d\n", ret);
 
-	printk(KERN_INFO "private_platform_device_register: creating new platform device\n");
-
-	new_pdev = platform_device_alloc("ingenic,t31-isp", PLATFORM_DEVID_AUTO);
-	if (!new_pdev) {
-		printk(KERN_ERR "Failed to allocate platform device\n");
-		return ERR_PTR(-ENOMEM);
-	}
-
-	if (platform_device_add_resources(new_pdev, res, ARRAY_SIZE(res))) {
-		printk(KERN_ERR "Failed to add resources to platform device\n");
-		platform_device_put(new_pdev);
-		return ERR_PTR(-ENODEV);
-	}
-
-	if (platform_device_add_data(new_pdev, pdev->dev.platform_data, 0)) {
-		printk(KERN_ERR "Failed to add platform data to platform device\n");
-		platform_device_put(new_pdev);
-		return ERR_PTR(-ENODEV);
-	}
-
-	if (platform_device_add(new_pdev)) {
-		printk(KERN_ERR "Failed to add platform device\n");
-		platform_device_put(new_pdev);
-		return ERR_PTR(-ENODEV);
-	}
-
-	return new_pdev;
+	return ret;
 }
 EXPORT_SYMBOL(private_platform_device_register);
 

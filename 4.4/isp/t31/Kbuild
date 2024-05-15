@@ -1,9 +1,22 @@
+# Add -O0 to disable optimization
+ccflags-y += -O0
+
 SRCS := $(DIR)/tx-isp-debug.c \
 	$(DIR)/tx-isp-module.c
 
-OBJS := $(SRCS:%.c=%.o) $(ASM_SRCS:%.S=%.o)
-OBJS += $(KERNEL_VERSION)/sdk/lib$(SOC_FAMILY)-firmware.a
+# Generate assembly files instead of object files
+ASM_FILES := $(SRCS:%.c=%.S)
 
-$(OUT)-objs := $(OBJS)
+# Rule to generate .S assembly files
+%.S: %.c
+	$(CC) $(ccflags-y) -S -o $@ $<
 
-obj-m += $(OUT).o
+# Replace OBJS with ASM_FILES
+OBJS := $(ASM_FILES)
+
+# Since we only want to generate assembly files, no need for linking
+all: $(ASM_FILES)
+
+# This will prevent obj-m from trying to create a module
+# and ensure only .S files are generated
+.PHONY: all
