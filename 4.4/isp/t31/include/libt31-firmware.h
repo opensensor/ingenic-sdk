@@ -1,4 +1,10 @@
 
+
+#define ISP_CORE_PAD_COUNT_OFFSET 0xcc
+#define ISP_CORE_PAD_DATA_OFFSET 0xd0
+#define ISP_CORE_TUNING_DATA_OFFSET 0x1c0
+
+// Below symbols are still left from the decompiler -- the above symbols I have brought in from refactoring that
 typedef enum Elf32_GPRMask_MIPS {
 	gpr_zero=1,
 	gpr_at=2,

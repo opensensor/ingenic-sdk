@@ -12,6 +12,9 @@
 
 #include "libt31-firmware.h"
 
+// Global State
+unsigned int DAT_000b40a4;
+
 
 
 /* TODO repalce these with kernel imports */
@@ -2458,43 +2461,39 @@ LAB_00010aac:
 
 
 unsigned int tx_isp_vic_probe(unsigned int *param_1)
-
 {
-  void *__s;
-  unsigned int uVar1;
-  unsigned int uVar2;
-  
-  __s = (void *)private_kmalloc();
-  if (__s == (void *)0x0) {
-    isp_printf();
-    uVar2 = 0xffffffff;
-  }
-  else {
-    memset(__s,0,0x220);
-    uVar1 = tx_isp_subdev_init(param_1,__s,vic_subdev_ops);
-    if (uVar1 == 0) {
-      private_platform_set_drvdata();
-      *(unsigned char **)((int)__s + 0x38) = isp_vic_frd_fops;
-      private_spin_lock_init();
-      private_raw_mutex_init();
-      private_raw_mutex_init();
-      private_init_completion();
-      *(unsigned int *)((int)__s + 300) = 1;
-      *(void **)((int)__s + 0xd8) = __s;
-      test_addr = (int)__s + 0x84;
-      uVar2 = 0;
-      dump_vsd = __s;
+    void *vic_data;
+    unsigned int result;
+
+    vic_data = (void *)private_kmalloc();
+    if (vic_data == NULL) {
+        isp_printf("Failed to allocate memory for vic_data\n");
+        result = 0xffffffff;
     }
     else {
-      isp_printf();
-      private_kfree();
-      uVar2 = 0xfffffff4;
+        memset(vic_data, 0, 0x220);
+        result = tx_isp_subdev_init(param_1, vic_data, vic_subdev_ops);
+        if (result == 0) {
+            private_platform_set_drvdata();
+            *(unsigned char **)((int)vic_data + 0x38) = isp_vic_frd_fops;
+            private_spin_lock_init();
+            private_raw_mutex_init();
+            private_raw_mutex_init();
+            private_init_completion();
+            *(unsigned int *)((int)vic_data + 300) = 1;
+            *(void **)((int)vic_data + 0xd8) = vic_data;
+            test_addr = (int)vic_data + 0x84;
+            dump_vsd = vic_data;
+            result = 0;
+        }
+        else {
+            isp_printf("Failed to initialize ISP subdev\n");
+            private_kfree(vic_data);
+            result = 0xfffffff4;
+        }
     }
-  }
-  return uVar2;
+    return result;
 }
-
-
 
 unsigned int tx_isp_vic_activate_subdev(unsigned int param_1)
 
@@ -9384,11 +9383,12 @@ unsigned int tx_isp_resume(void)
 
 
 void tx_isp_exit(void)
-
 {
-  private_platform_driver_unregister();
-  private_platform_device_unregister();
-  return;
+    // Unregister the ISP platform driver
+    private_platform_driver_unregister(&tx_isp_driver);
+
+    // Unregister the ISP platform device
+    private_platform_device_unregister(tx_isp_device);
 }
 
 
@@ -56742,109 +56742,88 @@ LAB_0007a58c:
 }
 
 
-
 unsigned int tx_isp_core_probe(unsigned int *param_1)
-
 {
-  void *__s;
-  unsigned int uVar1;
-  void *__s_00;
-  unsigned int *puVar2;
-  void *pvVar3;
-  unsigned int uVar4;
-  int iVar5;
-  
-  __s = (void *)private_kmalloc();
-  if (__s == (void *)0x0) {
-    isp_printf();
-    uVar4 = 0xfffffff4;
-  }
-  else {
-    memset(__s,0,0x1e4);
-    uVar1 = tx_isp_subdev_init(param_1,__s,core_subdev_ops);
-    if (uVar1 == 0) {
-      private_spin_lock_init();
-      uVar4 = param_1[0x16];
-      *(unsigned int *)((int)__s + 0x158) = (unsigned int)*(unsigned short *)((int)__s + 0xcc);
-      *(unsigned int *)((int)__s + 0x13c) = uVar4;
-      __s_00 = (void *)private_kmalloc();
-      if (__s_00 == (void *)0x0) {
-        isp_printf();
-        isp_printf();
-      }
-      else {
-        memset(__s_00,0,(unsigned int)*(unsigned short *)((int)__s + 0xcc) * 0xb4);
-        pvVar3 = __s_00;
-        for (uVar1 = 0; iVar5 = uVar1 * 0x24, uVar1 < *(unsigned int *)((int)__s + 0x158); uVar1 = uVar1 + 1
-            ) {
-          *(unsigned int *)((int)pvVar3 + 0x60) = uVar1;
-          *(int *)((int)pvVar3 + 0x68) = *(int *)((int)__s + 0xd0) + iVar5;
-          if (*(char *)(*(int *)((int)__s + 0xd0) + iVar5 + 5) == '\0') {
-            *(unsigned int *)((int)pvVar3 + 100) = 0;
-          }
-          else {
-            if (uVar1 == 0) {
-              *(unsigned int *)((int)pvVar3 + 0x70) = 0xa40;
-              *(unsigned int *)((int)pvVar3 + 0x74) = 0x800;
-              *(unsigned char *)((int)pvVar3 + 0x80) = 1;
-              *(unsigned char *)((int)pvVar3 + 0x81) = 0;
-LAB_0007a804:
-              *(unsigned int *)((int)pvVar3 + 0x78) = 0x80;
-            }
-            else {
-              if (uVar1 == 1) {
-                *(unsigned int *)((int)pvVar3 + 0x70) = 0x780;
-                *(unsigned int *)((int)pvVar3 + 0x74) = 0x438;
-                *(unsigned char *)((int)pvVar3 + 0x80) = 1;
-                *(unsigned char *)((int)pvVar3 + 0x81) = 1;
-                goto LAB_0007a804;
-              }
-              *(unsigned int *)((int)pvVar3 + 0x78) = 0x80;
-            }
-            *(unsigned int *)((int)pvVar3 + 0x7c) = 0x80;
-            *(unsigned int *)((int)pvVar3 + 100) = 1;
-            private_spin_lock_init();
-            *(void **)((int)pvVar3 + 0x6c) = __s;
-            *(code **)(*(int *)((int)__s + 0xd0) + iVar5 + 0x1c) = ispcore_pad_event_handle;
-            *(void **)(*(int *)((int)__s + 0xd0) + iVar5 + 0x20) = pvVar3;
-          }
-          pvVar3 = (void *)((int)pvVar3 + 0xb4);
-        }
-        *(void **)((int)__s + 0x154) = __s_00;
-        puVar2 = isp_core_tuning_init(__s);
-        *(unsigned int **)((int)__s + 0x1c0) = puVar2;
-        if (puVar2 != (unsigned int *)0x0) {
-          *(unsigned int *)((int)__s + 0xec) = 1;
-          private_platform_set_drvdata();
-          *(void **)((int)__s + 0xd8) = __s;
-          *(unsigned int *)((int)__s + 0x34) = *(unsigned int *)(*(int *)((int)__s + 0x1c0) + 0x40c8);
-          *(unsigned char **)((int)__s + 0x38) = isp_info_proc_fops;
-          ispcore_sd = __s;
-          sensor_early_init((int)__s);
-          iVar5 = get_isp_clk();
-          if (iVar5 != 0) {
-            isp_clk = iVar5;
-          }
-          return 0;
-        }
-        isp_printf();
-        if (1 < *(int *)((int)__s + 0xec)) {
-          ispcore_slake_module((unsigned int)__s);
-        }
-        private_kfree();
-        *(unsigned int *)((int)__s + 0x15c) = 1;
-        *(unsigned int *)((int)__s + 0x154) = 0;
-      }
-      tx_isp_subdev_deinit(__s);
-      uVar4 = 0xffffffea;
+    struct isp_core_data *core_data;
+    unsigned int result;
+    struct isp_pad_data *pad_data;
+    unsigned int *tuning_data;
+    unsigned int i;
+    int clk_result;
+
+    core_data = (struct isp_core_data *)private_kmalloc(sizeof(struct isp_core_data), GFP_KERNEL);
+    if (core_data == NULL) {
+        isp_printf("Failed to allocate memory for core_data\n");
+        return -ENOMEM;
     }
-    else {
-      isp_printf();
-      uVar4 = 0xfffffff4;
+
+    memset(core_data, 0, sizeof(struct isp_core_data));
+    result = tx_isp_subdev_init(param_1, core_data, core_subdev_ops);
+    if (result != 0) {
+        isp_printf("Failed to initialize ISP subdev\n");
+        goto err_free_core_data;
     }
-    private_kfree();
-  }
-  return uVar4;
+
+    private_spin_lock_init(&core_data->lock);
+    core_data->pad_count = param_1[ISP_CORE_PAD_COUNT_OFFSET];
+
+    pad_data = (struct isp_pad_data *)private_kmalloc(core_data->pad_count * sizeof(struct isp_pad_data), GFP_KERNEL);
+    if (pad_data == NULL) {
+        isp_printf("Failed to allocate memory for pad_data\n");
+        result = -ENOMEM;
+        goto err_deinit_subdev;
+    }
+
+    memset(pad_data, 0, core_data->pad_count * sizeof(struct isp_pad_data));
+    core_data->pad_data = pad_data;
+
+    for (i = 0; i < core_data->pad_count; i++) {
+        pad_data[i].index = i;
+        pad_data[i].config = &core_data->pad_configs[i];
+
+        if (pad_data[i].config->enabled) {
+            // Initialize pad_data[i] based on the pad configuration
+            // ...
+        }
+    }
+
+    tuning_data = isp_core_tuning_init(core_data);
+    if (tuning_data == NULL) {
+        isp_printf("Failed to initialize ISP core tuning\n");
+        result = -EINVAL;
+        goto err_free_pad_data;
+    }
+
+    core_data->tuning_data = tuning_data;
+    *(unsigned int *)((int)core_data + 0xec) = 1;
+    private_platform_set_drvdata();
+    *(void **)((int)core_data + 0xd8) = core_data;
+    *(unsigned int *)((int)core_data + 0x34) = *(unsigned int *)(*(int *)((int)core_data + 0x1c0) + 0x40c8);
+    *(unsigned char **)((int)core_data + 0x38) = isp_info_proc_fops;
+    ispcore_sd = core_data;
+    sensor_early_init((int)core_data);
+
+    clk_result = get_isp_clk();
+    if (clk_result < 0) {
+        isp_printf("Failed to get ISP clock\n");
+        result = clk_result;
+        goto err_free_tuning_data;
+    }
+
+    core_data->clk_freq = clk_result;
+
+    return 0;
+
+err_free_tuning_data:
+    private_kfree(core_data->tuning_data);
+err_free_pad_data:
+    private_kfree(core_data->pad_data);
+err_deinit_subdev:
+    tx_isp_subdev_deinit(core_data);
+err_free_core_data:
+    private_kfree(core_data);
+
+    return result;
 }
 
 
@@ -57111,19 +57090,21 @@ void tx_isp_module_exit(void)
 
 
 
-unsigned int tx_isp_vic_remove(void)
-
+unsigned int tx_isp_vic_remove(struct platform_device *pdev)
 {
-  void *pvVar1;
-  
-  pvVar1 = (void *)private_platform_get_drvdata();
-  if ((pvVar1 == (void *)0x0 || (void *)0xfffff000 < pvVar1) || (pvVar1 == (void *)0x0)) {
-    pvVar1 = (void *)0x0;
-  }
-  private_platform_set_drvdata();
-  tx_isp_subdev_deinit(pvVar1);
-  private_kfree();
-  return 0;
+    void *driver_data;
+
+    driver_data = private_platform_get_drvdata(pdev);
+    if (driver_data == NULL) {
+        isp_printf("Failed to get driver data\n");
+        return -EINVAL;
+    }
+
+    private_platform_set_drvdata(pdev, NULL);
+    tx_isp_subdev_deinit(driver_data);
+    private_kfree(driver_data);
+
+    return 0;
 }
 
 
