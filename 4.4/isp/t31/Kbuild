@@ -1,8 +1,9 @@
-SRCS := $(DIR)/tx-isp-debug.c \
-	$(DIR)/tx-isp-module.c \
-	$(DIR)/libt31-firmware.c
+SRCS := \
+    $(DIR)/tx-isp-debug.c \
+	$(DIR)/tx-isp-module.c
 
 OBJS := $(SRCS:%.c=%.o) $(ASM_SRCS:%.S=%.o)
+OBJS += $(KERNEL_VERSION)/sdk/lib$(SOC_FAMILY)-firmware.a
 
 $(OUT)-objs := $(OBJS)
 
