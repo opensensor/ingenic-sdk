@@ -27,6 +27,7 @@ SRCS := $(DIR)/platform.o \
 	$(DIR)/tx-isp-interrupt.o \
 	$(DIR)/tx-isp-ncu.o \
 	$(DIR)/tx-isp-ldc.o \
+	$(DIR)/tx-isp-module.o \
 	$(DIR)/tx-isp-mscaler.o \
 	$(DIR)/tx-isp-frame-channel.o \
 	$(DIR)/tx-isp-device.o

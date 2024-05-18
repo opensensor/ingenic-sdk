@@ -1,6 +1,7 @@
 SRCS := \
     $(DIR)/tx-isp-debug.c \
-	$(DIR)/tx-isp-module.c
+    $(DIR)/platform.c \
+	$(DIR)/tx-isp-device.c
 
 OBJS := $(SRCS:%.c=%.o) $(ASM_SRCS:%.S=%.o)
 OBJS += $(KERNEL_VERSION)/sdk/lib$(SOC_FAMILY)-firmware.a

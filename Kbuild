@@ -49,9 +49,9 @@ include $(src)/$(KERNEL_VERSION)/misc/jz-dtrng/Kbuild
 endif
 
 #### SENSORS ####
-ifeq ($(SENSOR_MODEL),)
-$(warning SENSOR_MODEL missing)
-else
-$(info Building for sensor $(SENSOR_MODEL))
-include $(src)/$(KERNEL_VERSION)/sensor-src/Kbuild
-endif
+#ifeq ($(SENSOR_MODEL),)
+#$(warning SENSOR_MODEL missing)
+#else
+#$(info Building for sensor $(SENSOR_MODEL))
+#include $(src)/$(KERNEL_VERSION)/sensor-src/Kbuild
+#endif
