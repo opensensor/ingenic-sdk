@@ -325,7 +325,19 @@ struct clk * private_clk_get(struct device *dev, const char *id)
 
 int private_clk_enable(struct clk *clk)
 {
-	return clk_enable(clk);
+	int ret;
+	ret = clk_prepare(clk);
+	if (ret) {
+		// Handle error
+		return ret;
+	}
+	ret = clk_enable(clk);
+	if (ret) {
+		// Handle error
+		clk_unprepare(clk);
+		return ret;
+	}
+	return 0;
 }
 EXPORT_SYMBOL(private_clk_enable);
 

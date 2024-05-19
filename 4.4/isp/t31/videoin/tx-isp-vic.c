@@ -1,4 +1,5 @@
 #include <linux/delay.h>
+#include <linux/fs.h>
 #include "../tx-isp-videobuf.h"
 #include "tx-isp-vic.h"
 #include "../sensor-common.h"
@@ -711,7 +712,7 @@ static ssize_t isp_vic_cmd_set(struct file *file, const char __user *buffer, siz
 			old_fs = get_fs();
 			set_fs(KERNEL_DS);
 			pos = &(fd->f_pos);
-			vfs_write(fd, vd->snap_vaddr, imagesize, pos);
+			kernel_write(fd, vd->snap_vaddr, imagesize, pos);
 			filp_close(fd, NULL);
 			set_fs(old_fs);
 		}

@@ -1122,6 +1122,8 @@ static int sensor_probe(struct i2c_client *client,
 	private_clk_set_rate(sensor->mclk, 24000000);
 	private_clk_enable(sensor->mclk);
 
+	jzgpio_set_func(GPIO_PORT_A, GPIO_FUNC_1, 0x8000);
+
 	sensor_attr.dbus_type = data_interface;
 	if (data_interface == TX_SENSOR_DATA_INTERFACE_DVP) {
 		ret = set_sensor_gpio_function(sensor_gpio_func);

@@ -150,7 +150,7 @@ TXispPrivParamManage* load_tx_isp_parameters(struct tx_isp_sensor_attribute *att
 		ret = -1;
 		goto failed_check_total_size;
 	}
-	vfs_read(file, manager->data, fsize, pos);
+	kernel_read(file, manager->data, fsize, pos);
 	filp_close(file, NULL);
 	set_fs(old_fs);
 

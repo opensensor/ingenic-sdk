@@ -3,6 +3,7 @@
 
 #include <linux/errno.h>
 #include <linux/err.h>
+#include <linux/fs.h>
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
 #include <linux/miscdevice.h>

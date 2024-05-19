@@ -135,7 +135,7 @@ EXPORT_SYMBOL(private_ioremap);
 
 void private_spin_lock_irqsave(spinlock_t *lock, unsigned long *flags)
 {
-	spin_lock_irqsave(spinlock_check(lock), *flags);
+	spin_lock_irqsave(lock, *flags);
 }
 EXPORT_SYMBOL(private_spin_lock_irqsave);
 

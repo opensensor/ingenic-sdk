@@ -1977,6 +1977,7 @@ static int ispcore_core_ops_init(struct tx_isp_subdev *sd, int on)
 	struct tx_isp_core_device *core = IS_ERR_OR_NULL(sd) ? NULL : tx_isp_get_subdevdata(sd);
 	unsigned long flags = 0;
 	int ret = ISP_SUCCESS;
+	int ret2;
 
 	if(IS_ERR_OR_NULL(core)){
 		return -EINVAL;
@@ -1987,10 +1988,11 @@ static int ispcore_core_ops_init(struct tx_isp_subdev *sd, int on)
 	/*printk("## %s %d on=%d ##\n", __func__,__LINE__, on);*/
 
 	if(on){
-		if(private_reset_tx_isp_module(TX_ISP_CORE_SUBDEV_ID)){
-			ISP_ERROR("Failed to reset %s\n", sd->module.name);
-			ret = -EINVAL;
-			goto exit;
+		ret2 = private_reset_tx_isp_module(TX_ISP_CORE_SUBDEV_ID);
+		if(ret2){
+			ISP_WARNING("Failed to reset %s[%d]!\n", sd->module.name, ret2);
+			//ret = -EINVAL;
+			//goto exit;
 		}
 
 		spin_lock_irqsave(&core->slock, flags);

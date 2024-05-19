@@ -571,7 +571,7 @@ static void ldc_load_parameters(struct tx_isp_ldc_device *ldc)
 			goto failed_malloc_data;
 		}
 	}
-	vfs_read(file, ldc->udata, fsize, pos);
+	kernel_read(file, ldc->udata, fsize, pos);
 	filp_close(file, NULL);
 	set_fs(old_fs);
 

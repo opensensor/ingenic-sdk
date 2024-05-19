@@ -295,16 +295,18 @@ static long subdev_sensor_ops_set_input(struct tx_isp_subdev *sd, int *index)
 	if(-1 == *index){
 		return ISP_SUCCESS;
 	}
+
 	/* fourth, find a corresponding sensor.*/
 	private_mutex_lock(&vi->mlock);
 	list_for_each_entry(sensor, &vi->sensors, list) {
+		printk("Checking sensor: index=%d, name=%s\n", sensor->index, sensor->attr.name);
 		if(sensor->index == *index){
 			break;
 		}
 	}
 	private_mutex_unlock(&vi->mlock);
 
-	/* if the index isn't find in the list of sensors that has been registered.*/
+	/* if the index isn't found in the list of sensors that has been registered.*/
 	if(sensor->index != *index){
 		ISP_ERROR("Failed to the set input sensor(%d) that .\n", *index);
 		return -EINVAL;
@@ -314,6 +316,7 @@ static long subdev_sensor_ops_set_input(struct tx_isp_subdev *sd, int *index)
 	vi->active = sensor;
 
 	sd = &sensor->sd;
+	printk("Activating sensor: index=%d, name=%s\n", sensor->index, sensor->attr.name);
 	ret = tx_isp_call_subdev_notify(sd, TX_ISP_EVENT_SYNC_SENSOR_ATTR, &sensor->video);
 	if(ret != ISP_SUCCESS)
 		goto err_exit;
@@ -331,6 +334,7 @@ err_init:
 err_exit:
 	return ret;
 }
+
 
 static int tx_isp_vin_init(struct tx_isp_subdev *sd, int on)
 {
