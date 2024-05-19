@@ -1990,9 +1990,9 @@ static int ispcore_core_ops_init(struct tx_isp_subdev *sd, int on)
 	if(on){
 		ret2 = private_reset_tx_isp_module(TX_ISP_CORE_SUBDEV_ID);
 		if(ret2){
-			ISP_WARNING("Failed to reset %s[%d]!\n", sd->module.name, ret2);
+			ISP_WARNING("Failed to reset core %s[%d]!\n", sd->module.name, ret2);
 			//ret = -EINVAL;
-			//goto exit;
+			goto exit;
 		}
 
 		spin_lock_irqsave(&core->slock, flags);

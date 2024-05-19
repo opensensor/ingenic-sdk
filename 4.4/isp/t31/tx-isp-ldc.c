@@ -618,7 +618,7 @@ static int ldc_core_ops_init(struct tx_isp_subdev *sd, int on)
 
 	if(on){
 		if(private_reset_tx_isp_module(TX_ISP_LDC_SUBDEV_ID)){
-			ISP_ERROR("Failed to reset %s\n", sd->module.name);
+			ISP_ERROR("Failed to reset ldc %s\n", sd->module.name);
 			printk("## %s %d on=%d ##\n", __func__,__LINE__, on);
 			ret = -EINVAL;
 			goto exit;

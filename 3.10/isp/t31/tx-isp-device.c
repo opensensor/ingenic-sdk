@@ -60,6 +60,8 @@ static int private_cpm_reset(unsigned int addr, unsigned int bit)
 	return 0;
 }
 
+
+
 int private_reset_tx_isp_module(enum tx_isp_subdev_id id)
 {
 	unsigned int addr = 0;

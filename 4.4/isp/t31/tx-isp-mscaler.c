@@ -547,9 +547,9 @@ static int mscaler_core_ops_init(struct tx_isp_subdev *sd, int on)
 
 	if(on){
 		if(private_reset_tx_isp_module(TX_ISP_MSCALER_SUBDEV_ID)){
-			ISP_ERROR("Failed to reset %s\n", sd->module.name);
-			ret = -EINVAL;
-			goto exit;
+			ISP_WARNING("Failed to reset mscaler %s\n", sd->module.name);
+			//ret = -EINVAL;
+			//goto exit;
 		}
 		spin_lock_irqsave(&mscaler->slock, flags);
 		if(mscaler->state != TX_ISP_MODULE_ACTIVATE){

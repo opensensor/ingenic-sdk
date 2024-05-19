@@ -33,28 +33,36 @@ extern struct platform_device tx_isp_platform_device;
 
 static struct tx_isp_device* globe_ispdev = NULL;
 
-static int private_cpm_reset(unsigned int addr, unsigned int bit)
+static int private_cpm_reset(unsigned int addr)
 {
 	int timeout = 500;
 	unsigned int value = 0;
+
+	// Set bit 21
 	value = *(volatile unsigned int*)(addr);
-	value |= 1<<(bit-1);
+	value |= 0x200000;
 	*(volatile unsigned int*)(addr) = value;
-	while(timeout && ((*(volatile unsigned int*)(addr)) & (1<<(bit-2))) == 0){
+
+	// Wait for bit 20 to be set
+	while (timeout && ((*(volatile unsigned int*)(addr) & 0x100000) == 0)) {
 		private_msleep(2);
 		timeout--;
 	}
-	if(timeout == 0)
+
+	if (timeout == 0)
 		return -1;
 
+	// Clear bit 21, set bit 22
 	value = *(volatile unsigned int*)(addr);
-	value &= ~(1<<(bit-1));
-	value |= 1<<bit;
+	value &= 0xffdfffff;
+	value |= 0x400000;
 	*(volatile unsigned int*)(addr) = value;
 
+	// Clear bit 22
 	value = *(volatile unsigned int*)(addr);
-	value &= ~(1<<bit);
+	value &= 0xffbfffff;
 	*(volatile unsigned int*)(addr) = value;
+
 	return 0;
 }
 
@@ -68,22 +76,22 @@ int private_reset_tx_isp_module(enum tx_isp_subdev_id id)
 			bit = 22;
 			break;
 		case TX_ISP_LDC_SUBDEV_ID:
-			addr = 0xb00000ac;
+			addr = 0xb00000c4;
 			bit = 8;
 			break;
 		case TX_ISP_NCU_SUBDEV_ID:
-			addr = 0xb00000ac;
+			addr = 0xb00000c4;
 			bit = 2;
 			break;
 		case TX_ISP_MSCALER_SUBDEV_ID:
-			addr = 0xb00000ac;
+			addr = 0xb00000c4;
 			bit = 5;
 			break;
 		default:
 			break;
 	}
 	if(addr){
-		return private_cpm_reset(addr, bit);
+		return private_cpm_reset(addr);
 	}
 	return 0;
 }
