@@ -1083,12 +1083,7 @@ int tx_isp_subdev_init(struct platform_device *pdev, struct tx_isp_subdev *sd, s
 	sd->ops = ops;
 
 	/*printk("## %s %d ##\n",__func__,__LINE__);*/
-	ret = tx_isp_module_init(pdev, &sd->module);
-	if(ret){
-		ISP_ERROR("Failed to init isp module(%s)\n", pdev->name);
-		ret = -ENOMEM;
-		goto exit;
-	}
+	tx_isp_module_init(pdev, &sd->module);
 
 	desc = pdev->dev.platform_data;
 	if(desc == NULL)
@@ -1129,8 +1124,10 @@ int tx_isp_subdev_init(struct platform_device *pdev, struct tx_isp_subdev *sd, s
 
 	/* init subdev */
 	if(desc->type == TX_ISP_TYPE_SUBDEV){
+		printk("## %s %d ##\n",__func__,__LINE__);
 		ret = tx_isp_subdev_device_init(sd, (void*)desc);
 	}else if(desc->type == TX_ISP_TYPE_WIDGET){
+		printk("## %s %d ##\n",__func__,__LINE__);
 		ret = tx_isp_subdev_widget_init(sd, (void*)desc);
 	}else{
 		ISP_INFO("It's header!\n");

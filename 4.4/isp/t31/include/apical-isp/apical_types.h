@@ -40,10 +40,6 @@
 #define UNIT_DISABLED 0
 #define UNIT_ENABLED 1
 
-#define array_size(a) \
-	(sizeof(a)/sizeof(a[0]))
-
-
 typedef struct _modulation_entry_t {
 	uint16_t x,y;
 } modulation_entry_t;

@@ -75,8 +75,7 @@ int tx_isp_request_irq(struct platform_device *pdev, struct tx_isp_irq_device *i
 	if(!pdev || !irqdev){
 		printk("%s[%d] the parameters are invalid!\n",__func__,__LINE__);
 		ret = -EINVAL;
-		goto exit;
-
+		return ret;
 	}
 
 	irq = private_platform_get_irq(pdev, 0);
@@ -88,23 +87,13 @@ int tx_isp_request_irq(struct platform_device *pdev, struct tx_isp_irq_device *i
 	private_spin_lock_init(&irqdev->slock);
 
 	ret = private_request_threaded_irq(irq, isp_irq_handle, isp_irq_thread_handle, IRQF_ONESHOT, pdev->name, irqdev);
-	if(ret){
-		ISP_ERROR("%s[%d] Failed to request irq(%d).\n", __func__,__LINE__, irq);
-		ret = -EINTR;
-		irqdev->irq = 0;
-		goto err_req_irq;
-	}
-
 	irqdev->irq = irq;
 	irqdev->enable_irq = tx_isp_enable_irq;
 	irqdev->disable_irq = tx_isp_disable_irq;
 	tx_isp_disable_irq(irqdev);
-	/*printk("^^ %s[%d] %s irq = %d ^^\n", __func__,__LINE__, pdev->name, irq);*/
+	printk("^^ %s[%d] %s irq = %d ^^\n", __func__,__LINE__, pdev->name, irq);
 
 done:
-	return 0;
-err_req_irq:
-exit:
 	return ret;
 }
 
