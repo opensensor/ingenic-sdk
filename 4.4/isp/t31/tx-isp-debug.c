@@ -3,40 +3,41 @@
 #include <tx-isp-debug.h>
 #include <linux/vmalloc.h>
 
+#include "txx-funcs.h"
 #include "tx-isp-device.h"
 
 /* -------------------debugfs interface------------------- */
 static int print_level = ISP_WARNING_LEVEL;
-module_param(print_level, int, S_IRUGO);
-MODULE_PARM_DESC(print_level, "isp print level");
-
+//module_param(print_level, int, S_IRUGO);
+//MODULE_PARM_DESC(print_level, "isp print level");
+//
 static int isp_clk = 100000000;
-module_param(isp_clk, int, S_IRUGO);
-MODULE_PARM_DESC(isp_clk, "isp clock freq");
+//module_param(isp_clk, int, S_IRUGO);
+//MODULE_PARM_DESC(isp_clk, "isp clock freq");
 
-extern int isp_ch0_pre_dequeue_time;
-module_param(isp_ch0_pre_dequeue_time, int, S_IRUGO);
-MODULE_PARM_DESC(isp_ch0_pre_dequeue_time, "isp pre dequeue time, unit ms");
-
-extern int isp_ch0_pre_dequeue_interrupt_process;
-module_param(isp_ch0_pre_dequeue_interrupt_process, int, S_IRUGO);
-MODULE_PARM_DESC(isp_ch0_pre_dequeue_interrupt_process, "isp pre dequeue interrupt process");
-
-extern int isp_ch0_pre_dequeue_valid_lines;
-module_param(isp_ch0_pre_dequeue_valid_lines, int, S_IRUGO);
-MODULE_PARM_DESC(isp_ch0_pre_dequeue_valid_lines, "isp pre dequeue valid lines");
-
-extern int isp_ch1_dequeue_delay_time;
-module_param(isp_ch1_dequeue_delay_time, int, S_IRUGO);
-MODULE_PARM_DESC(isp_ch1_dequeue_delay_time, "isp pre dequeue time, unit ms");
-
-extern int isp_day_night_switch_drop_frame_num;
-module_param(isp_day_night_switch_drop_frame_num, int, S_IRUGO);
-MODULE_PARM_DESC(isp_day_night_switch_drop_frame_num, "isp day night switch drop frame number");
-
-extern int isp_memopt;
-module_param(isp_memopt, int, S_IRUGO);
-MODULE_PARM_DESC(isp_memopt, "isp memory optimize");
+//extern int isp_ch0_pre_dequeue_time;
+//module_param(isp_ch0_pre_dequeue_time, int, S_IRUGO);
+//MODULE_PARM_DESC(isp_ch0_pre_dequeue_time, "isp pre dequeue time, unit ms");
+//
+//extern int isp_ch0_pre_dequeue_interrupt_process;
+//module_param(isp_ch0_pre_dequeue_interrupt_process, int, S_IRUGO);
+//MODULE_PARM_DESC(isp_ch0_pre_dequeue_interrupt_process, "isp pre dequeue interrupt process");
+//
+//extern int isp_ch0_pre_dequeue_valid_lines;
+//module_param(isp_ch0_pre_dequeue_valid_lines, int, S_IRUGO);
+//MODULE_PARM_DESC(isp_ch0_pre_dequeue_valid_lines, "isp pre dequeue valid lines");
+//
+//extern int isp_ch1_dequeue_delay_time;
+//module_param(isp_ch1_dequeue_delay_time, int, S_IRUGO);
+//MODULE_PARM_DESC(isp_ch1_dequeue_delay_time, "isp pre dequeue time, unit ms");
+//
+//extern int isp_day_night_switch_drop_frame_num;
+//module_param(isp_day_night_switch_drop_frame_num, int, S_IRUGO);
+//MODULE_PARM_DESC(isp_day_night_switch_drop_frame_num, "isp day night switch drop frame number");
+//
+//extern int isp_memopt;
+//module_param(isp_memopt, int, S_IRUGO);
+//MODULE_PARM_DESC(isp_memopt, "isp memory optimize");
 
 int isp_printf(unsigned int level, unsigned char *fmt, ...)
 {
@@ -111,6 +112,99 @@ void private_dma_sync_single_for_device(struct device *dev,
 	dma_sync_single_for_device(dev, addr, size, dir);
 	return;
 }
+
+
+struct resource * private_request_mem_region(resource_size_t start, resource_size_t n,
+													const char *name)
+{
+	return request_mem_region(start, n, name);
+}
+EXPORT_SYMBOL(private_request_mem_region);
+
+void private_release_mem_region(resource_size_t start, resource_size_t n)
+{
+	release_mem_region(start, n);
+}
+EXPORT_SYMBOL(private_release_mem_region);
+
+void __iomem * private_ioremap(phys_addr_t offset, unsigned long size)
+{
+return ioremap(offset, size);
+}
+EXPORT_SYMBOL(private_ioremap);
+
+void private_spin_lock_irqsave(spinlock_t *lock, unsigned long *flags)
+{
+	spin_lock_irqsave(spinlock_check(lock), *flags);
+}
+EXPORT_SYMBOL(private_spin_lock_irqsave);
+
+void private_spin_lock_init(spinlock_t *lock)
+{
+	spin_lock_init(lock);
+}
+EXPORT_SYMBOL(private_spin_lock_init);
+
+void private_raw_mutex_init(struct mutex *lock, const char *name, struct lock_class_key *key)
+{
+	__mutex_init(lock, name, key);
+}
+EXPORT_SYMBOL(private_raw_mutex_init);
+
+int private_request_module(bool wait, const char *fmt, ...)
+{
+	int ret = 0;
+	struct va_format vaf;
+	va_list args;
+
+	va_start(args, fmt);
+	vaf.fmt = fmt;
+	vaf.va = &args;
+	ret = request_module("%pV", &vaf);
+	va_end(args);
+
+	return ret;
+}
+EXPORT_SYMBOL(private_request_module);
+
+//static struct sk_buff *private_nlmsg_new(size_t payload, gfp_t flags)
+//{
+//	return nlmsg_new(payload, flags);
+//}
+//
+//static struct nlmsghdr *private_nlmsg_put(struct sk_buff *skb, u32 portid, u32 seq,
+//										  int type, int payload, int flags)
+//{
+//	return nlmsg_put(skb, portid, seq, type, payload, flags);
+//}
+
+
+struct sock *private_netlink_kernel_create(struct net *net, int unit, struct netlink_kernel_cfg *cfg) {
+	return netlink_kernel_create(net, unit, cfg);
+}
+EXPORT_SYMBOL(private_netlink_kernel_create);
+
+
+mm_segment_t private_get_fs(void)
+{
+	return get_fs();
+}
+EXPORT_SYMBOL(private_get_fs);
+
+void private_set_fs(mm_segment_t val)
+{
+	set_fs(val);
+}
+EXPORT_SYMBOL(private_set_fs);
+
+extern struct net init_net;
+struct net *private_get_init_net(void)
+{
+	return &init_net;
+}
+EXPORT_SYMBOL(private_get_init_net);
+
+
 
 
 ///* Must be check the return value */

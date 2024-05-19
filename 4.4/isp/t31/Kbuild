@@ -21,10 +21,16 @@ SRCS := \
 	$(DIR)/apical-isp/system_semaphore.o \
 	$(DIR)/apical-isp/sensor_drv.o \
 	$(DIR)/apical-isp/system_chardev.o \
-    $(DIR)/tx-isp-debug.c \
-    $(DIR)/tx-isp-videobuf.c \
-    $(DIR)/tx-isp-frame-channel.c \
-	$(DIR)/tx-isp-device.c
+    $(DIR)/tx-isp-debug.o \
+    $(DIR)/tx-isp-videobuf.o \
+    $(DIR)/tx-isp-frame-channel.o \
+	$(DIR)/tx-isp-device.o \
+	$(DIR)/tx-isp-interrupt.o \
+	$(DIR)/tx-isp-ldc.o \
+	$(DIR)/tx-isp-mscaler.o \
+	$(DIR)/tx-isp-ncu.o \
+	$(DIR)/platform.o \
+	$(DIR)/txx-funcs.o
 
 OBJS := $(SRCS:%.c=%.o) $(ASM_SRCS:%.S=%.o)
 OBJS += $(KERNEL_VERSION)/sdk/lib$(SOC_FAMILY)-firmware.a

@@ -12,6 +12,30 @@
 #include <linux/proc_fs.h>
 #include <txx-funcs.h>
 
+struct clk_wrapper {
+	struct clk *clk;
+	bool is_enabled;
+};
+
+
+static inline int clk_wrapper_enable(struct clk_wrapper *clk_wrap) {
+	int ret = clk_prepare_enable(clk_wrap->clk);
+	if (ret == 0) {
+		clk_wrap->is_enabled = true;
+	}
+	return ret;
+}
+
+static inline void clk_wrapper_disable(struct clk_wrapper *clk_wrap) {
+	clk_disable_unprepare(clk_wrap->clk);
+	clk_wrap->is_enabled = false;
+}
+
+static inline bool clk_wrapper_is_enabled(struct clk_wrapper *clk_wrap) {
+	return clk_wrap->is_enabled;
+}
+
+
 static const unsigned int __pow2_lut[33]={
 		1073741824,1097253708,1121280436,1145833280,1170923762,1196563654,1222764986,1249540052,
 		1276901417,1304861917,1333434672,1362633090,1392470869,1422962010,1454120821,1485961921,
@@ -166,18 +190,18 @@ static struct jz_driver_common_interfaces *pfaces = NULL;
 /* platform  */
 int private_platform_driver_register(struct platform_driver *drv)
 {
-	return pfaces->platform_driver_register(drv);
+	return platform_driver_register(drv);
 }
 
 void private_platform_driver_unregister(struct platform_driver *drv)
 {
-	pfaces->platform_driver_unregister(drv);
+	platform_driver_unregister(drv);
 }
 
 
 void private_platform_set_drvdata(struct platform_device *pdev, void *data)
 {
-	pfaces->platform_set_drvdata(pdev, data);
+	platform_set_drvdata(pdev, data);
 }
 
 void *private_platform_get_drvdata(struct platform_device *pdev)
@@ -187,54 +211,55 @@ void *private_platform_get_drvdata(struct platform_device *pdev)
 
 int private_platform_device_register(struct platform_device *pdev)
 {
-	return pfaces->platform_device_register(pdev);
+	return platform_device_register(pdev);
 }
 
 void private_platform_device_unregister(struct platform_device *pdev)
 {
-	return pfaces->platform_device_unregister(pdev);
+	return platform_device_unregister(pdev);
 }
 
 struct resource *private_platform_get_resource(struct platform_device *dev,
 			       unsigned int type, unsigned int num)
 {
-	return pfaces->platform_get_resource(dev, type, num);
+	return platform_get_resource(dev, type, num);
 }
 
 int private_dev_set_drvdata(struct device *dev, void *data)
 {
-	return pfaces->dev_set_drvdata(dev, data);
+	dev_set_drvdata(dev, data);
+	return 0;
 }
 
 void* private_dev_get_drvdata(const struct device *dev)
 {
-	return pfaces->dev_get_drvdata(dev);
+	return dev_get_drvdata(dev);
 }
 
 int private_platform_get_irq(struct platform_device *dev, unsigned int num)
 {
-	return pfaces->platform_get_irq(dev, num);
+	return platform_get_irq(dev, num);
 }
 #if 0
 struct resource * private_request_mem_region(resource_size_t start, resource_size_t n,
 			   const char *name)
 {
-	return pfaces->tx_request_mem_region(start, n, name);
+	return tx_request_mem_region(start, n, name);
 }
 
 void private_release_mem_region(resource_size_t start, resource_size_t n)
 {
-	pfaces->tx_release_mem_region(start, n);
+	tx_release_mem_region(start, n);
 }
 
 void __iomem * private_ioremap(phys_addr_t offset, unsigned long size)
 {
-	return pfaces->tx_ioremap(offset, size);
+	return tx_ioremap(offset, size);
 }
 #endif
 void private_iounmap(const volatile void __iomem *addr)
 {
-	pfaces->iounmap(addr);
+	iounmap(addr);
 }
 
 /* interrupt interfaces */
@@ -242,301 +267,285 @@ int private_request_threaded_irq(unsigned int irq, irq_handler_t handler,
 		irq_handler_t thread_fn, unsigned long irqflags,
 		const char *devname, void *dev_id)
 {
-	return pfaces->request_threaded_irq(irq, handler, thread_fn, irqflags, devname, dev_id);
+	return request_threaded_irq(irq, handler, thread_fn, irqflags, devname, dev_id);
 }
 
 void private_enable_irq(unsigned int irq)
 {
-	pfaces->enable_irq(irq);
+	enable_irq(irq);
 }
 
 void private_disable_irq(unsigned int irq)
 {
-	pfaces->disable_irq(irq);
+	disable_irq(irq);
 }
 
 void private_free_irq(unsigned int irq, void *dev_id)
 {
-	pfaces->free_irq(irq, dev_id);
+	free_irq(irq, dev_id);
 }
 
 /* lock and mutex interfaces */
 #if 0
 void private_spin_lock_irqsave(spinlock_t *lock, unsigned long flags)
 {
-	pfaces->tx_spin_lock_irqsave(lock, &flags);
+	tx_spin_lock_irqsave(lock, &flags);
 }
 #endif
 void private_spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags)
 {
-	pfaces->spin_unlock_irqrestore(lock, flags);
+	spin_unlock_irqrestore(lock, flags);
 }
 #if 0
 void private_spin_lock_init(spinlock_t *lock)
 {
-	pfaces->tx_spin_lock_init(lock);
+	tx_spin_lock_init(lock);
 }
 #endif
 void private_mutex_lock(struct mutex *lock)
 {
-	pfaces->mutex_lock(lock);
+	mutex_lock(lock);
 }
 
 void private_mutex_unlock(struct mutex *lock)
 {
-	pfaces->mutex_unlock(lock);
+	mutex_unlock(lock);
 }
 #if 0
 void private_mutex_init(struct mutex *mutex)
 {
-	pfaces->tx_mutex_init(mutex);
+	tx_mutex_init(mutex);
 }
 #endif
 /* clock interfaces */
 struct clk * private_clk_get(struct device *dev, const char *id)
 {
-	return pfaces->clk_get(dev, id);
+	return clk_get(dev, id);
 }
 
 int private_clk_enable(struct clk *clk)
 {
-	return pfaces->clk_enable(clk);
+	return clk_enable(clk);
 }
 EXPORT_SYMBOL(private_clk_enable);
 
 int private_clk_is_enabled(struct clk *clk)
 {
-	return pfaces->clk_is_enabled(clk);
+	struct clk_wrapper my_clk;
+	return clk_wrapper_is_enabled(&my_clk);
 }
 
 void private_clk_disable(struct clk *clk)
 {
-	pfaces->clk_disable(clk);
+	clk_disable(clk);
 }
 EXPORT_SYMBOL(private_clk_disable);
 
 void private_clk_put(struct clk *clk)
 {
-	pfaces->clk_put(clk);
+	clk_put(clk);
 }
 EXPORT_SYMBOL(private_clk_put);
 
 int private_clk_set_rate(struct clk *clk, unsigned long rate)
 {
-	return pfaces->clk_set_rate(clk, rate);
+	return clk_set_rate(clk, rate);
 }
 EXPORT_SYMBOL(private_clk_set_rate);
 
 unsigned long private_clk_get_rate(struct clk *clk)
 {
-	return pfaces->clk_get_rate(clk);
+	return clk_get_rate(clk);
 }
 
 /* i2c interfaces */
 struct i2c_adapter* private_i2c_get_adapter(int nr)
 {
-	return pfaces->i2c_get_adapter(nr);
+	return i2c_get_adapter(nr);
 }
 
 void private_i2c_put_adapter(struct i2c_adapter *adap)
 {
-	pfaces->i2c_put_adapter(adap);
+	i2c_put_adapter(adap);
 }
 
 int private_i2c_transfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 {
-	return pfaces->i2c_transfer(adap, msgs, num);
+	return i2c_transfer(adap, msgs, num);
 }
 EXPORT_SYMBOL(private_i2c_transfer);
 
 int private_i2c_register_driver(struct module *mod, struct i2c_driver *drv)
 {
-	return pfaces->i2c_register_driver(mod, drv);
+	return i2c_register_driver(mod, drv);
 }
 
 void private_i2c_del_driver(struct i2c_driver *drv)
 {
-	pfaces->i2c_del_driver(drv);
+	i2c_del_driver(drv);
 }
 EXPORT_SYMBOL(private_i2c_del_driver);
 
 struct i2c_client *private_i2c_new_device(struct i2c_adapter *adap, struct i2c_board_info const *info)
 {
-	return pfaces->i2c_new_device(adap, info);
+	return i2c_new_device(adap, info);
 }
 
 void *private_i2c_get_clientdata(const struct i2c_client *dev)
 {
-	return pfaces->i2c_get_clientdata(dev);
+	return i2c_get_clientdata(dev);
 }
 EXPORT_SYMBOL(private_i2c_get_clientdata);
 
 void private_i2c_set_clientdata(struct i2c_client *dev, void *data)
 {
-	pfaces->i2c_set_clientdata(dev, data);
+	i2c_set_clientdata(dev, data);
 }
 EXPORT_SYMBOL(private_i2c_set_clientdata);
 
 int private_i2c_add_driver(struct i2c_driver *drv)
 {
-	return pfaces->i2c_register_driver(THIS_MODULE, drv);
+	return i2c_register_driver(THIS_MODULE, drv);
 }
 EXPORT_SYMBOL(private_i2c_add_driver);
 
 void private_i2c_unregister_device(struct i2c_client *client)
 {
-	pfaces->i2c_unregister_device(client);
+	i2c_unregister_device(client);
 }
 
 /* gpio interfaces */
 int private_gpio_request(unsigned gpio, const char *label)
 {
-	return pfaces->gpio_request(gpio, label);
+	return gpio_request(gpio, label);
 }
 EXPORT_SYMBOL(private_gpio_request);
 
 void private_gpio_free(unsigned gpio)
 {
-	pfaces->gpio_free(gpio);
+	gpio_free(gpio);
 }
 EXPORT_SYMBOL(private_gpio_free);
 
 int private_gpio_direction_output(unsigned gpio, int value)
 {
-	return pfaces->gpio_direction_output(gpio, value);
+	return gpio_direction_output(gpio, value);
 }
 EXPORT_SYMBOL(private_gpio_direction_output);
 
 int private_gpio_direction_input(unsigned gpio)
 {
-	return pfaces->gpio_direction_input(gpio);
+	return gpio_direction_input(gpio);
 }
 
 int private_gpio_set_debounce(unsigned gpio, unsigned debounce)
 {
-	return pfaces->gpio_set_debounce(gpio, debounce);
+	return gpio_set_debounce(gpio, debounce);
 }
 
 int private_jzgpio_set_func(enum gpio_port port, enum gpio_function func,unsigned long pins)
 {
-	return pfaces->jzgpio_set_func(port, func, pins);
+	return jzgpio_set_func(port, func, pins);
 }
 EXPORT_SYMBOL(private_jzgpio_set_func);
-
-int private_jzgpio_ctrl_pull(enum gpio_port port, int enable_pull,unsigned long pins)
-{
-	return pfaces->jzgpio_ctrl_pull(port, enable_pull, pins);
-}
 
 /* system interfaces */
 void private_msleep(unsigned int msecs)
 {
-	pfaces->msleep(msecs);
+	msleep(msecs);
 }
 EXPORT_SYMBOL(private_msleep);
 
 bool private_capable(int cap)
 {
-	return pfaces->capable(cap);
+	return capable(cap);
 }
 EXPORT_SYMBOL(private_capable);
 
 unsigned long long private_sched_clock(void)
 {
-	return pfaces->sched_clock();
+	return sched_clock();
 }
 
 bool private_try_module_get(struct module *module)
 {
-	return pfaces->try_module_get(module);
+	return try_module_get(module);
 }
-#if 0
-int private_request_module(bool wait, const char *fmt, char *s)
-{
-	return pfaces->tx_request_module(wait, fmt, s);
-}
-#endif
+
 void private_module_put(struct module *module)
 {
-	pfaces->module_put(module);
+	module_put(module);
 }
 
 /* wait interfaces */
 void private_init_completion(struct completion *x)
 {
-	pfaces->init_completion(x);
+	init_completion(x);
 }
 
 void private_complete(struct completion *x)
 {
-	pfaces->complete(x);
+	complete(x);
 }
 
 int private_wait_for_completion_interruptible(struct completion *x)
 {
-	return pfaces->wait_for_completion_interruptible(x);
+	return wait_for_completion_interruptible(x);
 }
 
 /* misc driver interfaces */
 int private_misc_register(struct miscdevice *mdev)
 {
-	return pfaces->misc_register(mdev);
+	return misc_register(mdev);
 }
 
 int private_misc_deregister(struct miscdevice *mdev)
 {
-	return pfaces->misc_deregister(mdev);
+	misc_deregister(mdev);
+	return 0;
 }
 
 /* proc file interfaces */
 ssize_t private_seq_read(struct file *file, char __user *buf, size_t size, loff_t *ppos)
 {
-	return pfaces->seq_read(file, buf, size, ppos);
+	return seq_read(file, buf, size, ppos);
 }
 
 loff_t private_seq_lseek(struct file *file, loff_t offset, int whence)
 {
-	return pfaces->seq_lseek(file, offset, whence);
+	return seq_lseek(file, offset, whence);
 }
 
 int private_single_release(struct inode *inode, struct file *file)
 {
-	return pfaces->single_release(inode, file);
+	return single_release(inode, file);
 }
 
 int private_single_open_size(struct file *file, int (*show)(struct seq_file *, void *),
 		void *data, size_t size)
 {
-	return pfaces->single_open_size(file, show, data, size);
+	return single_open_size(file, show, data, size);
 }
 
 struct proc_dir_entry* private_jz_proc_mkdir(char *s)
 {
-	return pfaces->jz_proc_mkdir(s);
+	return jz_proc_mkdir(s);
 }
 
-/* isp driver interface */
+///* isp driver interface */
 void private_get_isp_priv_mem(unsigned int *phyaddr, unsigned int *size)
 {
-	pfaces->get_isp_priv_mem(phyaddr, size);
+	// get_isp_priv_mem(phyaddr, size);
+	// TODO What to actually call here?
 }
 
-struct proc_dir_entry *private_proc_create_data(const char *name, umode_t mode,
-		struct proc_dir_entry *parent,
-		const struct file_operations *proc_fops,
-		void *data)
-{
-	return pfaces->proc_create_data(name, mode, parent, proc_fops, data);
+struct proc_dir_entry *private_proc_create_data(const char *name, umode_t mode, struct proc_dir_entry *parent, const struct file_operations *proc_fops, void *data) {
+	return proc_create_data(name, mode, parent, proc_fops, data);
 }
 
 /* Must be check the return value */
 __must_check int private_driver_get_interface(void)
 {
-	pfaces = get_driver_common_interfaces();
-	if(pfaces && (pfaces->flags_0 != (unsigned int)printk || pfaces->flags_0 != pfaces->flags_1)){
-		printk("flags = 0x%08x, printk = %p", pfaces->flags_0, printk);
-		return -1;
-	}else
-		return 0;
+	return 0;
 }
 EXPORT_SYMBOL(private_driver_get_interface);

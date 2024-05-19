@@ -32,6 +32,7 @@
 #include <asm/uaccess.h>
 #include <asm/cacheflush.h>
 #include <soc/gpio.h>
+#include <linux/spinlock.h>
 //#include <mach/platform.h>
 /*#include <linux/seq_file.h>*/
 #include <jz_proc.h>
@@ -40,6 +41,9 @@
 #endif
 
 #define paddr2vaddr(phyaddr) ((void *)((phyaddr) + PAGE_OFFSET - PHYS_OFFSET))
+
+
+int private_request_module(bool wait, const char *fmt, ...);
 
 uint8_t private_leading_one_position(const uint32_t in);
 uint32_t private_log2_int_to_fixed(const uint32_t val, const uint8_t out_precision, const uint8_t shift_out);
@@ -56,7 +60,7 @@ int private_platform_device_register(struct platform_device *pdev);
 void private_platform_device_unregister(struct platform_device *pdev);
 struct resource *private_platform_get_resource(struct platform_device *dev,
 					       unsigned int type, unsigned int num);
-void private_dev_set_drvdata(struct device *dev, void *data);
+int private_dev_set_drvdata(struct device *dev, void *data);
 void* private_dev_get_drvdata(const struct device *dev);
 int private_platform_get_irq(struct platform_device *dev, unsigned int num);
 struct resource * private_request_mem_region(resource_size_t start, resource_size_t n,
@@ -74,9 +78,6 @@ void private_disable_irq(unsigned int irq);
 void private_free_irq(unsigned int irq, void *dev_id);
 
 /* lock and mutex interfaces */
-void __private_spin_lock_irqsave(spinlock_t *lock, unsigned long *flags);
-#define private_spin_lock_irqsave(lock, flags) \
-			__private_spin_lock_irqsave(lock, (&flags));
 void private_spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags);
 void private_spin_lock_init(spinlock_t *lock);
 void private_mutex_lock(struct mutex *lock);
@@ -121,14 +122,13 @@ int private_gpio_direction_output(unsigned gpio, int value);
 int private_gpio_direction_input(unsigned gpio);
 int private_gpio_set_debounce(unsigned gpio, unsigned debounce);
 int private_jzgpio_set_func(enum gpio_port port, enum gpio_function func,unsigned long pins);
-int private_jzgpio_ctrl_pull(enum gpio_port port, int enable_pull,unsigned long pins);
+// int private_jzgpio_ctrl_pull(enum gpio_port port, int enable_pull,unsigned long pins);
 
 /* system interfaces */
 void private_msleep(unsigned int msecs);
 bool private_capable(int cap);
 unsigned long long private_sched_clock(void);
 bool private_try_module_get(struct module *module);
-int private_request_module(bool wait, const char *fmt, ...);
 void private_module_put(struct module *module);
 
 /* wait interfaces */
@@ -143,7 +143,7 @@ unsigned long private_wait_for_completion_timeout(struct completion *x, unsigned
 
 /* misc driver interfaces */
 int private_misc_register(struct miscdevice *mdev);
-void private_misc_deregister(struct miscdevice *mdev);
+int private_misc_deregister(struct miscdevice *mdev);
 
 struct proc_dir_entry *private_proc_create_data(const char *name, umode_t mode,
 						struct proc_dir_entry *parent,

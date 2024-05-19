@@ -45,7 +45,7 @@ static int frame_channel_buffer_done(struct tx_isp_frame_channel *chan, void *ar
 	if(buf == NULL)
 		return 0;
 
-	private_spin_lock_irqsave(&chan->slock, flags);
+	spin_lock_irqsave(&chan->slock, flags);
 	tx_list_for_each_entry(pos, &q->queued_list, queued_entry){
 		if(pos->v4l2_buf.m.userptr == buf->addr){
 			vb = pos;
@@ -63,7 +63,7 @@ static int frame_channel_buffer_done(struct tx_isp_frame_channel *chan, void *ar
 
 		vb->v4l2_buf.sequence = buf->priv;
 		/* Add the buffer to the done buffers list */
-		private_spin_lock_irqsave(&q->done_lock, flags);
+		spin_lock_irqsave(&q->done_lock, flags);
 		vb->state = FS_VB2_BUF_STATE_DONE;
 		tx_list_add_tail(&vb->done_entry, &q->done_list);
 		q->done_count++;
@@ -559,7 +559,7 @@ static int frame_channel_vb2_qbuf(struct tx_isp_frame_channel *chan, unsigned lo
 	 * Add to the queued buffers list, a buffer will stay on it until
 	 * dequeued in dqbuf.
 	 */
-	private_spin_lock_irqsave(&chan->slock, flags);
+	spin_lock_irqsave(&chan->slock, flags);
 	tx_list_add_tail(&vb->queued_entry, &q->queued_list);
 	vb->state = FS_VB2_BUF_STATE_QUEUED;
 	q->queued_count++;
@@ -658,7 +658,7 @@ static int __vb2_get_done_vb(struct fs_vb2_queue *q, struct fs_vb2_buffer **vb)
 	 * Driver's lock has been held since we last verified that done_list
 	 * is not empty, so no need for another list_empty(done_list) check.
 	 */
-	private_spin_lock_irqsave(&q->done_lock, flags);
+	spin_lock_irqsave(&q->done_lock, flags);
 	*vb = tx_list_first_entry(&q->done_list, struct fs_vb2_buffer, done_entry);
 	tx_list_del(&(*vb)->done_entry);
 	q->done_count--;
@@ -845,7 +845,7 @@ static void __vb2_queue_cancel(struct fs_vb2_queue *q)
 	 * ...and done list; userspace will not receive any buffers it
 	 * has not already dequeued before initiating cancel.
 	 */
-	private_spin_lock_irqsave(&q->done_lock, flags);
+	spin_lock_irqsave(&q->done_lock, flags);
 	TX_INIT_LIST_HEAD(&q->done_list);
 	q->queued_count = 0;
 	q->done_count = 0;
@@ -1337,7 +1337,7 @@ static int isp_framesource_show(struct seq_file *m, void *v)
 			seq_printf(m ,"crop height: %d\n", chan->fmt.crop_height);
 		}
 		seq_printf(m ,"the state of buffers:\n");
-		private_spin_lock_irqsave(&chan->slock, flags);
+		spin_lock_irqsave(&chan->slock, flags);
 		seq_printf(m ,"queue count: %d\n", vbq->queued_count);
 		tx_list_for_each_entry(pos, &vbq->queued_list, queued_entry){
 			seq_printf(m ,"queue addr: 0x%08lx\n", pos->v4l2_buf.m.userptr);
