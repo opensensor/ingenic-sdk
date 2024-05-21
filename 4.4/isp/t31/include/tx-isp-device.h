@@ -11,6 +11,9 @@
 
 #include "txx-isp.h"
 
+#define TX_ISP_DRIVER_VERSION "H20190725b"
+
+
 enum tx_isp_subdev_id {
 	TX_ISP_CORE_SUBDEV_ID,
 	TX_ISP_MAX_SUBDEV_ID,
@@ -24,7 +27,7 @@ struct tx_isp_subdev_pad;
 struct tx_isp_subdev_link;
 
 struct tx_isp_module {
-	struct tx_isp_descriptor desc;
+	struct private_tx_isp_descriptor desc;
 	struct device *dev;
 	const char *name;
 	struct miscdevice miscdev;

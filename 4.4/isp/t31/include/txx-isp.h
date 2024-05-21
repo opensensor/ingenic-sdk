@@ -75,7 +75,7 @@
 #define TX_ISP_IRQ_ID 	"isp-irq-id"
 
 /* Video pad Descriptor */
-struct tx_isp_pad_descriptor {
+struct private_tx_isp_pad_descriptor {
 	unsigned char  type;
 	unsigned char  links_type;
 	/*unsigned char  links_type[TX_ISP_LINKS_PER_PADS];*/
@@ -85,13 +85,13 @@ struct tx_isp_pad_descriptor {
   @ name: the clock's name
   @ rate: the rate of the clock.
 */
-struct tx_isp_device_clk{
+struct private_tx_isp_device_clk{
 	const char *name;
 	unsigned long rate;
 };
 
 /* All TX descriptors have these 2 fields at the beginning */
-struct tx_isp_descriptor {
+struct private_tx_isp_descriptor {
 	unsigned char  type;
 	unsigned char  subtype;
 	unsigned char  parentid;
@@ -99,7 +99,7 @@ struct tx_isp_descriptor {
 };
 
 /* Video device entity Descriptor */
-struct tx_isp_device_descriptor {
+struct private_tx_isp_device_descriptor {
 	unsigned char  type;
 	unsigned char  subtype;
 	unsigned char  parentid;
@@ -109,25 +109,25 @@ struct tx_isp_device_descriptor {
 };
 
 /* Video subdev entity Descriptor */
-struct tx_isp_subdev_descriptor {
+struct private_tx_isp_subdev_descriptor {
 	unsigned char  type;
 	unsigned char  subtype;
 	unsigned char  parentid;
 	unsigned char  unitid;
 	unsigned char  clks_num;
-	struct tx_isp_device_clk *clks;
+	struct private_tx_isp_device_clk *clks;
 	unsigned char  pads_num;
-	struct tx_isp_pad_descriptor *pads;
+	struct private_tx_isp_pad_descriptor *pads;
 };
 
 /* Video widget entity Descriptor */
-struct tx_isp_widget_descriptor {
+struct private_tx_isp_widget_descriptor {
 	unsigned char  type;
 	unsigned char  subtype;
 	unsigned char  parentid;
 	unsigned char  unitid;
 	unsigned char  clks_num;
-	struct tx_isp_device_clk *clks;
+	struct private_tx_isp_device_clk *clks;
 };
 
 #endif /*__TX_ISP_H__*/
