@@ -363,7 +363,7 @@ static int tx_isp_csi_probe(struct platform_device *pdev)
 		goto failed_req;
 	}
 
-	csd->phy_base = private_ioremap(res->start, res->end - res->start + 1);
+	csd->phy_base = ioremap(res->start, res->end - res->start + 1);
 	if (!sd->base) {
 		ISP_ERROR("%s[%d] Unable to ioremap registers\n", __func__,__LINE__);
 		ret = -ENXIO;

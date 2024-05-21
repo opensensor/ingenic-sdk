@@ -714,25 +714,36 @@ static int tx_isp_open(struct inode *inode, struct file *file)
 	int index = 0;
 	int ret = 0;
 
-	if(ispdev->refcnt){
+	if (ispdev->refcnt) {
 		ispdev->refcnt++;
 		return 0;
 	}
 
-	/*printk("## %s %d ##\n",__func__,__LINE__);	*/
+	printk("## %s %d ##\n", __func__, __LINE__);
 	ispdev->active_link = -1;
-	for(index = 0; index < TX_ISP_ENTITY_ENUM_MAX_DEPTH; index++){
+	for (index = 0; index < TX_ISP_ENTITY_ENUM_MAX_DEPTH; index++) {
 		submod = module->submods[index];
-		if(submod){
+		if (submod) {
 			subdev = module_to_subdev(submod);
+			if (!subdev) {
+				printk("## %s %d subdev is NULL for submod %s ##\n", __func__, __LINE__, submod->name);
+				continue;
+			}
+
+			printk("## %s %d activating subdev %s ##\n", __func__, __LINE__, submod->name);
 			ret = tx_isp_subdev_call(subdev, internal, activate_module);
-			if(ret && ret != -ENOIOCTLCMD)
+			if (ret && ret != -ENOIOCTLCMD) {
+				printk("## %s %d activate_module failed for subdev %s with ret %d ##\n", __func__, __LINE__, submod->name, ret);
 				break;
-	/*printk("## %s %d name = %s ret = %d ops = %p ##\n",__func__,__LINE__, submod->name, ret, subdev->ops);	*/
+			}
+			printk("## %s %d name = %s ret = %d ops = %p ##\n", __func__, __LINE__, submod->name, ret, subdev->ops);
+		} else {
+			printk("## %s %d submod is NULL at index %d ##\n", __func__, __LINE__, index);
 		}
 	}
-	if(ret == -ENOIOCTLCMD)
+	if (ret == -ENOIOCTLCMD) {
 		return 0;
+	}
 
 	return ret;
 }
@@ -1270,20 +1281,61 @@ failed_misc_register:
 	return ret;
 }
 
+
+//static ssize_t tx_isp_read(struct file *file, char __user *buf, size_t count, loff_t *ppos)
+//{
+//	struct miscdevice *dev = file->private_data;
+//	struct tx_isp_module *module = miscdev_to_module(dev);
+//	struct tx_isp_subdev *subdev = NULL;
+//	size_t reg_offset = *ppos;
+//	size_t bytes_read = 0;
+//	uint32_t value;
+//	int index;
+//
+//	printk("Reading from module %s, offset: %zu, count: %zu\n", module->name, reg_offset, count);
+//
+//	// Iterate over the sub-modules to find the appropriate base address
+//	for (index = 0; index < TX_ISP_ENTITY_ENUM_MAX_DEPTH; index++) {
+//		if (module->submods[index]) {
+//			subdev = module_to_subdev(module->submods[index]);
+//			// Check if the offset is within the range of this sub-device
+//			if (reg_offset < subdev->res->end - subdev->res->start + 1) {
+//				break;
+//			}
+//			// Adjust the offset for the next sub-device
+//			reg_offset -= (subdev->res->end - subdev->res->start + 1);
+//		}
+//	}
+//
+//	if (!subdev || !subdev->base) {
+//		ISP_ERROR("Invalid sub-device or base address\n");
+//		return -EFAULT;
+//	}
+//
+//	printk("Reading from sub-device base: %p, offset: %zu, count: %zu\n", subdev->base, reg_offset, count);
+//
+//		// Check if the read would go out of bounds for the selected sub-device
+//	if (reg_offset + count > subdev->res->end - subdev->res->start + 1) {
+//		count = subdev->res->end - subdev->res->start + 1 - reg_offset;
+//	}
+//
+//	while (bytes_read < count) {
+//		value = tx_isp_readl(subdev->base, reg_offset + bytes_read);
+//		if (copy_to_user(buf + bytes_read, &value, sizeof(value))) {
+//			return -EFAULT;
+//		}
+//		bytes_read += sizeof(value);
+//	}
+//
+//	*ppos += bytes_read;
+//	return bytes_read;
+//}
+
 static struct file_operations tx_isp_fops = {
 	.open = tx_isp_open,
 	.release = tx_isp_release,
 	.unlocked_ioctl = tx_isp_unlocked_ioctl,
 };
-
-#if 0
-static const struct file_operations tx_isp_debug_fops ={
-	.read = seq_read,
-	.open = motor_info_open,
-	.llseek = seq_lseek,
-	.release = single_release,
-};
-#endif
 
 static int tx_isp_probe(struct platform_device *pdev)
 {
@@ -1292,7 +1344,7 @@ static int tx_isp_probe(struct platform_device *pdev)
 	struct tx_isp_module *module = NULL;
 	int ret = ISP_SUCCESS;
 
-	/*ISP_INFO("@@@@@@@@@@@@@@@@@@@@ tx-isp-probe @@@@@@@@@@@@@@@@@@@@@@@@@@\n");*/
+	ISP_INFO("@@@@@@@@@@@@@@@@@@@@ tx-isp-probe @@@@@@@@@@@@@@@@@@@@@@@@@@\n");
 	ispdev = (struct tx_isp_device*)kzalloc(sizeof(*ispdev), GFP_KERNEL);
 	if (!ispdev) {
 		ISP_ERROR("Failed to allocate camera device\n");
@@ -1303,7 +1355,7 @@ static int tx_isp_probe(struct platform_device *pdev)
 	/* register subdev */
 	desc = pdev->dev.platform_data;
 	ret = tx_isp_match_and_register_platforms(desc, ispdev->pdevs);
-	if(ret){
+	if (ret) {
 		goto failed_to_match;
 	}
 	ispdev->pdev_num = desc->entity_num;
@@ -1311,7 +1363,7 @@ static int tx_isp_probe(struct platform_device *pdev)
 	/* init self */
 	private_spin_lock_init(&ispdev->slock);
 	ret = tx_isp_module_init(pdev, &ispdev->module);
-	if(ret){
+	if (ret) {
 		ISP_ERROR("Failed to init isp module(%d.%d)\n", desc->parentid, desc->unitid);
 		ret = -ENOMEM;
 		goto failed_to_ispmodule;
@@ -1342,10 +1394,9 @@ static int tx_isp_probe(struct platform_device *pdev)
 
 	/* create the topology graph of isp modules */
 	ret = tx_isp_create_graph_and_nodes(ispdev);
-	if(ret){
+	if (ret) {
 		goto failed_to_nodes;
 	}
-
 	isp_mem_init();
 	/*isp_debug_init();*/
 	ispdev->version = TX_ISP_DRIVER_VERSION;
@@ -1364,8 +1415,8 @@ failed_to_match:
 	kfree(ispdev);
 exit:
 	return ret;
-
 }
+
 
 static int __exit tx_isp_remove(struct platform_device *pdev)
 {

@@ -134,10 +134,12 @@ static long frame_channel_vidioc_set_fmt(struct tx_isp_frame_channel *chan, unsi
 {
 	struct frame_image_format fmt;
 	long ret = 0;
+	printk("frame_channel_vidioc_set_fmt\n");
 	if(IS_ERR_OR_NULL(chan)){
 		return -EINVAL;
 	}
 
+	printk("Calling copy_from_user with arg = %lu\n", arg);
 	ret = copy_from_user(&fmt, (void __user *)arg, sizeof(fmt));
 	if(ret){
 		ISP_ERROR("Failed to copy from user\n");

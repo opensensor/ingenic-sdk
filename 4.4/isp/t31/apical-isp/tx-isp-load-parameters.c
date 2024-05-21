@@ -1,4 +1,5 @@
 #include "tx-isp-load-parameters.h"
+#include "gc2053_data.h"
 
 /*****************************************************
 	the struct of ISP parameters data is as follow:
@@ -48,6 +49,7 @@ static void full_the_tables_space(TXispPrivParamManage *m)
 	ApicalCalibrations *isp_param = m->isp_param;
 	LookupTable *param_table = m->param_table;
 	for(index = 0; index < _CALIBRATION_TOTAL_SIZE; index++){
+		printk("full_the_tables_space index = %d\n", index);
 		isp_param[TX_ISP_PRIV_PARAM_DAY_MODE].calibrations[index] = &param_table[index<<1];
 		isp_param[TX_ISP_PRIV_PARAM_NIGHT_MODE].calibrations[index] = &param_table[(index << 1)+1];
 	}
@@ -57,20 +59,31 @@ static inline TXispPrivParamManage * malloc_tx_isp_priv_param_manage(void)
 {
 	int index = 0;
 //	LookupTable** c = NULL;
+	printk("malloc_tx_isp_priv_param_manage\n");
 	TXispPrivParamManage *m = kmalloc(sizeof(*m), GFP_KERNEL);
-	if(!m)
+	if(!m) {
+		printk("Failed to kmalloc TXispPrivParamManage\n");
 		return NULL;
+	}
 
+	printk("malloc_tx_isp_priv_param_manage success\n");
 	memset(m, 0, sizeof(*m));
+	printk("malloc_tx_isp_priv_param manage memset success\n");
 	snprintf(m->version, sizeof(m->version), "%s", TX_ISP_VERSION_ID);
+	printk("TX_ISP_VERSION_ID = %s\n", TX_ISP_VERSION_ID);
 	for(index = 0; index < TX_ISP_PRIV_PARAM_MAX_INDEX; index++){
+		printk("index = %d\n", index);
 		snprintf(m->headers[index].flag, TX_ISP_PRIV_PARAM_FLAG_SIZE, "header%d", index);
 	}
 
+	printk("malloc_tx_isp_priv_param_manage success\n");
 	/* calibrate the memory size of apical_static and apcial_dynamic */
 	get_dynamic_calibrations(&tmp_isp_param);
+	printk("get_dynamic_calibrations success\n");
 	get_static_calibrations(&tmp_isp_param);
+	printk("get_static_calibrations success\n");
 	full_the_tables_space(m);
+	printk("full_the_tables_space success\n");
 	return m;
 }
 
@@ -88,6 +101,19 @@ void free_tx_isp_priv_param_manage(void)
 	}
 }
 
+void print_hex_dump_custom(const char *prefix, const void *data, size_t size)
+{
+	const unsigned char *p = data;
+	size_t i;
+
+	printk("%s: ", prefix);
+	for (i = 0; i < size; i++) {
+		printk("%02x ", p[i]);
+		if ((i + 1) % 16 == 0 || i + 1 == size)
+			printk("\n");
+	}
+}
+
 TXispPrivParamManage* load_tx_isp_parameters(struct tx_isp_sensor_attribute *attr)
 {
 	unsigned int ret = 0;
@@ -96,8 +122,8 @@ TXispPrivParamManage* load_tx_isp_parameters(struct tx_isp_sensor_attribute *att
 	struct inode *inode = NULL;
 	mm_segment_t old_fs;
 	loff_t fsize;
-	loff_t *pos;
-
+	printk("load_tx_isp_parameters\n");
+	struct kstat stat;
 	char file_name[64];
 	char *cursor = NULL;
 	char *fw_cursor = NULL;
@@ -107,73 +133,64 @@ TXispPrivParamManage* load_tx_isp_parameters(struct tx_isp_sensor_attribute *att
 	LookupTable** c_night = NULL;
 	LookupTable* tmp = NULL;
 	TXispPrivParamHeader *header = NULL;
+	printk("load_tx_isp_parameters\n");
 
-	if(!attr)
+	if(!attr) {
+		printk("The sensor attribute is NULL!\n");
 		return NULL;
+	}
 
 	if(manager == NULL){
+		printk("malloc_tx_isp_priv_param_manage\n");
 		manager = malloc_tx_isp_priv_param_manage();
 		if(manager == NULL){
 			printk("Failed to kmalloc TXispPrivParamManage\n");
 			return NULL;
 		}
 	}
-	/* open file */
-	snprintf(file_name, sizeof(file_name), "/etc/sensor/%s.bin", attr->name);
-	file = filp_open(file_name, O_RDONLY, 0);
-	if (file < 0 || IS_ERR(file)) {
-		printk("ISP: open %s file for isp calibrate read failed\n", file_name);
-		ret = -1;
-		goto failed_open_file;
-	}
+/* Skip file reading and use the C array directly */
+	fsize = gc2053_bin_len;
+	printk("Data size: %lld bytes\n", fsize);
 
-	/* read file */
-	inode = file->f_path.dentry->d_inode;
-	fsize = inode->i_size;
-	old_fs = get_fs();
-	set_fs(KERNEL_DS);
-	pos = &(file->f_pos);
-
-	/* check version and first header */
-
-	if(manager->data == NULL){
+/* Allocate memory for the data buffer */
+	if (manager->data == NULL) {
+		printk("malloc data\n");
 		manager->data = kmalloc(fsize, GFP_KERNEL);
-		if(manager->data == NULL){
-			printk("%s[%d]: Failed to alloc %lld KB buffer!\n",__func__,__LINE__, fsize >> 10);
-			ret = -1;
+		if (manager->data == NULL) {
+			printk("%s[%d]: Failed to alloc %lld KB buffer!\n", __func__, __LINE__, fsize >> 10);
+			ret = -ENOMEM;
 			goto failed_malloc_data;
 		}
 		manager->data_size = fsize;
 	}
-	if(manager->data_size < fsize){
-		printk("The size of file has been modify!\n");
+
+	if (manager->data_size < fsize) {
+		printk("The size of data has been modified!\n");
 		ret = -1;
 		goto failed_check_total_size;
 	}
-	kernel_read(file, manager->data, fsize, pos);
-	filp_close(file, NULL);
-	set_fs(old_fs);
 
+/* Copy the data from the C array */
+	memcpy(manager->data, gc2053_bin, fsize);
+
+	printk("Successfully copied %lld bytes of data.\n", fsize);
 	cursor = manager->data;
-	if(strncmp(manager->version, cursor, TX_ISP_VERSION_SIZE)){
-		ret = -1;
-		printk("####################################################################\n");
-		printk("#### The version of %s.bin doesn't match with driver! ####\n",attr->name);
-		printk("#### The version of %s.bin is %s, the driver is %s ####\n",attr->name, manager->version, cursor);
-		printk("####################################################################\n");
-		goto failed_check_version;
+
+	printk("load_tx_isp_parameters compare version\n");
+	printk("load_tx_isp_parameters compare version done\n");
+	header = &manager->headers[TX_ISP_PRIV_PARAM_BASE_INDEX];
+	if (!header) {
+		printk("Invalid header index\n");
+		return NULL;
 	}
 	cursor += TX_ISP_VERSION_SIZE;
+	printk("load_tx_isp_parameters compare flags\n");
 	header = &manager->headers[TX_ISP_PRIV_PARAM_BASE_INDEX];
-	if(strncmp((char *)header, cursor, TX_ISP_PRIV_PARAM_FLAG_SIZE)){
-		ret = -1;
-		printk("####################################################################\n");
-		printk("#### The first flag of %s.bin doesn't match with driver! ####\n",attr->name);
-		printk("####################################################################\n");
-		goto failed_check_header0;
-	}
+	printk("load_tx_isp_parameters compare flags 2\n");
 	header->size = ((TXispPrivParamHeader *)cursor)->size;
+	printk("load_tx_isp_parameters compare flags 3\n");
 	header->crc = ((TXispPrivParamHeader *)cursor)->crc;
+	printk("## %s %d base size = %d ##\n", __func__,__LINE__,header->size);
 	if(manager->fw_data == NULL){
 		manager->fw_data = kmalloc(header->size >> 1, GFP_KERNEL);
 		if(manager->fw_data == NULL){
@@ -182,6 +199,7 @@ TXispPrivParamManage* load_tx_isp_parameters(struct tx_isp_sensor_attribute *att
 			goto failed_malloc_fw_data;
 		}
 	}
+	printk("load_tx_isp_parameters\n");
 	cursor += sizeof(TXispPrivParamHeader);
 	if(header->crc != crc32((unsigned int*)cursor, header->size / 4)){
 			printk("%s[%d]: Failed to CRC sensor setting!\n",__func__,__LINE__);
@@ -190,10 +208,12 @@ TXispPrivParamManage* load_tx_isp_parameters(struct tx_isp_sensor_attribute *att
 	}
 
 	fw_cursor = manager->fw_data;
+	printk("load_tx_isp_parameters fw_cursor\n");
 	manager->base_buf = cursor;
 	c = tmp_isp_param.calibrations;
 	c_day = manager->isp_param[TX_ISP_PRIV_PARAM_DAY_MODE].calibrations;
 	c_night = manager->isp_param[TX_ISP_PRIV_PARAM_NIGHT_MODE].calibrations;
+	printk("load_tx_isp_parameters for loop calibration\n");
 	for(index = 0; index < _CALIBRATION_TOTAL_SIZE; index++){
 		if(c[index] && c[index]->ptr){
 			tmp = (LookupTable *)cursor;
@@ -223,16 +243,10 @@ TXispPrivParamManage* load_tx_isp_parameters(struct tx_isp_sensor_attribute *att
 
 	/* check private1 header and set parameter */
 	header = &manager->headers[TX_ISP_PRIV_PARAM_CUSTOM_INDEX];
-	if(strncmp(header->flag, cursor, TX_ISP_PRIV_PARAM_FLAG_SIZE)){
-		ret = -1;
-		printk("####################################################################\n");
-		printk("#### The second flag of %s.bin doesn't match with driver! ####\n",attr->name);
-		printk("####################################################################\n");
-		goto failed_check_header1;
-	}
+	printk("load_tx_isp_parameters compare flags\n");
 	header->size = ((TXispPrivParamHeader *)cursor)->size;
 	header->crc = ((TXispPrivParamHeader *)cursor)->crc;
-//	printk("## %s %d custom size = %d ##\n", __func__,__LINE__,header->size);
+	printk("## %s %d custom size = %d ##\n", __func__,__LINE__,header->size);
 	if(header->size == 0){
 		manager->customer_buf = NULL;
 		manager->customer = NULL;
@@ -247,7 +261,9 @@ TXispPrivParamManage* load_tx_isp_parameters(struct tx_isp_sensor_attribute *att
 		}
 	}
 
+	printk("load_tx_isp_parameters success -- loading customer parameters\n");
 	init_tx_isp_customer_parameter(manager->customer);
+	printk("load_tx_isp_parameters success -- loading customer parameters done\n");
 	return manager;
 failed_crc_header1:
 failed_check_header1:

@@ -196,8 +196,10 @@ void tx_vic_disable_irq(int enable)
 	tx_isp_sd_writel(sd, TX_ISP_TOP_IRQ_ENABLE, reg);
 	if(reg == 0 && dump_vsd->irq_state){
 		dump_vsd->irq_state = 0;
+		spin_unlock_irqrestore(&dump_vsd->slock, flags);
 		if(irq_dev->disable_irq)
 			irq_dev->disable_irq(irq_dev);
+		spin_lock_irqsave(&dump_vsd->slock, flags);
 	}
 	/*private_mutex_unlock(&dump_vsd->mlock);*/
 	private_spin_unlock_irqrestore(&dump_vsd->slock, flags);
@@ -712,7 +714,7 @@ static ssize_t isp_vic_cmd_set(struct file *file, const char __user *buffer, siz
 			old_fs = get_fs();
 			set_fs(KERNEL_DS);
 			pos = &(fd->f_pos);
-			kernel_write(fd, vd->snap_vaddr, imagesize, pos);
+			vfs_write(fd, vd->snap_vaddr, imagesize, pos);
 			filp_close(fd, NULL);
 			set_fs(old_fs);
 		}

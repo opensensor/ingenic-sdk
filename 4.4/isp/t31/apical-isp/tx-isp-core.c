@@ -336,6 +336,7 @@ static inline int isp_enable_channel(struct isp_core_output_channel *chan)
 {
 	unsigned int hw_dma = 0;
 	unsigned char next_bank = 0;
+	printk("## %s %d ##\n",__func__,__LINE__);
 	hw_dma = APICAL_READ_32(0xb24 + 0x100 * (chan->index));
 	next_bank = (((hw_dma >> 8) & 0x7) + 1) % chan->usingbanks;
 	if(chan->pad->link.flag & TX_ISP_PADLINK_LFB){
@@ -350,12 +351,14 @@ static inline int isp_enable_channel(struct isp_core_output_channel *chan)
 		}
 		return 0;
 	}
+	printk("## %s %d ##\n",__func__,__LINE__);
 
 	if(chan->bank_flag[next_bank] ^ chan->dma_state){
 		/*printk("## %s %d ##\n",__func__,__LINE__);	*/
 		chan->dma_state = chan->bank_flag[next_bank];
 		isp_enable_dma_transfer(chan, chan->dma_state);
 	}
+	printk("isp_enable_channel success\n");
 	return 0;
 }
 
@@ -2242,6 +2245,8 @@ static int isp_core_output_channel_init(struct tx_isp_core_device *core)
 	int ret = ISP_SUCCESS;
 	int index = 0;
 
+	printk("## %s %d ##\n", __func__,__LINE__);
+
 	core->num_chans = sd->num_outpads;
 	chans = (struct isp_core_output_channel *)kzalloc(sizeof(*chans) * sd->num_outpads, GFP_KERNEL);
 	if(!chans){
@@ -2254,6 +2259,7 @@ static int isp_core_output_channel_init(struct tx_isp_core_device *core)
 		chan = &chans[index];
 		chan->index = index;
 		chan->pad = &(sd->outpads[index]);
+		printk("## %s %d index = %d ##\n", __func__,__LINE__, index);
 		if(sd->outpads[index].type == TX_ISP_PADTYPE_UNDEFINE){
 			chan->state = TX_ISP_MODULE_UNDEFINE;
 			continue;
@@ -2289,6 +2295,8 @@ static int isp_core_output_channel_init(struct tx_isp_core_device *core)
 		sd->outpads[index].event = ispcore_pad_event_handle;
 		sd->outpads[index].priv = chan;
 	}
+
+	printk("#tx_isp_fs_chn_init success!");
 
 	core->chans = chans;
 	return ISP_SUCCESS;

@@ -3283,162 +3283,216 @@ static int apical_isp_core_ops_s_ctrl(image_tuning_vdrv_t *tuning, struct v4l2_c
 	switch (ctrl->id) {
 	case IMAGE_TUNING_CID_MWB_ATTR:
 	case V4L2_CID_AUTO_N_PRESET_WHITE_BALANCE:
+		printk("Video Device: Set White Balance\n");
 		ret = apical_isp_wb_s_control(tuning, ctrl);
 		break;
 	case V4L2_CID_HFLIP:
+		printk("Video Device: Set Horizontal Flip\n");
 		ret = apical_isp_hflip_s_control(tuning, ctrl);
 		break;
 	case V4L2_CID_VFLIP:
+		printk("Video Device: Set Vertical Flip\n");
 		ret = apical_isp_vflip_s_control(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_SINTER_ATTR:
+		printk("Video Device: Set Sinter Attr\n");
 		ret = apical_isp_sinter_dns_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_CUSTOM_TEMPER_DNS:
+		printk("Video Device: Set Temper Dns\n");
 		ret = apical_isp_temper_dns_s_control(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_TEMPER_STRENGTH:
+		printk("Video Device: Set Temper Strength\n");
 		ret = apical_isp_temper_dns_s_strength(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_TEMPER_ATTR:
+		printk("Video Device: Set Temper Attr\n");
 		ret = apical_isp_temper_dns_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_TEMPER_BUF:
+		printk("Video Device: Set Temper Buf\n");
 		ret = apical_isp_temper_dns_s_buf(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_NOISE_PROFILE_ATTR:
+		printk("Video Device: Set Noise Profile Attr\n");
 		ret = apical_isp_noise_profile_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_CUSTOM_WDR:
+		printk("Video Tuning Device: Set WDR\n");
 		ret = apical_isp_wdr_s_control(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_WDR_ATTR:
+		printk("Video Tuning Device: Set WDR Attr\n");
 		ret = apical_isp_wdr_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_CUSTOM_ISP_PROCESS:
+		printk("Video Tuning Device: Set ISP Process\n");
 		ret = apical_isp_bypass_s_control(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_CUSTOM_ISP_FREEZE:
+		printk("Video Tuning Device: Set ISP Freeze\n");
 		ret = apical_isp_freeze_s_control(tuning, ctrl);
 		break;
 	case V4L2_CID_POWER_LINE_FREQUENCY:
+		printk("Video Tuning Device: Set Flicker\n");
 		ret = apical_isp_flicker_s_control(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_CUSTOM_SHAD:
+		printk("Video Tuning Device: Set Shading\n");
 		ret = apical_isp_lens_shad_s_control(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_SHAD_ATTR:
+		printk("Video Tuning Device: Set Shading Attr\n");
 		ret = apical_isp_lens_shad_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_GE_ATTR:
+		printk("Video Tuning Device: Set GE Attr\n");
 		ret = apical_isp_ge_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_DYNAMIC_DP_ATTR:
+		printk("Video Tuning Device: Set Dynamic DP Attr\n");
 		ret = apical_isp_dynamic_dp_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_STATIC_DP_ATTR:
+		printk("Video Tuning Device: Set Static DP Attr\n");
 		ret = apical_isp_static_dp_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_CUSTOM_ANTI_FOG:
+		printk("Video Tuning Device: Set Anti Fog\n");
 		ret = apical_isp_antifog_s_control(tuning, ctrl);
 		break;
 	case V4L2_CID_SCENE_MODE:
+		printk("Video Tuning Device: Set Scene\n");
 		ret = apical_isp_scene_s_control(tuning, ctrl);
 		break;
 	case V4L2_CID_COLORFX:
+		printk("Video Tuning Device: Set Color Effect\n");
 		ret = apical_isp_colorfx_s_control(tuning, ctrl);
 		break;
 	case V4L2_CID_SATURATION:
+		printk("Video Tuning Device: Set Sat\n");
 		ret = apical_isp_sat_s_control(tuning, ctrl);
 		break;
 	case V4L2_CID_BRIGHTNESS:
+		printk("Video Tuning Device: Set Brightness\n");
 		ret = apical_isp_bright_s_control(tuning, ctrl);
 		break;
 	case V4L2_CID_CONTRAST:
+		printk("Video Tuning Device: Set Contrast\n");
 		ret = apical_isp_contrast_s_control(tuning, ctrl);
 		break;
 	case V4L2_CID_SHARPNESS:
+		printk("Video Tuning Device: Set Sharpness\n");
 		ret = apical_isp_sharp_s_control(tuning, ctrl);
+		printk("Video Tuning Device: Set Sharpness returned\n");
 		break;
 	case IMAGE_TUNING_CID_SHARP_ATTR:
+		printk("Video Tuning Device: Set Sharp Attr\n");
 		ret = apical_isp_sharp_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_CUSTOM_DRC:
+		printk("Video Tuning Device: Set DRC\n");
 		ret = apical_isp_drc_s_control(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_DRC_ATTR:
+		printk("Video Tuning Device: Set DRC ATTR\n");
 		ret = apical_isp_drc_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_DEMO_ATTR:
+		printk("Video Tuning Device: Set Demo Attr\n");
 		ret = apical_isp_demosaic_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_FC_ATTR:
+		printk("Video Tuning Device: Set FC Attr\n");
 		ret = apical_isp_fc_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_CONTROL_FPS:
+		printk("Video Tuning Device: Set FPS\n");
 		ret = apical_isp_fps_s_control(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_DAY_OR_NIGHT:
+		printk("Video Tuning Device: Set Day Night\n");
 		ret = apical_isp_day_or_night_s_ctrl(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_HVFLIP:
+		printk("Video Tuning Device: Set HV Flip\n");
 		ret = apical_isp_hvflip_s_ctrl(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_AE_STRATEGY:
+		printk("Video Tuning Device: Set AE Strategy\n");
 		ret = apical_isp_ae_strategy_s_ctrl(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_GAMMA_ATTR:
+		printk("Video Tuning Device: Set Gamma Attr\n");
 		ret = apical_isp_gamma_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_SYSTEM_TAB:
+		printk("Video Tuning Device: Set System Tab\n");
 		ret = apical_isp_stab_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_EXPR_ATTR:
+		printk("Video Tuning Device: Set Expr Attr\n");
 		ret = apical_isp_expr_s_ctrl(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_AE_ROI:
+		printk("Video Tuning Device: Set AE ROI\n");
 		ret = apical_isp_ae_s_roi(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_WB_ATTR:
+		printk("Video Tuning Device: Set WB ATTR\n");
 		ret = apical_isp_wb_s_ctrl(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_AWB_RGB_COEFFT_WB_ATTR:
+		printk("Video Tuning Device: Set AWB RGB Coefft WB ATTR\n");
 		ret = apical_isp_rgb_coefft_wb_s_ctrl(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_MAX_AGAIN_ATTR:
+		printk("Video Tuning Device: Set Max AGain ATTR\n");
 		ret = apical_isp_max_again_s_ctrl(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_MAX_DGAIN_ATTR:
+		printk("Video Tuning Device: Set Max DGain ATTR\n");
 		ret = apical_isp_max_dgain_s_ctrl(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_HILIGHT_DEPRESS_STRENGTH:
+		printk("Video Tuning Device: Set Hi Light Depress Strength\n");
 		ret = apical_isp_hi_light_depress_s_ctrl(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_AE_COMP:
+		printk("Video Tuning Device: Set AE Comp\n");
 		ret = apical_isp_ae_comp_s_ctrl(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_ISP_TABLE_ATTR:
+		printk("Video Tuning Device: Set ISP Table Attr\n");
 		ret = apical_isp_table_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_AWB_CWF_SHIFT:
+		printk("Video Tuning Device: Set AWB CWF Shift\n");
 		ret = apical_isp_awb_cwf_s_shift(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_AE_WEIGHT:
+		printk("Video Tuning Device: Set AE WEIGHT\n");
 		ret = apical_isp_ae_weight_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_AWB_WEIGHT:
+		printk("Video Tuning Device: Set AWB WEIGHT\n");
 		ret = apical_isp_awb_weight_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_AE_HIST:
+		printk("Video Tuning Device: Set AE HIST\n");
 		ret = apical_isp_ae_hist_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_AWB_HIST:
+		printk("Video Tuning Device: Set AWB HIST\n");
 		ret = apical_isp_awb_hist_s_attr(tuning, ctrl);
 		break;
 	case IMAGE_TUNING_CID_AF_HIST:
+		printk("Video Tuning Device: Set AF HIST\n");
 		ret = apical_isp_af_hist_s_attr(tuning, ctrl);
 		break;
 	default:
+		printk("Video Tuning Device: Set Default -EPERM\n");
 		ret = -EPERM;
 		break;
 	}
@@ -3484,9 +3538,10 @@ static long isp_core_tunning_unlocked_ioctl(struct file *file, unsigned int cmd,
 
 	switch(cmd){
 	case VIDIOC_S_CTRL:
+		printk("##### %s %d S_CTRL cmd=0x%08x #####\n", __func__,__LINE__, control.id);
 		if(copy_from_user(&control, (void __user *)arg, sizeof(control)))
 			return -EFAULT;
-		/*printk("##### %s %d S_CTRL cmd=0x%08x #####\n", __func__,__LINE__, control.id);*/
+		printk("##### 2nd %s %d S_CTRL cmd=0x%08x #####\n", __func__,__LINE__, control.id);
 		ret = apical_isp_core_ops_s_ctrl(tuning, &control);
 		break;
 	case VIDIOC_G_CTRL:
@@ -3517,14 +3572,17 @@ static int isp_core_tunning_open(struct inode *inode, struct file *file)
 	struct tx_isp_module *module = miscdev_to_module(dev);
 	struct tx_isp_subdev *sd = module_to_subdev(module);
 	struct tx_isp_core_device *core = tx_isp_get_subdevdata(sd);
+	printk("##### %s %d #####\n", __func__,__LINE__);
 	TXispPrivParamManage *param = core->param;
 	LookupTable** table = NULL;
 	/*struct tx_isp_video_in *vin = &core->vin;*/
 	image_tuning_vdrv_t *tuning = core->tuning;
 	struct image_tuning_ctrls *ctrls = &(tuning->ctrls);
 
-	/* the module must be actived firstly. */
+	/* the module must be active first. */
+	printk("##### %s %d #####\n", __func__,__LINE__);
 	if(tuning->state != TX_ISP_MODULE_ACTIVATE){
+		printk("Tuning state is not TX_ISP_MODULE_ACTIVATE, is: %d\n", tuning->state);
 		return -EPERM;
 	}
 
@@ -3533,6 +3591,7 @@ static int isp_core_tunning_open(struct inode *inode, struct file *file)
 	table = param->isp_param[TX_ISP_PRIV_PARAM_DAY_MODE].calibrations;
 	ctrls->temper_max = *((uint16_t *)(table[ _CALIBRATION_TEMPER_STRENGTH]->ptr) + table[_CALIBRATION_TEMPER_STRENGTH]->rows * table[_CALIBRATION_TEMPER_STRENGTH]->cols -1 );;
 	ctrls->temper_min = *((uint16_t *)(table[ _CALIBRATION_TEMPER_STRENGTH]->ptr) + 1);
+	printk("temper_max = %d, temper_min = %d\n", ctrls->temper_max, ctrls->temper_min);
 
 #if 0
 	tuning->temper_buffer_size = vin->vi_max_width * vin->vi_max_height * 4;
@@ -3576,7 +3635,14 @@ static int isp_core_tunning_release(struct inode *inode, struct file *file)
 	return 0;
 }
 
+static int isp_core_tunning_read(struct file *file, char __user *buf, size_t count, loff_t *ppos)
+{
+	printk("isp_core_tunning_read!!!!!!!!!!!!!!!!!!!!\n");
+	return 0;
+}
+
 static struct file_operations isp_core_tunning_fops = {
+		.read = isp_core_tunning_read,
 	.open = isp_core_tunning_open,
 	.release = isp_core_tunning_release,
 	.unlocked_ioctl = isp_core_tunning_unlocked_ioctl,
